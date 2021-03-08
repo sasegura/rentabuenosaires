@@ -41,7 +41,7 @@ ReactDOM.render(
           render={(props) => <NucleoIcons {...props} />}
         />
         <Route
-          path="/landing-page"
+          path="/"
           render={(props) => <LandingPage {...props} />}
         />
         <Route
@@ -52,8 +52,6 @@ ReactDOM.render(
           path="/login-page"
           render={(props) => <LoginPage {...props} />}
         />
-        <Redirect to="/index" />
-        <Redirect from="/" to="/index" />
       </Switch>
     </Switch>
   </BrowserRouter>,
