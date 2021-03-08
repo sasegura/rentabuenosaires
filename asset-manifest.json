@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/rentabuenosaires/static/css/main.3b6bad0a.chunk.css",
-    "main.js": "/rentabuenosaires/static/js/main.83546a9a.chunk.js",
-    "main.js.map": "/rentabuenosaires/static/js/main.83546a9a.chunk.js.map",
+    "main.js": "/rentabuenosaires/static/js/main.fb0f5bae.chunk.js",
+    "main.js.map": "/rentabuenosaires/static/js/main.fb0f5bae.chunk.js.map",
     "runtime-main.js": "/rentabuenosaires/static/js/runtime-main.7805c823.js",
     "runtime-main.js.map": "/rentabuenosaires/static/js/runtime-main.7805c823.js.map",
-    "static/js/2.9f64db73.chunk.js": "/rentabuenosaires/static/js/2.9f64db73.chunk.js",
-    "static/js/2.9f64db73.chunk.js.map": "/rentabuenosaires/static/js/2.9f64db73.chunk.js.map",
+    "static/js/2.50546958.chunk.js": "/rentabuenosaires/static/js/2.50546958.chunk.js",
+    "static/js/2.50546958.chunk.js.map": "/rentabuenosaires/static/js/2.50546958.chunk.js.map",
     "index.html": "/rentabuenosaires/index.html",
     "static/css/main.3b6bad0a.chunk.css.map": "/rentabuenosaires/static/css/main.3b6bad0a.chunk.css.map",
-    "static/js/2.9f64db73.chunk.js.LICENSE.txt": "/rentabuenosaires/static/js/2.9f64db73.chunk.js.LICENSE.txt",
+    "static/js/2.50546958.chunk.js.LICENSE.txt": "/rentabuenosaires/static/js/2.50546958.chunk.js.LICENSE.txt",
     "static/media/Banner.a0091e8e.png": "/rentabuenosaires/static/media/Banner.a0091e8e.png",
     "static/media/avatar.jpg": "/rentabuenosaires/static/media/avatar.21d108f8.jpg",
     "static/media/bg1.jpg": "/rentabuenosaires/static/media/bg1.71a28027.jpg",
@@ -36,8 +36,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.7805c823.js",
-    "static/js/2.9f64db73.chunk.js",
+    "static/js/2.50546958.chunk.js",
     "static/css/main.3b6bad0a.chunk.css",
-    "static/js/main.83546a9a.chunk.js"
+    "static/js/main.fb0f5bae.chunk.js"
   ]
 }
