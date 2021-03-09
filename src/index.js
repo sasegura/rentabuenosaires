@@ -30,6 +30,7 @@ import NucleoIcons from "views/NucleoIcons.js";
 import LoginPage from "views/examples/LoginPage.js";
 import LandingPage from "views/examples/LandingPage.js";
 import ProfilePage from "views/examples/ProfilePage.js";
+import Piso from "pages/Piso";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -43,6 +44,10 @@ ReactDOM.render(
         <Route
           path="/"
           render={(props) => <LandingPage {...props} />}
+        />
+        <Route
+          path="/piso"
+          render={(props) => <Piso {...props} />}
         />
         <Route
           path="/profile-page"
