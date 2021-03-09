@@ -12,14 +12,20 @@ import {
 } from "reactstrap";
 
 // core components
-import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import LandingPageHeader from "components/Headers/LandingPageHeader.js";
 import DefaultFooter from "components/Footers/DefaultFooter.js";
 import IndexNavbar from "components/Navbars/IndexNavbar";
+import img1 from "../assets/img/bg1.jpg";
+import img2 from "../assets/img/bg4.jpg";
+import img3 from "../assets/img/bg3.jpg";
+import DarkFooter from "components/Footers/DarkFooter";
+import TransparentFooter from "components/Footers/TransparentFooter";
+import ExamplesNavbar from "components/Navbars/ExamplesNavbar";
 
 function Inicio() {
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
+
   React.useEffect(() => {
     document.body.classList.add("landing-page");
     document.body.classList.add("sidebar-collapse");
@@ -34,7 +40,6 @@ function Inicio() {
 
   return (
     <>
-      <IndexNavbar />
       <div className="wrapper">
         <LandingPageHeader />
         <div className="section section-about-us">
@@ -58,10 +63,10 @@ function Inicio() {
                   <div
                     className="image-container image-left"
                     style={{
-                      backgroundImage: "url(" + +")",
+                      backgroundImage: "url(" + img1 + ")",
                     }}
                   >
-                    <p className="blockquote blockquote-info">
+                    <p className="blockquote blockquote-info" id="1234">
                       "Over the span of the satellite record, Arctic sea ice has
                       been declining significantly, while sea ice in the
                       Antarctichas increased very slightly" <br></br>
@@ -72,8 +77,7 @@ function Inicio() {
                   <div
                     className="image-container"
                     style={{
-                      backgroundImage:
-                        "url(" + require("assets/img/bg3.jpg") + ")",
+                      backgroundImage: "url(" + img3 + ")",
                     }}
                   ></div>
                 </Col>
@@ -81,8 +85,7 @@ function Inicio() {
                   <div
                     className="image-container image-right"
                     style={{
-                      backgroundImage:
-                        "url(" + require("assets/img/bg1.jpg") + ")",
+                      backgroundImage: "url(" + img2 + ")",
                     }}
                   ></div>
                   <h3>
@@ -107,16 +110,6 @@ function Inicio() {
                     rise. But over the more than 30 years of satellite records,
                     scientists have observed a clear pattern of decline,
                     decade-by-decade.
-                  </p>
-                  <p>
-                    The Arctic Ocean freezes every winter and much of the
-                    sea-ice then thaws every summer, and that process will
-                    continue whatever happens with climate change. Even if the
-                    Arctic continues to be one of the fastest-warming regions of
-                    the world, it will always be plunged into bitterly cold
-                    polar dark every winter. And year-by-year, for all kinds of
-                    natural reasons, there’s huge variety of the state of the
-                    ice.
                   </p>
                 </Col>
               </Row>
@@ -256,7 +249,10 @@ function Inicio() {
             </div>
           </Container>
         </div>
-        <div className="section section-contact-us text-center">
+        <div
+          id="enviar_mensaje"
+          className="section section-contact-us text-center"
+        >
           <Container>
             <h2 className="title">Want to work with us?</h2>
             <p className="description">Your project is very important to us.</p>
@@ -321,7 +317,6 @@ function Inicio() {
             </Row>
           </Container>
         </div>
-        <DefaultFooter />
       </div>
     </>
   );
