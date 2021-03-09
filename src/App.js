@@ -14,6 +14,7 @@ import LoginPage from "views/examples/LoginPage.js";
 import LandingPage from "views/examples/LandingPage.js";
 import ProfilePage from "views/examples/ProfilePage.js";
 import Piso from "pages/Piso";
+import Inicio from "pages/Inicio";
 
 function App() {
     return (
@@ -30,8 +31,12 @@ function App() {
             render={(props) => <NucleoIcons {...props} />}
             />
             <Route
-            exact path="/"
+            exact path="/landing"
             render={(props) => <LandingPage {...props} />}
+            />
+            <Route
+            exact path="/"
+            render={(props) => <Inicio {...props} />}
             />
             <Route
             exact path="/piso"
