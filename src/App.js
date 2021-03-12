@@ -30,7 +30,7 @@ function App() {
             <Switch>
 
                 <Route
-                exact path="/"
+                exact path="/rentabuenosaires"
                 render={(props) => <Inicio {...props} />}
                 />
                 <Route
