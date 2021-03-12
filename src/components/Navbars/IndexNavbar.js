@@ -76,7 +76,7 @@ function IndexNavbar() {
 
             {/*logo*/}
             <NavbarBrand
-              href=""
+              href="/rentabuenosaires"
               id="navbar-brand"
               target="_self"
             >
