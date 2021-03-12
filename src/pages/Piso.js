@@ -27,7 +27,7 @@ const items = [
 function Piso(){
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [animating, setAnimating] = React.useState(false);
-  
+
   const onExiting = () => {
     setAnimating(true);
   };
@@ -52,7 +52,6 @@ function Piso(){
     if (animating) return;
     setActiveIndex(newIndex);
   };
-
   return (
     <>
       <Carousel activeIndex={activeIndex} next={next} previous={previous}>
