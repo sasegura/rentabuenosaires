@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import airbnbLogo from '../../assets/img/airbnb-logon.png'
 // reactstrap components
 import {
   Button,
@@ -20,7 +21,21 @@ import {
 function IndexNavbar() {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
-  
+ 
+  const destinos = [
+    {
+      id:1,
+      nombre: "Madrid",
+      cantPisos: 1,
+    },
+    {
+      id:2,
+      nombre: "Buenos Aires",
+      cantPisos: 3,
+    },
+  ];
+
+
   React.useEffect(() => {
     const updateNavbarColor = () => {
       if (
@@ -41,6 +56,8 @@ function IndexNavbar() {
       window.removeEventListener("scroll", updateNavbarColor);
     };
   });
+
+  
   
   return (
     <>
@@ -99,63 +116,45 @@ function IndexNavbar() {
                       .scrollIntoView();
                   }}
                 >
-                  <i className="now-ui-icons arrows-1_cloud-download-93"></i>
+                  <i className="now-ui-icons ui-1_send"></i>
                   <p>Enviar mensaje</p>
                 </NavLink>
               </NavItem>
+              
               <UncontrolledDropdown nav>
-                <DropdownToggle
-                  caret
-                  color="default"
-                  href="#pablo"
-                  nav
-                  onClick={(e) => e.preventDefault()}
-                >
-                  <i className="now-ui-icons design_app mr-1"></i>
-                  <p>Components</p>
+                
+                <DropdownToggle caret color="default" href="#pablo" nav onClick={(e) => e.preventDefault()}>
+                  <i className="now-ui-icons travel_istanbul"></i>
+                  <p>Destinos</p>
                 </DropdownToggle>
-                <DropdownMenu>
-                  <DropdownItem to="/index" tag={Link}>
-                    <i className="now-ui-icons business_chart-pie-36 mr-1"></i>
-                    All components
-                  </DropdownItem>
-                  <DropdownItem
-                    href="https://demos.creative-tim.com/now-ui-kit-react/#/documentation/introduction?ref=nukr-index-navbar"
-                    target="_blank"
-                  >
-                    <i className="now-ui-icons design_bullet-list-67 mr-1"></i>
-                    Documentation
-                  </DropdownItem>
-                </DropdownMenu>
+                
+                  <DropdownMenu>
+                    {destinos.map(({ id, nombre }) => (
+                        <DropdownItem to='/piso'  key={id} tag={Link}>
+                          <i className="now-ui-icons mr-1"></i>
+                            {nombre}
+                        </DropdownItem>
+                      ))}
+                  </DropdownMenu>
+              
               </UncontrolledDropdown>
-              <NavItem>
-                <Button
-                  className="nav-link btn-neutral"
-                  color="info"
-                  href="#pablo"
-                  id="upgrade-to-pro"
-                  onClick={(e) => e.preventDefault()}
-                >
-                  <i className="now-ui-icons arrows-1_share-66 mr-1"></i>
-                  <p>Upgrade to PRO</p>
-                </Button>
-                <UncontrolledTooltip target="#upgrade-to-pro">
-                  Cooming soon!
-                </UncontrolledTooltip>
-              </NavItem>
+              
               <NavItem>
                 <NavLink
                   href="https://twitter.com/CreativeTim?ref=creativetim"
                   target="_blank"
-                  id="twitter-tooltip"
+                  id="airbnb-tooltip"
                 >
-                  <i className="fab fa-twitter"></i>
-                  <p className="d-lg-none d-xl-none">Twitter</p>
+                  <i className="fab ">
+                    <img src={airbnbLogo} ></img>
+                  </i>
+                  <p className="d-lg-none d-xl-none">Airbnb</p>
                 </NavLink>
-                <UncontrolledTooltip target="#twitter-tooltip">
-                  Follow us on Twitter
+                <UncontrolledTooltip target="#airbnb-tooltip">
+                  Síguenos en Airbnb
                 </UncontrolledTooltip>
-              </NavItem>
+              </NavItem>             
+             
               <NavItem>
                 <NavLink
                   href="https://www.facebook.com/CreativeTim?ref=creativetim"
@@ -166,7 +165,7 @@ function IndexNavbar() {
                   <p className="d-lg-none d-xl-none">Facebook</p>
                 </NavLink>
                 <UncontrolledTooltip target="#facebook-tooltip">
-                  Like us on Facebook
+                Síguenos en Facebook
                 </UncontrolledTooltip>
               </NavItem>
               <NavItem>
@@ -179,7 +178,7 @@ function IndexNavbar() {
                   <p className="d-lg-none d-xl-none">Instagram</p>
                 </NavLink>
                 <UncontrolledTooltip target="#instagram-tooltip">
-                  Follow us on Instagram
+                Síguenos en Instagram
                 </UncontrolledTooltip>
               </NavItem>
             </Nav>

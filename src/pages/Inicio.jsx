@@ -18,6 +18,9 @@ import IndexNavbar from "components/Navbars/IndexNavbar";
 import img1 from "../assets/img/bg1.jpg";
 import img2 from "../assets/img/bg4.jpg";
 import img3 from "../assets/img/bg3.jpg";
+import foto1 from "../assets/img/avatar.jpg";
+import foto2 from "../assets/img/ryan.jpg";
+import foto3 from "../assets/img/eva.jpg";
 import DarkFooter from "components/Footers/DarkFooter";
 import TransparentFooter from "components/Footers/TransparentFooter";
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar";
@@ -46,7 +49,7 @@ function Inicio() {
           <Container>
             <Row>
               <Col className="ml-auto mr-auto text-center" md="8">
-                <h2 className="title">Who we are?</h2>
+                <h2 className="title">Quiénes somos</h2>
                 <h5 className="description">
                   According to the National Oceanic and Atmospheric
                   Administration, Ted, Scambos, NSIDClead scentist, puts the
@@ -111,6 +114,15 @@ function Inicio() {
                     scientists have observed a clear pattern of decline,
                     decade-by-decade.
                   </p>
+                  <p>
+                    For a start, it does not automatically follow that a record
+                    amount of ice will melt this summer. More important for
+                    determining the size of the annual thaw is the state of the
+                    weather as the midnight sun approaches and temperatures
+                    rise. But over the more than 30 years of satellite records,
+                    scientists have observed a clear pattern of decline,
+                    decade-by-decade.
+                  </p>
                 </Col>
               </Row>
             </div>
@@ -118,15 +130,15 @@ function Inicio() {
         </div>
         <div className="section section-team text-center">
           <Container>
-            <h2 className="title">Here is our team</h2>
+            <h2 className="title">Este es nuestro equipo</h2>
             <div className="team">
               <Row>
                 <Col md="4">
                   <div className="team-player">
                     <img
-                      alt="..."
+                      alt="Nombre Apellido 1"
                       className="rounded-circle img-fluid img-raised"
-                      src={require("assets/img/avatar.jpg")}
+                      src={foto1}
                     ></img>
                     <h4 className="title">Romina Hadid</h4>
                     <p className="category text-info">Model</p>
@@ -168,9 +180,9 @@ function Inicio() {
                 <Col md="4">
                   <div className="team-player">
                     <img
-                      alt="..."
+                      alt="Nombre Apellido 2"
                       className="rounded-circle img-fluid img-raised"
-                      src={require("assets/img/ryan.jpg")}
+                      src={foto2}
                     ></img>
                     <h4 className="title">Ryan Tompson</h4>
                     <p className="category text-info">Designer</p>
@@ -206,7 +218,7 @@ function Inicio() {
                     <img
                       alt="..."
                       className="rounded-circle img-fluid img-raised"
-                      src={require("assets/img/eva.jpg")}
+                      src={foto3}
                     ></img>
                     <h4 className="title">Eva Jenner</h4>
                     <p className="category text-info">Fashion</p>
@@ -254,8 +266,10 @@ function Inicio() {
           className="section section-contact-us text-center"
         >
           <Container>
-            <h2 className="title">Want to work with us?</h2>
-            <p className="description">Your project is very important to us.</p>
+            <h2 className="title">Envíanos un mensaje</h2>
+            <p className="description">
+              Tus comentarios son muy importantes para nosotros
+            </p>
             <Row>
               <Col className="text-center ml-auto mr-auto" lg="6" md="8">
                 <InputGroup
@@ -269,7 +283,7 @@ function Inicio() {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
-                    placeholder="First Name..."
+                    placeholder="Nombre"
                     type="text"
                     onFocus={() => setFirstFocus(true)}
                     onBlur={() => setFirstFocus(false)}
@@ -287,7 +301,7 @@ function Inicio() {
                   </InputGroupAddon>
                   <Input
                     placeholder="Email..."
-                    type="text"
+                    type="email"
                     onFocus={() => setLastFocus(true)}
                     onBlur={() => setLastFocus(false)}
                   ></Input>
@@ -296,7 +310,7 @@ function Inicio() {
                   <Input
                     cols="80"
                     name="name"
-                    placeholder="Type a message..."
+                    placeholder="Escribe un mensaje..."
                     rows="4"
                     type="textarea"
                   ></Input>
@@ -310,7 +324,7 @@ function Inicio() {
                     onClick={(e) => e.preventDefault()}
                     size="lg"
                   >
-                    Send Message
+                    Enviar Mensaje
                   </Button>
                 </div>
               </Col>
