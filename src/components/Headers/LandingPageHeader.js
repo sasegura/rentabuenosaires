@@ -35,7 +35,7 @@ function LandingPageHeader() {
         ></div>
         <div className="content-center">
           <Container>
-            <h1 className="title">Bienbenidos a nuestra web</h1>
+            <h1 className="title">Bienvenidos a nuestra web</h1>
             <div className="text-center">
               <Button
                 className="btn-icon btn-round"
