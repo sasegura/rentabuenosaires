@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
@@ -17,11 +17,14 @@ import Piso from "pages/Piso";
 import Inicio from "pages/Inicio";
 import DarkFooter from "components/Footers/DarkFooter";
 import IndexNavbar from "components/Navbars/IndexNavbar";
+import Example from "pages/PisoPreview.component";
+import PisoPreview from "pages/PisoPreview.component";
+
 
 function App() {
     return (
     
-        <BrowserRouter>
+        <Fragment>
 
             {/**TopBar */}
             <IndexNavbar/>
@@ -35,12 +38,9 @@ function App() {
                 />
                 <Route
                 exact path="/piso"
-                render={(props) => <Piso {...props} />}
+                render={(props) => <PisoPreview {...props} />}
                 />
 
-
-                
-            
                 <Route exact path="/index" render={(props) => <Index {...props} />} />
                 <Route
                 exact path="/nucleo-icons"
@@ -59,12 +59,19 @@ function App() {
                 path="/login-page"
                 render={(props) => <LoginPage {...props} />}
                 />
+                <Route
+                path="/example"
+                render={(props) => <Example {...props} />}
+                />
+
             </Switch>
 
             {/**Footer */}
             <DarkFooter/>
-           
-        </BrowserRouter>
+            </Fragment>
+        
 
 );}
+
+
 export default App;

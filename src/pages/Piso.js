@@ -1,4 +1,5 @@
 import React from "react";
+import {connect} from 'react-redux';
 
 // reactstrap components
 import { Carousel, CarouselItem, CarouselIndicators } from "reactstrap";
@@ -24,7 +25,9 @@ const items = [
   }
 ];
 
-function Piso(){
+const Piso = (props) => {
+ 
+
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [animating, setAnimating] = React.useState(false);
 
@@ -103,7 +106,11 @@ function Piso(){
   );
 }
 
-export default Piso;
+const mapStateToProps = state => ({
+  currentPiso: state.piso.currentPiso
+})
+
+export default connect(mapStateToProps)(Piso);
 
 /**import React from "react";
 

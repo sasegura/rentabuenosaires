@@ -17,9 +17,17 @@ import {
   Container,
   UncontrolledTooltip,
 } from "reactstrap";
+import { connect } from "react-redux";
+import { setCurrentDestino } from "redux/destino/destino.action";
+import { setCurrentNavBarColor } from "redux/navBarColor/navBarColor.action";
 
-function IndexNavbar() {
-  const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
+const IndexNavbar = (props) =>  {
+  
+  const [navbarColor, setNavbarColor] = React.useState(
+    (props.currentNavBarColor === true) ? ("navbar-transparent") : ("") 
+  );
+
+  
   const [collapseOpen, setCollapseOpen] = React.useState(false);
  
   const destinos = [
@@ -37,25 +45,38 @@ function IndexNavbar() {
 
 
   React.useEffect(() => {
+    
     const updateNavbarColor = () => {
-      if (
-        document.documentElement.scrollTop > 399 ||
-        document.body.scrollTop > 399
-      ) {
-        setNavbarColor("");
-      } else if (
-        document.documentElement.scrollTop < 400 ||
-        document.body.scrollTop < 400
-      ) {
-        setNavbarColor("navbar-transparent");
-      }
+
+      if(navbarColor === "navbar-transparent"){
+        if (
+          document.documentElement.scrollTop > 399 ||
+          document.body.scrollTop > 399
+        ) {
+          setNavbarColor("")
+        } else if (
+          document.documentElement.scrollTop < 400 ||
+          document.body.scrollTop < 400
+        ) {
+          setNavbarColor("navbar-transparent");
+        }
+      }      
     };
-    window.addEventListener("scroll", updateNavbarColor);
+
+    if(props.currentNavBarColor){
+      window.addEventListener("scroll", updateNavbarColor);
+    }
+    else{
+      window.removeEventListener("scroll", updateNavbarColor);
+      setNavbarColor("")
+    }
+
+   
     
     return function cleanup() {
       window.removeEventListener("scroll", updateNavbarColor);
     };
-  });
+  },[props.currentNavBarColor]);
 
   
   
@@ -130,7 +151,11 @@ function IndexNavbar() {
                 
                   <DropdownMenu>
                     {destinos.map(({ id, nombre }) => (
-                        <DropdownItem to='/piso'  key={id} tag={Link}>
+                        <DropdownItem to='/piso' onClick={() => props.setCurrentDestino({
+                          nombre: nombre,
+                          id: id
+                          })}   
+                          key={id} tag={Link}>
                           <i className="now-ui-icons mr-1"></i>
                             {nombre}
                         </DropdownItem>
@@ -189,4 +214,15 @@ function IndexNavbar() {
   );
 }
 
-export default IndexNavbar;
+const mapDispatchToProps = dispatch => ({
+  setCurrentDestino : destino => dispatch(setCurrentDestino(destino)),
+  setCurrentNavBarColor: navBarColor => dispatch(setCurrentNavBarColor(navBarColor)),
+})
+
+const mapStateToProps = state => ({
+  currentNavBarColor: state.navBarColor.currentNavBarColor
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(IndexNavbar);
+
+
