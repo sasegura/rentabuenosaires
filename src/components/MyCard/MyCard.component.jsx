@@ -9,10 +9,10 @@ import {
   Button,
 } from "reactstrap";
 
-import imagen from "../../assets/img/flags/AD.png";
+import imagen from "../../assets/img/bg1.jpg";
 // core components
 
-function MyCard() {
+function MyCard(props) {
   return (
     <>
       <Card style={{ width: "20rem" }}>
