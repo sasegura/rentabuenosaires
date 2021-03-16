@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/rentabuenosaires/static/css/main.45096a0f.chunk.css",
-    "main.js": "/rentabuenosaires/static/js/main.3b40ed90.chunk.js",
-    "main.js.map": "/rentabuenosaires/static/js/main.3b40ed90.chunk.js.map",
+    "main.css": "/rentabuenosaires/static/css/main.eb96fa1d.chunk.css",
+    "main.js": "/rentabuenosaires/static/js/main.5eacabd7.chunk.js",
+    "main.js.map": "/rentabuenosaires/static/js/main.5eacabd7.chunk.js.map",
     "runtime-main.js": "/rentabuenosaires/static/js/runtime-main.7805c823.js",
     "runtime-main.js.map": "/rentabuenosaires/static/js/runtime-main.7805c823.js.map",
-    "static/js/2.40c6ee21.chunk.js": "/rentabuenosaires/static/js/2.40c6ee21.chunk.js",
-    "static/js/2.40c6ee21.chunk.js.map": "/rentabuenosaires/static/js/2.40c6ee21.chunk.js.map",
+    "static/js/2.11d314b9.chunk.js": "/rentabuenosaires/static/js/2.11d314b9.chunk.js",
+    "static/js/2.11d314b9.chunk.js.map": "/rentabuenosaires/static/js/2.11d314b9.chunk.js.map",
     "index.html": "/rentabuenosaires/index.html",
-    "static/css/main.45096a0f.chunk.css.map": "/rentabuenosaires/static/css/main.45096a0f.chunk.css.map",
-    "static/js/2.40c6ee21.chunk.js.LICENSE.txt": "/rentabuenosaires/static/js/2.40c6ee21.chunk.js.LICENSE.txt",
+    "static/css/main.eb96fa1d.chunk.css.map": "/rentabuenosaires/static/css/main.eb96fa1d.chunk.css.map",
+    "static/js/2.11d314b9.chunk.js.LICENSE.txt": "/rentabuenosaires/static/js/2.11d314b9.chunk.js.LICENSE.txt",
     "static/media/Banner.a0091e8e.png": "/rentabuenosaires/static/media/Banner.a0091e8e.png",
     "static/media/airbnb-logon.5e6c0ad7.png": "/rentabuenosaires/static/media/airbnb-logon.5e6c0ad7.png",
     "static/media/avatar.jpg": "/rentabuenosaires/static/media/avatar.21d108f8.jpg",
@@ -37,8 +37,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.7805c823.js",
-    "static/js/2.40c6ee21.chunk.js",
-    "static/css/main.45096a0f.chunk.css",
-    "static/js/main.3b40ed90.chunk.js"
+    "static/js/2.11d314b9.chunk.js",
+    "static/css/main.eb96fa1d.chunk.css",
+    "static/js/main.5eacabd7.chunk.js"
   ]
 }
