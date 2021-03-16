@@ -17,13 +17,23 @@ const PisoPreview = (props) => {
   const pisos = [
     {
       id:1,
-      nombre: "piso 1",
+      nombre: "Piso 1",
       cantHab: 1,
     },
     {
       id:2,
-      nombre: "piso 2",
-      cantHab: 3,
+      nombre: "Piso 2",
+      cantHab: 2,
+    },
+    {
+      id:3,
+      nombre: "Piso 3",
+      cantHab: 1,
+    },
+    {
+      id:4,
+      nombre: "Piso 4",
+      cantHab: 5,
     },
   ];
 
@@ -32,14 +42,18 @@ const PisoPreview = (props) => {
     
         <div className="separador"/>
 
-        <h1 className="title">{props.currentDestino.nombre.toUpperCase()}</h1>
-        
-        <div className="preview">
-          {pisos
-            .filter((piso, idx) => idx < 4)
-            .map(({ id, ...theOthers }) => (
-              <MyCard key={id} {...theOthers} />
-            ))}
+        <div className="pisoPrev">
+
+          <h1 className="h1">{props.currentDestino.nombre.toUpperCase()}</h1>
+          
+          <div className="collection-preview">
+            {pisos
+              .filter((piso, idx) => idx < 4)
+              .map(({ id, ...theOthers }) => (
+                <MyCard key={id} {...theOthers} />
+              ))}
+          </div>
+
         </div>
 
     </fragment>
