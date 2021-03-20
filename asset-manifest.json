@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/rentabuenosaires/static/css/main.eb96fa1d.chunk.css",
-    "main.js": "/rentabuenosaires/static/js/main.5eacabd7.chunk.js",
-    "main.js.map": "/rentabuenosaires/static/js/main.5eacabd7.chunk.js.map",
+    "main.css": "/rentabuenosaires/static/css/main.75c9fe50.chunk.css",
+    "main.js": "/rentabuenosaires/static/js/main.d4ec9c04.chunk.js",
+    "main.js.map": "/rentabuenosaires/static/js/main.d4ec9c04.chunk.js.map",
     "runtime-main.js": "/rentabuenosaires/static/js/runtime-main.7805c823.js",
     "runtime-main.js.map": "/rentabuenosaires/static/js/runtime-main.7805c823.js.map",
-    "static/js/2.11d314b9.chunk.js": "/rentabuenosaires/static/js/2.11d314b9.chunk.js",
-    "static/js/2.11d314b9.chunk.js.map": "/rentabuenosaires/static/js/2.11d314b9.chunk.js.map",
+    "static/js/2.d23e2dbf.chunk.js": "/rentabuenosaires/static/js/2.d23e2dbf.chunk.js",
+    "static/js/2.d23e2dbf.chunk.js.map": "/rentabuenosaires/static/js/2.d23e2dbf.chunk.js.map",
     "index.html": "/rentabuenosaires/index.html",
-    "static/css/main.eb96fa1d.chunk.css.map": "/rentabuenosaires/static/css/main.eb96fa1d.chunk.css.map",
-    "static/js/2.11d314b9.chunk.js.LICENSE.txt": "/rentabuenosaires/static/js/2.11d314b9.chunk.js.LICENSE.txt",
+    "static/css/main.75c9fe50.chunk.css.map": "/rentabuenosaires/static/css/main.75c9fe50.chunk.css.map",
+    "static/js/2.d23e2dbf.chunk.js.LICENSE.txt": "/rentabuenosaires/static/js/2.d23e2dbf.chunk.js.LICENSE.txt",
+    "static/media/2.4702bf24.jpg": "/rentabuenosaires/static/media/2.4702bf24.jpg",
     "static/media/Banner.a0091e8e.png": "/rentabuenosaires/static/media/Banner.a0091e8e.png",
     "static/media/airbnb-logon.5e6c0ad7.png": "/rentabuenosaires/static/media/airbnb-logon.5e6c0ad7.png",
     "static/media/avatar.jpg": "/rentabuenosaires/static/media/avatar.21d108f8.jpg",
@@ -23,6 +24,7 @@
     "static/media/bg8.jpg": "/rentabuenosaires/static/media/bg8.2c89438b.jpg",
     "static/media/creative-tim-white-slim2.png": "/rentabuenosaires/static/media/creative-tim-white-slim2.c9b2f68e.png",
     "static/media/eva.jpg": "/rentabuenosaires/static/media/eva.258d5c64.jpg",
+    "static/media/getFetch.cjs": "/rentabuenosaires/static/media/getFetch.d7d6010d.cjs",
     "static/media/header.jpg": "/rentabuenosaires/static/media/header.2cb9b14b.jpg",
     "static/media/hero-image-1.png": "/rentabuenosaires/static/media/hero-image-1.33f10ca8.png",
     "static/media/hero-image-2.png": "/rentabuenosaires/static/media/hero-image-2.876d7218.png",
@@ -37,8 +39,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.7805c823.js",
-    "static/js/2.11d314b9.chunk.js",
-    "static/css/main.eb96fa1d.chunk.css",
-    "static/js/main.5eacabd7.chunk.js"
+    "static/js/2.d23e2dbf.chunk.js",
+    "static/css/main.75c9fe50.chunk.css",
+    "static/js/main.d4ec9c04.chunk.js"
   ]
 }
