@@ -4,8 +4,11 @@
   "version": "1.4.0",
   "private": true,
   "dependencies": {
+    "fs": "0.0.1-security",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8",
+    "image-file-to-base64-exif": "^1.0.3",
+    "image-to-base64": "^2.1.1",
     "moment": "2.26.0",
     "node-sass": "4.14.1",
     "nouislider": "14.5.0",
