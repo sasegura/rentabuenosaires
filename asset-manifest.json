@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/rentabuenosaires/static/css/main.75c9fe50.chunk.css",
-    "main.js": "/rentabuenosaires/static/js/main.23d7c2f4.chunk.js",
-    "main.js.map": "/rentabuenosaires/static/js/main.23d7c2f4.chunk.js.map",
+    "main.js": "/rentabuenosaires/static/js/main.15642090.chunk.js",
+    "main.js.map": "/rentabuenosaires/static/js/main.15642090.chunk.js.map",
     "runtime-main.js": "/rentabuenosaires/static/js/runtime-main.7805c823.js",
     "runtime-main.js.map": "/rentabuenosaires/static/js/runtime-main.7805c823.js.map",
     "static/js/2.d23e2dbf.chunk.js": "/rentabuenosaires/static/js/2.d23e2dbf.chunk.js",
@@ -41,6 +41,6 @@
     "static/js/runtime-main.7805c823.js",
     "static/js/2.d23e2dbf.chunk.js",
     "static/css/main.75c9fe50.chunk.css",
-    "static/js/main.23d7c2f4.chunk.js"
+    "static/js/main.15642090.chunk.js"
   ]
 }
