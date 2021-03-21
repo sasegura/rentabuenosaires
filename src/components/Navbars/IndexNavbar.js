@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { withTranslation } from 'react-i18next';
 import airbnbLogo from '../../assets/img/airbnb-logon.png'
+import esp from "../../assets/img/flags/ES.png";
+import eng from "../../assets/img/flags/GB.png";
 // reactstrap components
 import {
   Button,
@@ -22,12 +25,15 @@ import { setCurrentDestino } from "redux/destino/destino.action";
 import { setCurrentNavBarColor } from "redux/navBarColor/navBarColor.action";
 
 const IndexNavbar = (props) =>  {
-  
+  const {t}=props
   const [navbarColor, setNavbarColor] = React.useState(
     (props.currentNavBarColor === true) ? ("navbar-transparent") : ("") 
   );
 
-  
+  const ChangeLenguage=(e,language)=>{
+    e.preventDefault()
+    props.i18n.changeLanguage(language);
+  }
   const [collapseOpen, setCollapseOpen] = React.useState(false);
  
   const destinos = [
@@ -138,7 +144,7 @@ const IndexNavbar = (props) =>  {
                   }}
                 >
                   <i className="now-ui-icons ui-1_send"></i>
-                  <p>Enviar mensaje</p>
+                  <p>{t("Enviar mensaje")}</p>
                 </NavLink>
               </NavItem>
               
@@ -146,7 +152,7 @@ const IndexNavbar = (props) =>  {
                 
                 <DropdownToggle caret color="default" href="#pablo" nav onClick={(e) => e.preventDefault()}>
                   <i className="now-ui-icons travel_istanbul"></i>
-                  <p>Destinos</p>
+                  <p>{t("Destinos")}</p>
                 </DropdownToggle>
                 
                   <DropdownMenu>
@@ -164,21 +170,7 @@ const IndexNavbar = (props) =>  {
               
               </UncontrolledDropdown>
               
-              <NavItem>
-                <NavLink
-                  href="https://twitter.com/CreativeTim?ref=creativetim"
-                  target="_blank"
-                  id="airbnb-tooltip"
-                >
-                  <i className="fab ">
-                    <img src={airbnbLogo} ></img>
-                  </i>
-                  <p className="d-lg-none d-xl-none">Airbnb</p>
-                </NavLink>
-                <UncontrolledTooltip target="#airbnb-tooltip">
-                  Síguenos en Airbnb
-                </UncontrolledTooltip>
-              </NavItem>             
+                          
              
               <NavItem>
                 <NavLink
@@ -190,7 +182,7 @@ const IndexNavbar = (props) =>  {
                   <p className="d-lg-none d-xl-none">Facebook</p>
                 </NavLink>
                 <UncontrolledTooltip target="#facebook-tooltip">
-                Síguenos en Facebook
+                {t("Síguenos en Facebook")}
                 </UncontrolledTooltip>
               </NavItem>
               <NavItem>
@@ -203,10 +195,28 @@ const IndexNavbar = (props) =>  {
                   <p className="d-lg-none d-xl-none">Instagram</p>
                 </NavLink>
                 <UncontrolledTooltip target="#instagram-tooltip">
-                Síguenos en Instagram
+                {t("Síguenos en Instagram")}
                 </UncontrolledTooltip>
               </NavItem>
-            </Nav>
+              <UncontrolledDropdown nav>
+                
+                <DropdownToggle caret color="default" href="#pablo" nav onClick={(e) => e.preventDefault()}>
+                  <i className="now-ui-icons travel_istanbul"></i>
+                  <p>{t("Idioma")}</p>
+                </DropdownToggle>
+                
+                  <DropdownMenu>
+                      <DropdownItem to='/' onClick={(e) => ChangeLenguage(e,"en")} tag={Link}>
+                        <img alt="..." className="n-logo" src={eng} />
+                          {t("Inglés")}
+                      </DropdownItem>
+                      <DropdownItem to='/' onClick={(e) => ChangeLenguage(e,"es")} tag={Link}>
+                          <img alt="..." className="n-logo" src={esp}/>
+                          {t("Español")}
+                      </DropdownItem>
+                  </DropdownMenu>              
+              </UncontrolledDropdown>
+            </Nav>            
           </Collapse>
         </Container>
       </Navbar>
@@ -223,6 +233,6 @@ const mapStateToProps = state => ({
   currentNavBarColor: state.navBarColor.currentNavBarColor
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(IndexNavbar);
+export default connect(mapStateToProps,mapDispatchToProps)(withTranslation ("translations") (IndexNavbar));
 
 

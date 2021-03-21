@@ -1,4 +1,5 @@
 import React from "react";
+import { withTranslation } from 'react-i18next';
 // reactstrap components
 import {
   Card,
@@ -13,6 +14,7 @@ import imagen from "../../assets/img/2.jpg";
 
 import "./MyCard.style.scss";
 import { withRouter } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 // core components
 
@@ -21,14 +23,15 @@ function MyCard({ id, match, destino, link, history, cantHab, nombre }) {
     event.preventDefault();
     history.push(`${match.url}/${nombre}`);
   };
+  const {t}=useTranslation()
 
   return (
     <>
-      <Card className="collection-item">
+      <Card className="col-xs-10 col-sm-4 ">
         <CardImg className="image" alt={nombre} src={imagen} top></CardImg>
-        <CardBody className="cardbody">
+        <CardBody className="cardbody col-12">
           <CardTitle tag="h4">{nombre}</CardTitle>
-          <CardText> Cantidad de habitaciones: {cantHab}</CardText>
+          <CardText> {t("Cantidad de habitaciones")}: {cantHab}</CardText>
           <Button
             type="submit"
             color="primary"
@@ -36,7 +39,7 @@ function MyCard({ id, match, destino, link, history, cantHab, nombre }) {
             onClick={(e) => e.preventDefault()}
             onClick={handleSubmit}
           >
-            Ver detalles
+            {t("Ver detalles")}
           </Button>
         </CardBody>
       </Card>
@@ -44,4 +47,4 @@ function MyCard({ id, match, destino, link, history, cantHab, nombre }) {
   );
 }
 
-export default withRouter(MyCard);
+export default withRouter(withTranslation ("translations") (MyCard));

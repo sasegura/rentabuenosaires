@@ -1,4 +1,5 @@
 import React from "react";
+import { withTranslation } from 'react-i18next';
 
 // reactstrap components
 import { Button, Container } from "reactstrap";
@@ -7,7 +8,8 @@ import Banner from '../../assets/img/Banner.png';
 
 // core components
 
-function LandingPageHeader() {
+function LandingPageHeader(props) {
+  const {t}=props
   let pageHeader = React.createRef();
 
   React.useEffect(() => {
@@ -35,7 +37,7 @@ function LandingPageHeader() {
         ></div>
         <div className="content-center">
           <Container>
-            <h1 className="title">Bienvenidos a nuestra web</h1>
+            <h1 className="title">{t("Bienvenidos a nuestra web")}</h1>
             <div className="text-center">
               <Button
                 className="btn-icon btn-round"
@@ -69,4 +71,4 @@ function LandingPageHeader() {
   );
 }
 
-export default LandingPageHeader;
+export default withTranslation ("translations") (LandingPageHeader);

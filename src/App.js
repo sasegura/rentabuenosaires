@@ -33,35 +33,35 @@ function App() {
             <Switch>
 
                 <Route
-                exact path="/rentabuenosaires"
+                exact path="/rentabuenosaires" exact
                 render={(props) => <Inicio {...props} />}
                 />
                 <Route
-                exact path="/piso"
+                exact path="/piso" exact
                 render={(props) => <PisoPreview {...props} />}
                 />
 
                 <Route exact path="/index" render={(props) => <Index {...props} />} />
                 <Route
-                exact path="/nucleo-icons"
-                render={(props) => <NucleoIcons {...props} />}
+                    exact path="/nucleo-icons"
+                    render={(props) => <NucleoIcons {...props} />}
                 />
                 <Route
-                exact path="/landing"
-                render={(props) => <LandingPage {...props} />}
+                    exact path="/landing"
+                    render={(props) => <LandingPage {...props} />}
                 />
                 
                 <Route
-                path="/profile-page"
-                render={(props) => <ProfilePage {...props} />}
+                    exact path="/profile-page"
+                    render={(props) => <ProfilePage {...props} />}
                 />
                 <Route
-                path="/login-page"
-                render={(props) => <LoginPage {...props} />}
+                    exact path="/login-page"
+                    render={(props) => <LoginPage {...props} />}
                 />
                 <Route
-                path="/example"
-                render={(props) => <Example {...props} />}
+                    exact path="/example"
+                    render={(props) => <Example {...props} />}
                 />
 
             </Switch>
