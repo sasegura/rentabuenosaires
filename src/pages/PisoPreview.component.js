@@ -8,7 +8,6 @@ import {connect} from 'react-redux';
 import { setCurrentNavBarColor } from "redux/navBarColor/navBarColor.action";
 import './css/pisoPreview.scss'
 
-import fs from "fs"
 import { pisos } from "configuracion/constantes";
 
 // reactstrap components
