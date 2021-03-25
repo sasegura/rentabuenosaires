@@ -70,6 +70,7 @@ function Inicio() {
         //history.push("/profile")
     } catch (e) {
         console.log(e);
+        
     }
 }
   const ReaderLoaded=(ev)=>{
