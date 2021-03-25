@@ -18,9 +18,21 @@ const PisoPreview = (props) => {
 
   const [img, setImg] = useState("")
   const [load, setLoad] = useState(true)
+
   props.setCurrentNavBarColor(false);
 
-  //fetch pisos según el destino
+  React.useEffect(() => {
+    document.body.classList.add("landing-page");
+    document.body.classList.add("sidebar-collapse");
+    document.documentElement.classList.remove("nav-open");
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    return function cleanup() {
+      document.body.classList.remove("landing-page");
+      document.body.classList.remove("sidebar-collapse");
+    };
+  }, []);
+
 
   async function getPiso() {
     const url = '/pisos?filter[where][iddestino]=' + props.currentDestino.id;

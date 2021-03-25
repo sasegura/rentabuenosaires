@@ -112,7 +112,7 @@ const IndexNavbar = (props) => {
               id="navbar-brand"
               target="_self"
             >
-              Logo
+              LOGO
             </NavbarBrand>
 
 
@@ -140,9 +140,13 @@ const IndexNavbar = (props) => {
             <Nav navbar>
               <NavItem>
                 <Link to='/mensaje'>
-                  <NavLink target="_self">
+                  <NavLink target="_self" onClick={() => {
+                    document.documentElement.classList.toggle("nav-open");
+                    setCollapseOpen(!collapseOpen);
+                  }}>
                     <i className="now-ui-icons ui-1_send"></i>
                     <p>{t("Enviar mensaje")}</p>
+
                   </NavLink>
                 </Link>
               </NavItem>
@@ -164,10 +168,11 @@ const IndexNavbar = (props) => {
                 <DropdownMenu>
                   {destinos !== null ?
                     destinos.map(({ iddestino, nombre }) => (
-                      <DropdownItem to='/piso' onClick={() => props.setCurrentDestino({
-                        nombre: nombre,
-                        id: iddestino
-                      })}
+                      <DropdownItem to='/piso' onClick={() => {
+                        props.setCurrentDestino({ nombre: nombre, id: iddestino })
+                        document.documentElement.classList.toggle("nav-open");
+                        setCollapseOpen(!collapseOpen);
+                      }}
                         key={iddestino} tag={Link}>
                         <i className="now-ui-icons mr-1"></i>
                         {nombre}
@@ -198,6 +203,10 @@ const IndexNavbar = (props) => {
                 <Link to='/login'>
                   <NavLink
                     target="_self"
+                    onClick={() => {
+                      document.documentElement.classList.toggle("nav-open");
+                      setCollapseOpen(!collapseOpen);
+                    }}
                   >
                     <i className="now-ui-icons users_single-02"></i>
                     <p>{t("Entrar")}</p>

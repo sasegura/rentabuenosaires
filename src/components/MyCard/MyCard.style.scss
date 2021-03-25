@@ -26,5 +26,38 @@
 .cardbody{
     text-align: center;
 }
+
+.imagenDiv{
+  width: 100%;
+  height: 300px;
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.imagenDiv img{
+  width: 100%;
+  height: auto;
+  
+}
+
+.imagenDiv .cargando{
+  
+  height: auto;
+  
+}
+@supports(object-fit: cover){
+    .imagenDiv img{
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+}
+
+.card-text{
+  font-size: 14px !important;
+  margin-bottom: 2px !important;
+}
   
   
