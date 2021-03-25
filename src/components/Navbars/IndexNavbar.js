@@ -147,6 +147,15 @@ const IndexNavbar = (props) => {
                 </Link>
               </NavItem>
 
+              <NavItem>
+                <Link to='/adisionar'>
+                  <NavLink target="_self">
+                    <i className="now-ui-icons ui-1_send"></i>
+                    <p>{t("Administracion")}</p>
+                  </NavLink>
+                </Link>
+              </NavItem>
+
               <UncontrolledDropdown nav>
                 <DropdownToggle caret color="default" href="#pablo" nav onClick={(e) => e.preventDefault()}>
                   <i className="now-ui-icons location_map-big"></i>

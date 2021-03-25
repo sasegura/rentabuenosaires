@@ -22,7 +22,12 @@ import PisoPreview from "pages/PisoPreview.component";
 import Navbars from "views/index-sections/Navbars";
 import SignUp from "views/index-sections/SignUp";
 import EnviarMensaje from "pages/Mensaje.component";
+import Adisionar from "pages/Adisionar";
 
+import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+import 'primeflex/primeflex.css';
 
 function App() {
     return (
@@ -40,13 +45,17 @@ function App() {
                     render={(props) => <Inicio {...props} />}
                 />
                 <Route
-                    exact path="/piso" exact
+                    exact path="/pisos" exact
                     render={(props) => <PisoPreview {...props} />}
                 />
 
                 <Route
-                    exact path="/piso/Piso 1" exact
+                    exact path="/piso" exact
                     render={(props) => <Piso {...props} />}
+                />
+                <Route
+                    exact path="/adisionar" exact
+                    render={(props) => <Adisionar {...props} />}
                 />
 
                 <Route exact path="/index" render={(props) => <Index {...props} />} />
