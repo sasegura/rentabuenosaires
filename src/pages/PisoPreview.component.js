@@ -9,7 +9,6 @@ import { setCurrentNavBarColor } from "redux/navBarColor/navBarColor.action";
 import './css/pisoPreview.scss'
 
 
-import { pisos } from "configuracion/constantes";
 import AxiosConexionConfig from "conexion/AxiosConexionConfig";
 import { useState } from "react";
 
@@ -17,92 +16,57 @@ import { useState } from "react";
 
 const PisoPreview = (props) => {
 
-  const [img, setImg]=useState("")
-  const [load, setLoad]=useState(true)
+  const [img, setImg] = useState("")
+  const [load, setLoad] = useState(true)
   props.setCurrentNavBarColor(false);
 
   //fetch pisos según el destino
 
-  //const piso=pisos;
-<<<<<<< HEAD
-  
-  async function getImagen() {
-    
-    const url = '/imagen';
+  async function getPiso() {
+    const url = '/pisos?filter[where][iddestino]=' + props.currentDestino.id;
     try {
-      console.log("aaa")
-        const imagen = await AxiosConexionConfig.get(url);
-        //console.log(imagen.data[2].imagen);
-        setImg(imagen.data[1].imagen)
-        setLoad(!load)
-        console.log("bbbb")
-        //history.push("/profile")
+      const piso = await AxiosConexionConfig.get(url);
+      setPisos(piso.data);
     } catch (e) {
-      console.log("error")
-        console.log(e);
+      console.log(e);
     }
-}
+  }
 
-React.useEffect(() => {
-  getImagen()
-},[]);
+  const [pisos, setPisos] = useState(null);
 
-  const destino=()=>{
-      return (<div className="pisoPrev">
-          <h1 className="h1">{props.currentDestino.nombre.toUpperCase()}</h1>
-          <img src={"data:image/png;base64,"+img}/>
-          <div className="collection-preview">
-              {pisos
-                  .filter((piso, idx) => idx < 4)
-                  .map(({ id, ...theOthers }) => (
-                    < MyCard key={id} id={id} destino={props.currentDestino.nombre} {...theOthers} />
-                ))}
-          </div>
-      </div>)
-=======
+  React.useEffect(() => {
+    getPiso()
+  }, [props.currentDestino]);
 
   const destino = () => {
     return (<div className="pisoPrev">
       <h1 className="h1">{props.currentDestino.nombre.toUpperCase()}</h1>
+      {/*<img src={"data:image/png;base64," + img} />*/}
       <div className="collection-preview">
-        {pisos
-          .filter((piso, idx) => idx < 4)
-          .map(({ id, ...theOthers }) => (
-            < MyCard key={id} id={id} destino={props.currentDestino.nombre} {...theOthers} />
-          ))}
+        {pisos !== null ?
+          pisos
+            .filter((piso, idx) => idx < 3)
+            .map(({ id, ...theOthers }) => (
+              < MyCard key={id} id={id} destino={props.currentDestino.nombre} {...theOthers} />
+            )) : <Fragment />}
       </div>
     </div>)
->>>>>>> 75159ea8c4aa388ffcd3461e65f76a770d62d4aa
   }
+
   const nodestino = () => {
     return (<div className="pisoPrev">
-      <h1 className="h1">{"Buenos Aires".toUpperCase()}</h1>
-      <div className="collection-preview">
-        {pisos
-          .filter((piso, idx) => idx < 4)
-          .map(({ id, ...theOthers }) => (
-            < MyCard key={id} id={id} destino={"Buenos Aires"} {...theOthers} />
-          ))}
-      </div>
+      <h1 className="h1">{"No hay destinos disponibles".toUpperCase()}</h1>
     </div>)
   }
 
   return (
     <Fragment>
-<<<<<<< HEAD
-        <div className="separador" key={load}/>
-          {props.currentDestino!==null ?
-              destino():
-              nodestino()
-          }
-          <img src={"data:image/png;base64,"+img}/>
-=======
-      <div className="separador" />
+      <div className="separador" key={load} />
       {props.currentDestino !== null ?
         destino() :
         nodestino()
       }
->>>>>>> 75159ea8c4aa388ffcd3461e65f76a770d62d4aa
+      {/* <img src={"data:image/png;base64," + img} />*/}
     </Fragment>
   );
 }

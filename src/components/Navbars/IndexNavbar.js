@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { withTranslation } from 'react-i18next';
 import airbnbLogo from '../../assets/img/airbnb-logon.png'
@@ -24,6 +24,7 @@ import { connect } from "react-redux";
 import { setCurrentDestino } from "redux/destino/destino.action";
 import { setCurrentNavBarColor } from "redux/navBarColor/navBarColor.action";
 import './IndexNavBar.style.scss'
+import AxiosConexionConfig from "conexion/AxiosConexionConfig";
 
 const IndexNavbar = (props) => {
   const { t } = props
@@ -37,19 +38,22 @@ const IndexNavbar = (props) => {
   }
   const [collapseOpen, setCollapseOpen] = React.useState(false);
 
-  const destinos = [
-    {
-      id: 1,
-      nombre: "Madrid",
-      cantPisos: 1,
-    },
-    {
-      id: 2,
-      nombre: "Buenos Aires",
-      cantPisos: 3,
-    },
-  ];
+  React.useEffect(() => {
+    getDestinos();
+  }, []);
 
+  async function getDestinos() {
+    const url = '/destinos';
+
+    try {
+      const destino = await AxiosConexionConfig.get(url);
+      setDestinos(destino.data)
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const [destinos, setDestinos] = useState(null)
 
   React.useEffect(() => {
 
@@ -149,16 +153,17 @@ const IndexNavbar = (props) => {
                   <p>{t("Destinos")}</p>
                 </DropdownToggle>
                 <DropdownMenu>
-                  {destinos.map(({ id, nombre }) => (
-                    <DropdownItem to='/piso' onClick={() => props.setCurrentDestino({
-                      nombre: nombre,
-                      id: id
-                    })}
-                      key={id} tag={Link}>
-                      <i className="now-ui-icons mr-1"></i>
-                      {nombre}
-                    </DropdownItem>
-                  ))}
+                  {destinos !== null ?
+                    destinos.map(({ iddestino, nombre }) => (
+                      <DropdownItem to='/piso' onClick={() => props.setCurrentDestino({
+                        nombre: nombre,
+                        id: iddestino
+                      })}
+                        key={iddestino} tag={Link}>
+                        <i className="now-ui-icons mr-1"></i>
+                        {nombre}
+                      </DropdownItem>
+                    )) : <Fragment />}
                 </DropdownMenu>
               </UncontrolledDropdown>
 

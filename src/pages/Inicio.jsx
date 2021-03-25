@@ -31,6 +31,7 @@ function Inicio() {
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
   const [imagen, setImagen] = React.useState(__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
+  
   React.useEffect(() => {
     document.body.classList.add("landing-page");
     document.body.classList.add("sidebar-collapse");
@@ -62,10 +63,10 @@ function Inicio() {
   }
   async function setImagenX(imagenX) {
     const url = '/imagen';
-    const v={ idpiso:1, imagen:imagenX}
+    const v={ idpiso:2, imagen:imagenX, portada:true}
     try {
         const imagen = await AxiosConexionConfig.post(url,JSON.stringify(v));
-        console.log(imagen);
+        
         
         //history.push("/profile")
     } catch (e) {
