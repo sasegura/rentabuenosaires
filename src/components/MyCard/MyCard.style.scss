@@ -4,19 +4,27 @@
     flex-direction: column;
     align-items: center;
     margin: 15px;
-  
-    .image {
-      width: 100%;
-      height: 95%;
-      background-size: cover;
-      background-position: center;
-      margin-bottom: 5px;
-    } 
+}
 
-    .cardbody{
-        text-align: center;
-    }
-    
+.card1{
+  margin: 10px !important;
+  padding: 0 !important;
+}
+.image {
+  width: 100%;
+  height: 95%;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 0px;
+  margin-top: 0px;
+} 
+
+.card-title {
+  margin-top: 2px !important;
+}
+
+.cardbody{
+    text-align: center;
 }
   
   

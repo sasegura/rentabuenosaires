@@ -19,26 +19,34 @@ import DarkFooter from "components/Footers/DarkFooter";
 import IndexNavbar from "components/Navbars/IndexNavbar";
 import Example from "pages/PisoPreview.component";
 import PisoPreview from "pages/PisoPreview.component";
+import Navbars from "views/index-sections/Navbars";
+import SignUp from "views/index-sections/SignUp";
+import EnviarMensaje from "pages/Mensaje.component";
 
 
 function App() {
     return (
-    
+
         <Fragment>
 
             {/**TopBar */}
-            <IndexNavbar/>
+            <IndexNavbar />
 
             {/**Ruteo */}
             <Switch>
 
                 <Route
-                exact path="/rentabuenosaires" exact
-                render={(props) => <Inicio {...props} />}
+                    exact path="/rentabuenosaires" exact
+                    render={(props) => <Inicio {...props} />}
                 />
                 <Route
-                exact path="/piso" exact
-                render={(props) => <PisoPreview {...props} />}
+                    exact path="/piso" exact
+                    render={(props) => <PisoPreview {...props} />}
+                />
+
+                <Route
+                    exact path="/piso/Piso 1" exact
+                    render={(props) => <Piso {...props} />}
                 />
 
                 <Route exact path="/index" render={(props) => <Index {...props} />} />
@@ -50,14 +58,22 @@ function App() {
                     exact path="/landing"
                     render={(props) => <LandingPage {...props} />}
                 />
-                
+
                 <Route
                     exact path="/profile-page"
                     render={(props) => <ProfilePage {...props} />}
                 />
                 <Route
-                    exact path="/login-page"
+                    exact path="/login"
                     render={(props) => <LoginPage {...props} />}
+                />
+                <Route
+                    exact path="/3"
+                    render={(props) => <SignUp {...props} />}
+                />
+                <Route
+                    exact path="/mensaje"
+                    render={(props) => <EnviarMensaje {...props} />}
                 />
                 <Route
                     exact path="/example"
@@ -67,11 +83,12 @@ function App() {
             </Switch>
 
             {/**Footer */}
-            <DarkFooter/>
-            </Fragment>
-        
+            <DarkFooter />
+        </Fragment>
 
-);}
+
+    );
+}
 
 
 export default App;

@@ -3,8 +3,8 @@
 import IndexHeader from "components/Headers/IndexHeader";
 import ProfilePageHeader from "components/Headers/ProfilePageHeader";
 import MyCard from "components/MyCard/MyCard.component";
-import React,{Fragment} from "react";
-import {connect} from 'react-redux';
+import React, { Fragment } from "react";
+import { connect } from 'react-redux';
 import { setCurrentNavBarColor } from "redux/navBarColor/navBarColor.action";
 import './css/pisoPreview.scss'
 
@@ -24,6 +24,7 @@ const PisoPreview = (props) => {
   //fetch pisos según el destino
 
   //const piso=pisos;
+<<<<<<< HEAD
   
   async function getImagen() {
     
@@ -58,28 +59,50 @@ React.useEffect(() => {
                 ))}
           </div>
       </div>)
-  }
-  const nodestino=()=>{
+=======
+
+  const destino = () => {
     return (<div className="pisoPrev">
-          <h1 className="h1">{"Buenos Aires".toUpperCase()}</h1>
-          <div className="collection-preview">
-              {pisos
-                  .filter((piso, idx) => idx < 4)
-                  .map(({ id, ...theOthers }) => (
-                    < MyCard key={id} id={id} destino={"Buenos Aires"} {...theOthers} />
-                ))}
-          </div>
-      </div>)
+      <h1 className="h1">{props.currentDestino.nombre.toUpperCase()}</h1>
+      <div className="collection-preview">
+        {pisos
+          .filter((piso, idx) => idx < 4)
+          .map(({ id, ...theOthers }) => (
+            < MyCard key={id} id={id} destino={props.currentDestino.nombre} {...theOthers} />
+          ))}
+      </div>
+    </div>)
+>>>>>>> 75159ea8c4aa388ffcd3461e65f76a770d62d4aa
+  }
+  const nodestino = () => {
+    return (<div className="pisoPrev">
+      <h1 className="h1">{"Buenos Aires".toUpperCase()}</h1>
+      <div className="collection-preview">
+        {pisos
+          .filter((piso, idx) => idx < 4)
+          .map(({ id, ...theOthers }) => (
+            < MyCard key={id} id={id} destino={"Buenos Aires"} {...theOthers} />
+          ))}
+      </div>
+    </div>)
   }
 
   return (
     <Fragment>
+<<<<<<< HEAD
         <div className="separador" key={load}/>
           {props.currentDestino!==null ?
               destino():
               nodestino()
           }
           <img src={"data:image/png;base64,"+img}/>
+=======
+      <div className="separador" />
+      {props.currentDestino !== null ?
+        destino() :
+        nodestino()
+      }
+>>>>>>> 75159ea8c4aa388ffcd3461e65f76a770d62d4aa
     </Fragment>
   );
 }
@@ -89,7 +112,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    setCurrentNavBarColor : navBarColor => dispatch(setCurrentNavBarColor(navBarColor))
-  })
+  setCurrentNavBarColor: navBarColor => dispatch(setCurrentNavBarColor(navBarColor))
+})
 
-export default connect(mapStateToProps,mapDispatchToProps)(PisoPreview);
+export default connect(mapStateToProps, mapDispatchToProps)(PisoPreview);

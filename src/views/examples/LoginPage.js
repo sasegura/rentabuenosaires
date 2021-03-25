@@ -20,31 +20,39 @@ import {
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import TransparentFooter from "components/Footers/TransparentFooter.js";
 
+import img1 from '../../assets/img/login.jpg'
+import img2 from '../../assets/img/now-logo.png'
+
 function LoginPage() {
+
+  const img11 = img1;
+
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
-  
+
   React.useEffect(() => {
     document.body.classList.add("login-page");
     document.body.classList.add("sidebar-collapse");
     document.documentElement.classList.remove("nav-open");
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
-    
+
     return function cleanup() {
       document.body.classList.remove("login-page");
       document.body.classList.remove("sidebar-collapse");
     };
   }, []);
-  
+  ///rentabuenosaires/static/media/login.ab931d77.jpg
   return (
+
     <>
-      
+
       <div className="page-header clear-filter" filter-color="blue">
         <div
           className="page-header-image"
+
           style={{
-            backgroundImage: "url(" + require("assets/img/login.jpg") + ")",
+            backgroundImage: "url(" + img11 + ")",
           }}
         ></div>
         <div className="content">
@@ -56,7 +64,7 @@ function LoginPage() {
                     <div className="logo-container">
                       <img
                         alt="..."
-                        src={require("assets/img/now-logo.png")}
+                        src={img2}
                       ></img>
                     </div>
                   </CardHeader>
@@ -73,7 +81,7 @@ function LoginPage() {
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input
-                        placeholder="First Name..."
+                        placeholder="Usuario..."
                         type="text"
                         onFocus={() => setFirstFocus(true)}
                         onBlur={() => setFirstFocus(false)}
@@ -91,8 +99,8 @@ function LoginPage() {
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input
-                        placeholder="Last Name..."
-                        type="text"
+                        placeholder="Contraseña..."
+                        type="password"
                         onFocus={() => setLastFocus(true)}
                         onBlur={() => setLastFocus(false)}
                       ></Input>
@@ -107,9 +115,9 @@ function LoginPage() {
                       onClick={(e) => e.preventDefault()}
                       size="lg"
                     >
-                      Get Started
+                      Entrar
                     </Button>
-                    <div className="pull-left">
+                    {/*<div className="pull-left">
                       <h6>
                         <a
                           className="link"
@@ -130,14 +138,15 @@ function LoginPage() {
                           Need Help?
                         </a>
                       </h6>
-                    </div>
+                    </div>*/
+                    }
                   </CardFooter>
                 </Form>
               </Card>
             </Col>
           </Container>
         </div>
-        
+
       </div>
     </>
   );

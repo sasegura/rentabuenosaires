@@ -1,12 +1,13 @@
 import imageToBase64 from "image-to-base64";
 import React from "react";
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 // reactstrap components
-import { Carousel, CarouselItem, CarouselIndicators } from "reactstrap";
+import { Carousel, CarouselItem, CarouselIndicators, Container, Row, Col } from "reactstrap";
 import img1 from "../assets/img/bg1.jpg"
 import img3 from "../assets/img/bg3.jpg"
 import img4 from "../assets/img/bg4.jpg"
+import './Piso.scss'
 // core components
 const items = [
   {
@@ -27,7 +28,7 @@ const items = [
 ];
 
 const Piso = (props) => {
- 
+
 
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [animating, setAnimating] = React.useState(false);
@@ -60,53 +61,72 @@ const Piso = (props) => {
   
   return (
     <>
-      <Carousel activeIndex={activeIndex} next={next} previous={previous}>
-        <CarouselIndicators
-          items={items}
-          activeIndex={activeIndex}
-          onClickHandler={goToIndex}
-        />
-        {items.map(item => {
-          return (
-            <div className="" md={8}>
-              <CarouselItem
-                onExiting={onExiting}
-                onExited={onExited}
-                key={item.src}
-              >
-                <img src={item.src} alt={item.altText} />
-                <div className="carousel-caption d-none d-md-block">
-                  <h5>{item.caption}</h5>
-                </div>
-              </CarouselItem>
-            </div>
-          );
-        })}
-        <a
-          className="carousel-control-prev"
-          data-slide="prev"
-          href="#pablo"
-          onClick={e => {
-            e.preventDefault();
-            previous();
-          }}
-          role="button"
-        >
-          <i className="now-ui-icons arrows-1_minimal-left"></i>
-        </a>
-        <a
-          className="carousel-control-next"
-          data-slide="next"
-          href="#pablo"
-          onClick={e => {
-            e.preventDefault();
-            next();
-          }}
-          role="button"
-        >
-          <i className="now-ui-icons arrows-1_minimal-right"></i>
-        </a>
-      </Carousel>
+      <div className="separador" />
+      <div class="carruselRoot">
+        <div className="col-xs-12 col-sm-12 carruselDiv">
+          <Carousel className="col-xs-12 col-sm-8 carrusel" activeIndex={activeIndex} next={next} previous={previous}>
+            <CarouselIndicators
+              items={items}
+              activeIndex={activeIndex}
+              onClickHandler={goToIndex}
+            />
+            {items.map(item => {
+              return (
+
+                <CarouselItem
+                  onExiting={onExiting}
+                  onExited={onExited}
+                  key={item.src}
+                >
+                  <img src={item.src} alt={item.altText} className="jjj" />
+                  <div className="carousel-caption d-none d-md-block">
+                    <h5>{item.caption}</h5>
+                  </div>
+                </CarouselItem>
+              );
+            })}
+            <a
+              className="carousel-control-prev"
+              data-slide="prev"
+              href="#pablo"
+              onClick={e => {
+                e.preventDefault();
+                previous();
+              }}
+              role="button"
+            >
+              <i className="now-ui-icons arrows-1_minimal-left"></i>
+            </a>
+            <a
+              className="carousel-control-next"
+              data-slide="next"
+              href="#pablo"
+              onClick={e => {
+                e.preventDefault();
+                next();
+              }}
+              role="button"
+            >
+              <i className="now-ui-icons arrows-1_minimal-right"></i>
+            </a>
+          </Carousel>
+        </div>
+      </div>
+      <Container>
+        <h4>Descripción</h4>
+        <Row>
+          <Col md="4">
+
+          </Col>
+        </Row>
+      </Container>
+
+
+
+
+
+
+
     </>
   );
 }
@@ -214,9 +234,9 @@ const productTemplate = (product) => {
                     itemTemplate={productTemplate} header={<h5>Basic</h5>} />
             </div>
 
-            
+
         </div>
-      
+
     </>
   );
 }
