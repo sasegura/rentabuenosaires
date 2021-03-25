@@ -135,18 +135,12 @@ const IndexNavbar = (props) => {
           >
             <Nav navbar>
               <NavItem>
-                <NavLink
-                  href="#pablo"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document
-                      .getElementById("enviar_mensaje")
-                      .scrollIntoView();
-                  }}
-                >
-                  <i className="now-ui-icons ui-1_send"></i>
-                  <p>{t("Enviar mensaje")}</p>
-                </NavLink>
+                <Link to='/mensaje'>
+                  <NavLink target="_self">
+                    <i className="now-ui-icons ui-1_send"></i>
+                    <p>{t("Enviar mensaje")}</p>
+                  </NavLink>
+                </Link>
               </NavItem>
 
               <UncontrolledDropdown nav>
@@ -189,7 +183,6 @@ const IndexNavbar = (props) => {
               <NavItem >
                 <Link to='/login'>
                   <NavLink
-
                     target="_self"
                   >
                     <i className="now-ui-icons users_single-02"></i>

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { setCurrentNavBarColor } from "redux/navBarColor/navBarColor.action";
 import { Button, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 
+import './Mensaje.style.scss';
+
 
 const EnviarMensaje = (props) => {
     const [firstFocus, setFirstFocus] = React.useState(false);
