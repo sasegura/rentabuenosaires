@@ -1,3 +1,4 @@
+import imageToBase64 from "image-to-base64";
 import React from "react";
 import {connect} from 'react-redux';
 
@@ -55,6 +56,8 @@ const Piso = (props) => {
     if (animating) return;
     setActiveIndex(newIndex);
   };
+
+  
   return (
     <>
       <Carousel activeIndex={activeIndex} next={next} previous={previous}>

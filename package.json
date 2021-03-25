@@ -4,6 +4,7 @@
   "version": "1.4.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.21.1",
     "fs": "0.0.1-security",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8",

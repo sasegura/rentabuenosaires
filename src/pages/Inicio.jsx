@@ -24,11 +24,13 @@ import foto3 from "../assets/img/eva.jpg";
 import DarkFooter from "components/Footers/DarkFooter";
 import TransparentFooter from "components/Footers/TransparentFooter";
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar";
+import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from "react";
+import AxiosConexionConfig from "conexion/AxiosConexionConfig";
 
 function Inicio() {
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
-
+  const [imagen, setImagen] = React.useState(__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
   React.useEffect(() => {
     document.body.classList.add("landing-page");
     document.body.classList.add("sidebar-collapse");
@@ -41,12 +43,54 @@ function Inicio() {
     };
   }, []);
 
+
+  const onChange=(e)=>{
+    console.log(e.target.files[0])
+    let file=e.target.files[0]
+    if(file){
+      const reader=new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload=function(){
+          var base64=reader.result
+          console.log(base64)
+          var s=base64.split(",")
+          setImagen(s[1])
+          setImagenX(s[1])
+      }
+      
+    }
+  }
+  async function setImagenX(imagenX) {
+    const url = '/imagen';
+    const v={ idpiso:1, imagen:imagenX}
+    try {
+        const imagen = await AxiosConexionConfig.post(url,JSON.stringify(v));
+        console.log(imagen);
+        
+        //history.push("/profile")
+    } catch (e) {
+        console.log(e);
+    }
+}
+  const ReaderLoaded=(ev)=>{
+    let binary=ev
+    console.log(binary)
+    console.log(btoa(binary.target.result))
+  }
   return (
     <>
       <div className="wrapper">
         <LandingPageHeader />
         <div className="section section-about-us">
           <Container>
+            <Row>
+              <Col className="ml-auto mr-auto text-center" md="8">
+                <form onChange={(e)=>{onChange(e)}}>
+                  <input type="file" name ="image" id="file" accept=".jpeg, .png, .jpg"/>
+                </form>
+                <img src={"data:image/png;base64,"+imagen}/>
+              </Col>
+            </Row>
             <Row>
               <Col className="ml-auto mr-auto text-center" md="8">
                 <h2 className="title">Quiénes somos</h2>
