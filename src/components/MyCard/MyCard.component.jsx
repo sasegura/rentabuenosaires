@@ -27,7 +27,7 @@ function MyCard({ id, match, destino, link, history, cantHab, nombre }) {
 
   return (
     <>
-      <Card className="col-xs-10 col-sm-4 ">
+      <Card className="col-xs-12 col-sm-3 card1">
         <CardImg className="image" alt={nombre} src={imagen} top></CardImg>
         <CardBody className="cardbody col-12">
           <CardTitle tag="h4">{nombre}</CardTitle>

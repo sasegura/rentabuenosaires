@@ -23,27 +23,28 @@ import {
 import { connect } from "react-redux";
 import { setCurrentDestino } from "redux/destino/destino.action";
 import { setCurrentNavBarColor } from "redux/navBarColor/navBarColor.action";
+import './IndexNavBar.style.scss'
 
-const IndexNavbar = (props) =>  {
-  const {t}=props
+const IndexNavbar = (props) => {
+  const { t } = props
   const [navbarColor, setNavbarColor] = React.useState(
-    (props.currentNavBarColor === true) ? ("navbar-transparent") : ("") 
+    (props.currentNavBarColor === true) ? ("navbar-transparent") : ("")
   );
 
-  const ChangeLenguage=(e,language)=>{
+  const ChangeLenguage = (e, language) => {
     e.preventDefault()
     props.i18n.changeLanguage(language);
   }
   const [collapseOpen, setCollapseOpen] = React.useState(false);
- 
+
   const destinos = [
     {
-      id:1,
+      id: 1,
       nombre: "Madrid",
       cantPisos: 1,
     },
     {
-      id:2,
+      id: 2,
       nombre: "Buenos Aires",
       cantPisos: 3,
     },
@@ -51,10 +52,10 @@ const IndexNavbar = (props) =>  {
 
 
   React.useEffect(() => {
-    
+
     const updateNavbarColor = () => {
 
-      if(navbarColor === "navbar-transparent"){
+      if (navbarColor === "navbar-transparent") {
         if (
           document.documentElement.scrollTop > 399 ||
           document.body.scrollTop > 399
@@ -66,26 +67,26 @@ const IndexNavbar = (props) =>  {
         ) {
           setNavbarColor("navbar-transparent");
         }
-      }      
+      }
     };
 
-    if(props.currentNavBarColor){
+    if (props.currentNavBarColor) {
       window.addEventListener("scroll", updateNavbarColor);
     }
-    else{
+    else {
       window.removeEventListener("scroll", updateNavbarColor);
       setNavbarColor("")
     }
 
-   
-    
+
+
     return function cleanup() {
       window.removeEventListener("scroll", updateNavbarColor);
     };
-  },[props.currentNavBarColor]);
+  }, [props.currentNavBarColor]);
 
-  
-  
+
+
   return (
     <>
       {collapseOpen ? (
@@ -109,8 +110,8 @@ const IndexNavbar = (props) =>  {
             >
               Logo
             </NavbarBrand>
-            
-            
+
+
             <button
               className="navbar-toggler navbar-toggler"
               onClick={() => {
@@ -120,7 +121,7 @@ const IndexNavbar = (props) =>  {
               aria-expanded={collapseOpen}
               type="button"
             >
-              
+
               <span className="navbar-toggler-bar top-bar"></span>
               <span className="navbar-toggler-bar middle-bar"></span>
               <span className="navbar-toggler-bar bottom-bar"></span>
@@ -147,31 +148,58 @@ const IndexNavbar = (props) =>  {
                   <p>{t("Enviar mensaje")}</p>
                 </NavLink>
               </NavItem>
-              
+
               <UncontrolledDropdown nav>
-                
                 <DropdownToggle caret color="default" href="#pablo" nav onClick={(e) => e.preventDefault()}>
-                  <i className="now-ui-icons travel_istanbul"></i>
+                  <i className="now-ui-icons location_map-big"></i>
                   <p>{t("Destinos")}</p>
                 </DropdownToggle>
-                
-                  <DropdownMenu>
-                    {destinos.map(({ id, nombre }) => (
-                        <DropdownItem to='/piso' onClick={() => props.setCurrentDestino({
-                          nombre: nombre,
-                          id: id
-                          })}   
-                          key={id} tag={Link}>
-                          <i className="now-ui-icons mr-1"></i>
-                            {nombre}
-                        </DropdownItem>
-                      ))}
-                  </DropdownMenu>
-              
+                <DropdownMenu>
+                  {destinos.map(({ id, nombre }) => (
+                    <DropdownItem to='/piso' onClick={() => props.setCurrentDestino({
+                      nombre: nombre,
+                      id: id
+                    })}
+                      key={id} tag={Link}>
+                      <i className="now-ui-icons mr-1"></i>
+                      {nombre}
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
               </UncontrolledDropdown>
-              
-                          
-             
+
+
+              <UncontrolledDropdown nav>
+                <DropdownToggle caret color="default" href="#pablo" nav onClick={(e) => e.preventDefault()}>
+                  <i className="now-ui-icons location_world"></i>
+                  <p>{t("Idioma")}</p>
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem to='/' onClick={(e) => ChangeLenguage(e, "en")} tag={Link}>
+                    <img alt="..." className="n-logo bandera" src={eng} />
+                    {t("Inglés")}
+                  </DropdownItem>
+                  <DropdownItem to='/' onClick={(e) => ChangeLenguage(e, "es")} tag={Link}>
+                    <img alt="..." className="n-logo bandera" src={esp} />
+                    {t("Español")}
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+
+              <NavItem >
+                <Link to='/login'>
+                  <NavLink
+
+                    target="_self"
+                  >
+                    <i className="now-ui-icons users_single-02"></i>
+                    <p>{t("Entrar")}</p>
+                  </NavLink>
+                </Link>
+
+              </NavItem>
+
+
               <NavItem>
                 <NavLink
                   href="https://www.facebook.com/CreativeTim?ref=creativetim"
@@ -182,7 +210,7 @@ const IndexNavbar = (props) =>  {
                   <p className="d-lg-none d-xl-none">Facebook</p>
                 </NavLink>
                 <UncontrolledTooltip target="#facebook-tooltip">
-                {t("Síguenos en Facebook")}
+                  {t("Síguenos en Facebook")}
                 </UncontrolledTooltip>
               </NavItem>
               <NavItem>
@@ -195,28 +223,13 @@ const IndexNavbar = (props) =>  {
                   <p className="d-lg-none d-xl-none">Instagram</p>
                 </NavLink>
                 <UncontrolledTooltip target="#instagram-tooltip">
-                {t("Síguenos en Instagram")}
+                  {t("Síguenos en Instagram")}
                 </UncontrolledTooltip>
               </NavItem>
-              <UncontrolledDropdown nav>
-                
-                <DropdownToggle caret color="default" href="#pablo" nav onClick={(e) => e.preventDefault()}>
-                  <i className="now-ui-icons travel_istanbul"></i>
-                  <p>{t("Idioma")}</p>
-                </DropdownToggle>
-                
-                  <DropdownMenu>
-                      <DropdownItem to='/' onClick={(e) => ChangeLenguage(e,"en")} tag={Link}>
-                        <img alt="..." className="n-logo" src={eng} />
-                          {t("Inglés")}
-                      </DropdownItem>
-                      <DropdownItem to='/' onClick={(e) => ChangeLenguage(e,"es")} tag={Link}>
-                          <img alt="..." className="n-logo" src={esp}/>
-                          {t("Español")}
-                      </DropdownItem>
-                  </DropdownMenu>              
-              </UncontrolledDropdown>
-            </Nav>            
+
+
+
+            </Nav>
           </Collapse>
         </Container>
       </Navbar>
@@ -225,7 +238,7 @@ const IndexNavbar = (props) =>  {
 }
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentDestino : destino => dispatch(setCurrentDestino(destino)),
+  setCurrentDestino: destino => dispatch(setCurrentDestino(destino)),
   setCurrentNavBarColor: navBarColor => dispatch(setCurrentNavBarColor(navBarColor)),
 })
 
@@ -233,6 +246,6 @@ const mapStateToProps = state => ({
   currentNavBarColor: state.navBarColor.currentNavBarColor
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(withTranslation ("translations") (IndexNavbar));
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation("translations")(IndexNavbar));
 
 
