@@ -1,5 +1,5 @@
 import imageToBase64 from "image-to-base64";
-import React from "react";
+import React, { useState } from "react";
 import { connect } from 'react-redux';
 
 // reactstrap components
@@ -8,27 +8,47 @@ import img1 from "../assets/img/bg1.jpg"
 import img3 from "../assets/img/bg3.jpg"
 import img4 from "../assets/img/bg4.jpg"
 import './Piso.scss'
+
+import AxiosConexionConfig from "conexion/AxiosConexionConfig";
+
 // core components
-const items = [
-  {
-    src: img1,
-    altText: "Nature, United States",
-    caption: "Nature, United States"
-  },
-  {
-    src: img3,
-    altText: "Somewhere Beyond, United States",
-    caption: "Somewhere Beyond, United States"
-  },
-  {
-    src: img4,
-    altText: "Yellowstone National Park, United States",
-    caption: "Yellowstone National Park, United States"
-  }
-];
 
 const Piso = (props) => {
 
+  const items = [
+    {
+      src: img1,
+      altText: "Nature, United States",
+      caption: "Nature, United States"
+    },
+    {
+      src: img3,
+      altText: "Somewhere Beyond, United States",
+      caption: "Somewhere Beyond, United States"
+    },
+    {
+      src: img4,
+      altText: "Yellowstone National Park, United States",
+      caption: "Yellowstone National Park, United States"
+    }
+  ];
+
+  async function getImagenes() {
+    const url = '/imagen?filter[where][idpiso]=1';
+    try {
+      const imagen = await AxiosConexionConfig.get(url);
+      setImagenes(imagen.data);
+      console.log(imagen.data)
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const [imagenes, setImagenes] = useState(null);
+
+  React.useEffect(() => {
+    getImagenes()
+  });
 
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [animating, setAnimating] = React.useState(false);
@@ -58,7 +78,7 @@ const Piso = (props) => {
     setActiveIndex(newIndex);
   };
 
-  
+
   return (
     <>
       <div className="separador" />
