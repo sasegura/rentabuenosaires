@@ -1,44 +1,38 @@
 import imageToBase64 from "image-to-base64";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { connect } from 'react-redux';
 
 // reactstrap components
 import { Carousel, CarouselItem, CarouselIndicators, Container, Row, Col } from "reactstrap";
-import img1 from "../assets/img/bg1.jpg"
-import img3 from "../assets/img/bg3.jpg"
-import img4 from "../assets/img/bg4.jpg"
 import './Piso.scss'
 
 import AxiosConexionConfig from "conexion/AxiosConexionConfig";
+import { setCurrentNavBarColor } from "redux/navBarColor/navBarColor.action";
 
 // core components
 
 const Piso = (props) => {
+  console.log("lo que sea")
+  props.setCurrentNavBarColor(false);
 
-  const items = [
-    {
-      src: img1,
-      altText: "Nature, United States",
-      caption: "Nature, United States"
-    },
-    {
-      src: img3,
-      altText: "Somewhere Beyond, United States",
-      caption: "Somewhere Beyond, United States"
-    },
-    {
-      src: img4,
-      altText: "Yellowstone National Park, United States",
-      caption: "Yellowstone National Park, United States"
-    }
-  ];
+  React.useEffect(() => {
+    document.body.classList.add("landing-page");
+    document.body.classList.add("sidebar-collapse");
+    document.documentElement.classList.remove("nav-open");
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    return function cleanup() {
+      document.body.classList.remove("landing-page");
+      document.body.classList.remove("sidebar-collapse");
+    };
+  }, []);
+
 
   async function getImagenes() {
     const url = '/imagen?filter[where][idpiso]=1';
     try {
       const imagen = await AxiosConexionConfig.get(url);
       setImagenes(imagen.data);
-      console.log(imagen.data)
     } catch (e) {
       console.log(e);
     }
@@ -48,7 +42,7 @@ const Piso = (props) => {
 
   React.useEffect(() => {
     getImagenes()
-  });
+  }, []);
 
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [animating, setAnimating] = React.useState(false);
@@ -63,13 +57,13 @@ const Piso = (props) => {
 
   const next = () => {
     if (animating) return;
-    const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
+    const nextIndex = activeIndex === imagenes.length - 1 ? 0 : activeIndex + 1;
     setActiveIndex(nextIndex);
   };
 
   const previous = () => {
     if (animating) return;
-    const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
+    const nextIndex = activeIndex === 0 ? imagenes.length - 1 : activeIndex - 1;
     setActiveIndex(nextIndex);
   };
 
@@ -79,57 +73,68 @@ const Piso = (props) => {
   };
 
 
+  const carrusel = () => {
+    return (
+      <Carousel className="col-xs-12 col-sm-8 carrusel" activeIndex={activeIndex} next={next} previous={previous}>
+        <CarouselIndicators
+          items={imagenes}
+          activeIndex={activeIndex}
+          onClickHandler={goToIndex}
+        />
+        {
+
+          imagenes.map((imagen, index) => {
+            return (
+              <CarouselItem
+                onExiting={onExiting}
+                onExited={onExited}
+                key={index}
+              >
+                <img src={"data:image/png;base64," + imagen.imagen} alt="jjj" className="jjj" />
+                <div className="carousel-caption d-none d-md-block">
+                  <h5>fff</h5>
+                </div>
+              </CarouselItem>
+            );
+          })}
+
+        <a
+          className="carousel-control-prev"
+          data-slide="prev"
+          href="#pablo"
+          onClick={e => {
+            e.preventDefault();
+            previous();
+          }}
+          role="button"
+        >
+          <i className="now-ui-icons arrows-1_minimal-left"></i>
+        </a>
+        <a
+          className="carousel-control-next"
+          data-slide="next"
+          href="#pablo"
+          onClick={e => {
+            e.preventDefault();
+            next();
+          }}
+          role="button"
+        >
+          <i className="now-ui-icons arrows-1_minimal-right"></i>
+        </a>
+      </Carousel>
+    )
+  }
+
+
   return (
     <>
       <div className="separador" />
       <div class="carruselRoot">
         <div className="col-xs-12 col-sm-12 carruselDiv">
-          <Carousel className="col-xs-12 col-sm-8 carrusel" activeIndex={activeIndex} next={next} previous={previous}>
-            <CarouselIndicators
-              items={items}
-              activeIndex={activeIndex}
-              onClickHandler={goToIndex}
-            />
-            {items.map(item => {
-              return (
+          {imagenes !== null ?
+            carrusel() : <Fragment />}
 
-                <CarouselItem
-                  onExiting={onExiting}
-                  onExited={onExited}
-                  key={item.src}
-                >
-                  <img src={item.src} alt={item.altText} className="jjj" />
-                  <div className="carousel-caption d-none d-md-block">
-                    <h5>{item.caption}</h5>
-                  </div>
-                </CarouselItem>
-              );
-            })}
-            <a
-              className="carousel-control-prev"
-              data-slide="prev"
-              href="#pablo"
-              onClick={e => {
-                e.preventDefault();
-                previous();
-              }}
-              role="button"
-            >
-              <i className="now-ui-icons arrows-1_minimal-left"></i>
-            </a>
-            <a
-              className="carousel-control-next"
-              data-slide="next"
-              href="#pablo"
-              onClick={e => {
-                e.preventDefault();
-                next();
-              }}
-              role="button"
-            >
-              <i className="now-ui-icons arrows-1_minimal-right"></i>
-            </a>
-          </Carousel>
         </div>
       </div>
       <Container>
@@ -140,13 +145,6 @@ const Piso = (props) => {
           </Col>
         </Row>
       </Container>
-
-
-
-
-
-
-
     </>
   );
 }
@@ -155,7 +153,11 @@ const mapStateToProps = state => ({
   currentPiso: state.piso.currentPiso
 })
 
-export default connect(mapStateToProps)(Piso);
+const mapDispatchToProps = dispatch => ({
+  setCurrentNavBarColor: navBarColor => dispatch(setCurrentNavBarColor(navBarColor))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Piso);
 
 /**import React from "react";
 

@@ -50,7 +50,7 @@ function App() {
                 />
 
                 <Route
-                    exact path="/piso" exact
+                    exact path="/piso/1" exact
                     render={(props) => <Piso {...props} />}
                 />
                 <Route

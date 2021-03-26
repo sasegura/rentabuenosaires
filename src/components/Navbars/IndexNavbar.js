@@ -168,7 +168,7 @@ const IndexNavbar = (props) => {
                 <DropdownMenu>
                   {destinos !== null ?
                     destinos.map(({ iddestino, nombre }) => (
-                      <DropdownItem to='/piso' onClick={() => {
+                      <DropdownItem to='/pisos' onClick={() => {
                         props.setCurrentDestino({ nombre: nombre, id: iddestino })
                         document.documentElement.classList.toggle("nav-open");
                         setCollapseOpen(!collapseOpen);
