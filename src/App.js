@@ -2,28 +2,28 @@ import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
-// styles for this kit
+// styles
 import "assets/css/bootstrap.min.css";
 import "assets/scss/now-ui-kit.scss?v=1.4.0";
 import "assets/demo/demo.css?v=1.4.0";
 import "assets/demo/nucleo-icons-page-styles.css?v=1.4.0";
-// pages for this kit
-import Index from "views/Index.js";
+
+// pages
 import NucleoIcons from "views/NucleoIcons.js";
-import LoginPage from "views/examples/LoginPage.js";
-import LandingPage from "views/examples/LandingPage.js";
-import ProfilePage from "views/examples/ProfilePage.js";
-import Piso from "pages/Piso";
-import Inicio from "pages/Inicio";
+import LoginPage from "pages/LoginPage/LoginPage";
+
+import Piso from "pages/Piso/Piso";
+import Inicio from "pages/Inicio/Inicio";
+import PisoPreview from "pages/PisoPreview/PisoPreview.component";
+
 import DarkFooter from "components/Footers/DarkFooter";
 import IndexNavbar from "components/Navbars/IndexNavbar";
-import Example from "pages/PisoPreview.component";
-import PisoPreview from "pages/PisoPreview.component";
-import Navbars from "views/index-sections/Navbars";
-import SignUp from "views/index-sections/SignUp";
-import EnviarMensaje from "pages/Mensaje.component";
-import Adisionar from "pages/Adisionar";
 
+
+import EnviarMensaje from "pages/Mensaje/Mensaje.component";
+import Adisionar from "pages/Adicionar/Adisionar";
+
+//styles
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
@@ -59,36 +59,21 @@ function App() {
                     render={(props) => <Adisionar {...props} />}
                 />
 
-                <Route exact path="/index" render={(props) => <Index {...props} />} />
                 <Route
                     exact path="/nucleo-icons"
                     render={(props) => <NucleoIcons {...props} />}
                 />
-                <Route
-                    exact path="/landing"
-                    render={(props) => <LandingPage {...props} />}
-                />
 
-                <Route
-                    exact path="/profile-page"
-                    render={(props) => <ProfilePage {...props} />}
-                />
                 <Route
                     exact path="/login"
                     render={(props) => <LoginPage {...props} />}
                 />
-                <Route
-                    exact path="/3"
-                    render={(props) => <SignUp {...props} />}
-                />
+
                 <Route
                     exact path="/mensaje"
                     render={(props) => <EnviarMensaje {...props} />}
                 />
-                <Route
-                    exact path="/example"
-                    render={(props) => <Example {...props} />}
-                />
+
 
             </Switch>
 
