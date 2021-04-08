@@ -9,7 +9,7 @@ import Banner from '../../assets/img/Banner.png';
 // core components
 
 function LandingPageHeader(props) {
-  const {t}=props
+  const { t } = props
   let pageHeader = React.createRef();
 
   React.useEffect(() => {
@@ -37,7 +37,7 @@ function LandingPageHeader(props) {
         ></div>
         <div className="content-center">
           <Container>
-            <h1 className="title">{t("Bienvenidos a nuestra web")}</h1>
+            <h1 className="title">{t("Vive de forma extraordinaria, ya sea por trabajo o placer")}</h1>
             <div className="text-center">
               <Button
                 className="btn-icon btn-round"
@@ -71,4 +71,4 @@ function LandingPageHeader(props) {
   );
 }
 
-export default withTranslation ("translations") (LandingPageHeader);
+export default withTranslation("translations")(LandingPageHeader);

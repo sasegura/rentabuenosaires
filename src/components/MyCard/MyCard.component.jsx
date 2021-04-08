@@ -28,7 +28,8 @@ function MyCard(props,{ match, destino, link, history, cantHab, nombre }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    historyy.push(props.location.pathname + `/${props.idpiso}`);
+    //historyy.push(props.location.pathname + `/${props.idpiso}`);
+    historyy.push('/piso/1');
   };
 
   //const idPiso = props.idpiso;
