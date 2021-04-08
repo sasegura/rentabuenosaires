@@ -10,21 +10,26 @@ import { Column } from 'primereact/column';
 
 import AxiosConexionConfig from "conexion/AxiosConexionConfig";
 import { useState } from "react";
+import { withTranslation } from "react-i18next";
+import AdisionarPiso from "./AdisionarPiso";
 
 // reactstrap components
 
 const Adisionar = (props) => {
-
+    const {t}=props;
   
 
     props.setCurrentNavBarColor(false);
 
     const [destinos, setDestinos] = useState(null);
-    const [selectedDestino, setSelectesDestino] = useState(null);
-    const [selectedPiso, setSelectesPiso] = useState(null);
+    const [selectedDestino, setSelectedDestino] = useState(null);
+    const [selectedPiso, setSelectedPiso] = useState(null);
     const [img, setImg] = useState("")
-    const [load, setLoad] = useState(true)
+    const [loadPisos, setLoadPisos] = useState(false)
     const [pisos, setPisos] = useState(null);
+    const [loadPiso, setLoadPiso] = useState(false)
+    const [piso, setPiso] = useState(null);
+    
   
     React.useEffect(() => {
         getDestinos()
@@ -32,9 +37,16 @@ const Adisionar = (props) => {
     React.useEffect(() => {
         if(selectedDestino!==null){
           getPiso()
-        }
-      
-  }, [selectedDestino]);
+        }      
+    }, [selectedDestino]);
+    React.useEffect(() => {
+      console.log("piso")
+        if(selectedPiso!==null){
+          getPisoSelecionado()
+        }  
+        console.log("piso")
+        console.log(piso)
+    }, [selectedPiso]);
 
     //Obtener destinos
     async function getDestinos() {
@@ -48,48 +60,55 @@ const Adisionar = (props) => {
         }
     }
     async function getPiso() {
+      setLoadPisos(false)
+      setLoadPiso(false)
       const url = '/pisos?filter[where][iddestino]=' + selectedDestino.iddestino;
       try {
-          const piso = await AxiosConexionConfig.get(url);
-          console.log(piso)
-          setPisos(piso.data);
-      } catch (e) {
-          console.log(e);
-      }
-  }
-
-    const setSelectedDestino=(valor)=>{
-        console.log(valor)
-        setSelectesDestino(valor)
-    }
-
-    const setSelectedPiso=(valor)=>{
-        console.log(valor)
-        setSelectesPiso(valor)
+          const respuesta = await AxiosConexionConfig.get(url);
+          console.log(respuesta.data)
+          if(respuesta.data.length>0){
+              setPisos(respuesta.data);
+              setLoadPisos(true)
+          }          
+        } catch (e) {
+            console.log(e);
+        }
     }
   
+    async function getPisoSelecionado() {
+      setLoadPiso(false)
+      const url = '/pisos?filter[where][idpiso]=' + selectedPiso.idpiso;
+      try {
+          const respuesta = await AxiosConexionConfig.get(url);
+          console.log(respuesta.data)
+          if(respuesta.data.length>0){
+              setPiso(respuesta.data[0]);
+              setLoadPiso(true)
+          }          
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
     const getDestino = () => {
         return (
-            <div className="section datatable-responsive-demo">
-                <div className="section datatable-responsive-demo">
-                    <DataTable  
-                        className="p-datatable-responsive-demo roboto" 
-                        value={destinos} selection={selectedDestino} 
-                        selectionMode="single" 
-                        onSelectionChange={e => setSelectedDestino(e.value)}
-                        dataKey="iddestino"
-                    >
-                        <Column field="nombre" header="Nombre"></Column>                    
-                    </DataTable>
-                </div>
+            <div className=" datatable-responsive-demo">
+                <DataTable  
+                    className="p-datatable-responsive-demo roboto" 
+                    value={destinos} selection={selectedDestino} 
+                    selectionMode="single" 
+                    onSelectionChange={e => setSelectedDestino(e.value)}
+                    dataKey="iddestino"
+                >
+                    <Column field="nombre" header="Nombre"></Column>                    
+                </DataTable>
             </div>
         )
     }
 
     const getPisos = () => {
         return (
-            <div className="datatable-responsive-demo">
+            <div className=" datatable-responsive-demo">
                   <DataTable  
                       className="p-datatable-responsive-demo roboto" 
                       value={pisos} selection={selectedPiso} 
@@ -97,17 +116,26 @@ const Adisionar = (props) => {
                       onSelectionChange={e => setSelectedPiso(e.value)}
                       dataKey="idpiso"
                   >
-                      <Column field="direccion" header="Nombre"></Column>                    
+                      <Column field="direccion" header="Direccion"></Column>                    
                   </DataTable>
             </div>
         )
     }
 
-
     return (
       <Fragment>
-          {getDestino()}
-          {getPisos()}
+          <div className="separador" />
+          <div className="p-col-12 displayFlex ">
+              <div className="col-md-6 p-col-12  ">
+                  {getDestino()}
+              </div>
+              <div className=" col-md-6 p-col-12">
+                  {loadPisos?getPisos():<Fragment></Fragment>}
+              </div>
+          </div>
+          <div>
+              {loadPiso?<AdisionarPiso idpiso={piso.idpiso}></AdisionarPiso>:<Fragment></Fragment>}
+          </div>
       </Fragment>
     );
 }
@@ -120,4 +148,4 @@ const mapDispatchToProps = dispatch => ({
     setCurrentNavBarColor: navBarColor => dispatch(setCurrentNavBarColor(navBarColor))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Adisionar);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation("translations")(Adisionar));

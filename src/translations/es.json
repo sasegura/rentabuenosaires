@@ -9,6 +9,15 @@
         "Bienvenidos a nuestra web":"Bienvenidos a nuestra web",
         "Idioma":"Idioma",
         "Destinos":"Destinos",
-        "Enviar mensaje":"Enviar mensaje"
+        "Enviar mensaje":"Enviar mensaje",
+        "aireacondicionado":"Aireacondicionado",
+        "calefaccion":"Calefacción",
+        "cantbannos":"Cantidad de baños",
+        "cantpersonas":"Cantidad de personas",
+        "direccion":"Dirección",
+        "piso":"Piso",
+        "metroscuadrados":"Metros Cuadrados",
+        "tvcable":"TV por cable",
+        "wifi":"wifi"
     }
 }
