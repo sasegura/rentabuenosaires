@@ -20,3 +20,19 @@
     align-items: center;
     justify-content: center;
 }
+
+.switch{
+    margin: 5px;
+    text-align: right;    
+}
+
+.switch label{
+    margin-right: 20px;
+    margin-bottom: 10px;
+    transform: translate3d(0px, -10px, 0px);
+}
+
+#esteId{
+    margin-top: 65px;
+    max-height: 100%;
+}
