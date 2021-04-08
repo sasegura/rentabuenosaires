@@ -9,6 +9,15 @@
         "Bienvenidos a nuestra web":"Welcome to our website",
         "Idioma":"Languaje",
         "Destinos":"Destinations",
-        "Enviar mensaje":"Send message"
+        "Enviar mensaje":"Send message",
+        "aireacondicionado":"Aireacondicionado",
+        "calefaccion":"Calefacción",
+        "cantbannos":"Cantidad de baños",
+        "cantpersonas":"Cantidad de personas",
+        "direccion":"Dirección",
+        "piso":"Piso",
+        "metroscuadrados":"Metros Cuadrados",
+        "tvcable":"TV por cable",
+        "wifi":"wifi"
     }
 }

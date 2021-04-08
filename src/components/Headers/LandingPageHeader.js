@@ -3,7 +3,7 @@ import { withTranslation } from 'react-i18next';
 
 // reactstrap components
 import { Button, Container } from "reactstrap";
-import Banner from 'assets/img/Banner.png';
+import Banner from '../../assets/img/Banner.png';
 
 
 // core components
