@@ -20,6 +20,7 @@ import { RadioButton } from 'primereact/radiobutton';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
+import { Checkbox } from 'primereact/checkbox';
 
 //CSS
 import '../PisoPreview/pisoPreview.scss'
@@ -29,6 +30,7 @@ import './Adicionar.style.scss';
 
 //Conexion
 import AxiosConexionConfig from "conexion/AxiosConexionConfig";
+import { InputSwitch } from "primereact/inputswitch";
 
 
 const Adisionar = (props) => {
@@ -56,6 +58,7 @@ const Adisionar = (props) => {
 
 
     const [products, setProducts] = useState(null);
+
     const [productDialog, setProductDialog] = useState(false);
     const [deleteProductDialog, setDeleteProductDialog] = useState(false);
     const [deleteProductsDialog, setDeleteProductsDialog] = useState(false);
@@ -66,12 +69,21 @@ const Adisionar = (props) => {
     const toast = useRef(null);
     const dt = useRef(null);
 
+
+
+    const [wifi, setWifi] = useState(true);
+    const [calefaccion, setCalefaccion] = useState(true);
+    const [aire, setAire] = useState(true);
+
+
+
     React.useEffect(() => {
         getDestinos()
     }, []);
     React.useEffect(() => {
         if (selectedDestino !== null) {
             getPiso();
+
         }
     }, [selectedDestino]);
 
@@ -89,7 +101,7 @@ const Adisionar = (props) => {
         const url = '/pisos?filter[where][iddestino]=' + selectedDestino.iddestino;
         try {
             const piso = await AxiosConexionConfig.get(url);
-            setPisos(piso.data);
+            setProducts(piso.data);
         } catch (e) {
             console.log(e);
         }
@@ -256,6 +268,12 @@ const Adisionar = (props) => {
         return <span className={`product-badge status-${rowData.inventoryStatus.toLowerCase()}`}>{rowData.inventoryStatus}</span>;
     }
 
+    const statusBooleanTemplate = (rowData) => {
+        return <span >{
+            rowData.wifi ? "Sí" : "No"}</span>;
+
+    }
+
     const actionBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
@@ -314,20 +332,27 @@ const Adisionar = (props) => {
                         <div className="card">
                             <Toolbar className="p-mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
 
-                            <DataTable ref={dt} value={pisos} selection={selectedProducts} onSelectionChange={(e) => setSelectedProducts(e.value)}
-                                dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
+
+
+                            <DataTable ref={dt} value={products} selection={selectedProducts} dataKey="idpiso" onSelectionChange={(e) => setSelectedProducts(e.value)}
+                                paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                                 paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
-                                globalFilter={globalFilter} header={header}
-                            >
+                                currentPageReportTemplate="{first} a {last} de {totalRecords} pisos"
+                                globalFilter={globalFilter}
+                                header={header}>
 
                                 <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>
-                                <Column field="idpiso" header="Nº" sortable></Column>
                                 <Column field="direccion" header="Dirección" sortable></Column>
                                 <Column field="precio" header="Precio" sortable></Column>
                                 <Column field="cantpersonas" header="Cant. de personas" sortable></Column>
                                 <Column field="metroscuadrados" header="Metros Cuadrados" sortable></Column>
-                                <Column field="wifi" header="WiFi" sortable></Column>
+                                <Column field="wifi" header="WiFi" body={statusBooleanTemplate} sortable></Column>
+                                <Column field="aireacondicionado" body={statusBooleanTemplate} header="Aire" sortable></Column>
+                                <Column field="calefaccion" body={statusBooleanTemplate} header="Calefacción" sortable></Column>
+                                <Column field="canthabitaciones" header="Habitaciones" sortable></Column>
+                                <Column field="cantbannos" header="Baños" sortable></Column>
+
+
                                 <Column body={actionBodyTemplate}></Column>
 
 
@@ -335,50 +360,78 @@ const Adisionar = (props) => {
                             </DataTable>
                         </div>
 
-                        <Dialog visible={productDialog} style={{ width: '450px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
+                        <Dialog visible={productDialog} id="esteId" style={{ width: '700px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
                             {product.image && <img src={`showcase/demo/images/product/${product.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="product-image" />}
-                            <div className="p-field">
-                                <label htmlFor="name">Name</label>
-                                <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
-                                {submitted && !product.name && <small className="p-error">Name is required.</small>}
+
+                            <div className="p-grid">
+                                <div className="p-field p-col-8">
+                                    <label htmlFor="name">Dirección</label>
+                                    <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
+                                    {submitted && !product.name && <small className="p-error">Introduzca la dirección.</small>}
+                                </div>
+
+                                <div className="p-field p-col-3">
+                                    <label htmlFor="precio">Precio</label>
+                                    <InputNumber id="precio" value={product.precio} onValueChange={(e) => onInputNumberChange(e, 'precio')} mode="currency" currency="EUR" locale="en-US" />
+                                </div>
                             </div>
+
+
                             <div className="p-field">
-                                <label htmlFor="description">Description</label>
+                                <label htmlFor="description">Descripción</label>
                                 <InputTextarea id="description" value={product.description} onChange={(e) => onInputChange(e, 'description')} required rows={3} cols={20} />
                             </div>
 
-                            <div className="p-field">
-                                <label className="p-mb-3">Category</label>
-                                <div className="p-formgrid p-grid">
-                                    <div className="p-field-radiobutton p-col-6">
-                                        <RadioButton inputId="category1" name="category" value="Accessories" onChange={onCategoryChange} checked={product.category === 'Accessories'} />
-                                        <label htmlFor="category1">Accessories</label>
+
+                            <div className="p-grid">
+                                <div className="p-field p-col-3">
+                                    <div className="p-field ">
+                                        <label htmlFor="bannos">Nº Baños</label>
+                                        <InputNumber id="bannos" value={product.price} onValueChange={(e) => onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" />
                                     </div>
-                                    <div className="p-field-radiobutton p-col-6">
-                                        <RadioButton inputId="category2" name="category" value="Clothing" onChange={onCategoryChange} checked={product.category === 'Clothing'} />
-                                        <label htmlFor="category2">Clothing</label>
-                                    </div>
-                                    <div className="p-field-radiobutton p-col-6">
-                                        <RadioButton inputId="category3" name="category" value="Electronics" onChange={onCategoryChange} checked={product.category === 'Electronics'} />
-                                        <label htmlFor="category3">Electronics</label>
-                                    </div>
-                                    <div className="p-field-radiobutton p-col-6">
-                                        <RadioButton inputId="category4" name="category" value="Fitness" onChange={onCategoryChange} checked={product.category === 'Fitness'} />
-                                        <label htmlFor="category4">Fitness</label>
+                                    <div className="p-field">
+                                        <label htmlFor="habitaciones">Nº Habitaciones</label>
+                                        <InputNumber id="habitaciones" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} integeronly />
                                     </div>
                                 </div>
+
+                                <div className="p-col-3">
+                                    <div className="p-field ">
+                                        <label htmlFor="personas">Nº Personas</label>
+                                        <InputNumber id="personas" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} integeronly />
+                                    </div>
+
+                                    <div className="p-field">
+                                        <label htmlFor="metros">Metros cuadrados</label>
+                                        <InputNumber id="metros" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} integeronly />
+                                    </div>
+
+                                </div>
+
+
+                                <div className="p-col-5">
+                                    <div className="switch">
+                                        <label htmlFor="binary">WiFi</label>
+                                        <InputSwitch checked={wifi} onChange={(e) => setWifi(e.value)} />
+                                    </div>
+                                    <div className="switch">
+                                        <label htmlFor="binary">Aire Acondicionado</label>
+                                        <InputSwitch checked={aire} onChange={(e) => setAire(e.value)} />
+                                    </div>
+                                    <div className="switch">
+                                        <label htmlFor="binary">Calefacción</label>
+                                        <InputSwitch checked={calefaccion} onChange={(e) => setCalefaccion(e.value)} />
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div className="p-field">
+
+
+
                             </div>
 
-                            <div className="p-formgrid p-grid">
-                                <div className="p-field p-col">
-                                    <label htmlFor="price">Price</label>
-                                    <InputNumber id="price" value={product.price} onValueChange={(e) => onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" />
-                                </div>
-                                <div className="p-field p-col">
-                                    <label htmlFor="quantity">Quantity</label>
-                                    <InputNumber id="quantity" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} integeronly />
-                                </div>
-                            </div>
+
                         </Dialog>
 
                         <Dialog visible={deleteProductDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={hideDeleteProductDialog}>
@@ -412,7 +465,7 @@ const Adisionar = (props) => {
             <div className="datatable-responsive-demo">
                 <DataTable
                     className="p-datatable-responsive-demo roboto"
-                    value={pisos} selection={selectedPiso}
+                    value={products} selection={selectedPiso}
                     selectionMode="single"
                     onSelectionChange={e => setSelectedPiso(e.value)}
                     dataKey="idpiso"
