@@ -1,30 +1,24 @@
 import React from "react";
 
-import {
-  Button,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  Container,
-  Row,
-  Col,
-} from "reactstrap";
+//Reactstrap
+import { Button, Input, InputGroupAddon, InputGroupText, InputGroup, Container, Row, Col } from "reactstrap";
 
-// core components
+// Imagenes
+import img1 from "assets/img/bg1.jpg";
+import img2 from "assets/img/bg4.jpg";
+import foto1 from "assets/img/avatar.jpg";
+import foto2 from "assets/img/ryan.jpg";
+import foto3 from "assets/img/eva.jpg";
+
+//Component
 import LandingPageHeader from "components/Headers/LandingPageHeader.js";
-import img1 from "../assets/img/bg1.jpg";
-import img2 from "../assets/img/bg4.jpg";
-import img3 from "../assets/img/bg3.jpg";
-import foto1 from "../assets/img/avatar.jpg";
-import foto2 from "../assets/img/ryan.jpg";
-import foto3 from "../assets/img/eva.jpg";
-import DarkFooter from "components/Footers/DarkFooter";
-import TransparentFooter from "components/Footers/TransparentFooter";
-import ExamplesNavbar from "components/Navbars/ExamplesNavbar";
+
+//Conexión
 import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from "react";
 import AxiosConexionConfig from "conexion/AxiosConexionConfig";
-import './css/inicio.style.scss';
+
+//Styles
+import './inicio.style.scss';
 
 function Inicio() {
   const [firstFocus, setFirstFocus] = React.useState(false);

@@ -1,15 +1,18 @@
-import imageToBase64 from "image-to-base64";
 import React, { Fragment, useState } from "react";
+
+//redux
 import { connect } from 'react-redux';
+import { setCurrentNavBarColor } from "redux/navBarColor/navBarColor.action";
 
 // reactstrap components
 import { Carousel, CarouselItem, CarouselIndicators, Container, Row, Col } from "reactstrap";
+
+//CSS
 import './Piso.scss'
 
+//Conexión
 import AxiosConexionConfig from "conexion/AxiosConexionConfig";
-import { setCurrentNavBarColor } from "redux/navBarColor/navBarColor.action";
 
-// core components
 
 const Piso = (props) => {
   console.log("lo que sea")

@@ -1,18 +1,19 @@
-
-
-import IndexHeader from "components/Headers/IndexHeader";
-import ProfilePageHeader from "components/Headers/ProfilePageHeader";
-import MyCard from "components/MyCard/MyCard.component";
 import React, { Fragment } from "react";
-import { connect } from 'react-redux';
-import { setCurrentNavBarColor } from "redux/navBarColor/navBarColor.action";
-import './css/pisoPreview.scss'
-
-
-import AxiosConexionConfig from "conexion/AxiosConexionConfig";
 import { useState } from "react";
 
-// reactstrap components
+//redux
+import { connect } from 'react-redux';
+import { setCurrentNavBarColor } from "redux/navBarColor/navBarColor.action";
+
+//CSS
+import './pisoPreview.scss'
+
+//Components
+import MyCard from "components/MyCard/MyCard.component";
+
+//Conexion
+import AxiosConexionConfig from "conexion/AxiosConexionConfig";
+
 
 const PisoPreview = (props) => {
 

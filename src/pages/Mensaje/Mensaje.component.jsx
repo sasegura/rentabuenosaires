@@ -1,8 +1,13 @@
 import React from 'react';
+
+//redux
 import { connect } from 'react-redux';
 import { setCurrentNavBarColor } from "redux/navBarColor/navBarColor.action";
+
+//reactstrap
 import { Button, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 
+//CSS
 import './Mensaje.style.scss';
 
 

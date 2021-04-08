@@ -1,9 +1,8 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { withTranslation } from 'react-i18next';
-import airbnbLogo from '../../assets/img/airbnb-logon.png'
-import esp from "../../assets/img/flags/ES.png";
-import eng from "../../assets/img/flags/GB.png";
+import esp from "assets/img/flags/ES.png";
+import eng from "assets/img/flags/GB.png";
 // reactstrap components
 import {
   Button,

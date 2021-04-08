@@ -1,27 +1,11 @@
 import React from "react";
 
 // reactstrap components
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  Container,
-  Col,
-} from "reactstrap";
+import { Button, Card, CardHeader, CardBody, CardFooter, Form, Input, InputGroupAddon, InputGroupText, InputGroup, Container, Col } from "reactstrap";
 
-// core components
-import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
-import TransparentFooter from "components/Footers/TransparentFooter.js";
-
-import img1 from '../../assets/img/login.jpg'
-import img2 from '../../assets/img/now-logo.png'
+// Imagenes
+import img1 from 'assets/img/login.jpg'
+import img2 from 'assets/img/now-logo.png'
 
 function LoginPage() {
 
@@ -44,9 +28,7 @@ function LoginPage() {
   }, []);
   ///rentabuenosaires/static/media/login.ab931d77.jpg
   return (
-
     <>
-
       <div className="page-header clear-filter" filter-color="blue">
         <div
           className="page-header-image"
