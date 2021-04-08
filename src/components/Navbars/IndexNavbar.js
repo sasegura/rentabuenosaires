@@ -20,9 +20,12 @@ import {
   Container,
   UncontrolledTooltip,
 } from "reactstrap";
+
 import { connect } from "react-redux";
 import { setCurrentDestino } from "redux/destino/destino.action";
 import { setCurrentNavBarColor } from "redux/navBarColor/navBarColor.action";
+import { setCurrentUsuario } from "redux/usuario/usuario.action";
+
 import './IndexNavBar.style.scss'
 import AxiosConexionConfig from "conexion/AxiosConexionConfig";
 
@@ -90,6 +93,43 @@ const IndexNavbar = (props) => {
   }, [props.currentNavBarColor]);
 
 
+  const Login=()=>{
+    if(props.currentUsuario!==""){
+      return(
+        <NavItem >
+                <Link to='/logout'>
+                  <NavLink
+                    target="_self"
+                    onClick={() => {
+                      document.documentElement.classList.toggle("nav-open");
+                      setCollapseOpen(!collapseOpen);
+                    }}
+                  >
+                    <i className="now-ui-icons users_single-02"></i>
+                    <p>{t("Cerrar Sesión")}</p>
+                  </NavLink>
+                </Link>
+
+              </NavItem>
+      )
+    }else{
+      return(<NavItem >
+        <Link to='/login'>
+          <NavLink
+            target="_self"
+            onClick={() => {
+              document.documentElement.classList.toggle("nav-open");
+              setCollapseOpen(!collapseOpen);
+            }}
+          >
+            <i className="now-ui-icons users_single-02"></i>
+            <p>{t("Entrar")}</p>
+          </NavLink>
+        </Link>
+
+      </NavItem>)
+    }
+  }
 
   return (
     <>
@@ -107,14 +147,8 @@ const IndexNavbar = (props) => {
           <div className="navbar-translate">
 
             {/*logo*/}
-            <NavbarBrand
-              href="/rentabuenosaires"
-              id="navbar-brand"
-              target="_self"
-            >
-              LOGO
-            </NavbarBrand>
 
+            <Link to='/rentabuenosaires'>LOGO</Link>
 
             <button
               className="navbar-toggler navbar-toggler"
@@ -199,21 +233,7 @@ const IndexNavbar = (props) => {
                 </DropdownMenu>
               </UncontrolledDropdown>
 
-              <NavItem >
-                <Link to='/login'>
-                  <NavLink
-                    target="_self"
-                    onClick={() => {
-                      document.documentElement.classList.toggle("nav-open");
-                      setCollapseOpen(!collapseOpen);
-                    }}
-                  >
-                    <i className="now-ui-icons users_single-02"></i>
-                    <p>{t("Entrar")}</p>
-                  </NavLink>
-                </Link>
-
-              </NavItem>
+              {Login()}
 
 
               <NavItem>
@@ -256,10 +276,12 @@ const IndexNavbar = (props) => {
 const mapDispatchToProps = dispatch => ({
   setCurrentDestino: destino => dispatch(setCurrentDestino(destino)),
   setCurrentNavBarColor: navBarColor => dispatch(setCurrentNavBarColor(navBarColor)),
+  setCurrentUsuario: usuario => dispatch(setCurrentUsuario(usuario))
 })
 
 const mapStateToProps = state => ({
-  currentNavBarColor: state.navBarColor.currentNavBarColor
+  currentNavBarColor: state.navBarColor.currentNavBarColor,
+  currentUsuario: state.usuario.currentUsuario
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withTranslation("translations")(IndexNavbar));

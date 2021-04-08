@@ -1,4 +1,5 @@
 import React from "react";
+import { withTranslation } from 'react-i18next';
 
 //Reactstrap
 import { Button, Input, InputGroupAddon, InputGroupText, InputGroup, Container, Row, Col } from "reactstrap";
@@ -20,7 +21,8 @@ import AxiosConexionConfig from "conexion/AxiosConexionConfig";
 //Styles
 import './inicio.style.scss';
 
-function Inicio() {
+function Inicio(props) {
+  const {t}=props;
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
   const [imagen, setImagen] = React.useState(__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
@@ -77,30 +79,16 @@ function Inicio() {
       <div className="wrapper">
         <LandingPageHeader />
         <div className="section section-about-us">
-          <Container>
+          <Container>           
             <Row>
               <Col className="ml-auto mr-auto text-center" md="8">
-                <form onChange={(e)=>{onChange(e)}}>
-                  <input type="file" name ="image" id="file" accept=".jpeg, .png, .jpg"/>
-                </form>
-                <img src={"data:image/png;base64,"+imagen}/>
-              </Col>
-            </Row>
-            <Row>
-              <Col className="ml-auto mr-auto text-center" md="8">
-                <h2 className="title">“Queremos que te sientas especial.
-                Que has encontrado tu lugar. Vive lo mejor que puedas”
-</h2>
+                <h2 className="title">
+                  <p>{t("Queremos que te sientas especial.")}</p>
+                  <p>{t("Que has encontrado tu lugar.")}</p>
+                  <p>{t("Vive lo mejor que puedas.")}</p>
+                </h2>
                 <h5 className="description">
-                Disfrutamos viajar por el mundo, conocer diferentes 
-                culturas y sentirnos parte de cada lugar. A lo largo 
-                de los últimos años hemos conocido más de 100 ciudades, 
-                lo que nos ayuda a entender qué necesitan y valoran 
-                los viajeros del lugar donde se hospedan. Nuestro 
-                objetivo es lograr que tu estadía sea lo más placentera
-                posible, ofreciéndote un servicio completo y de primer 
-                nivel, no sólo sobre el hospedaje sino también sobre 
-                inquietudes que tengas durante tu viaje.
+                {t("Disfrutamos viajar por el mundo, conocer diferentes culturas y sentirnos parte de cada lugar. A lo largo de los últimos años hemos conocido más de 100 ciudades, lo que nos ayuda a entender qué necesitan y valoran los viajeros del lugar donde se hospedan. Nuestro objetivo es lograr que tu estadía sea lo más placentera posible, ofreciéndote un servicio completo y de primer nivel, no sólo sobre el hospedaje sino también sobre inquietudes que tengas durante tu viaje.")}
 
                 </h5>
               </Col>
@@ -116,12 +104,12 @@ function Inicio() {
                     }}
                   >
                     <p className="blockquote blockquote-info" id="1234">
-                    Nuestra garantía:<br/>
-                    + Calidad <br/> 
-                    + Comodidad<br/> 
-                    + Limpieza <br/>
-                    + Ubicación<br/> 
-                    + Seguridad
+                    {t("Nuestra garantía:")}<br/>
+                    {t("+ Calidad")} <br/> 
+                    {t("+ Comodidad")}<br/> 
+                    {t("+ Limpieza")} <br/>
+                    {t("+ Ubicación")}<br/> 
+                    {t("+ Seguridad")}
                     </p>
                   </div>
                   
@@ -135,11 +123,7 @@ function Inicio() {
                   ></div>
                   
                   <p>
-                  Estamos a tu disposición 24/7 durante toda tu estancia. 
-                  Cuidamos y mantenemos nuestras propiedades revisando 
-                  cada detalle. Si hay algo que podamos hacer para 
-                  mejorar tu estancia, avísanos y estaremos encantados 
-                  de ayudarte.
+                  {t("Estamos a tu disposición 24/7 durante toda tu estancia. Cuidamos y mantenemos nuestras propiedades revisando cada detalle. Si hay algo que podamos hacer para mejorar tu estancia, avísanos y estaremos encantados de ayudarte.")}
                   </p>
                   
                  
@@ -280,4 +264,4 @@ function Inicio() {
   );
 }
 
-export default Inicio;
+export default withTranslation("translations") (Inicio);

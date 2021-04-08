@@ -23,8 +23,8 @@ import cargando from '../../assets/img/cargando.gif'
 function MyCard(props,{ match, destino, link, history, cantHab, nombre }) {
 
   const historyy=useHistory();
-  console.log(props.location.pathname);
-
+  //console.log(props.location.pathname);
+  console.log(props);
 
   const handleSubmit = (event) => {
     event.preventDefault();

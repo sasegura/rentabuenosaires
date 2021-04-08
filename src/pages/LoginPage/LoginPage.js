@@ -1,4 +1,7 @@
-import React from "react";
+import React, { Fragment } from "react";
+import { connect } from 'react-redux';
+import { setCurrentUsuario } from "redux/usuario/usuario.action";
+
 
 // reactstrap components
 import { Button, Card, CardHeader, CardBody, CardFooter, Form, Input, InputGroupAddon, InputGroupText, InputGroup, Container, Col } from "reactstrap";
@@ -6,13 +9,22 @@ import { Button, Card, CardHeader, CardBody, CardFooter, Form, Input, InputGroup
 // Imagenes
 import img1 from 'assets/img/login.jpg'
 import img2 from 'assets/img/now-logo.png'
+import AxiosConexionConfig from "conexion/AxiosConexionConfig";
+import { setCurrentPiso } from "redux/usuario/usuario.action";
+import { index } from "configuracion/constantes";
+import { useHistory } from "react-router";
 
-function LoginPage() {
-
+function LoginPage(props) {
+  const history=useHistory()
   const img11 = img1;
 
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
+  const [nombreUsuario, setNombreUsuario] = React.useState("");
+  const [contrasennaUsuario, setContrasennaUsuario] = React.useState("");
+  const [nombremensaje, setNombremensaje] = React.useState("");
+  const [contrasennamensaje, setContrasennamensaje] = React.useState("");
+  const [loginmensaje, setloginmensaje] = React.useState("");
 
   React.useEffect(() => {
     document.body.classList.add("login-page");
@@ -26,6 +38,52 @@ function LoginPage() {
       document.body.classList.remove("sidebar-collapse");
     };
   }, []);
+
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+    if(nombreUsuario===""){
+      setNombremensaje("Nombre de usuario requerido")
+    }else{
+      setNombremensaje("")
+    }
+    if(contrasennaUsuario===""){
+      setContrasennamensaje("Contraseña de usuario requerido")
+    }else{
+      setContrasennamensaje("")
+    }
+    getUsuarioLogin()
+  }
+
+  async function getUsuarioLogin() {   
+    const url = '/usuarios?filter=';
+    const valores=JSON.stringify(
+      {      
+        where: { 
+          and:[
+            {nombre:nombreUsuario},
+            {contrasenna:contrasennaUsuario}
+          ]
+        }      
+      }
+    )
+    try {
+        const respuesta = await AxiosConexionConfig.get(url+ encodeURIComponent(valores));          
+        if(respuesta.data.length>0){
+          const fecha=new Date(respuesta.data[0].expiracion)
+          const hoy=new Date()
+          if(fecha>hoy){
+            props.setCurrentUsuario(respuesta.data[0])
+            history.push(index)
+          }
+          setloginmensaje("")
+        }else{
+          setloginmensaje("Usuario o contraseña incorrectos")
+        }
+    } catch (e) {
+        console.log(e);
+    }
+}
+
   ///rentabuenosaires/static/media/login.ab931d77.jpg
   return (
     <>
@@ -65,10 +123,13 @@ function LoginPage() {
                       <Input
                         placeholder="Usuario..."
                         type="text"
+                        value={nombreUsuario}
                         onFocus={() => setFirstFocus(true)}
                         onBlur={() => setFirstFocus(false)}
-                      ></Input>
+                        onChange={(e)=>(setNombreUsuario(e.target.value))}
+                      ></Input>                      
                     </InputGroup>
+                    <div>{nombremensaje!==""?<label>{nombremensaje}</label>:<Fragment/>}</div>
                     <InputGroup
                       className={
                         "no-border input-lg" +
@@ -83,18 +144,22 @@ function LoginPage() {
                       <Input
                         placeholder="Contraseña..."
                         type="password"
+                        value={contrasennaUsuario}
                         onFocus={() => setLastFocus(true)}
                         onBlur={() => setLastFocus(false)}
-                      ></Input>
+                        onChange={(e)=>(setContrasennaUsuario(e.target.value))}
+                      ></Input>                      
                     </InputGroup>
+                    {contrasennamensaje!==""?<label>{contrasennamensaje}</label>:<Fragment/>}
                   </CardBody>
+                  {loginmensaje!==""?<label>{loginmensaje}</label>:<Fragment/>}
                   <CardFooter className="text-center">
                     <Button
                       block
                       className="btn-round"
                       color="info"
                       href="#pablo"
-                      onClick={(e) => e.preventDefault()}
+                      onClick={(e) => handleSubmit(e)}
                       size="lg"
                     >
                       Entrar
@@ -134,4 +199,12 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+const mapStateToProps = state => ({
+  currentUsuario: state.usuario.currentUsuario
+})
+const mapDispatchToProps = dispatch => ({
+  setCurrentUsuario: usuario => dispatch(setCurrentUsuario(usuario))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+

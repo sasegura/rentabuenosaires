@@ -29,6 +29,8 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import "./App.scss"
+import LogOut from "pages/LogOut/LogOut";
+import { index, linkPisos,linkAdisionar,linkLogin, linkMensaje, linkLogout } from "configuracion/constantes";
 
 function App() {
     return (
@@ -42,11 +44,11 @@ function App() {
             <Switch>
 
                 <Route
-                    exact path="/rentabuenosaires" exact
+                    exact path={index} exact
                     render={(props) => <Inicio {...props} />}
                 />
                 <Route
-                    exact path="/pisos" exact
+                    exact path={linkPisos} exact
                     render={(props) => <PisoPreview {...props} />}
                 />
 
@@ -55,7 +57,7 @@ function App() {
                     render={(props) => <Piso {...props} />}
                 />
                 <Route
-                    exact path="/adisionar" exact
+                    exact path={linkAdisionar} exact
                     render={(props) => <Adisionar {...props} />}
                 />
 
@@ -65,12 +67,15 @@ function App() {
                 />
 
                 <Route
-                    exact path="/login"
+                    exact path={linkLogin}
                     render={(props) => <LoginPage {...props} />}
                 />
-
                 <Route
-                    exact path="/mensaje"
+                    exact path={linkLogout}
+                    render={(props) => <LogOut {...props} />}
+                />
+                <Route
+                    exact path={linkMensaje}
                     render={(props) => <EnviarMensaje {...props} />}
                 />
 

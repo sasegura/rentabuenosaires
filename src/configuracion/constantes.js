@@ -1,4 +1,11 @@
-export const baseURL="http://localhost:3000"
+export const baseURL="http://localhost:3000";
+export const proyectName="rentabuenosaires";
+export const index="/rentabuenosaires"
+export const linkPisos="/pisos";
+export const linkAdisionar="/adisionar";
+export const linkLogin="/login";
+export const linkLogout="/logout";
+export const linkMensaje="/mensaje";
 export const pisos = [
     {
       id:1,

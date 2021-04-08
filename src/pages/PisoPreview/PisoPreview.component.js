@@ -17,8 +17,6 @@ import AxiosConexionConfig from "conexion/AxiosConexionConfig";
 
 const PisoPreview = (props) => {
 
-  const [img, setImg] = useState("")
-  const [load, setLoad] = useState(true)
 
   props.setCurrentNavBarColor(false);
 
@@ -39,6 +37,7 @@ const PisoPreview = (props) => {
     const url = '/pisos?filter[where][iddestino]=' + props.currentDestino.id;
     try {
       const piso = await AxiosConexionConfig.get(url);
+      //console.log(piso.data)
       setPisos(piso.data);
     } catch (e) {
       console.log(e);
@@ -74,7 +73,7 @@ const PisoPreview = (props) => {
 
   return (
     <Fragment>
-      <div className="separador" key={load} />
+      <div className="separador" />
       {props.currentDestino !== null ?
         destino() :
         nodestino()
