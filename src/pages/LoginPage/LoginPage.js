@@ -72,12 +72,15 @@ function LoginPage(props) {
           const fecha=new Date(respuesta.data[0].expiracion)
           const hoy=new Date()
           if(fecha>hoy){
+            setloginmensaje("")
             props.setCurrentUsuario(respuesta.data[0])
             history.push(index)
+          }else{
+            setloginmensaje("El usuario ha expirado.")  
           }
-          setloginmensaje("")
+          
         }else{
-          setloginmensaje("Usuario o contraseña incorrectos")
+          setloginmensaje("Usuario o contraseña incorrectos.")
         }
     } catch (e) {
         console.log(e);
