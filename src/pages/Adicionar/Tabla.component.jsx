@@ -281,14 +281,14 @@ const Tabla = (props) => {
                     <Column field="direccion" header="Dirección" sortable></Column>
                     <Column field="precio" header="Precio" body={priceBodyTemplate} sortable></Column>
                     
-                    {/*
+                    
                     <Column header="Image" body={imageBodyTemplate}></Column>
                     
                     <Column field="category" header="Category" sortable></Column>
                     <Column field="rating" header="Reviews" body={ratingBodyTemplate} sortable></Column>
                     <Column field="inventoryStatus" header="Status" body={statusBodyTemplate} sortable></Column>
                     <Column body={actionBodyTemplate}></Column>
-                    */}
+                    
                 </DataTable>
             </div>
 
