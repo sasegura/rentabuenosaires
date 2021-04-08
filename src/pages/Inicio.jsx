@@ -13,8 +13,6 @@ import {
 
 // core components
 import LandingPageHeader from "components/Headers/LandingPageHeader.js";
-import DefaultFooter from "components/Footers/DefaultFooter.js";
-import IndexNavbar from "components/Navbars/IndexNavbar";
 import img1 from "../assets/img/bg1.jpg";
 import img2 from "../assets/img/bg4.jpg";
 import img3 from "../assets/img/bg3.jpg";
@@ -26,6 +24,7 @@ import TransparentFooter from "components/Footers/TransparentFooter";
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar";
 import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from "react";
 import AxiosConexionConfig from "conexion/AxiosConexionConfig";
+import './css/inicio.style.scss';
 
 function Inicio() {
   const [firstFocus, setFirstFocus] = React.useState(false);
@@ -95,13 +94,20 @@ function Inicio() {
             </Row>
             <Row>
               <Col className="ml-auto mr-auto text-center" md="8">
-                <h2 className="title">Quiénes somos</h2>
+                <h2 className="title">“Queremos que te sientas especial.
+                Que has encontrado tu lugar. Vive lo mejor que puedas”
+</h2>
                 <h5 className="description">
-                  According to the National Oceanic and Atmospheric
-                  Administration, Ted, Scambos, NSIDClead scentist, puts the
-                  potentially record low maximum sea ice extent tihs year down
-                  to low ice extent in the Pacific and a late drop in ice extent
-                  in the Barents Sea.
+                Disfrutamos viajar por el mundo, conocer diferentes 
+                culturas y sentirnos parte de cada lugar. A lo largo 
+                de los últimos años hemos conocido más de 100 ciudades, 
+                lo que nos ayuda a entender qué necesitan y valoran 
+                los viajeros del lugar donde se hospedan. Nuestro 
+                objetivo es lograr que tu estadía sea lo más placentera
+                posible, ofreciéndote un servicio completo y de primer 
+                nivel, no sólo sobre el hospedaje sino también sobre 
+                inquietudes que tengas durante tu viaje.
+
                 </h5>
               </Col>
             </Row>
@@ -116,19 +122,15 @@ function Inicio() {
                     }}
                   >
                     <p className="blockquote blockquote-info" id="1234">
-                      "Over the span of the satellite record, Arctic sea ice has
-                      been declining significantly, while sea ice in the
-                      Antarctichas increased very slightly" <br></br>
-                      <br></br>
-                      <small>-NOAA</small>
+                    Nuestra garantía:<br/>
+                    + Calidad <br/> 
+                    + Comodidad<br/> 
+                    + Limpieza <br/>
+                    + Ubicación<br/> 
+                    + Seguridad
                     </p>
                   </div>
-                  <div
-                    className="image-container"
-                    style={{
-                      backgroundImage: "url(" + img3 + ")",
-                    }}
-                  ></div>
+                  
                 </Col>
                 <Col md="5">
                   <div
@@ -137,173 +139,75 @@ function Inicio() {
                       backgroundImage: "url(" + img2 + ")",
                     }}
                   ></div>
-                  <h3>
-                    So what does the new record for the lowest level of winter
-                    ice actually mean
-                  </h3>
+                  
                   <p>
-                    The Arctic Ocean freezes every winter and much of the
-                    sea-ice then thaws every summer, and that process will
-                    continue whatever happens with climate change. Even if the
-                    Arctic continues to be one of the fastest-warming regions of
-                    the world, it will always be plunged into bitterly cold
-                    polar dark every winter. And year-by-year, for all kinds of
-                    natural reasons, there’s huge variety of the state of the
-                    ice.
+                  Estamos a tu disposición 24/7 durante toda tu estancia. 
+                  Cuidamos y mantenemos nuestras propiedades revisando 
+                  cada detalle. Si hay algo que podamos hacer para 
+                  mejorar tu estancia, avísanos y estaremos encantados 
+                  de ayudarte.
                   </p>
-                  <p>
-                    For a start, it does not automatically follow that a record
-                    amount of ice will melt this summer. More important for
-                    determining the size of the annual thaw is the state of the
-                    weather as the midnight sun approaches and temperatures
-                    rise. But over the more than 30 years of satellite records,
-                    scientists have observed a clear pattern of decline,
-                    decade-by-decade.
-                  </p>
-                  <p>
-                    For a start, it does not automatically follow that a record
-                    amount of ice will melt this summer. More important for
-                    determining the size of the annual thaw is the state of the
-                    weather as the midnight sun approaches and temperatures
-                    rise. But over the more than 30 years of satellite records,
-                    scientists have observed a clear pattern of decline,
-                    decade-by-decade.
-                  </p>
+                  
+                 
                 </Col>
               </Row>
             </div>
           </Container>
         </div>
-        <div className="section section-team text-center">
+        <div className="sectionEquipo section-team text-center">
           <Container>
             <h2 className="title">Este es nuestro equipo</h2>
             <div className="team">
               <Row>
-                <Col md="4">
+                <Col md="3">
                   <div className="team-player">
                     <img
                       alt="Nombre Apellido 1"
                       className="rounded-circle img-fluid img-raised"
-                      src={foto1}
+                      src={foto2}
                     ></img>
-                    <h4 className="title">Romina Hadid</h4>
-                    <p className="category text-info">Model</p>
-                    <p className="description">
-                      You can write here details about one of your team members.
-                      You can give more details about what they do. Feel free to
-                      add some{" "}
-                      <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                        links
-                      </a>{" "}
-                      for people to be able to follow them outside the site.
-                    </p>
-                    <Button
-                      className="btn-icon btn-round"
-                      color="info"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className="fab fa-twitter"></i>
-                    </Button>
-                    <Button
-                      className="btn-icon btn-round"
-                      color="info"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className="fab fa-instagram"></i>
-                    </Button>
-                    <Button
-                      className="btn-icon btn-round"
-                      color="info"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className="fab fa-facebook-square"></i>
-                    </Button>
+                    <h4 className="title">Jonathan Berman</h4>
+                    <p className="category text-info">CEO & Co-Founder{" "}</p>
+                                        
                   </div>
                 </Col>
-                <Col md="4">
+                <Col md="3">
                   <div className="team-player">
                     <img
-                      alt="Nombre Apellido 2"
+                      alt="Luciana Carino Hasperué"
+                      className="rounded-circle img-fluid img-raised"
+                      src={foto1}
+                    ></img>
+                    <h4 className="title">Luciana Carino Hasperué</h4>
+                    <p className="category text-info">Head of interior design & Co-Founder </p>
+                    
+                  </div>
+                </Col>
+                <Col md="3">
+                  <div className="team-player">
+                    <img
+                      alt="Luis"
                       className="rounded-circle img-fluid img-raised"
                       src={foto2}
                     ></img>
-                    <h4 className="title">Ryan Tompson</h4>
-                    <p className="category text-info">Designer</p>
-                    <p className="description">
-                      You can write here details about one of your team members.
-                      You can give more details about what they do. Feel free to
-                      add some{" "}
-                      <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                        links
-                      </a>{" "}
-                      for people to be able to follow them outside the site.
-                    </p>
-                    <Button
-                      className="btn-icon btn-round"
-                      color="info"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className="fab fa-twitter"></i>
-                    </Button>
-                    <Button
-                      className="btn-icon btn-round"
-                      color="info"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className="fab fa-linkedin"></i>
-                    </Button>
+                    <h4 className="title">Luis</h4>
+                    <p className="category text-info">Head of service </p>
+                    
                   </div>
                 </Col>
-                <Col md="4">
+                <Col md="3">
                   <div className="team-player">
                     <img
-                      alt="..."
+                      alt="Alicia"
                       className="rounded-circle img-fluid img-raised"
                       src={foto3}
                     ></img>
-                    <h4 className="title">Eva Jenner</h4>
-                    <p className="category text-info">Fashion</p>
-                    <p className="description">
-                      You can write here details about one of your team members.
-                      You can give more details about what they do. Feel free to
-                      add some{" "}
-                      <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                        links
-                      </a>{" "}
-                      for people to be able to follow them outside the site.
-                    </p>
-                    <Button
-                      className="btn-icon btn-round"
-                      color="info"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className="fab fa-google-plus"></i>
-                    </Button>
-                    <Button
-                      className="btn-icon btn-round"
-                      color="info"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className="fab fa-youtube"></i>
-                    </Button>
-                    <Button
-                      className="btn-icon btn-round"
-                      color="info"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      <i className="fab fa-twitter"></i>
-                    </Button>
+                    <h4 className="title">Alicia</h4>
+                    <p className="category text-info">Guest service coordinator </p>
+                    
                   </div>
                 </Col>
-              </Row>
+                </Row>
             </div>
           </Container>
         </div>
