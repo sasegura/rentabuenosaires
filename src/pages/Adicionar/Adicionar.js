@@ -9,18 +9,15 @@ import { setCurrentNavBarColor } from "redux/navBarColor/navBarColor.action";
 //PrimeReact
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
 import { FileUpload } from 'primereact/fileupload';
 import { Rating } from 'primereact/rating';
 import { Toolbar } from 'primereact/toolbar';
 import { InputTextarea } from 'primereact/inputtextarea';
-import { RadioButton } from 'primereact/radiobutton';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
-import { Checkbox } from 'primereact/checkbox';
 
 //CSS
 import '../PisoPreview/pisoPreview.scss'
@@ -32,8 +29,11 @@ import './Adicionar.style.scss';
 import AxiosConexionConfig from "conexion/AxiosConexionConfig";
 import { InputSwitch } from "primereact/inputswitch";
 
+//Componente
+import Imagen from './ImagenUpload.component';
+import { Link } from "react-router-dom";
 
-const Adisionar = (props) => {
+const Adicionar = (props) => {
 
     let emptyProduct = {
         id: null,
@@ -47,14 +47,19 @@ const Adisionar = (props) => {
         inventoryStatus: 'INSTOCK'
     };
 
+    let emptyImagen = {
+        id: null,
+        idpiso: null,
+        imagen: null,
+        portada: true
+    }
+
     props.setCurrentNavBarColor(false);
 
     const [destinos, setDestinos] = useState(null);
     const [selectedDestino, setSelectesDestino] = useState(null);
-    const [selectedPiso, setSelectesPiso] = useState(null);
     const [img, setImg] = useState("")
     const [load, setLoad] = useState(true)
-    const [pisos, setPisos] = useState(null);
 
 
     const [products, setProducts] = useState(null);
@@ -66,6 +71,9 @@ const Adisionar = (props) => {
     const [selectedProducts, setSelectedProducts] = useState(null);
     const [submitted, setSubmitted] = useState(false);
     const [globalFilter, setGlobalFilter] = useState(null);
+
+    const [imagenes, setImagenes] = useState(null);
+
     const toast = useRef(null);
     const dt = useRef(null);
 
@@ -80,10 +88,10 @@ const Adisionar = (props) => {
     React.useEffect(() => {
         getDestinos()
     }, []);
+
     React.useEffect(() => {
         if (selectedDestino !== null) {
             getPiso();
-
         }
     }, [selectedDestino]);
 
@@ -99,20 +107,23 @@ const Adisionar = (props) => {
     }
     async function getPiso() {
         const url = '/pisos?filter[where][iddestino]=' + selectedDestino.iddestino;
+        const urlImagen = '/imagen?filter[where][portada]=true';
+
         try {
             const piso = await AxiosConexionConfig.get(url);
             setProducts(piso.data);
+
+            const img1 = await AxiosConexionConfig.get(urlImagen);
+            setImagenes(img1);
+
         } catch (e) {
             console.log(e);
         }
     }
 
+
     const setSelectedDestino = (valor) => {
         setSelectesDestino(valor)
-    }
-
-    const setSelectedPiso = (valor) => {
-        setSelectesPiso(valor)
     }
 
     const openNew = () => {
@@ -147,7 +158,6 @@ const Adisionar = (props) => {
                 toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
             }
             else {
-                _product.id = createId();
                 _product.image = 'product-placeholder.svg';
                 _products.push(_product);
                 toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
@@ -187,15 +197,6 @@ const Adisionar = (props) => {
         }
 
         return index;
-    }
-
-    const createId = () => {
-        let id = '';
-        let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (let i = 0; i < 5; i++) {
-            id += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return id;
     }
 
     const exportCSV = () => {
@@ -254,8 +255,26 @@ const Adisionar = (props) => {
         )
     }
 
-    const imageBodyTemplate = (rowData) => {
-        return <img src={`showcase/demo/images/product/${rowData.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="product-image" />
+    const imageBodyTemplate = (row) => {
+        let src = null;
+
+        if (imagenes != null && products != null) {
+            const id = row.idpiso
+
+            var index = -1;
+
+            var filteredObj = imagenes.data.find(function (item, i) {
+                if (item.idpiso === row.idpiso) {
+                    index = i;
+                    return i;
+                }
+            });
+            src = 'data:image/png;base64,' + imagenes.data[index].imagen;
+        }
+        else {
+            src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'
+        }
+        return <img src={src} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className="product-image" />
     }
 
 
@@ -277,7 +296,8 @@ const Adisionar = (props) => {
     const actionBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" onClick={() => editProduct(rowData)} />
+                <Link to='/modificarPiso'>
+                    <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" /></Link>
                 <Button icon="pi pi-trash" className="p-button-rounded p-button-warning" onClick={() => confirmDeleteProduct(rowData)} />
             </React.Fragment>
         );
@@ -343,6 +363,7 @@ const Adisionar = (props) => {
 
                                 <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>
                                 <Column field="direccion" header="Dirección" sortable></Column>
+                                <Column header="Image" body={imageBodyTemplate}></Column>
                                 <Column field="precio" header="Precio" sortable></Column>
                                 <Column field="cantpersonas" header="Cant. de personas" sortable></Column>
                                 <Column field="metroscuadrados" header="Metros Cuadrados" sortable></Column>
@@ -360,84 +381,89 @@ const Adisionar = (props) => {
                             </DataTable>
                         </div>
 
-                        <Dialog visible={productDialog} id="esteId" style={{ width: '700px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
+                        <Dialog visible={productDialog} id="esteId" style={{ width: '950px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
                             {product.image && <img src={`showcase/demo/images/product/${product.image}`} onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={product.image} className="product-image" />}
 
-                            <div className="p-grid">
-                                <div className="p-field p-col-8">
-                                    <label htmlFor="name">Dirección</label>
-                                    <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
-                                    {submitted && !product.name && <small className="p-error">Introduzca la dirección.</small>}
-                                </div>
-
-                                <div className="p-field p-col-3">
-                                    <label htmlFor="precio">Precio</label>
-                                    <InputNumber id="precio" value={product.precio} onValueChange={(e) => onInputNumberChange(e, 'precio')} mode="currency" currency="EUR" locale="en-US" />
-                                </div>
-                            </div>
-
-
-                            <div className="p-field">
-                                <label htmlFor="description">Descripción</label>
-                                <InputTextarea id="description" value={product.description} onChange={(e) => onInputChange(e, 'description')} required rows={3} cols={20} />
-                            </div>
-
 
                             <div className="p-grid">
-                                <div className="p-field p-col-3">
-                                    <div className="p-field ">
-                                        <label htmlFor="bannos">Nº Baños</label>
-                                        <InputNumber id="bannos" value={product.price} onValueChange={(e) => onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" />
+                                <div className="p-col-12 p-md-12 p-lg-7">
+
+                                    <div className="p-grid">
+                                        <div className="p-field p-col-8">
+                                            <label htmlFor="name">Dirección</label>
+                                            <InputText id="name" value={product.name} onChange={(e) => onInputChange(e, 'name')} required autoFocus className={classNames({ 'p-invalid': submitted && !product.name })} />
+                                            {submitted && !product.name && <small className="p-error">Introduzca la dirección.</small>}
+                                        </div>
+
+                                        <div className="p-field p-col-3">
+                                            <label htmlFor="precio">Precio</label>
+                                            <InputNumber id="precio" value={product.precio} onValueChange={(e) => onInputNumberChange(e, 'precio')} mode="currency" currency="EUR" locale="en-US" />
+                                        </div>
                                     </div>
+
+
                                     <div className="p-field">
-                                        <label htmlFor="habitaciones">Nº Habitaciones</label>
-                                        <InputNumber id="habitaciones" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} integeronly />
+                                        <label htmlFor="description">Descripción</label>
+                                        <InputTextarea id="description" value={product.description} onChange={(e) => onInputChange(e, 'description')} required rows={3} cols={20} />
+                                    </div>
+
+
+                                    <div className="p-grid">
+                                        <div className="p-field p-col-3">
+                                            <div className="p-field ">
+                                                <label htmlFor="bannos">Nº Baños</label>
+                                                <InputNumber id="bannos" value={product.price} onValueChange={(e) => onInputNumberChange(e, 'price')} mode="currency" currency="USD" locale="en-US" />
+                                            </div>
+                                            <div className="p-field">
+                                                <label htmlFor="habitaciones">Nº Habitaciones</label>
+                                                <InputNumber id="habitaciones" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} integeronly />
+                                            </div>
+                                        </div>
+
+                                        <div className="p-col-3">
+                                            <div className="p-field ">
+                                                <label htmlFor="personas">Nº Personas</label>
+                                                <InputNumber id="personas" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} integeronly />
+                                            </div>
+
+                                            <div className="p-field">
+                                                <label htmlFor="metros">Metros cuadrados</label>
+                                                <InputNumber id="metros" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} integeronly />
+                                            </div>
+
+                                        </div>
+
+
+                                        <div className="p-col-6">
+                                            <div className="switch">
+                                                <label htmlFor="binary">WiFi</label>
+                                                <InputSwitch checked={wifi} onChange={(e) => setWifi(e.value)} />
+                                            </div>
+                                            <div className="switch">
+                                                <label htmlFor="binary">Aire Acondicionado</label>
+                                                <InputSwitch checked={aire} onChange={(e) => setAire(e.value)} />
+                                            </div>
+                                            <div className="switch">
+                                                <label htmlFor="binary">Calefacción</label>
+                                                <InputSwitch checked={calefaccion} onChange={(e) => setCalefaccion(e.value)} />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div className="p-col-3">
-                                    <div className="p-field ">
-                                        <label htmlFor="personas">Nº Personas</label>
-                                        <InputNumber id="personas" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} integeronly />
-                                    </div>
+                                <div className="p-col-12 p-md-12 p-lg-5">
+                                    <label htmlFor="binary">Subir imágenes del piso</label>
 
-                                    <div className="p-field">
-                                        <label htmlFor="metros">Metros cuadrados</label>
-                                        <InputNumber id="metros" value={product.quantity} onValueChange={(e) => onInputNumberChange(e, 'quantity')} integeronly />
-                                    </div>
+                                    <Imagen imagen={imagenes} />
 
                                 </div>
-
-
-                                <div className="p-col-5">
-                                    <div className="switch">
-                                        <label htmlFor="binary">WiFi</label>
-                                        <InputSwitch checked={wifi} onChange={(e) => setWifi(e.value)} />
-                                    </div>
-                                    <div className="switch">
-                                        <label htmlFor="binary">Aire Acondicionado</label>
-                                        <InputSwitch checked={aire} onChange={(e) => setAire(e.value)} />
-                                    </div>
-                                    <div className="switch">
-                                        <label htmlFor="binary">Calefacción</label>
-                                        <InputSwitch checked={calefaccion} onChange={(e) => setCalefaccion(e.value)} />
-                                    </div>
-                                </div>
-
                             </div>
-                            <div className="p-field">
-
-
-
-                            </div>
-
-
                         </Dialog>
 
                         <Dialog visible={deleteProductDialog} style={{ width: '450px' }} header="Confirm" modal footer={deleteProductDialogFooter} onHide={hideDeleteProductDialog}>
                             <div className="confirmation-content">
                                 <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem' }} />
-                                {product && <span>Are you sure you want to delete <b>{product.name}</b>?</span>}
+                                {product && <span>Estás seguro que quieres eliminar <b>{product.name}</b>?</span>}
                             </div>
                         </Dialog>
 
@@ -448,38 +474,17 @@ const Adisionar = (props) => {
                             </div>
                         </Dialog>
 
-
                     </div>
-
-
                 </div>
-
-
-
             </div>
         )
     }
 
-    const getPisos = () => {
-        return (
-            <div className="datatable-responsive-demo">
-                <DataTable
-                    className="p-datatable-responsive-demo roboto"
-                    value={products} selection={selectedPiso}
-                    selectionMode="single"
-                    onSelectionChange={e => setSelectedPiso(e.value)}
-                    dataKey="idpiso"
-                >
-                    <Column field="direccion" header="Nombre"></Column>
-                </DataTable>
-            </div>
-        )
-    }
+
 
     return (
         <Fragment>
             {getDestino()}
-            {getPisos()}
         </Fragment>
     );
 }
@@ -492,4 +497,4 @@ const mapDispatchToProps = dispatch => ({
     setCurrentNavBarColor: navBarColor => dispatch(setCurrentNavBarColor(navBarColor))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Adisionar);
+export default connect(mapStateToProps, mapDispatchToProps)(Adicionar);

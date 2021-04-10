@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 // styles
@@ -11,17 +10,15 @@ import "assets/demo/nucleo-icons-page-styles.css?v=1.4.0";
 // pages
 import NucleoIcons from "views/NucleoIcons.js";
 import LoginPage from "pages/LoginPage/LoginPage";
-
 import Piso from "pages/Piso/Piso";
 import Inicio from "pages/Inicio/Inicio";
 import PisoPreview from "pages/PisoPreview/PisoPreview.component";
+import EnviarMensaje from "pages/Mensaje/Mensaje.component";
+import Adicionar from "pages/Adicionar/Adicionar";
 
+//components
 import DarkFooter from "components/Footers/DarkFooter";
 import IndexNavbar from "components/Navbars/IndexNavbar";
-
-
-import EnviarMensaje from "pages/Mensaje/Mensaje.component";
-import Adisionar from "pages/Adicionar/Adisionar";
 
 //styles
 import 'primereact/resources/themes/saga-blue/theme.css';
@@ -30,7 +27,8 @@ import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import "./App.scss"
 import LogOut from "pages/LogOut/LogOut";
-import { index, linkPisos,linkAdisionar,linkLogin, linkMensaje, linkLogout } from "configuracion/constantes";
+import { index, linkPisos, linkAdicionar, linkLogin, linkMensaje, linkLogout } from "configuracion/constantes";
+import ModificarPiso from "pages/ModificarPiso/ModificarPiso.component";
 
 function App() {
     return (
@@ -51,21 +49,18 @@ function App() {
                     exact path={linkPisos} exact
                     render={(props) => <PisoPreview {...props} />}
                 />
-
                 <Route
                     exact path="/piso/1" exact
                     render={(props) => <Piso {...props} />}
                 />
                 <Route
-                    exact path={linkAdisionar} exact
-                    render={(props) => <Adisionar {...props} />}
+                    exact path={linkAdicionar} exact
+                    render={(props) => <Adicionar {...props} />}
                 />
-
                 <Route
                     exact path="/nucleo-icons"
                     render={(props) => <NucleoIcons {...props} />}
                 />
-
                 <Route
                     exact path={linkLogin}
                     render={(props) => <LoginPage {...props} />}
@@ -78,10 +73,14 @@ function App() {
                     exact path={linkMensaje}
                     render={(props) => <EnviarMensaje {...props} />}
                 />
+                <Route
+                    exact path="/modificarPiso"
+                    render={(props) => <ModificarPiso {...props} />}
+                />
+
 
 
             </Switch>
-
             {/**Footer */}
             <DarkFooter />
         </Fragment>

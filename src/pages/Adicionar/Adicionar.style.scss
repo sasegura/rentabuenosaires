@@ -36,3 +36,33 @@
     margin-top: 65px;
     max-height: 100%;
 }
+
+    .p-component{
+        font-size: 13px !important;  
+        font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif !important;  
+    }
+
+    .p-datatable .p-datatable-thead > tr > th {
+        text-align: center !important;
+        font-weight: 510 !important;
+        color: #495057 !important;
+    }
+
+    .p-datatable .p-datatable-tbody > tr > td {
+        text-align: center !important;
+    }
+
+    .linea{
+        width: 1px;
+        height: 100%;
+        background-color:#dbe0e6;
+        margin: 0px 15px;
+        float:left;
+    }
+
+    .ant-upload-list-picture-card-container{
+        float: left !important;
+    }
+    .p-lg-5 {
+        padding: 0.5rem !important;
+    }

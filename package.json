@@ -4,6 +4,8 @@
   "version": "1.4.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.6.2",
+    "antd": "^4.15.0",
     "axios": "^0.21.1",
     "fs": "0.0.1-security",
     "gulp": "4.0.2",
