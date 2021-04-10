@@ -28,6 +28,7 @@ import 'primeflex/primeflex.css';
 import "./App.scss"
 import LogOut from "pages/LogOut/LogOut";
 import { index, linkPisos, linkAdicionar, linkLogin, linkMensaje, linkLogout } from "configuracion/constantes";
+import ModificarPiso from "pages/ModificarPiso/ModificarPiso.component";
 
 function App() {
     return (
@@ -72,7 +73,10 @@ function App() {
                     exact path={linkMensaje}
                     render={(props) => <EnviarMensaje {...props} />}
                 />
-                
+                <Route
+                    exact path="/modificarPiso"
+                    render={(props) => <ModificarPiso {...props} />}
+                />
 
 
 
