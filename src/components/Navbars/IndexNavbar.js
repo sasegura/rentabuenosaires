@@ -93,27 +93,27 @@ const IndexNavbar = (props) => {
   }, [props.currentNavBarColor]);
 
 
-  const Login=()=>{
-    if(props.currentUsuario!==""){
-      return(
+  const Login = () => {
+    if (props.currentUsuario !== "") {
+      return (
         <NavItem >
-                <Link to='/logout'>
-                  <NavLink
-                    target="_self"
-                    onClick={() => {
-                      document.documentElement.classList.toggle("nav-open");
-                      setCollapseOpen(!collapseOpen);
-                    }}
-                  >
-                    <i className="now-ui-icons users_single-02"></i>
-                    <p>{t("Cerrar Sesión")}</p>
-                  </NavLink>
-                </Link>
+          <Link to='/logout'>
+            <NavLink
+              target="_self"
+              onClick={() => {
+                document.documentElement.classList.toggle("nav-open");
+                setCollapseOpen(!collapseOpen);
+              }}
+            >
+              <i className="now-ui-icons users_single-02"></i>
+              <p>{t("Cerrar Sesión")}</p>
+            </NavLink>
+          </Link>
 
-              </NavItem>
+        </NavItem>
       )
-    }else{
-      return(<NavItem >
+    } else {
+      return (<NavItem >
         <Link to='/login'>
           <NavLink
             target="_self"
@@ -186,7 +186,7 @@ const IndexNavbar = (props) => {
               </NavItem>
 
               <NavItem>
-                <Link to='/adisionar'>
+                <Link to='/adicionar'>
                   <NavLink target="_self">
                     <i className="now-ui-icons ui-1_send"></i>
                     <p>{t("Administracion")}</p>
