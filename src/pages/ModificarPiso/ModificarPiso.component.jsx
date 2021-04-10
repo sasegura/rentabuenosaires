@@ -5,9 +5,8 @@ import Imagen from "pages/Adicionar/ImagenUpload.component";
 import { InputNumber } from "primereact/inputnumber";
 import { InputTextarea } from "primereact/inputtextarea";
 import { InputSwitch } from "primereact/inputswitch";
-
+/*
 const ModificarPiso  = (props) => {
-
     return ( 
         <div visible={productDialog} id="esteId" style={{ width: '950px' }} header="Product Details" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
             {product.image && 
@@ -102,4 +101,4 @@ const ModificarPiso  = (props) => {
     )}
 
     export default ModificarPiso;
-
+*/
