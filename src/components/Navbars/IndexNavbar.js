@@ -28,6 +28,8 @@ import { setCurrentUsuario } from "redux/usuario/usuario.action";
 
 import './IndexNavBar.style.scss'
 import AxiosConexionConfig from "conexion/AxiosConexionConfig";
+import { linkAdicionar } from "configuracion/constantes";
+import { linkPisos } from "configuracion/constantes";
 
 const IndexNavbar = (props) => {
   const { t } = props
@@ -186,7 +188,7 @@ const IndexNavbar = (props) => {
               </NavItem>
 
               <NavItem>
-                <Link to='/adisionar'>
+                <Link to={linkAdicionar}>
                   <NavLink target="_self">
                     <i className="now-ui-icons ui-1_send"></i>
                     <p>{t("Administracion")}</p>
@@ -202,7 +204,7 @@ const IndexNavbar = (props) => {
                 <DropdownMenu>
                   {destinos !== null ?
                     destinos.map(({ iddestino, nombre }) => (
-                      <DropdownItem to='/pisos' onClick={() => {
+                      <DropdownItem to={linkPisos} onClick={() => {
                         props.setCurrentDestino({ nombre: nombre, id: iddestino })
                         document.documentElement.classList.toggle("nav-open");
                         setCollapseOpen(!collapseOpen);
