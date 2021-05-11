@@ -1,0 +1,101 @@
+
+{
+    "serviciosAdicionales":[
+        "Desayuno",
+        "Traslados",
+        "Limpieza"        
+    ],
+    "Estacionamiento e instalacione":[
+        "Estacionamiento gratuito en las instalaciones",
+        "Estacionamiento pago en las instalaciones",
+        "Estacionamiento gratuito fuera de las instalaciones",
+        "Estacionamiento pago fuera de las instalaciones",
+        "Cargador para coches eléctricos",
+        "Piscina",
+        "Gimnasio",
+        "Salón de usos múltiples"
+    ],
+    "cocinaComedor":[
+        "Utensilios de parrilla",
+        "Panificadora",
+        "Cafetera",
+        "Cafetera de filtro",
+        "Cafetera Nespresso",
+        "Cafetera con cápsulas",
+        "Utensilios de cocina",
+        "Procesador de alimentos eléctrico",
+        "Mesa de comedor",
+        "Platos y cubiertos",
+        "Lavavajillas",
+        "Hervidor de agua",
+        "Microondas",
+        "Horno",
+        "Heladera con freezer",
+        "Tostadora eléctrica",
+        "Copas de vino",
+        "Cava de vinos eléctrica"
+    ],
+    "internetOficina":[
+        "Zona para trabajar",
+        "Wifi móvil",
+        "Wifi",
+        "Conexión Ethernet"
+    ],
+    "seguridadHogar":[
+        "Detector de monóxido de carbono",
+        "Detector de humo",        
+        "Detector de gas",        
+        "Extintor de incendios",        
+        "Botiquín"
+    ],
+    "calefaccionRefrigeracion":[
+        "Aire acondicionado",
+        "Ventilador de techo",        
+        "Ventiladores portátiles",        
+        "Calefacción eléctrica",        
+        "Calefacción por suelo radiante",        
+        "Chimenea interior"
+    ],
+    "paraFamilias":[
+        "Bañera para bebés",
+        "Monitor de bebés",        
+        "Barreras de seguridad para bebés",        
+        "Juegos de mesa",        
+        "Mesa para cambiar pañales",        
+        "Libros y juguetes para niños",        
+        "Platos y cubiertos para niños",        
+        "Cuna",        
+        "Protectores de enchufes",        
+        "Protectores para esquinas de mesa",        
+        "Seguros para ventanas"
+    ],
+    "entretenimiento":[
+        "TV por cable",
+        "TV",        
+        "Videoconsola",        
+        "Sistema de sonido",        
+        "Elementos para la playa",
+        "Bicicletas"
+    ],
+    "Dormitorio":[
+        "Elementos básicos Toallas, sábanas, jabón, papel higiénico y almohadas",
+        "Ropa de cama",        
+        "Espacio para guardar la ropa",        
+        "Almohadas y mantas adicionales",        
+        "Perchas",        
+        "Mosquitera",        
+        "Persianas o cortinas opacas",        
+        "Caja fuerte"
+    ],
+    "banno":[
+        "Bañera",
+        "Bidé",        
+        "Jabón de ducha",        
+        "Shampoo",        
+        "Acondicionador",        
+        "Secador de pelo",        
+        "Gel de ducha",        
+        "Jacuzzi"
+    ]
+
+}

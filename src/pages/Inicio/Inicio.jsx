@@ -15,8 +15,6 @@ import foto3 from "assets/img/eva.jpg";
 import LandingPageHeader from "components/Headers/LandingPageHeader.js";
 
 //Conexión
-import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from "react";
-import AxiosConexionConfig from "conexion/AxiosConexionConfig";
 
 //Styles
 import './inicio.style.scss';
@@ -25,7 +23,6 @@ function Inicio(props) {
   const {t}=props;
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
-  const [imagen, setImagen] = React.useState(__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
   
   React.useEffect(() => {
     document.body.classList.add("landing-page");
@@ -39,41 +36,7 @@ function Inicio(props) {
     };
   }, []);
 
-
-  const onChange=(e)=>{
-    console.log(e.target.files[0])
-    let file=e.target.files[0]
-    if(file){
-      const reader=new FileReader()
-      reader.readAsDataURL(file)
-      reader.onload=function(){
-          var base64=reader.result
-          console.log(base64)
-          var s=base64.split(",")
-          setImagen(s[1])
-          setImagenX(s[1])
-      }
-      
-    }
-  }
-  async function setImagenX(imagenX) {
-    const url = '/imagen';
-    const v={ idpiso:2, imagen:imagenX, portada:true}
-    try {
-        const imagen = await AxiosConexionConfig.post(url,JSON.stringify(v));
-        
-        
-        //history.push("/profile")
-    } catch (e) {
-        console.log(e);
-        
-    }
-}
-  const ReaderLoaded=(ev)=>{
-    let binary=ev
-    console.log(binary)
-    console.log(btoa(binary.target.result))
-  }
+  
   return (
     <>
       <div className="wrapper">

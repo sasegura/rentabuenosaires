@@ -7,6 +7,8 @@
     "@ant-design/icons": "^4.6.2",
     "antd": "^4.15.0",
     "axios": "^0.21.1",
+    "final-form": "^4.20.2",
+    "formik": "^2.2.6",
     "fs": "0.0.1-security",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8",
@@ -15,17 +17,20 @@
     "i18next-http-backend": "^1.1.1",
     "image-file-to-base64-exif": "^1.0.3",
     "image-to-base64": "^2.1.1",
+    "leaflet": "^1.7.1",
     "moment": "2.26.0",
     "node-sass": "4.14.1",
     "nouislider": "14.5.0",
     "primeflex": "^2.0.0",
     "primeicons": "^4.1.0",
     "primereact": "^6.1.0",
-    "react": "17.0.1",
+    "react": "^17.0.1",
     "react-bootstrap-switch": "15.5.3",
     "react-datetime": "2.16.3",
-    "react-dom": "17.0.1",
+    "react-dom": "^17.0.1",
+    "react-final-form": "^6.5.3",
     "react-i18next": "^11.8.10",
+    "react-leaflet": "^3.1.0",
     "react-redux": "^7.2.2",
     "react-router": "5.2.0",
     "react-router-dom": "5.2.0",
@@ -66,6 +71,7 @@
     "typescript": "3.9.5"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.7.0",
     "gh-pages": "^3.1.0"
   }
 }

@@ -10,7 +10,6 @@ import { Button, Card, CardHeader, CardBody, CardFooter, Form, Input, InputGroup
 import img1 from 'assets/img/login.jpg'
 import img2 from 'assets/img/now-logo.png'
 import AxiosConexionConfig from "conexion/AxiosConexionConfig";
-import { setCurrentPiso } from "redux/usuario/usuario.action";
 import { index } from "configuracion/constantes";
 import { useHistory } from "react-router";
 

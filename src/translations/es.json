@@ -8,6 +8,15 @@
         "Síguenos en Instagram":"Síguenos en Instagram",
         "Bienvenidos a nuestra web":"Bienvenidos a nuestra web",
         "Idioma":"Idioma",
+        "Administracion":"Administración",
+        "Desde":"Desde",
+        "noche":"la noche",
+        "la noche":"la noche",
+        "Guests":"Personas",
+        "Total":"Total",
+        "noches":" noches",
+        "Estancia":"Estancia",
+        "Entrar":"Entrar",
         "Destinos":"Destinos",
         "Enviar mensaje":"Enviar mensaje",
         "aireacondicionado":"Aireacondicionado",
@@ -31,6 +40,11 @@
         "+ Ubicación":"+ Ubicación",
         "+ Seguridad":"+ Seguridad",
         "+ Limpieza":"+ Limpieza",
-        "+ Comodidad":"+ Comodidad"
+        "+ Comodidad":"+ Comodidad",
+        "Comodidades":"Comodidades",
+        "Calefacción":"Calefacción",
+        "Aire Acondicionado":"Aire Acondicionado",
+        "Seleccione un rango":"Seleccione un rango",
+        "Pre-reservar":"Pre-reservar"
     }
 }

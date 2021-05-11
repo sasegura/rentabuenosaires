@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 // styles
 import "assets/css/bootstrap.min.css";
@@ -41,19 +41,19 @@ function App() {
             <Switch>
 
                 <Route
-                    exact path={index} exact
+                    exact path={index}
                     render={(props) => <Inicio {...props} />}
                 />
                 <Route
-                    exact path={linkPisos} exact
+                    exact path={linkPisos}
                     render={(props) => <PisoPreview {...props} />}
                 />
                 <Route
-                    exact path="/piso/1" exact
+                    exact path="/piso"
                     render={(props) => <Piso {...props} />}
                 />
                 <Route
-                    exact path={linkAdicionar} exact
+                    exact path={linkAdicionar}
                     render={(props) => <Adicionar {...props} />}
                 />
                 <Route
@@ -77,7 +77,8 @@ function App() {
 
 
             </Switch>
-            {/**Footer */}
+            <div > -</div> 
+            
             <DarkFooter />
         </Fragment>
 

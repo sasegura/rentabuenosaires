@@ -11,8 +11,47 @@
 
 .carruselDiv{
     display: flex;
-        align-items: center;
-        justify-content: center;
-    width: 100%;
+    //align-items: center;
+    justify-content: center;
 }
+.div2{
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+}
+.leaflet-container {
+    width: 100%;
+    height: 40vh;
+  }
 
+.seccion{
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: gotham;
+    font-weight: 300;
+    color: #aaa;
+    padding: 25px 5px!important;
+    letter-spacing: 2px;
+    text-align: left;
+}
+.p-accordion-header-text{
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: gotham;
+    font-weight: 300;
+    color: #aaa;
+    letter-spacing: 2px;
+}
+.p-accordion-header-link{
+    background-color: white!important;
+}
+.row{
+    margin-right: 0px!important;
+    margin-left: 0px!important;
+}
+.amenitie{
+    padding-right: 15px;
+    font-size: 14px;
+    color: #757575;
+    font-weight: 700;
+}

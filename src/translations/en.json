@@ -8,6 +8,15 @@
         "Síguenos en Instagram":"Follow us on Instagram",
         "Bienvenidos a nuestra web":"Welcome to our website",
         "Idioma":"Languaje",
+        "Administracion":"Administration",
+        "Desde":"From",
+        "noche":"the night",
+        "la noche":"the night",
+        "Guests":"Guests",
+        "Total":"Total",
+        "noches":" nights",
+        "Estancia":"Stay",
+        "Entrar":"Login",
         "Destinos":"Destinations",
         "Enviar mensaje":"Send message",
         "aireacondicionado":"Aireacondicionado",
@@ -31,6 +40,11 @@
         "+ Ubicación":"+ Location",
         "+ Seguridad":"+ Security",
         "+ Limpieza":"+ Cleaning",
-        "+ Comodidad":"+ Comfort"
+        "+ Comodidad":"+ Comfort",
+        "Comodidades":"Amenities",
+        "Calefacción":"Heating",
+        "Aire Acondicionado":"Air Conditioning",
+        "Seleccione un rango":"Select a range",
+        "Pre-reservar":"Pre-reservar"
     }
 }

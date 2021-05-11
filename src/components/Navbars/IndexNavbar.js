@@ -1,18 +1,15 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { withTranslation } from 'react-i18next';
-import airbnbLogo from '../../assets/img/airbnb-logon.png'
 import esp from "../../assets/img/flags/ES.png";
 import eng from "../../assets/img/flags/GB.png";
 // reactstrap components
 import {
-  Button,
   Collapse,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
-  NavbarBrand,
   Navbar,
   NavItem,
   NavLink,
@@ -28,14 +25,14 @@ import { setCurrentUsuario } from "redux/usuario/usuario.action";
 
 import './IndexNavBar.style.scss'
 import AxiosConexionConfig from "conexion/AxiosConexionConfig";
-import { linkAdicionar } from "configuracion/constantes";
-import { linkPisos } from "configuracion/constantes";
+import { linkAdicionar, linkDestinos, linkPisos, index, linkMensaje, linkLogin, linkLogout } from "configuracion/constantes";
 
 const IndexNavbar = (props) => {
   const { t } = props
   const [navbarColor, setNavbarColor] = React.useState(
     (props.currentNavBarColor === true) ? ("navbar-transparent") : ("")
   );
+  const [destinos, setDestinos] = useState(null)
 
   const ChangeLenguage = (e, language) => {
     e.preventDefault()
@@ -43,27 +40,20 @@ const IndexNavbar = (props) => {
   }
   const [collapseOpen, setCollapseOpen] = React.useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     getDestinos();
   }, []);
 
   async function getDestinos() {
-    const url = '/destinos';
-
-    try {
-      const destino = await AxiosConexionConfig.get(url);
-      setDestinos(destino.data)
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  const [destinos, setDestinos] = useState(null)
+      AxiosConexionConfig.get(linkDestinos).then((respuesta)=>{
+        setDestinos(respuesta.data);        
+      }).catch((e)=>{
+        console.log(e)
+      })
+  }  
 
   React.useEffect(() => {
-
     const updateNavbarColor = () => {
-
       if (navbarColor === "navbar-transparent") {
         if (
           document.documentElement.scrollTop > 399 ||
@@ -78,7 +68,6 @@ const IndexNavbar = (props) => {
         }
       }
     };
-
     if (props.currentNavBarColor) {
       window.addEventListener("scroll", updateNavbarColor);
     }
@@ -86,12 +75,10 @@ const IndexNavbar = (props) => {
       window.removeEventListener("scroll", updateNavbarColor);
       setNavbarColor("")
     }
-
-
-
     return function cleanup() {
       window.removeEventListener("scroll", updateNavbarColor);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.currentNavBarColor]);
 
 
@@ -99,7 +86,7 @@ const IndexNavbar = (props) => {
     if (props.currentUsuario !== "") {
       return (
         <NavItem >
-          <Link to='/logout'>
+          <Link to={linkLogout}>
             <NavLink
               target="_self"
               onClick={() => {
@@ -116,7 +103,7 @@ const IndexNavbar = (props) => {
       )
     } else {
       return (<NavItem >
-        <Link to='/login'>
+        <Link to={linkLogin}>
           <NavLink
             target="_self"
             onClick={() => {
@@ -150,7 +137,7 @@ const IndexNavbar = (props) => {
 
             {/*logo*/}
 
-            <Link to='/rentabuenosaires'>LOGO</Link>
+            <Link to={index}>LOGO</Link>
 
             <button
               className="navbar-toggler navbar-toggler"
@@ -174,21 +161,10 @@ const IndexNavbar = (props) => {
             navbar
           >
             <Nav navbar>
-              <NavItem>
-                <Link to='/mensaje'>
-                  <NavLink target="_self" onClick={() => {
-                    document.documentElement.classList.toggle("nav-open");
-                    setCollapseOpen(!collapseOpen);
-                  }}>
-                    <i className="now-ui-icons ui-1_send"></i>
-                    <p>{t("Enviar mensaje")}</p>
-
-                  </NavLink>
-                </Link>
-              </NavItem>
+              
 
               <NavItem>
-                <Link to='/adicionar'>
+                <Link to={linkAdicionar}>
                   <NavLink target="_self">
                     <i className="now-ui-icons ui-1_send"></i>
                     <p>{t("Administracion")}</p>
@@ -216,7 +192,19 @@ const IndexNavbar = (props) => {
                     )) : <Fragment />}
                 </DropdownMenu>
               </UncontrolledDropdown>
+              
+              <NavItem>
+                <Link to={linkMensaje}>
+                  <NavLink target="_self" onClick={() => {
+                    document.documentElement.classList.toggle("nav-open");
+                    setCollapseOpen(!collapseOpen);
+                  }}>
+                    <i className="now-ui-icons ui-1_send"></i>
+                    <p>{t("Enviar mensaje")}</p>
 
+                  </NavLink>
+                </Link>
+              </NavItem>
 
               <UncontrolledDropdown nav>
                 <DropdownToggle caret color="default" href="#pablo" nav onClick={(e) => e.preventDefault()}>
