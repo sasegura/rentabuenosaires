@@ -1,4 +1,4 @@
-export const baseURL = "http://localhost:3010";
+export const baseURL = "https://rentabuenosairesapi-tfjwe.ondigitalocean.app/";
 export const proyectName = "rentabuenosaires";
 export const index = "/"
 export const linkDestinos="/destinos";
