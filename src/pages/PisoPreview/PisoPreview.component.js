@@ -102,20 +102,13 @@ const responsiveOptions = [
     return (<div className="pisoPrev">
       <h1 className="h1">{props.currentDestino.nombre.toUpperCase()}</h1>
       {/*<img src={"data:image/png;base64," + img} />*/}
-      <div className="collection-preview">
-      {pisos !== null ?
-              <Carousel value={pisos} numVisible={3} numScroll={1} responsiveOptions={responsiveOptions}
-                    itemTemplate={MyCardComponent} />:
-          <Fragment></Fragment>}
+      <div className="p-col-12">
+          <div className="collection-preview">
+              {pisos !== null ?
+                  <Carousel value={pisos} numVisible={3} numScroll={1} className="p-col-11" responsiveOptions={responsiveOptions} itemTemplate={MyCardComponent} />
+                  :<Fragment></Fragment>}
+          </div>
       </div>
-      {/*<div className="collection-preview">
-        {pisos !== null ?
-          pisos
-            .filter((piso, idx) => idx < 3)
-            .map(({ id, ...theOthers }) => (
-              < MyCard key={id} id={id} destino={props.currentDestino.nombre} {...theOthers} />
-            )) : <Fragment />}
-            </div>*/}
     </div>)
   }
 

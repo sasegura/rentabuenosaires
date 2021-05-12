@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { withTranslation } from 'react-i18next';
 // reactstrap components
 import {
@@ -14,12 +14,13 @@ import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import AxiosConexionConfig from "conexion/AxiosConexionConfig";
 
-import cargando from '../../assets/img/loading.gif'
-
+import cargando from '../../assets/img/loading.gif';
+import noImagenDisponible from '../../assets/img/Imagen-no-disponible.png';
 // core components
 
 function MyCard(props,{ match, destino, link, history, cantHab, nombre }) {
 
+  const [noImagen, setNoImagen]=useState(false)
   const historyy=useHistory();
  console.log(props)
   React.useEffect(() => {
@@ -40,14 +41,16 @@ function MyCard(props,{ match, destino, link, history, cantHab, nombre }) {
 
     try {
       const imagen = await AxiosConexionConfig.get(url);
-            
-     if(imagen.data.length === 0) {
-        const imagen1 = await AxiosConexionConfig.get(urlNoPortada); 
-        setImagen(imagen1.data[0].imagen)
-     }    
-      setImagen(imagen.data[0].imagen)
-      //history.push("/profile")
-      
+      if(imagen.data.length === 0) {
+          const imagen1 = await AxiosConexionConfig.get(urlNoPortada); 
+          if(imagen1.data.length !== 0) {
+              setImagen(imagen1.data[0].imagen)
+          }else{
+              setNoImagen(true);
+          }
+      }else{
+          setImagen(imagen.data[0].imagen)
+      }
     } catch (e) {
       console.log(e);
     }
@@ -63,13 +66,16 @@ function MyCard(props,{ match, destino, link, history, cantHab, nombre }) {
         <div className="imagenDiv">
           {imagen!==null?
             <CardImg className="image" alt={nombre} src={"data:image/png;base64," + imagen} top></CardImg>
-            :<CardImg className="cargando" alt={nombre} src={cargando} top></CardImg>
+            :!noImagen?
+                <CardImg className="cargando" alt={nombre} src={cargando} top></CardImg>
+                :<CardImg className="cargando" alt={nombre} src={noImagenDisponible} top></CardImg>
           }
         </div>
         <CardBody className="cardbody col-12 ">
+          
           <div className="flex p-col-12 padding-bottom0">
               <div className=" p-col-12 p-md-6">
-                  {props.nombre}
+                  <h3 className="p-mb-1">{props.nombre}</h3>
                   <span className="marginLeft10px"></span>
                   
                   <p className="card-location margin-bottom0">
@@ -86,23 +92,26 @@ function MyCard(props,{ match, destino, link, history, cantHab, nombre }) {
                   {t("noche")}
               </div>
           </div>
-          <div className=" p-col-12 padding-top0">
-              <span className="fa-exp"><span className="fontweightbold">{props.metroscuadrados}</span>
-              <span className="marginLeft5px"></span>
-              m<sup>2</sup></span>
-              <span className="marginLeft10px"></span>
-              <i className="pi pi-user"></i><span className="marginLeft5px"></span>
-              <span className="fontweightbold">{props.cantpersonas}</span>
-              <span className="marginLeft10px"></span>              
-              
-              <Button
-                type="submit"
-                color="primary"
-                href="#pablo"
-                onClick={(e) => (handleSubmit(e))}
-              >
-                {t("Ver detalles")}
-              </Button>
+          <div className="flex p-col-12 padding-top0">
+              <div className=" p-col-12 p-md-6">
+                  <span className="fa-exp"><span className="fontweightbold">{props.metroscuadrados}</span>
+                  <span className="marginLeft5px"></span>
+                  m<sup>2</sup></span>
+                  <span className="marginLeft10px"></span>
+                  <i className="pi pi-user"></i><span className="marginLeft5px"></span>
+                  <span className="fontweightbold">{props.cantpersonas}</span>
+                  <span className="marginLeft10px"></span> 
+              </div>             
+              <div className=" p-col-12 p-md-6">
+                  <Button
+                    type="submit"
+                    color="primary"
+                    href="#pablo"
+                    onClick={(e) => (handleSubmit(e))}
+                  >
+                    {t("Ver detalles")}
+                  </Button>
+              </div>
           </div>
         </CardBody>
       </Card>
