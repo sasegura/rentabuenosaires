@@ -366,9 +366,11 @@ const productTemplate = (imagenes) => {
                   {loadImg ?
                       carrusel() : <img alt="imagen"  src={imagenLoading}/>}
               </div>
-              <div className="p-lg-3 card floatLeft p-col-12">
-                  {loadData ?
-                      TarjetPiso() : <img alt="imagen" src={imagenLoading}/>}
+              <div className="p-lg-3 p-col-12 floatLeft">
+                  <div className="card p-col-12">
+                      {loadData ?
+                          TarjetPiso() : <img alt="imagen" src={imagenLoading}/>}
+                  </div>
               </div>
           </div>
           <div className="floatLeft p-col-12">
@@ -377,9 +379,9 @@ const productTemplate = (imagenes) => {
                     DatosPiso() : 
                     <img alt="imagen" src={imagenLoading}/>}
               </div>
-              <div className="p-lg-3 p-col-12 card floatLeft">
+              <div className="p-lg-3 p-col-12 floatLeft">
                   {loadData ?
-                      <div className="p-col-12"><Maps piso={data}/></div> : 
+                      <div className="p-col-12 card"><Maps piso={data}/></div> : 
                       <img alt="imagen" src={imagenLoading}/>}
               </div>
           </div>
