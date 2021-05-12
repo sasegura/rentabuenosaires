@@ -1,6 +1,9 @@
 import React from "react";
 import { withTranslation } from 'react-i18next';
-
+import { connect } from "react-redux";
+import { setCurrentDestino } from "redux/destino/destino.action";
+import { setCurrentNavBarColor } from "redux/navBarColor/navBarColor.action";
+import { setCurrentUsuario } from "redux/usuario/usuario.action";
 //Reactstrap
 import { Button, Input, InputGroupAddon, InputGroupText, InputGroup, Container, Row, Col } from "reactstrap";
 
@@ -24,6 +27,9 @@ function Inicio(props) {
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
   
+  React.useEffect(() => {
+    props.setCurrentNavBarColor(true);
+  });
   React.useEffect(() => {
     document.body.classList.add("landing-page");
     document.body.classList.add("sidebar-collapse");
@@ -227,4 +233,15 @@ function Inicio(props) {
   );
 }
 
-export default withTranslation("translations") (Inicio);
+const mapDispatchToProps = dispatch => ({
+  setCurrentDestino: destino => dispatch(setCurrentDestino(destino)),
+  setCurrentNavBarColor: navBarColor => dispatch(setCurrentNavBarColor(navBarColor)),
+  setCurrentUsuario: usuario => dispatch(setCurrentUsuario(usuario))
+})
+
+const mapStateToProps = state => ({
+  currentNavBarColor: state.navBarColor.currentNavBarColor,
+  currentUsuario: state.usuario.currentUsuario
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation("translations") (Inicio));

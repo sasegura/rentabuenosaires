@@ -74,7 +74,7 @@ function MyCard(props,{ match, destino, link, history, cantHab, nombre }) {
         <CardBody className="cardbody col-12 ">
           
           <div className="flex p-col-12 padding-bottom0">
-              <div className=" p-col-12 p-md-6">
+              <div className=" p-col-12 p-md-7">
                   <h3 className="p-mb-1">{props.nombre}</h3>
                   <span className="marginLeft10px"></span>
                   
@@ -82,7 +82,7 @@ function MyCard(props,{ match, destino, link, history, cantHab, nombre }) {
                       {props.destino}
                   </p>
               </div>
-              <div className=" p-col-12 p-md-6">
+              <div className=" p-col-12 p-md-5">
                   <span className="textdecorationunderline fontweightbold">{t("desde")}</span>
                   <div>
                       <i className="pi pi-euro"></i><span className="marginLeft5px"></span>
@@ -93,7 +93,7 @@ function MyCard(props,{ match, destino, link, history, cantHab, nombre }) {
               </div>
           </div>
           <div className="flex p-col-12 padding-top0">
-              <div className=" p-col-12 p-md-6">
+              <div className=" p-col-12 p-md-7 padding11">
                   <span className="fa-exp"><span className="fontweightbold">{props.metroscuadrados}</span>
                   <span className="marginLeft5px"></span>
                   m<sup>2</sup></span>
@@ -102,11 +102,12 @@ function MyCard(props,{ match, destino, link, history, cantHab, nombre }) {
                   <span className="fontweightbold">{props.cantpersonas}</span>
                   <span className="marginLeft10px"></span> 
               </div>             
-              <div className=" p-col-12 p-md-6">
+              <div className=" p-col-12 p-md-5">
                   <Button
                     type="submit"
                     color="primary"
                     href="#pablo"
+                    className="margin0"
                     onClick={(e) => (handleSubmit(e))}
                   >
                     {t("Ver detalles")}

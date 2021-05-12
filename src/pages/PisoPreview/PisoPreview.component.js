@@ -24,9 +24,9 @@ import MyCardComponent from "components/MyCard/MyCard.component";
 
 const PisoPreview = (props) => {
 
-
-  props.setCurrentNavBarColor(false);
-
+  React.useEffect(() => {
+    props.setCurrentNavBarColor(false);
+  });
   React.useEffect(() => {
     document.body.classList.add("landing-page");
     document.body.classList.add("sidebar-collapse");

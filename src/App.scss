@@ -54,11 +54,17 @@
 .width100{
     width: 100%!important;
 }
+.width20{
+    width: 40px!important;
+}
 .margin-bottom0{
     margin-bottom:0px!important;
 }
 .flex{
     display: flex;
+}
+.padding11{
+    padding: 15px!important;
 }
 .padding-bottom0{
     padding-bottom: 0px;
@@ -74,4 +80,17 @@
 }
 .borderradius30{
     border-radius: 30px!important;
+}
+.margin0{
+    margin: 0px!important;
+}
+
+.p-md-5{    
+    padding: 0px!important;
+}
+
+.loaddingCenter{
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }

@@ -107,16 +107,16 @@ const Piso = (props) => {
   const amenitiesList=(data)=>{
     let a=[]
     if(data.wifi){
-      a.push(<div className="p-col-4"><img src={imagenWifi} alt=""  width={"20px"}/><span className="marginLeft5px">Wifi</span></div>)
+      a.push(<div className="p-col-3"><img src={imagenWifi} alt=""  width={"20px"}/><span className="marginLeft5px">Wifi</span></div>)
     }
     if(data.calefaccion){
-      a.push(<div className="p-col-4"><img src={imagencalefaccion} width={"20px"} alt="" /><span className="marginLeft5px">{t("Calefacción")}</span></div>)
+      a.push(<div className="p-col-3"><img src={imagencalefaccion} width={"20px"} alt="" /><span className="marginLeft5px">{t("Calefacción")}</span></div>)
     }
     if(data.aireacondicionado){
-      a.push(<div className="p-col-4"><img src={imagenAire} width={"20px"} alt="" /><span className="marginLeft5px">{t("Aire Acondicionado")}</span></div>)
+      a.push(<div className="p-col-3"><img src={imagenAire} width={"20px"} alt="" /><span className="marginLeft5px">{t("Aire Acondicionado")}</span></div>)
     }
     if(data.tvcable){
-      a.push(<div className="p-col-4"><img src={imagenTV} alt="" width={"20px"}/><span className="marginLeft5px">TV</span></div>)
+      a.push(<div className="p-col-3"><img src={imagenTV} alt="" width={"20px"}/><span className="marginLeft5px">TV</span></div>)
     }
     setAmenities(a)
   }
@@ -300,7 +300,7 @@ const productTemplate = (imagenes) => {
         </Row>
         <Row>
             {amenitiesGenerales.map((dato, index)=>{
-                return(data[dato]?<div className="p-col-4">{amenitiesGeneralesText[index]}</div>:"")
+                return(data[dato]?<div className="p-col-3">{amenitiesGeneralesText[index]}</div>:"")
             })}      
         </Row>
 
@@ -364,12 +364,12 @@ const productTemplate = (imagenes) => {
           <div className="floatLeft p-col-12">
               <div className="p-lg-8 p-col-12 floatLeft">
                   {loadImg ?
-                      carrusel() : <img alt="imagen"  src={imagenLoading}/>}
+                      carrusel() : <div className="loaddingCenter"><img alt="imagen"  src={imagenLoading}/></div>}
               </div>
               <div className="p-lg-3 p-col-12 floatLeft">
                   <div className="card p-col-12">
                       {loadData ?
-                          TarjetPiso() : <img alt="imagen" src={imagenLoading}/>}
+                          TarjetPiso() : <div className="loaddingCenter"><img alt="imagen" src={imagenLoading}/></div>}
                   </div>
               </div>
           </div>
@@ -377,16 +377,16 @@ const productTemplate = (imagenes) => {
               <div className="floatLeft p-col-12 p-md-12 p-lg-8">
                 {loadData ?
                     DatosPiso() : 
-                    <img alt="imagen" src={imagenLoading}/>}
+                    <div className="loaddingCenter"><img alt="imagen" src={imagenLoading}/></div>}
               </div>
               <div className="p-lg-3 p-col-12 floatLeft">
                   {loadData ?
                       <div className="p-col-12 card"><Maps piso={data}/></div> : 
-                      <img alt="imagen" src={imagenLoading}/>}
+                      <div className="loaddingCenter"><img alt="imagen" src={imagenLoading}/></div>}
               </div>
           </div>
           <div className="p-col-12">
-          {loadData ?acordion():<img alt="imagen" src={imagenLoading}/>}
+          {loadData ?acordion():<div className="loaddingCenter"><img alt="imagen" src={imagenLoading}/></div>}
           </div>
     </>
   );

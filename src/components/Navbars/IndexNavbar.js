@@ -18,6 +18,8 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 
+import logo from '../../assets/img/logo-de-alquiler.png'
+
 import { connect } from "react-redux";
 import { setCurrentDestino } from "redux/destino/destino.action";
 import { setCurrentNavBarColor } from "redux/navBarColor/navBarColor.action";
@@ -51,33 +53,32 @@ const IndexNavbar = (props) => {
         console.log(e)
       })
   }  
-
   React.useEffect(() => {
-    const updateNavbarColor = () => {
-      if (navbarColor === "navbar-transparent") {
-        if (
-          document.documentElement.scrollTop > 399 ||
-          document.body.scrollTop > 399
-        ) {
-          setNavbarColor("")
-        } else if (
-          document.documentElement.scrollTop < 400 ||
-          document.body.scrollTop < 400
-        ) {
+    
+  });
+  React.useEffect(() => {
+      if (props.currentNavBarColor) {        
           setNavbarColor("navbar-transparent");
-        }
-      }
-    };
-    if (props.currentNavBarColor) {
-      window.addEventListener("scroll", updateNavbarColor);
-    }
-    else {
-      window.removeEventListener("scroll", updateNavbarColor);
-      setNavbarColor("")
-    }
-    return function cleanup() {
-      window.removeEventListener("scroll", updateNavbarColor);
-    };
+          const updateNavbarColor = () => {
+            if (
+              document.documentElement.scrollTop > 399 ||
+              document.body.scrollTop > 399
+            ) {
+              setNavbarColor("");
+            } else if (
+              document.documentElement.scrollTop < 400 ||
+              document.body.scrollTop < 400
+            ) {
+              setNavbarColor("navbar-transparent");
+            }
+          };
+          window.addEventListener("scroll", updateNavbarColor);
+          return function cleanup() {
+            window.removeEventListener("scroll", updateNavbarColor);
+          };
+      }else{setNavbarColor("");}
+        
+      
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.currentNavBarColor]);
 
@@ -137,7 +138,8 @@ const IndexNavbar = (props) => {
 
             {/*logo*/}
 
-            <Link to={index}>LOGO</Link>
+
+            <Link to={index}><div className="width20"><img alt={"Logo"} src={logo}/></div></Link>
 
             <button
               className="navbar-toggler navbar-toggler"
