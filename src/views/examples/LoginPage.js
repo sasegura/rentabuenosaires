@@ -42,7 +42,7 @@ function LoginPage() {
       document.body.classList.remove("sidebar-collapse");
     };
   }, []);
-  ///rentabuenosaires/static/media/login.ab931d77.jpg
+  
   return (
 
     <>
