@@ -1,5 +1,5 @@
 export const baseURL = "https://rentabuenosairesapi-jv96v.ondigitalocean.app";
-export const proyectName = "rentabuenosaires";
+export const proyectName = "renta";
 export const index = "/"
 export const linkDestinos="/destinos";
 export const linkPisos = "/pisos";

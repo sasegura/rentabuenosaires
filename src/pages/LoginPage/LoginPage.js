@@ -86,7 +86,6 @@ function LoginPage(props) {
     }
 }
 
-  ///rentabuenosaires/static/media/login.ab931d77.jpg
   return (
     <>
       <div className="page-header clear-filter" filter-color="blue">
