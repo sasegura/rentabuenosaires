@@ -12,8 +12,8 @@ const LogOut=(props)=>{
 
     //localStorage.setItem('', "");
 
-    history.push("/rentabuenosaires")
-    return (<div>Cerrando Seción</div>)
+    history.push("/")
+    return (<div>Cerrando Sesión</div>)
 }
 
 
