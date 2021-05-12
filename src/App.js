@@ -27,7 +27,9 @@ import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import "./App.scss"
 import LogOut from "pages/LogOut/LogOut";
-import { index, linkPisos, linkAdicionar, linkLogin, linkMensaje, linkLogout } from "configuracion/constantes";
+import { index, linkPisos, linkAdicionar, linkLogin, linkMensaje, linkNosotros, linkPropietarios,linkLogout } from "configuracion/constantes";
+import Propietarios from "pages/Propietarios/Propietarios.component";
+import Nosotros from "pages/Nosotros/Nosotros.component";
 
 function App() {
     return (
@@ -55,6 +57,14 @@ function App() {
                 <Route
                     exact path={linkAdicionar}
                     render={(props) => <Adicionar {...props} />}
+                />
+                <Route
+                    exact path={linkPropietarios}
+                    render={(props) => <Propietarios {...props} />}
+                />
+                <Route
+                    exact path={linkNosotros}
+                    render={(props) => <Nosotros {...props} />}
                 />
                 <Route
                     exact path="/nucleo-icons"

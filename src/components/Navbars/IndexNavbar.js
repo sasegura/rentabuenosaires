@@ -27,7 +27,7 @@ import { setCurrentUsuario } from "redux/usuario/usuario.action";
 
 import './IndexNavBar.style.scss'
 import AxiosConexionConfig from "conexion/AxiosConexionConfig";
-import { linkAdicionar, linkDestinos, linkPisos, index, linkMensaje, linkLogin, linkLogout } from "configuracion/constantes";
+import { linkAdicionar, linkDestinos, linkPisos, index, linkMensaje, linkNosotros, linkPropietarios, linkLogin, linkLogout } from "configuracion/constantes";
 
 const IndexNavbar = (props) => {
   const { t } = props
@@ -184,8 +184,6 @@ const IndexNavbar = (props) => {
                     destinos.map(({ iddestino, nombre }) => (
                       <DropdownItem to={linkPisos} onClick={() => {
                         props.setCurrentDestino({ nombre: nombre, id: iddestino })
-                        document.documentElement.classList.toggle("nav-open");
-                        setCollapseOpen(!collapseOpen);
                       }}
                         key={iddestino} tag={Link}>
                         <i className="now-ui-icons mr-1"></i>
@@ -196,13 +194,30 @@ const IndexNavbar = (props) => {
               </UncontrolledDropdown>
               
               <NavItem>
-                <Link to={linkMensaje}>
-                  <NavLink target="_self" onClick={() => {
-                    document.documentElement.classList.toggle("nav-open");
-                    setCollapseOpen(!collapseOpen);
-                  }}>
+                <Link to={linkNosotros}>
+                  <NavLink target="_self">
                     <i className="now-ui-icons ui-1_send"></i>
-                    <p>{t("Enviar mensaje")}</p>
+                    <p>{t("Nosotros")}</p>
+
+                  </NavLink>
+                </Link>
+              </NavItem>
+
+              <NavItem>
+                <Link to={linkPropietarios}>
+                  <NavLink target="_self" >
+                    <i className="now-ui-icons ui-1_send"></i>
+                    <p>{t("Propietarios")}</p>
+
+                  </NavLink>
+                </Link>
+              </NavItem>
+
+              <NavItem>
+                <Link to={linkMensaje}>
+                  <NavLink target="_self">
+                    <i className="now-ui-icons ui-1_send"></i>
+                    <p>{t("Contactar")}</p>
 
                   </NavLink>
                 </Link>
