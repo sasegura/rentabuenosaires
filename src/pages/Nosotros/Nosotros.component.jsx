@@ -4,6 +4,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setCurrentNavBarColor } from "redux/navBarColor/navBarColor.action";
 
+import { withTranslation } from 'react-i18next';
+
 //reactstrap
 import { Button, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 
@@ -12,6 +14,7 @@ import './Nosotros.style.scss';
 
 
 const Nosotros = (props) => {
+    const {t}=props;
     const [firstFocus, setFirstFocus] = React.useState(false);
     const [lastFocus, setLastFocus] = React.useState(false);
 
@@ -37,30 +40,30 @@ const Nosotros = (props) => {
           className="section section-contact-us text-center"
         >
           <Container>
-            <h2 className="title">Te ofrecemos un servicio de alquiler de primer nivel.</h2>
-            <h2 className="title">Queremos que te sientas especial.</h2>
+            <h2 className="title">{t("Te ofrecemos un servicio de alquiler de primer nivel.")}</h2>
+            <h2 className="title">{t("Queremos que te sientas especial.")}</h2>
 
             <p className="description">
-              Disfrutamos viajar por el mundo, conocer diferentes culturas y sentirnos parte de cada lugar.
+              {t("Disfrutamos viajar por el mundo, conocer diferentes culturas y sentirnos parte de cada lugar.")}
             </p>
             <p className="description">
-              A lo largo de los últimos años hemos conocido más de 100 ciudades, lo que nos ayuda a entender qué necesitan y valoran los viajeros del lugar donde se hospedan.
+              {t("A lo largo de los últimos años hemos conocido más de 100 ciudades, lo que nos ayuda a entender qué necesitan y valoran los viajeros del lugar donde se hospedan.")}
             </p>
             <p className="description">
-              Nuestro objetivo es lograr que tu estadía sea lo más placentera posible, ofreciendo un servicio completo y de primer nivel, no sólo en el hospedaje sino también en las inquietudes que tengas durante tu viaje.
+              {t("Nuestro objetivo es lograr que tu estadía sea lo más placentera posible, ofreciendo un servicio completo y de primer nivel, no sólo en el hospedaje sino también en las inquietudes que tengas durante tu viaje.")}
             </p>
             <p className="description">
-              Alquila por días, semanas o meses con nosotros.
+              {t("Alquila por días, semanas o meses con nosotros.")}
             </p>
 
-            <h3><b>Nuestra garantía:</b></h3>
-            <h4><p>+ Calidad + Comodidad + Limpieza + Ubicación + Seguridad +
+            <h3><b>{t("Nuestra garantía:")}</b></h3>
+            <h4><p>{t("+ Calidad + Comodidad + Limpieza + Ubicación + Seguridad +")}
 
             </p></h4>
             <br/>
             <Row><p>
-              Estamos a tu disposición 24/7 durante toda tu estancia. 
-              Cuidamos y mantenemos nuestras propiedades revisando cada detalle. Si hay algo que podamos hacer para mejorar tu experiencia, avísanos y estaremos encantados de ayudarte.
+              {t("Estamos a tu disposición 24/7 durante toda tu estancia.")}
+              {t("Cuidamos y mantenemos nuestras propiedades revisando cada detalle. Si hay algo que podamos hacer para mejorar tu experiencia, avísanos y estaremos encantados de ayudarte.")}
             </p>
             
               
@@ -74,4 +77,4 @@ const Nosotros = (props) => {
         setCurrentNavBarColor : navBarColor => dispatch(setCurrentNavBarColor(navBarColor))
       })
 
-    export default connect(null,mapDispatchToProps)(Nosotros);
+    export default connect(null, mapDispatchToProps)(withTranslation("translations") (Nosotros));

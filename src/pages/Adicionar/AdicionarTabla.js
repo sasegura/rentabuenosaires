@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Fragment } from 'react';
 import classNames from 'classnames';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -14,6 +14,8 @@ import { InputNumber } from 'primereact/inputnumber';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Form, Field } from 'react-final-form';
+
+import cargando from '../../assets/img/loading.gif'
 
 import './Adicionar.style.scss';
 import AxiosConexionConfig from 'conexion/AxiosConexionConfig';
@@ -35,6 +37,7 @@ const AdicionarTabla = (props) => {
         precio:0,
         nombre:"",
         descripcion:"",
+        imagen:"",
         diasReservados:""
     }
     const getEmptyPiso=()=>{
@@ -46,6 +49,7 @@ const AdicionarTabla = (props) => {
     
 
     const [pisos, setpisos] = useState(null);
+    const [loadingPisos, setloadingpisos] = useState(false);
     const [pisoDialog, setpisoDialog] = useState(false);
     const [deletepisoDialog, setDeletepisoDialog] = useState(false);
     const [deletepisosDialog, setDeletepisosDialog] = useState(false);
@@ -65,11 +69,15 @@ const AdicionarTabla = (props) => {
     }, [props.destino]); 
 
     async function getPiso() {
+        console.log(pisos)
+        setpisos(null)
+        setloadingpisos(true)
         const url = '/pisos?filter[where][iddestino]=' + props.destino.iddestino;
         const urlImagen = '/imagen?filter=';
         try {
             const pisos = await AxiosConexionConfig.get(url);
-            setpisos(pisos.data);
+            const a=pisos.data;
+            let go=0;
             pisos.data.forEach((piso,index)=>{
                 const uri={
                     where: {
@@ -81,10 +89,18 @@ const AdicionarTabla = (props) => {
                   }
                 AxiosConexionConfig.get(urlImagen+encodeURI(JSON.stringify(uri))).then((respuesta)=>{
                     piso.imagen=respuesta.data
+                    go=go+1;
+                    if(go===pisos.data.length){
+                        setpisos(pisos.data);
+                        setloadingpisos(false)
+                    }
                 });
             })
+            if(pisos.data.length===0){
+                setloadingpisos(false)
+            }
             //setImagenes(img1);
-            setpiso(pisos)
+            //setpiso(pisos)
         } catch (e) {
             console.log(e);
         }
@@ -227,6 +243,7 @@ const AdicionarTabla = (props) => {
             })
         })
         let _pisos = pisos.filter(val => !selectedpisos.includes(val));
+        console.log(_pisos)
         setpisos(_pisos);
         setDeletepisosDialog(false);
         setSelectedpisos(null);
@@ -277,11 +294,14 @@ const AdicionarTabla = (props) => {
         return <img src={`showcase/demo/images/piso/${rowData.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="piso-image" />
     }*/
     const imageBodyTemplate = (row) => {
+        
         let src = "";
         if(row.imagen!==undefined&&row.imagen[0]!==undefined&&row.imagen[0].imagen!==undefined){
             src = 'data:image/png;base64,' + row.imagen[0].imagen;
+        }else{
+            src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png';
         }
-        return <img src={src} alt="imagen" onError={(e) => e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} className="piso-image" />
+        return <img src={src} alt="imagen" className="piso-image" />
     }    
 
     const actionBodyTemplate = (rowData) => {
@@ -485,7 +505,6 @@ const initialValues=
         return (
             <div className="p-d-flex p-jc-center">
                 <div className="card">
-                    <h5 className="p-text-center">Register</h5>
                     <Form onSubmit={onSubmit}
                     initialValues={{ nombre: piso.nombre}}
                     validate={validate} render={({ handleSubmit }) => (
@@ -611,7 +630,12 @@ const initialValues=
 
             <div className="card">
                 <Toolbar className="p-mb-4" left={leftToolbarTemplate} /*right={rightToolbarTemplate}*/></Toolbar>
-
+                {(pisos===null)?
+                    (loadingPisos?
+                        (<div className="p-col-12 p-text-center"><img src={cargando}/></div>)
+                        :(<div className="p-col-12 p-text-center"><p>Sin datos</p></div>)
+                    ):
+                (console.log(loadingPisos),
                 <DataTable ref={dt} value={pisos} selection={selectedpisos} onSelectionChange={(e) => setSelectedpisos(e.value)}
                     dataKey="idpiso" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
@@ -622,14 +646,14 @@ const initialValues=
                     <Column field="nombre" header="Nombre" sortable></Column>
                     <Column field="descripcion" header="Descripción" sortable></Column>
                     <Column field="direccion" header="Dirección" sortable></Column>
-                    <Column header="Image" body={imageBodyTemplate}></Column>
+                    <Column header="Imagen" body={(r)=>imageBodyTemplate(r)}></Column>
                     <Column field="precio" header="Precio" sortable></Column>
                     <Column field="cantpersonas" header="Cant. de personas" sortable></Column>
                     <Column field="metroscuadrados" header="Metros Cuadrados" sortable></Column>
                     <Column field="canthabitaciones" header="Habitaciones" sortable></Column>
                     <Column field="cantbannos" header="Baños" sortable></Column>
                     <Column body={actionBodyTemplate}></Column>
-                </DataTable>
+                </DataTable>)}
             </div>
 
             {form()}

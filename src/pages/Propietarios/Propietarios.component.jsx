@@ -12,10 +12,10 @@ import './Propietarios.style.scss';
 import { Link } from 'react-router-dom';
 import { linkNosotros } from 'configuracion/constantes';
 import { linkMensaje } from 'configuracion/constantes';
-
+import { withTranslation } from 'react-i18next';
 
 const Propietarios = (props) => {
-
+  const {t}=props;
     props.setCurrentNavBarColor(false);
 
 
@@ -27,17 +27,17 @@ const Propietarios = (props) => {
           className="section section-contact-us text-center"
         >
           <Container>
-          <h2 className="title">Rentabiliza tu propiedad.</h2>
+          <h2 className="title">{t("Rentabiliza tu propiedad.")}</h2>
             <p className="description">
-              Te ofrecemos una propuesta de alta rentabilidad para tu propiedad.
-              Comercializamos por días, semanas o meses, y nos ocupamos de todo lo necesario.
+              {t("Te ofrecemos una propuesta de alta rentabilidad para tu propiedad.")}
+              {t("Comercializamos por días, semanas o meses, y nos ocupamos de todo lo necesario.")}
             </p>
             <p className="description">
-              Cuidamos tu casa y obtenemos beneficios económicos cuando no estás en ella.
+              {t("Cuidamos tu casa y obtenemos beneficios económicos cuando no estás en ella.")}
             </p>
             <Link to={linkMensaje}>
               <h3>
-                CONTACTA CON NOSOTROS
+                {t("CONTACTA CON NOSOTROS")}
               </h3>
             </Link>
           </Container>
@@ -49,4 +49,4 @@ const Propietarios = (props) => {
         setCurrentNavBarColor : navBarColor => dispatch(setCurrentNavBarColor(navBarColor))
       })
 
-    export default connect(null,mapDispatchToProps)(Propietarios);
+    export default connect(null, mapDispatchToProps)(withTranslation("translations") (Propietarios));

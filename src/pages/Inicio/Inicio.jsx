@@ -103,7 +103,7 @@ function Inicio(props) {
         </div>
         <div className="sectionEquipo section-team text-center">
           <Container>
-            <h2 className="title">Este es nuestro equipo</h2>
+            <h2 className="title">{t("Este es nuestro equipo")}</h2>
             <div className="team">
               <Row>
                 <Col md="3">
@@ -163,9 +163,9 @@ function Inicio(props) {
           className="section section-contact-us text-center"
         >
           <Container>
-            <h2 className="title">Envíanos un mensaje</h2>
+            <h2 className="title">{t("Envíanos un mensaje")}</h2>
             <p className="description">
-              Tus comentarios son muy importantes para nosotros
+            {t("Tus comentarios son muy importantes para nosotros")}
             </p>
             <Row>
               <Col className="text-center ml-auto mr-auto" lg="6" md="8">
@@ -221,7 +221,7 @@ function Inicio(props) {
                     onClick={(e) => e.preventDefault()}
                     size="lg"
                   >
-                    Enviar Mensaje
+                    {t("Enviar Mensaje")}
                   </Button>
                 </div>
               </Col>
