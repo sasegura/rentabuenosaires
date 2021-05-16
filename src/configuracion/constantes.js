@@ -1,5 +1,6 @@
 const tokenDigitalOcean="b56dda11424b04ecf62a2725e4c39258cd6821bd2eaa83484fc17df52ddcb1a9";
-export const baseURL = "https://rentabuenosairesapi-jv96v.ondigitalocean.app";
+//export const baseURL = "https://rentabuenosairesapi-jv96v.ondigitalocean.app";
+export const baseURL ="http://localhost:3010";
 export const proyectName = "renta";
 export const index = "/"
 export const linkDestinos="/destinos";

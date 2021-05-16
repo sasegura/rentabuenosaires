@@ -15,7 +15,7 @@ import { linkMensaje } from 'configuracion/constantes';
 import { withTranslation } from 'react-i18next';
 
 const Propietarios = (props) => {
-  const {t}=props;
+    const {t}=props;
     props.setCurrentNavBarColor(false);
 
 

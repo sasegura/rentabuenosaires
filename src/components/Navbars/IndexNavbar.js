@@ -164,7 +164,7 @@ const IndexNavbar = (props) => {
           >
             <Nav navbar>
               
-
+              {props?.currentUsuario?.rol===1?
               <NavItem>
                 <Link to={linkAdicionar}>
                   <NavLink target="_self">
@@ -172,7 +172,8 @@ const IndexNavbar = (props) => {
                     <p>{t("Administracion")}</p>
                   </NavLink>
                 </Link>
-              </NavItem>
+              </NavItem>:
+              null}
 
               <UncontrolledDropdown nav>
                 <DropdownToggle caret color="default" href="#pablo" nav onClick={(e) => e.preventDefault()}>

@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { connect } from 'react-redux';
 import { setCurrentUsuario } from "redux/usuario/usuario.action";
 
+import { withTranslation } from 'react-i18next';
 
 // reactstrap components
 import { Button, Card, CardHeader, CardBody, CardFooter, Form, Input, InputGroupAddon, InputGroupText, InputGroup, Container, Col } from "reactstrap";
@@ -16,7 +17,7 @@ import { useHistory } from "react-router";
 function LoginPage(props) {
   const history=useHistory()
   const img11 = img1;
-
+  const {t}=props;
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
   const [nombreUsuario, setNombreUsuario] = React.useState("");
@@ -41,12 +42,12 @@ function LoginPage(props) {
   const handleSubmit=(e)=>{
     e.preventDefault()
     if(nombreUsuario===""){
-      setNombremensaje("Nombre de usuario requerido")
+      setNombremensaje(t("Nombre de usuario requerido"))
     }else{
       setNombremensaje("")
     }
     if(contrasennaUsuario===""){
-      setContrasennamensaje("Contraseña de usuario requerido")
+      setContrasennamensaje(t("Contraseña de usuario requerido"))
     }else{
       setContrasennamensaje("")
     }
@@ -75,11 +76,11 @@ function LoginPage(props) {
             props.setCurrentUsuario(respuesta.data[0])
             history.push(index)
           }else{
-            setloginmensaje("El usuario ha expirado.")  
+            setloginmensaje(t("El usuario ha expirado."))
           }
           
         }else{
-          setloginmensaje("Usuario o contraseña incorrectos.")
+          setloginmensaje(t("Usuario o contraseña incorrectos."))
         }
     } catch (e) {
         console.log(e);
@@ -122,7 +123,7 @@ function LoginPage(props) {
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input
-                        placeholder="Usuario..."
+                        placeholder={t("Usuario...")}
                         type="text"
                         value={nombreUsuario}
                         onFocus={() => setFirstFocus(true)}
@@ -143,7 +144,7 @@ function LoginPage(props) {
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input
-                        placeholder="Contraseña..."
+                        placeholder={t("Contraseña...")}
                         type="password"
                         value={contrasennaUsuario}
                         onFocus={() => setLastFocus(true)}
@@ -163,7 +164,7 @@ function LoginPage(props) {
                       onClick={(e) => handleSubmit(e)}
                       size="lg"
                     >
-                      Entrar
+                      {t("Entrar")}
                     </Button>
                     {/*<div className="pull-left">
                       <h6>
@@ -207,5 +208,5 @@ const mapDispatchToProps = dispatch => ({
   setCurrentUsuario: usuario => dispatch(setCurrentUsuario(usuario))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation("translations") (LoginPage));
 

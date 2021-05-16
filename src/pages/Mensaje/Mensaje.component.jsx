@@ -10,8 +10,10 @@ import { Button, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupT
 //CSS
 import './Mensaje.style.scss';
 
+import { withTranslation } from 'react-i18next';
 
 const EnviarMensaje = (props) => {
+    const {t}=props;
     const [firstFocus, setFirstFocus] = React.useState(false);
     const [lastFocus, setLastFocus] = React.useState(false);
 
@@ -37,9 +39,9 @@ const EnviarMensaje = (props) => {
           className="section section-contact-us text-center"
         >
           <Container>
-            <h2 className="title">Envíanos un mensaje</h2>
+            <h2 className="title">{t("Envíanos un mensaje")}</h2>
             <p className="description">
-              Tus comentarios son muy importantes para nosotros
+              {t("Tus comentarios son muy importantes para nosotros")}
             </p>
             <Row>
               <Col className="text-center ml-auto mr-auto" lg="6" md="8">
@@ -54,7 +56,7 @@ const EnviarMensaje = (props) => {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
-                    placeholder="Nombre"
+                    placeholder={t("Nombre")}
                     type="text"
                     onFocus={() => setFirstFocus(true)}
                     onBlur={() => setFirstFocus(false)}
@@ -71,7 +73,7 @@ const EnviarMensaje = (props) => {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
-                    placeholder="Email..."
+                    placeholder={t("Email...")}
                     type="email"
                     onFocus={() => setLastFocus(true)}
                     onBlur={() => setLastFocus(false)}
@@ -81,7 +83,7 @@ const EnviarMensaje = (props) => {
                   <Input
                     cols="80"
                     name="name"
-                    placeholder="Escribe un mensaje..."
+                    placeholder={t("Escribe un mensaje...")}
                     rows="4"
                     type="textarea"
                   ></Input>
@@ -95,7 +97,7 @@ const EnviarMensaje = (props) => {
                     onClick={(e) => e.preventDefault()}
                     size="lg"
                   >
-                    Enviar Mensaje
+                    {t("Enviar Mensaje")}
                   </Button>
                 </div>
               </Col>
@@ -109,4 +111,4 @@ const EnviarMensaje = (props) => {
         setCurrentNavBarColor : navBarColor => dispatch(setCurrentNavBarColor(navBarColor))
       })
 
-    export default connect(null,mapDispatchToProps)(EnviarMensaje);
+    export default connect(null,mapDispatchToProps)(withTranslation("translations") (EnviarMensaje));

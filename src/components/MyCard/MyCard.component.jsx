@@ -22,7 +22,7 @@ function MyCard(props,{ match, destino, link, history, cantHab, nombre }) {
 
   const [noImagen, setNoImagen]=useState(false)
   const historyy=useHistory();
- console.log(props)
+  //console.log(props)
   React.useEffect(() => {
     getImagen()
     // eslint-disable-next-line react-hooks/exhaustive-deps

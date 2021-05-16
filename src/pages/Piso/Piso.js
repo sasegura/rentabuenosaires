@@ -124,6 +124,7 @@ const Piso = (props) => {
     const url = '/pisos/'+idPiso;
     try {
       const piso = await AxiosConexionConfig.get(url);
+      console.log(piso.data)
       setData(piso.data);
       amenitiesList(piso.data)
       getDestino(piso.data.iddestino)
@@ -308,53 +309,34 @@ const productTemplate = (imagenes) => {
     </Container>)
 }
   const fila=(datosFila, texto)=>{
-    return(
-      <AccordionTab header={texto}>              
-          
-      <Row>
-          {datosFila.split(",").map((dato, index)=>{
-              return(dato?<div className="p-col-4">{dato}</div>:"")
-          })}      
-      </Row>
-      </AccordionTab>
-    )
+    if(datosFila!==null){    
+      return(
+        <AccordionTab header={t(texto)}>
+          <Row>
+              {datosFila.split(",").map((dato, index)=>{
+                  return(dato?<div className="p-col-4">{t(dato)}</div>:"")
+              })}      
+          </Row>
+        </AccordionTab>
+      )
+    }else{
+      return(<AccordionTab header={texto}>{t("Sin servicios.")}</AccordionTab>)
+    }
   }
 
   const acordion=()=>{
     return (
       <Accordion multiple activeIndex={activeIndex} headerClassName="seccion" onTabChange={(e) => setactiveIndex(e.index)}>
-            {data.banno!==null?
-                fila(data.banno, "Baño"):
-                <Fragment/>}
-            {data.dormitorio!==null?
-                fila(data.dormitorio,"Dormitorio"):
-                <Fragment/>}
-            {data.entretenimiento!==null?
-                fila(data.entretenimiento,"Entretenimiento"):
-                <Fragment/>}
-            {data.paraFamilias!==null?
-                fila(data.paraFamilias,"Para familias"):
-                <Fragment/>}
-
-            {data.calefaccionRefrigeracion!==null?
-                fila(data.calefaccionRefrigeracion,"Calefacción y refrigeración"):
-                <Fragment/>}
-
-            {data.seguridadHogar!==null?
-                fila(data.seguridadHogar,"Seguridad en el hogar"):
-                <Fragment/>}
-            {data.internetOficina!==null?
-                fila(data.internetOficina,"Internet y oficina"):
-                <Fragment/>}
-            {data.cocinaComedor!==null?
-                fila(data.cocinaComedor,"Cocina y comedor"):
-                <Fragment/>}
-            {data.estacionamientoInstalaciones!==null?
-                fila(data.estacionamientoInstalaciones,"Estacionamiento e instalaciones"):
-                <Fragment/>}
-            {data.serviciosAdicionales!==null?
-                fila(data.serviciosAdicionales,"Servicios adicionales con recargo"):
-                <Fragment/>}
+            {fila(data.banno, "Baño")}
+            {fila(data.dormitorio,"Dormitorio")}
+            {fila(data.entretenimiento,"Entretenimiento")}
+            {fila(data.paraFamilias,"Para familias")}
+            {fila(data.calefaccionRefrigeracion,"Calefacción y refrigeración")}
+            {fila(data.seguridadHogar,"Seguridad en el hogar")}
+            {fila(data.internetOficina,"Internet y oficina")}
+            {fila(data.cocinaComedor,"Cocina y comedor")}
+            {fila(data.estacionamientoInstalaciones,"Estacionamiento e instalaciones")}
+            {fila(data.serviciosAdicionales,"Servicios adicionales con recargo")}
         </Accordion>
     )
   }
@@ -385,7 +367,8 @@ const productTemplate = (imagenes) => {
                       <div className="loaddingCenter"><img alt="imagen" src={imagenLoading}/></div>}
               </div>
           </div>
-          <div className="p-col-12">
+          <div className="p-col-12 p-lg-10 amenitiesCenter">
+                    
           {loadData ?acordion():<div className="loaddingCenter"><img alt="imagen" src={imagenLoading}/></div>}
           </div>
     </>
