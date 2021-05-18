@@ -69,7 +69,7 @@ const AdicionarTabla = (props) => {
     }, [props.destino]); 
 
     async function getPiso() {
-        console.log(pisos)
+        // console.log(pisos)
         setpisos(null)
         setloadingpisos(true)
         const url = '/pisos?filter[where][iddestino]=' + props.destino.iddestino;
@@ -412,6 +412,7 @@ const initialValues=
         date: null,
         country: null,
         accept: false };
+
     const formik = useFormik({
         initialValues: {
             direccion:"",
@@ -458,9 +459,9 @@ const initialValues=
             formik.resetForm();
         }
     });
-    const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
-    const getFormErrorMessage = (name) => {
-        return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
+    const isFormFieldValid = (meta) => !!(meta.touched && meta.error);
+    const getFormErrorMessage = (meta) => {
+        return isFormFieldValid(meta) && <small className="p-error">{meta.error}</small>;
     };
 
     const elementoBoolean=(text, elemento, handleChange, valor)=>{
@@ -484,16 +485,22 @@ const initialValues=
     const onSubmit = (data, form) => {
         console.log(data);
         setpisoDialog(false);
+        SavePiso(data)
         form.restart();
     };
     const validate = (data) => {
         let errors = {};
-
-        if (!data.nombre) {
+        if (!data.nombre|| data.nombre==='') {
             errors.nombre = 'Nombre is required.';
         }
-        if (!data.descripcion) {
+        if (!data.descripcion|| data.descripcion==='') {
             errors.descripcion = 'descripcion is required.';
+        }
+        if (!data.latitud|| data.latitud==='') {
+            errors.latitud = 'latitud is required.';
+        }
+        if (!data.longitud|| data.longitud==='') {
+            errors.longitud = 'longitud is required.';
         }
         /*else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
             errors.email = 'Invalid email address. E.g. example@email.com';
@@ -519,97 +526,103 @@ const initialValues=
                         <Field name="nombre" render={({ input, meta }) => (   
                             <div className="p-field">
                                 <span className="p-float-label">
-                                    <InputText id="nombre" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })} />
+                                    <InputText id="nombre" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
                                     <label htmlFor="nombre" className={classNames({ 'p-error': isFormFieldValid('nombre') })}>Nombre*</label>
                                 </span>
                                 {getFormErrorMessage('nombre')}
                             </div>
                          )} />
-                         <Field name="descripcion" render={({ input, meta }) => (
-                            <div className="p-field">
-                                <span className="p-float-label">
-                                    <InputText id="descripcion" value={formik.values.descripcion} onChange={formik.handleChange} />
-                                    <label htmlFor="descripcion" className={classNames({ 'p-error': isFormFieldValid('descripcion') })}>descripcion*</label>
-                                </span>
-                                {getFormErrorMessage('descripcion')}
-                            </div>
-                        )} />
-                        <Field name="descripcion" render={({ input, meta }) => (
+                        <Field name="latitud" render={({ input, meta }) => (
                         <div className="p-field">
                             <span className="p-float-label">
-                                <InputText id="latitud" value={formik.values.latitud} onChange={formik.handleChange} />
+                                <InputText id="latitud" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
                                 <label htmlFor="latitud" className={classNames({ 'p-error': isFormFieldValid('latitud') })}>latitud*</label>
                             </span>
                             {getFormErrorMessage('latitud')}
                         </div>
                         )} />
-                        <Field name="descripcion" render={({ input, meta }) => (
+                        <Field name="longitud" render={({ input, meta }) => (
                         <div className="p-field">
                             <span className="p-float-label">
-                                <InputText id="longitud" value={formik.values.longitud} onChange={formik.handleChange} />
+                                <InputText id="longitud" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
                                 <label htmlFor="longitud" className={classNames({ 'p-error': isFormFieldValid('longitud') })}>longitud*</label>
                             </span>
                             {getFormErrorMessage('longitud')}
                         </div>
                         )} />
-                        <Field name="descripcion" render={({ input, meta }) => (
-                        <div className="p-field">
-                            <span className="p-float-label">
-                                <InputText id="direccion" value={formik.values.direccion} onChange={formik.handleChange} />
-                                <label htmlFor="direccion" className={classNames({ 'p-error': isFormFieldValid('direccion') })}>direccion*</label>
-                            </span>
-                            {getFormErrorMessage('direccion')}
-                        </div>
+                        <Field name="direccion" render={({ input, meta }) => (
+                            <div className="p-field">
+                                <span className="p-float-label">
+                                    <InputText id="direccion" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
+                                    <label htmlFor="direccion" className={classNames({ 'p-error': isFormFieldValid('direccion') })}>direccion*</label>
+                                </span>
+                                {getFormErrorMessage('direccion')}
+                            </div>
                         )} />
-                        <div className="p-field">
-                            <span className="p-float-label">
-                                <InputText id="descripcionI" value={formik.values.descripcionI} onChange={formik.handleChange} />
-                                <label htmlFor="descripcionI" className={classNames({ 'p-error': isFormFieldValid('descripcionI') })}>descripcionI*</label>
-                            </span>
-                            {getFormErrorMessage('descripcionI')}
-                        </div>
-                        <div className="p-field">
-                            <span className="p-float-label">
-                                <InputText id="descripcion" value={formik.values.descripcion} onChange={formik.handleChange} />
-                                <label htmlFor="descripcion" className={classNames({ 'p-error': isFormFieldValid('descripcion') })}>descripcion*</label>
-                            </span>
-                            {getFormErrorMessage('descripcion')}
-                        </div>
-                        <div className="p-field">
-                            <span className="p-float-label">
-                                <InputNumber id="precio" value={formik.values.precio} onValueChange={formik.handleChange} />
-                                <label htmlFor="precio" className={classNames({ 'p-error': isFormFieldValid('precio') })}>precio*</label>
-                            </span>
-                            {getFormErrorMessage('precio')}
-                        </div>
-                        <div className="p-field">
-                            <span className="p-float-label">
-                                <InputNumber id="cantpersonas" value={formik.values.cantpersonas} onValueChange={formik.handleChange} />
-                                <label htmlFor="cantpersonas" className={classNames({ 'p-error': isFormFieldValid('cantpersonas') })}>cantpersonas*</label>
-                            </span>
-                            {getFormErrorMessage('cantpersonas')}
-                        </div>
-                        <div className="p-field">
-                            <span className="p-float-label">
-                                <InputNumber id="metroscuadrados" value={formik.values.metroscuadrados} onValueChange={formik.handleChange} />
-                                <label htmlFor="metroscuadrados" className={classNames({ 'p-error': isFormFieldValid('metroscuadrados') })}>metroscuadrados*</label>
-                            </span>
-                            {getFormErrorMessage('metroscuadrados')}
-                        </div>
-                        <div className="p-field">
-                            <span className="p-float-label">
-                                <InputNumber id="canthabitaciones" value={formik.values.canthabitaciones} onValueChange={formik.handleChange} />
-                                <label htmlFor="canthabitaciones" className={classNames({ 'p-error': isFormFieldValid('canthabitaciones') })}>canthabitaciones*</label>
-                            </span>
-                            {getFormErrorMessage('canthabitaciones')}
-                        </div>
-                        <div className="p-field">
-                            <span className="p-float-label">
-                                <InputNumber id="cantbannos" value={formik.values.cantbannos} onValueChange={formik.handleChange} />
-                                <label htmlFor="cantbannos" className={classNames({ 'p-error': isFormFieldValid('cantbannos') })}>cantbannos*</label>
-                            </span>
-                            {getFormErrorMessage('cantbannos')}
-                        </div>
+                        <Field name="descripcion" render={({ input, meta }) => (
+                            <div className="p-field">
+                                <span className="p-float-label">
+                                    <InputText id="descripcion" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
+                                    <label htmlFor="descripcion" className={classNames({ 'p-error': isFormFieldValid('descripcion') })}>direccion*</label>
+                                </span>
+                                {getFormErrorMessage('descripcion')}
+                            </div>
+                        )} />
+                        <Field name="descripcionI" render={({ input, meta }) => (
+                            <div className="p-field">
+                                <span className="p-float-label">
+                                    <InputText id="descripcionI" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
+                                    <label htmlFor="descripcionI" className={classNames({ 'p-error': isFormFieldValid('descripcionI') })}>descripcionI*</label>
+                                </span>
+                                {getFormErrorMessage('descripcionI')}
+                            </div>
+                        )} />
+                        <Field name="precio" render={({ input, meta }) => (
+                            <div className="p-field">
+                                <span className="p-float-label">
+                                    <InputNumber id="precio" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
+                                    <label htmlFor="precio" className={classNames({ 'p-error': isFormFieldValid('precio') })}>precio*</label>
+                                </span>
+                                {getFormErrorMessage('precio')}
+                            </div>
+                        )} />
+                        <Field name="canthabitaciones" render={({ input, meta }) => (
+                            <div className="p-field">
+                                <span className="p-float-label">
+                                    <InputNumber id="canthabitaciones" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
+                                    <label htmlFor="canthabitaciones" className={classNames({ 'p-error': isFormFieldValid('canthabitaciones') })}>canthabitaciones*</label>
+                                </span>
+                                {getFormErrorMessage('canthabitaciones')}
+                            </div>
+                        )} />
+                        <Field name="cantpersonas" render={({ input, meta }) => (
+                            <div className="p-field">
+                                <span className="p-float-label">
+                                    <InputNumber id="cantpersonas" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
+                                    <label htmlFor="cantpersonas" className={classNames({ 'p-error': isFormFieldValid('cantpersonas') })}>cantpersonas*</label>
+                                </span>
+                                {getFormErrorMessage('cantpersonas')}
+                            </div>
+                        )} />
+                        <Field name="metroscuadrados" render={({ input, meta }) => (
+                            <div className="p-field">
+                                <span className="p-float-label">
+                                    <InputNumber id="metroscuadrados" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
+                                    <label htmlFor="metroscuadrados" className={classNames({ 'p-error': isFormFieldValid('metroscuadrados') })}>metroscuadrados*</label>
+                                </span>
+                                {getFormErrorMessage('metroscuadrados')}
+                            </div>
+                        )} />                        
+                        <Field name="cantbannos" render={({ input, meta }) => (
+                            <div className="p-field">
+                                <span className="p-float-label">
+                                    <InputNumber id="cantbannos" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
+                                    <label htmlFor="cantbannos" className={classNames({ 'p-error': isFormFieldValid('cantbannos') })}>cantbannos*</label>
+                                </span>
+                                {getFormErrorMessage('cantbannos')}
+                            </div>
+                        )} />
+                        
                         {elementoBoolean("Aire Acondicionado", "aireacondicionado", formik.handleChange, formik.values.aireacondicionado)}
                         <div className="floatLeft"> 
                             {amenitiesGenerales.map((amenitie, index)=>{
@@ -635,7 +648,7 @@ const initialValues=
                         (<div className="p-col-12 p-text-center"><img src={cargando}/></div>)
                         :(<div className="p-col-12 p-text-center"><p>Sin datos</p></div>)
                     ):
-                (console.log(loadingPisos),
+                (
                 <DataTable ref={dt} value={pisos} selection={selectedpisos} onSelectionChange={(e) => setSelectedpisos(e.value)}
                     dataKey="idpiso" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"

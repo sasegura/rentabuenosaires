@@ -1,7 +1,7 @@
 import React from 'react';
 import {  MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 const Maps=(props)=>{  
-    console.log(props)  
+    // console.log(props)  
     const position = [props.piso.latitud, props.piso.longitud]
     return (
         <div className="leaflet-container">

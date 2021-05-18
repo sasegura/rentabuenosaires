@@ -46,7 +46,7 @@ const Piso = (props) => {
   const [calculo,setCalculo]=useState(false);
   const amenitiesGenerales=amenitiesGeneralesConst;
   const amenitiesGeneralesText=amenitiesGeneralesTextConst;
-  const [activeIndex,setactiveIndex]=useState(0);
+  const [activeIndex,setactiveIndex]=useState([]);
   let today = new Date();
   addLocale('es', {
     firstDayOfWeek: 1,
@@ -124,7 +124,7 @@ const Piso = (props) => {
     const url = '/pisos/'+idPiso;
     try {
       const piso = await AxiosConexionConfig.get(url);
-      console.log(piso.data)
+      // console.log(piso.data)
       setData(piso.data);
       amenitiesList(piso.data)
       getDestino(piso.data.iddestino)
@@ -210,13 +210,23 @@ const productTemplate = (imagenes) => {
   const headerTarjeta=()=>{
     return(
         <div>            
-            <i class="fa fa-user"></i><span className="marginLeft5px amenitie">{data.cantpersonas}</span>
+            <i className="fa fa-user"></i>
+            <span className="marginLeft5px amenitie">
+              {data.cantpersonas}
+            </span>
             <span className="marginLeft10px"></span>
-            {data.metroscuadrados}<span class="fa-exp amenitie">m<sup>2</sup></span>
+            {data.metroscuadrados}
+            <span className="fa-exp amenitie">m<sup>2</sup></span>
             <span className="marginLeft10px"></span>
-            <i class="fa fa-bath"></i><span className="marginLeft5px amenitie">{data.cantbannos}</span>
+            <i className="fa fa-bath"></i>
+            <span className="marginLeft5px amenitie">
+              {data.cantbannos}
+            </span>
             <span className="marginLeft10px"></span>
-            <i class="fa fa-bed"></i><span className="marginLeft5px amenitie">{data.canthabitaciones}</span>
+            <i className="fa fa-bed"></i>
+            <span className="marginLeft5px amenitie">
+              {data.canthabitaciones}
+            </span>
             <span className="marginLeft10px"></span>
         </div>
     )
@@ -296,12 +306,12 @@ const productTemplate = (imagenes) => {
         </Row>
         <Row>          
             {amenities?.map((dato, index)=>{
-              return(dato)
+              return(<Fragment key={index}>{dato}</Fragment>)
             })}
         </Row>
         <Row>
             {amenitiesGenerales.map((dato, index)=>{
-                return(data[dato]?<div className="p-col-3">{amenitiesGeneralesText[index]}</div>:"")
+                return(data[dato]?<div key={index} className="p-col-3">{amenitiesGeneralesText[index]}</div>:"")
             })}      
         </Row>
 
@@ -314,7 +324,7 @@ const productTemplate = (imagenes) => {
         <AccordionTab header={t(texto)}>
           <Row>
               {datosFila.split(",").map((dato, index)=>{
-                  return(dato?<div className="p-col-4">{t(dato)}</div>:"")
+                  return(dato?<div key={index} className="p-col-4">{t(dato)}</div>:"")
               })}      
           </Row>
         </AccordionTab>
