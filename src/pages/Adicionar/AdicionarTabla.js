@@ -195,6 +195,7 @@ const AdicionarTabla = (props) => {
     const confirmDeletepiso = (piso) => {
         setpiso(piso);
         setDeletepisoDialog(true);
+        
     }
 
     async function deletepiso() {
@@ -210,6 +211,7 @@ const AdicionarTabla = (props) => {
         setpiso(_pisos);
         setDeletepisoDialog(false);
         setpiso(emptypiso);
+        getPiso();
         toast.current.show({ severity: 'success', summary: 'Successful', detail: 'piso Deleted', life: 3000 });
     }
 
@@ -352,6 +354,9 @@ const AdicionarTabla = (props) => {
     }
 
     async function SavePiso (pisoData){
+        console.log(pisoData)
+        console.log(props.destino)
+        pisoData.iddestino=props.destino.iddestino
         setSubmitted(true);
         let modificar=false;
         let id=0;
@@ -388,7 +393,7 @@ const AdicionarTabla = (props) => {
             //setpisos(_pisos);            
             //setpiso(emptypiso);
         
-    }
+        }
 }
 
 const initialValues=
@@ -463,25 +468,7 @@ const initialValues=
     const getFormErrorMessage = (meta) => {
         return isFormFieldValid(meta) && <small className="p-error">{meta.error}</small>;
     };
-
-    const elementoBoolean=(text, elemento, handleChange, valor)=>{
-        return(
-            <div className="floatLeft p-field p-col-12 p-md-6">
-                <label className="p-mb-3">{text}</label>
-                <div className="p-formgrid p-grid">
-                    <div className="p-field-radiobutton p-col-6">
-                        <RadioButton inputId={elemento+"1"} name={elemento} value={true} onChange={handleChange} checked={valor === true} />
-                        <label htmlFor={elemento+"1"}>Si</label>
-                    </div>
-                    <div className="p-field-radiobutton p-col-6">
-                        <RadioButton inputId={elemento+"2"} name={elemento} value={false} onChange={handleChange} checked={valor === false} />
-                        <label htmlFor={elemento+"2"}>No</label>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-
+    
     const onSubmit = (data, form) => {
         console.log(data);
         setpisoDialog(false);
@@ -508,6 +495,45 @@ const initialValues=
             return errors;
     };
 
+    const fieldTextComponent=(campo, texto)=>(
+        <Field name={campo} render={({ input, meta }) => (
+            <div className="p-field">
+                <span className="p-float-label">
+                <InputText id="serviciosAdicionales" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
+                    <label htmlFor={campo} className={classNames({ 'p-error': isFormFieldValid('canthabitaciones') })}>{texto}*</label>
+                </span>
+                {getFormErrorMessage(campo)}
+            </div>
+        )} />
+    )
+    const fieldNumberComponent=(campo, texto)=>(
+        <Field name={campo} render={({ input, meta }) => (
+            <div className="p-field">
+                <span className="p-float-label">
+                    <InputNumber id={campo} onValueChange={(e) => input.onChange(e.value)} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
+                    <label htmlFor={campo} className={classNames({ 'p-error': isFormFieldValid('canthabitaciones') })}>{texto}*</label>
+                </span>
+                {getFormErrorMessage(campo)}
+            </div>
+        )} />
+    )
+    const elementoBoolean=(text, elemento, handleChange, valor)=>{
+        return(
+            <div className="floatLeft p-field p-col-12 p-md-6">
+                <label className="p-mb-3">{text}</label>
+                <div className="p-formgrid p-grid">
+                    <div className="p-field-radiobutton p-col-6">
+                        <RadioButton inputId={elemento+"1"} name={elemento} value={true} onChange={handleChange} checked={valor === true} />
+                        <label htmlFor={elemento+"1"}>Si</label>
+                    </div>
+                    <div className="p-field-radiobutton p-col-6">
+                        <RadioButton inputId={elemento+"2"} name={elemento} value={false} onChange={handleChange} checked={valor === false} />
+                        <label htmlFor={elemento+"2"}>No</label>
+                    </div>
+                </div>
+            </div>
+        )
+    }
     const form=()=>{
         return (
             <div className="p-d-flex p-jc-center">
@@ -522,112 +548,37 @@ const initialValues=
                             <Button label="Cancel" icon="pi pi-times" className="p-button-text" onClick={hideDialog} />,
                             <Button type="submit" label="Submit" className="p-button-text" /></React.Fragment>
                         } onHide={hideDialog}
-                    >            
-                        <Field name="nombre" render={({ input, meta }) => (   
-                            <div className="p-field">
-                                <span className="p-float-label">
-                                    <InputText id="nombre" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
-                                    <label htmlFor="nombre" className={classNames({ 'p-error': isFormFieldValid('nombre') })}>Nombre*</label>
-                                </span>
-                                {getFormErrorMessage('nombre')}
-                            </div>
-                         )} />
-                        <Field name="latitud" render={({ input, meta }) => (
-                        <div className="p-field">
-                            <span className="p-float-label">
-                                <InputText id="latitud" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
-                                <label htmlFor="latitud" className={classNames({ 'p-error': isFormFieldValid('latitud') })}>latitud*</label>
-                            </span>
-                            {getFormErrorMessage('latitud')}
-                        </div>
-                        )} />
-                        <Field name="longitud" render={({ input, meta }) => (
-                        <div className="p-field">
-                            <span className="p-float-label">
-                                <InputText id="longitud" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
-                                <label htmlFor="longitud" className={classNames({ 'p-error': isFormFieldValid('longitud') })}>longitud*</label>
-                            </span>
-                            {getFormErrorMessage('longitud')}
-                        </div>
-                        )} />
-                        <Field name="direccion" render={({ input, meta }) => (
-                            <div className="p-field">
-                                <span className="p-float-label">
-                                    <InputText id="direccion" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
-                                    <label htmlFor="direccion" className={classNames({ 'p-error': isFormFieldValid('direccion') })}>direccion*</label>
-                                </span>
-                                {getFormErrorMessage('direccion')}
-                            </div>
-                        )} />
-                        <Field name="descripcion" render={({ input, meta }) => (
-                            <div className="p-field">
-                                <span className="p-float-label">
-                                    <InputText id="descripcion" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
-                                    <label htmlFor="descripcion" className={classNames({ 'p-error': isFormFieldValid('descripcion') })}>direccion*</label>
-                                </span>
-                                {getFormErrorMessage('descripcion')}
-                            </div>
-                        )} />
-                        <Field name="descripcionI" render={({ input, meta }) => (
-                            <div className="p-field">
-                                <span className="p-float-label">
-                                    <InputText id="descripcionI" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
-                                    <label htmlFor="descripcionI" className={classNames({ 'p-error': isFormFieldValid('descripcionI') })}>descripcionI*</label>
-                                </span>
-                                {getFormErrorMessage('descripcionI')}
-                            </div>
-                        )} />
-                        <Field name="precio" render={({ input, meta }) => (
-                            <div className="p-field">
-                                <span className="p-float-label">
-                                    <InputNumber id="precio" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
-                                    <label htmlFor="precio" className={classNames({ 'p-error': isFormFieldValid('precio') })}>precio*</label>
-                                </span>
-                                {getFormErrorMessage('precio')}
-                            </div>
-                        )} />
-                        <Field name="canthabitaciones" render={({ input, meta }) => (
-                            <div className="p-field">
-                                <span className="p-float-label">
-                                    <InputNumber id="canthabitaciones" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
-                                    <label htmlFor="canthabitaciones" className={classNames({ 'p-error': isFormFieldValid('canthabitaciones') })}>canthabitaciones*</label>
-                                </span>
-                                {getFormErrorMessage('canthabitaciones')}
-                            </div>
-                        )} />
-                        <Field name="cantpersonas" render={({ input, meta }) => (
-                            <div className="p-field">
-                                <span className="p-float-label">
-                                    <InputNumber id="cantpersonas" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
-                                    <label htmlFor="cantpersonas" className={classNames({ 'p-error': isFormFieldValid('cantpersonas') })}>cantpersonas*</label>
-                                </span>
-                                {getFormErrorMessage('cantpersonas')}
-                            </div>
-                        )} />
-                        <Field name="metroscuadrados" render={({ input, meta }) => (
-                            <div className="p-field">
-                                <span className="p-float-label">
-                                    <InputNumber id="metroscuadrados" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
-                                    <label htmlFor="metroscuadrados" className={classNames({ 'p-error': isFormFieldValid('metroscuadrados') })}>metroscuadrados*</label>
-                                </span>
-                                {getFormErrorMessage('metroscuadrados')}
-                            </div>
-                        )} />                        
-                        <Field name="cantbannos" render={({ input, meta }) => (
-                            <div className="p-field">
-                                <span className="p-float-label">
-                                    <InputNumber id="cantbannos" {...input} autoFocus className={classNames({ 'p-invalid': isFormFieldValid(meta) })}/>
-                                    <label htmlFor="cantbannos" className={classNames({ 'p-error': isFormFieldValid('cantbannos') })}>cantbannos*</label>
-                                </span>
-                                {getFormErrorMessage('cantbannos')}
-                            </div>
-                        )} />
+                    >
+                        {fieldTextComponent('nombre','nombre')}
+                        {fieldTextComponent('latitud','latitud')}
+                        {fieldTextComponent('longitud','longitud')}
+                        {fieldTextComponent('direccion','direccion')}
+                        {fieldTextComponent('descripcion','descripcion')}
+                        {fieldTextComponent('descripcionI','descripcionI')}
+                        {fieldNumberComponent('precio','precio')}
+                        {fieldNumberComponent('canthabitaciones','canthabitaciones')}
+                        {fieldNumberComponent('cantpersonas','cantpersonas')}
+                        {fieldNumberComponent('metroscuadrados','metroscuadrados')}
+                        {fieldNumberComponent('cantbannos','cantbannos')}
                         
+                        
+                        {fieldTextComponent('serviciosAdicionales','serviciosAdicionales')}
+                        {fieldTextComponent('estacionamientoInstalaciones','estacionamientoInstalaciones')}
+                        {fieldTextComponent('cocinaComedor','cocinaComedor')}
+                        {fieldTextComponent('internetOficina','internetOficina')}
+                        {fieldTextComponent('seguridadHogar','seguridadHogar')}
+                        {fieldTextComponent('calefaccionRefrigeracion','calefaccionRefrigeracion')}
+                        {fieldTextComponent('entretenimiento','entretenimiento')}
+                        {fieldTextComponent('paraFamilias','paraFamilias')}
+                        {fieldTextComponent('dormitorio','dormitorio')}
+                        {fieldTextComponent('banno','banno')}
                         {elementoBoolean("Aire Acondicionado", "aireacondicionado", formik.handleChange, formik.values.aireacondicionado)}
-                        <div className="floatLeft"> 
-                            {amenitiesGenerales.map((amenitie, index)=>{
-                                return(booleanData(amenitie, amenitiesGeneralesText[index]))
-                            })}
+                        <div>
+                            <div className="floatLeft"> 
+                                {amenitiesGenerales.map((amenitie, index)=>{
+                                    return(elementoBoolean(amenitiesGeneralesText[index],amenitie, formik.handleChange, formik.values[amenitie]))
+                                })}
+                            </div>
                         </div>
                         </Dialog>
                     </form>
@@ -637,11 +588,20 @@ const initialValues=
             
         )
     }
+    /**{path: "", code: "required", message: "should have required property 'serviciosAdicionales'",…}
+1: {path: "", code: "required", message: "should have required property 'estacionamientoInstalaciones'",…}
+2: {path: "", code: "required", message: "should have required property 'cocinaComedor'",…}
+3: {path: "", code: "required", message: "should have required property 'internetOficina'",…}
+4: {path: "", code: "required", message: "should have required property 'seguridadHogar'",…}
+5: {path: "", code: "required", message: "should have required property 'calefaccionRefrigeracion'",…}
+6: {path: "", code: "required", message: "should have required property 'entretenimiento'",…}
+7: {path: "", code: "required", message: "should have required property 'paraFamilias'",…}
+8: {path: "", code: "required", message: "should have required property 'dormitorio'",…}
+9: {path: "", code: "required", message: "should have required property 'banno'",…} */
     return (
         <div className="datatable-crud-demo">
-            <Toast ref={toast} />
-
             <div className="card">
+            <Toast ref={toast} />
                 <Toolbar className="p-mb-4" left={leftToolbarTemplate} /*right={rightToolbarTemplate}*/></Toolbar>
                 {(pisos===null)?
                     (loadingPisos?
@@ -688,40 +648,3 @@ const initialValues=
     );
 }
 export default AdicionarTabla;
-
-/*
-const formatCurrency = (value) => {
-        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-    }
-const exportCSV = () => {
-    dt.current.exportCSV();
-}
-const header = (
-        <div className="table-header">
-            <h5 className="p-m-0">Manage pisos</h5>
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
-            </span>
-        </div>
-    );
- const rightToolbarTemplate = () => {
-        return (
-            <React.Fragment>
-                <FileUpload mode="basic" accept="image/*" maxFileSize={1000000} label="Import" chooseLabel="Import" className="p-mr-2 p-d-inline-block" />
-                <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />
-            </React.Fragment>
-        )
-    }
-    const priceBodyTemplate = (rowData) => {
-        return formatCurrency(rowData.price);
-    }
-
-    const ratingBodyTemplate = (rowData) => {
-        return <Rating value={rowData.rating} readOnly cancel={false} />;
-    }
-
-    const statusBodyTemplate = (rowData) => {
-        return <span className={`piso-badge status-${rowData.inventoryStatus.toLowerCase()}`}>{rowData.inventoryStatus}</span>;
-    }
- */

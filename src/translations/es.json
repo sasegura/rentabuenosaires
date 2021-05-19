@@ -1,5 +1,6 @@
 {
     "translations": {
+        "No se aplicará ningún cargo.":"No se aplicará ningún cargo.",
         "Desayuno":"Desayuno",
         "Traslados":"Traslados",
         "Limpieza":"Limpieza",
@@ -76,7 +77,7 @@
         "Calefacción eléctrica":"Calefacción eléctrica",        
         "Calefacción por suelo radiante":"Calefacción por suelo radiante",        
         "Chimenea interior":"Chimenea interior",
-
+        "Introdusca su nombre y correo para procesar la pre-reserva.":"Introdusca su nombre y correo para procesar la pre-reserva.",
         "Conexión Ethernet":"Conexión Ethernet",
         "Baño":"Baño",
         "Dormitorio":"Dormitorio",
@@ -90,6 +91,7 @@
         "Servicios adicionales con recargo":"Servicios adicionales con recargo",
         "Escribe un mensaje...":"Escribe un mensaje...",
         "Email...":"Correo...",
+        "Email":"Correo",
         "Nombre":"Nombre",
         "desde":"Desde",
         "Sin servicios.":"Sin servicios.",

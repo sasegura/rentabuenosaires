@@ -25,6 +25,7 @@ import AxiosConexionConfig from "conexion/AxiosConexionConfig";
 import { amenitiesGeneralesTextConst } from "configuracion/constantes";
 import { amenitiesGeneralesConst } from "configuracion/constantes";
 import Maps from "./Map";
+import DialogDemo from "components/Dialog";
 
 const Piso = (props) => {
   const {t}=props
@@ -36,7 +37,7 @@ const Piso = (props) => {
   const [destino,setDestino]=useState(null)
   const [dateBegin, setDateBegin] = useState(null);
   const [dateEnd, setDateEnd] = useState(null);
-  const [disabledDates, setddisabledDates]=useState(null)
+  const [disabledDates, setddisabledDates]=useState([])
   const [disabledEndDate,setdisabledEndDate]=useState(true)
   const [errorfecha, seterrorfecha]=useState("");
   const [minDate,setminDate]=useState(null);
@@ -47,6 +48,11 @@ const Piso = (props) => {
   const amenitiesGenerales=amenitiesGeneralesConst;
   const amenitiesGeneralesText=amenitiesGeneralesTextConst;
   const [activeIndex,setactiveIndex]=useState([]);
+
+  const [visibleDialog,setVisibleDialog]=useState(false);
+  const [valorDialog,setValorDialog]=useState('');
+  const [acept,setAcept]=useState(false);
+
   let today = new Date();
   addLocale('es', {
     firstDayOfWeek: 1,
@@ -86,11 +92,16 @@ const Piso = (props) => {
   useEffect(()=>{
     let begin=dateBegin?.getDate();
     let end=dateEnd?.getDate();
-    if(end>begin){
-      settotalCalculo((end-begin)*huesped*data.precio);
-      setCalculo(true);
+    if(BuscarEnIntervalo(dateBegin,dateEnd)){
+      seterrorfecha("En el intervalo seleccionado existen fechas reservadas previamente.")
+      setCalculo(false);
+    }else{
+      if(end>begin){
+        settotalCalculo((end-begin)*huesped*data.precio);
+        setCalculo(true);
+        seterrorfecha('')
+      }
     }
-    
   },[dateEnd, huesped])
   
   async function getImagenes() {
@@ -107,16 +118,16 @@ const Piso = (props) => {
   const amenitiesList=(data)=>{
     let a=[]
     if(data.wifi){
-      a.push(<div className="p-col-3"><img src={imagenWifi} alt=""  width={"20px"}/><span className="marginLeft5px">Wifi</span></div>)
+      a.push(<div className="p-col-12 p-md-3"><img src={imagenWifi} alt=""  width={"20px"}/><span className="marginLeft5px">Wifi</span></div>)
     }
     if(data.calefaccion){
-      a.push(<div className="p-col-3"><img src={imagencalefaccion} width={"20px"} alt="" /><span className="marginLeft5px">{t("Calefacción")}</span></div>)
+      a.push(<div className="p-col-12 p-md-3"><img src={imagencalefaccion} width={"20px"} alt="" /><span className="marginLeft5px">{t("Calefacción")}</span></div>)
     }
     if(data.aireacondicionado){
-      a.push(<div className="p-col-3"><img src={imagenAire} width={"20px"} alt="" /><span className="marginLeft5px">{t("Aire Acondicionado")}</span></div>)
+      a.push(<div className="p-col-12 p-md-3"><img src={imagenAire} width={"20px"} alt="" /><span className="marginLeft5px">{t("Aire Acondicionado")}</span></div>)
     }
     if(data.tvcable){
-      a.push(<div className="p-col-3"><img src={imagenTV} alt="" width={"20px"}/><span className="marginLeft5px">TV</span></div>)
+      a.push(<div className="p-col-12 p-md-3"><img src={imagenTV} alt="" width={"20px"}/><span className="marginLeft5px">TV</span></div>)
     }
     setAmenities(a)
   }
@@ -128,11 +139,12 @@ const Piso = (props) => {
       setData(piso.data);
       amenitiesList(piso.data)
       getDestino(piso.data.iddestino)
+      let temp=[];
       if(piso.data?.diasReservados!==""&& piso.data?.diasReservados!==null){
-        setddisabledDates(piso.data?.diasReservados?.split(","))
+        temp=(piso.data?.diasReservados?.split(","));
+        temp=temp.map((pos)=>(pos=new Date(pos)))
       }
-      
-      
+      setddisabledDates(temp)      
       if(piso.data.wifi){
         datos.push({icon:"pi-wifi"})
       }
@@ -158,6 +170,13 @@ const Piso = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  React.useEffect(() => {
+    if(acept){
+      console.log(valorDialog)
+      setValorDialog('')
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [acept]);
 
   const responsiveOptions = [
     {
@@ -196,20 +215,36 @@ const productTemplate = (imagenes) => {
     )
   }
 
+  const BuscarEnIntervalo=(begin, end)=>{
+    console.log(begin)
+    console.log(end)
+    let flag=false;
+    disabledDates.map((pos)=>{
+      console.log(pos)
+      if(pos>begin && pos<end){
+        flag=true;
+      }
+    });
+    return(flag);
+  }
   const handleSubmit=(e)=>{
     e.preventDefault();
-    if(new Date(dateEnd)-new Date(dateBegin)<=0){
+    /*if(new Date(dateEnd)-new Date(dateBegin)<=0){
       seterrorfecha("El rango seleccionado no es correcto")
+    }else if(BuscarEnIntervalo(dateBegin,dateEnd)){
+      seterrorfecha("En el intervalo seleccionado existen fechas reservadas previamente.")
     }else{
+      seterrorfecha('');
+    }*/
+    setVisibleDialog(true)
 
-      seterrorfecha("")
-    }
-    console.log(e.value)
   }
+
+ 
 
   const headerTarjeta=()=>{
     return(
-        <div>            
+        <div className='marginLeft20px'>            
             <i className="fa fa-user"></i>
             <span className="marginLeft5px amenitie">
               {data.cantpersonas}
@@ -234,12 +269,12 @@ const productTemplate = (imagenes) => {
   const TarjetPiso=()=>{
     return (
       <div className="">   
-      <div><h2>{data.nombre}</h2></div>
+      <div className='marginLeft20px'><h2 style={{fontFamily: 'playfair'}}>{data.nombre}</h2></div>
         {headerTarjeta()}
         <hr/>
-        <div>{t("Desde")} <i className="pi pi-euro"></i><span className="marginLeft5px">{data.precio}</span> {t("la noche")}</div>
+        <div className='marginLeft20px'>{t("Desde")} <i className="pi pi-euro"></i><span className="marginLeft5px">{data.precio}</span> {t("la noche")}</div>
         <div className="p-field p-col-12">
-            <label htmlFor="calendar">{t("Seleccione un rango")}</label>
+            <label className='marginLeft10px' htmlFor="calendar">{t("Seleccione un rango")}</label>
             <div>
                 <Calendar 
                     id="calendar" 
@@ -247,8 +282,9 @@ const productTemplate = (imagenes) => {
                     value={dateBegin} 
                     minDate={today} 
                     locale="es" 
-                    onChange={(e) => setDateBegin(e.value)} 
+                    onChange={(e) => (setDateBegin(e.value), setDateEnd(null))} 
                     disabledDates={disabledDates}
+                    baseZIndex={500}
                     readOnlyInput />
                 <Calendar 
                     id="calendarend" 
@@ -259,10 +295,11 @@ const productTemplate = (imagenes) => {
                     disabled={disabledEndDate}
                     onChange={(e) => setDateEnd(e.value)} 
                     disabledDates={disabledDates}
+                    baseZIndex={500}
                     readOnlyInput />
             </div>
-            <div className="p-field p-col-12 p-md-3">
-                <label htmlFor="minmax-buttons">{t("Guests")}</label>
+            <div className="marginLeft10px">
+                <div><label htmlFor="minmax-buttons">{t("Guests")}</label></div>
                 <InputNumber id="minmax-buttons" value={huesped} onValueChange={(e) => sethuesped(e.value)} mode="decimal" showButtons min={1} max={100} />
             </div>
             <div>
@@ -279,6 +316,7 @@ const productTemplate = (imagenes) => {
           type="submit"
           color="primary"
           href="#pablo"
+          disabled={!calculo}
           onClick={(e) => (handleSubmit(e))}
         >
           {t("Pre-reservar")}
@@ -287,20 +325,22 @@ const productTemplate = (imagenes) => {
     )
   }
   const DatosPiso=()=>{    
-    return(<Container>
-        <div>
-            <p>
+    return(
+    <Container>
+      <div className='p-col-12 flex'>
+        <div className='p-col-12 p-md-1'></div>
+        <div className='p-col-12 p-md-11'>
+        <div >
+            <h1 style={{fontFamily: 'playfair'}}>
                 {data.nombre}
                 <span className="marginLeft5px"></span>
                 -
                 <span className="marginLeft5px"></span>
                 {destino?.nombre}
-            </p>
+            </h1>
         </div>
         {headerTarjeta()}
-        <span className="marginLeft10px"></span>
-        <div>{data.descripcion}</div>
-        <span className="marginLeft10px"></span>
+        <div><h4>{data.descripcion}</h4></div>
         <Row>        
             {t("Comodidades")}
         </Row>
@@ -311,10 +351,11 @@ const productTemplate = (imagenes) => {
         </Row>
         <Row>
             {amenitiesGenerales.map((dato, index)=>{
-                return(data[dato]?<div key={index} className="p-col-3">{amenitiesGeneralesText[index]}</div>:"")
+                return(data[dato]?<div key={index} className="p-col-12 p-md-3">{amenitiesGeneralesText[index]}</div>:"")
             })}      
         </Row>
-
+        </div>
+      </div>
         
     </Container>)
 }
@@ -352,26 +393,30 @@ const productTemplate = (imagenes) => {
   }
   return (
     <>    
-      <div className="separador" />
-          <div className="floatLeft p-col-12">
-              <div className="p-lg-8 p-col-12 floatLeft">
-                  {loadImg ?
-                      carrusel() : <div className="loaddingCenter"><img alt="imagen"  src={imagenLoading}/></div>}
-              </div>
-              <div className="p-lg-3 p-col-12 floatLeft">
-                  <div className="card p-col-12">
-                      {loadData ?
-                          TarjetPiso() : <div className="loaddingCenter"><img alt="imagen" src={imagenLoading}/></div>}
+      <DialogDemo acept={(e)=>setAcept(e)} open={visibleDialog} setOpen={(e)=>setVisibleDialog(e)} valor={valorDialog} setValor={(e)=>setValorDialog(e)}/>
+      <div className="separador" style={{fontFamily: 'gotham'}}/>
+          <div className="flex p-col-12">
+              <div className="p-col-12 p-md-1"></div>
+              <div className="center p-col-12 p-md-10">
+                  <div className="p-lg-9 p-col-12 floatLeft">
+                      {loadImg ?
+                          carrusel() : <div className="loaddingCenter"><img alt="imagen"  src={imagenLoading}/></div>}
                   </div>
-              </div>
+                  <div className="p-lg-3 p-col-12 floatLeft">
+                      <div className="card p-col-12" style={{fontFamily: 'gotham'}}>
+                          {loadData ?
+                              TarjetPiso() : <div className="loaddingCenter"><img alt="imagen" src={imagenLoading}/></div>}
+                      </div>
+                  </div>
+                </div>
           </div>
           <div className="floatLeft p-col-12">
-              <div className="floatLeft p-col-12 p-md-12 p-lg-8">
+              <div className="floatLeft p-col-12 p-md-12 p-lg-8" style={{fontFamily: 'gotham'}}>
                 {loadData ?
                     DatosPiso() : 
                     <div className="loaddingCenter"><img alt="imagen" src={imagenLoading}/></div>}
               </div>
-              <div className="p-lg-3 p-col-12 floatLeft">
+              <div className="p-lg-3 p-col-12 floatLeft" style={{fontFamily: 'gotham'}}>
                   {loadData ?
                       <div className="p-col-12 card"><Maps piso={data}/></div> : 
                       <div className="loaddingCenter"><img alt="imagen" src={imagenLoading}/></div>}

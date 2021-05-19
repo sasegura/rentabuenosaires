@@ -60,8 +60,12 @@
 .margin-bottom0{
     margin-bottom:0px!important;
 }
+.marginTop20{
+    margin-top: 20px;
+}
 .flex{
     display: flex;
+    flex-wrap: wrap-reverse;
 }
 .padding11{
     padding: 15px!important;
@@ -100,4 +104,7 @@
 }
 .wrapper{
     font-family: playfair;
+}
+.center{
+    text-align: center;
 }
