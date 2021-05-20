@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { withTranslation } from 'react-i18next';
 import { Carousel } from 'primereact/carousel';
 import { Calendar } from 'primereact/calendar';
@@ -6,6 +6,7 @@ import { addLocale } from 'primereact/api';
 import { Button } from 'primereact/button';
 import { InputNumber } from 'primereact/inputnumber';
 import { Accordion, AccordionTab } from 'primereact/accordion';
+import { Toast } from 'primereact/toast';
 //redux
 import { connect } from 'react-redux';
 import { setCurrentNavBarColor } from "redux/navBarColor/navBarColor.action";
@@ -29,6 +30,7 @@ import DialogDemo from "components/Dialog";
 
 const Piso = (props) => {
   const {t}=props
+  const toast = useRef(null);
   const idPiso=props.history.location.search.split("?")[1]
   const [imagenes, setImagenes] = useState(null);
   const [loadImg,setLoadImg]=useState(false)
@@ -174,6 +176,8 @@ const Piso = (props) => {
     if(acept){
       console.log(valorDialog)
       setValorDialog('')
+      toast.current.show({severity:'success', summary: 'Success Message', detail:`Nombre:${valorDialog.name} email:${valorDialog.email}`, life: 3000});
+      setAcept(false)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [acept]);
@@ -393,12 +397,15 @@ const productTemplate = (imagenes) => {
   }
   return (
     <>    
+    
       <DialogDemo acept={(e)=>setAcept(e)} open={visibleDialog} setOpen={(e)=>setVisibleDialog(e)} valor={valorDialog} setValor={(e)=>setValorDialog(e)}/>
       <div className="separador" style={{fontFamily: 'gotham'}}/>
+      
           <div className="flex p-col-12">
               <div className="p-col-12 p-md-1"></div>
               <div className="center p-col-12 p-md-10">
                   <div className="p-lg-9 p-col-12 floatLeft">
+                  <Toast baseZIndex={500} ref={toast} />
                       {loadImg ?
                           carrusel() : <div className="loaddingCenter"><img alt="imagen"  src={imagenLoading}/></div>}
                   </div>
