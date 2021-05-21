@@ -176,11 +176,41 @@ const Piso = (props) => {
     if(acept){
       console.log(valorDialog)
       setValorDialog('')
-      toast.current.show({severity:'success', summary: 'Success Message', detail:`Nombre:${valorDialog.name} email:${valorDialog.email}`, life: 3000});
+      
+      sendMail();
       setAcept(false)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [acept]);
+
+  async function sendMail() {
+    const url = '/sendMailPreReserva';
+    const values={
+      correoCliente: "sasegura.fernandez87@gmail.com",
+      correoAdmin: "sasegura.fernandez87@gmail.com",
+      fechaInicio: "10/10/2021",
+      fechaFin: "10/12/2021",
+      cantidadPersonas: 2,
+      precio: 25,
+      clienteNombre: "Sergio",
+      pisoNombre: "Piso2",
+      destino: "Buenos Aires"
+    }
+    try {
+      const piso = await AxiosConexionConfig.post(url, JSON.stringify(values));
+      console.log(piso)
+      if(piso.data){
+        toast.current.show({severity:'success', summary: 'Success Message', detail:`Correo enviado al administrador.`, life: 3000});
+      }else{
+        toast.current.show({severity:'success', summary: 'Success Message', detail:`El correo no se envió correctamente.`, life: 3000});
+      }
+      
+      
+    } catch (e) {
+      toast.current.show({severity:'success', summary: 'Success Message', detail:e, life: 3000});
+      console.log(e);
+    }
+  }
 
   const responsiveOptions = [
     {

@@ -1,19 +1,21 @@
-import React, { useState, useEffect, useRef, Fragment } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 //import pisoservice from '../service/pisoservice';
+import ImageUploader from 'react-images-upload';
 
 import { useFormik } from 'formik';
 import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
 import { Toolbar } from 'primereact/toolbar';
-import { InputTextarea } from 'primereact/inputtextarea';
 import { RadioButton } from 'primereact/radiobutton';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
+import { FileUpload } from 'primereact/fileupload';
 import { Form, Field } from 'react-final-form';
+import { withTranslation } from 'react-i18next';
 
 import cargando from '../../assets/img/loading.gif'
 
@@ -23,6 +25,7 @@ import { amenitiesGeneralesTextConst } from 'configuracion/constantes';
 import { amenitiesGeneralesConst } from 'configuracion/constantes';
 
 const AdicionarTabla = (props) => {
+    const {t}=props;
     let emptypiso={
         direccion:"",
         iddestino:3,
@@ -104,8 +107,7 @@ const AdicionarTabla = (props) => {
         } catch (e) {
             console.log(e);
         }
-    }
-    
+    }    
 
     const openNew = () => {
         setpiso(getEmptyPiso());
@@ -126,27 +128,6 @@ const AdicionarTabla = (props) => {
         setDeletepisosDialog(false);
     }
 
-    function Validacion(){
-        console.log(piso.nombre+"nombre  "+ 
-        piso.descripcion+"descrip  "+
-        piso.direccion+" direccion "+ 
-        piso.precio+" precio "+
-        piso.cantpersonas+" persona "+
-        piso.metroscuadrados+" metrosc "+ 
-        piso.canthabitaciones+"habitac  "+ 
-        piso.cantbannos+" baños ")
-        if(piso.nombre==="" || 
-            piso.descripcion==="" || piso.descripcion===null ||
-            piso.direccion==="" || 
-            piso.precio==="" || 
-            piso.cantpersonas===0 ||
-            piso.metroscuadrados===0 || 
-            piso.canthabitaciones===0 || 
-            piso.cantbannos===0 ){
-                console.log("false")
-            return false;
-        }else{console.log("true");return true;}
-    }
     async function savepiso (){
             setSubmitted(true);
             let modificar=false;
@@ -182,8 +163,7 @@ const AdicionarTabla = (props) => {
                 setpisoDialog(false);
                 getPiso()          
                 //setpisos(_pisos);            
-                //setpiso(emptypiso);
-            
+                //setpiso(emptypiso);            
         }
     }
 
@@ -194,29 +174,52 @@ const AdicionarTabla = (props) => {
 
     const confirmDeletepiso = (piso) => {
         setpiso(piso);
-        setDeletepisoDialog(true);
-        
+        setDeletepisoDialog(true);        
     }
 
-    async function deletepiso() {
-        const url = '/pisos/'+piso.idpiso;
+    async function deletepiso() {        
+        const uri = '/imagen?filter=';
+        const condicion={
+            where: {
+                idpiso: piso.idpiso
+            }
+          }
         try {
-            const imagen = await AxiosConexionConfig.delete(url);
-            console.log(imagen.data)
+            AxiosConexionConfig.get(uri+JSON.stringify(condicion)).then((imagenData)=>{
+                console.log(imagenData)
+                if(imagenData.data.length===0){
+                    del();
+                }
+                imagenData.data.map((imData, index)=>{
+                    AxiosConexionConfig.delete('/imagen/'+imData.id).then((e)=>{
+                        console.log(e)
+                        if(index===imagenData.data.length-1){
+                            del();
+                        }
+                    });
+                })
+            }).catch((e)=>{console.log(e)});
+            
         } catch (e) {
             console.log(e);
         }
+
+        
             
         let _pisos = pisos.filter(val => val.id !== piso.id);
         setpiso(_pisos);
         setDeletepisoDialog(false);
         setpiso(emptypiso);
-        getPiso();
+        
         toast.current.show({ severity: 'success', summary: 'Successful', detail: 'piso Deleted', life: 3000 });
     }
 
-    const confirmDeleteSelected = () => {
-        setDeletepisosDialog(true);
+    const del=()=>{
+        const url = '/pisos/'+piso.idpiso;
+        AxiosConexionConfig.delete(url).then((e)=>{
+            console.log(e.data)
+            getPiso();
+        });
     }
 
     const deleteSelectedpisos = () => {
@@ -263,38 +266,20 @@ const AdicionarTabla = (props) => {
         }
     }
 
-    const onInputChange = (e, nombre) => {
-        const val = (e.target && e.target.value) || '';
-        let _piso = {...piso};
-        _piso[`${nombre}`] = val;
-        setpiso(_piso);
-    }
-
     const onInputSelectChange = (e, nombre) => {
         let _piso = {...piso};
         _piso[`${nombre}`] = e.value;
         setpiso(_piso);
     }
 
-    const onInputNumberChange = (e, name) => {
-        const val = e.value || 0;
-        let _piso = {...piso};
-        _piso[`${name}`] = val;
-        setpiso(_piso);
-    }
-
     const leftToolbarTemplate = () => {
         return (
             <React.Fragment>
-                <Button label="New" icon="pi pi-plus" className="p-button-success p-mr-2" onClick={openNew} />
-                <Button label="Delete" icon="pi pi-trash" className="p-button-danger" onClick={confirmDeleteSelected} disabled={!selectedpisos || !selectedpisos.length} />
+                <Button label="New" icon="pi pi-plus" className="p-button-success p-mr-2" onClick={openNew} />                
             </React.Fragment>
         )
     }    
 
-    /*const imageBodyTemplate = (rowData) => {
-        return <img src={`showcase/demo/images/piso/${rowData.image}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={rowData.image} className="piso-image" />
-    }*/
     const imageBodyTemplate = (row) => {
         
         let src = "";
@@ -315,13 +300,6 @@ const AdicionarTabla = (props) => {
         );
     }
     
-    const pisoDialogFooter = (
-        <React.Fragment>
-            <Button label="Cancel" icon="pi pi-times" className="p-button-text" onClick={hideDialog} />
-            <Button type="submit" label="Submit" className="p-button-text" />
-            <Button label="Save" icon="pi pi-check" className="p-button-text" onClick={savepiso} />
-        </React.Fragment>
-    );
     const deletepisoDialogFooter = (
         <React.Fragment>
             <Button label="No" icon="pi pi-times" className="p-button-text" onClick={hideDeletepisoDialog} />
@@ -335,26 +313,9 @@ const AdicionarTabla = (props) => {
         </React.Fragment>
     );
 
-    const booleanData=(field, fieldName)=>{
-        return(
-            <div className="floatLeft p-field p-col-12 p-md-6">
-                    <label className="p-mb-3">{fieldName}</label>
-                    <div className="p-formgrid p-grid">
-                        <div className="p-field-radiobutton p-col-6">
-                            <RadioButton inputId={field+"1"} name={field} value={true} onChange={(e) => onInputSelectChange(e, field)} checked={piso[field] === true} />
-                            <label htmlFor={field+"1"}>Si</label>
-                        </div>
-                        <div className="p-field-radiobutton p-col-6">
-                            <RadioButton inputId={field+"2"} name={field} value={false} onChange={(e) => onInputSelectChange(e, field)} checked={piso[field] === false} />
-                            <label htmlFor={field+"2"}>No</label>
-                        </div>
-                    </div>
-                </div>
-        )                            
-    }
-
     async function SavePiso (pisoData){
         console.log(pisoData)
+        console.log(images)
         console.log(props.destino)
         pisoData.iddestino=props.destino.iddestino
         setSubmitted(true);
@@ -382,8 +343,22 @@ const AdicionarTabla = (props) => {
                 }
             }else{
                 try {
-                    const imagen = await AxiosConexionConfig.post(url, pisoData);
-                    console.log(imagen.data)
+                    AxiosConexionConfig.post(url, pisoData).then((data)=>{
+                        console.log(data);
+                        let uri="/imagen"
+                        images.map((imagen, index)=>{
+                            const imagenData={
+                                idpiso: data.data.idpiso,
+                                imagen: imagen,
+                                portada: index===0?true:false
+                              }
+                              AxiosConexionConfig.post(uri, imagenData).then((data)=>{
+                                  console.log(data)
+                              });
+                        })
+                        
+                    });
+
                 } catch (e) {
                     console.log(e);
                 }
@@ -472,6 +447,7 @@ const initialValues=
     const onSubmit = (data, form) => {
         console.log(data);
         setpisoDialog(false);
+        console.log(images)
         SavePiso(data)
         form.restart();
     };
@@ -534,6 +510,48 @@ const initialValues=
             </div>
         )
     }
+
+    const [images,setImages]=useState([])
+    const [cargandoImagenes,setCargandoImages]=useState(false)
+    function onDrop(picture) {
+        setCargandoImages(true)
+        //console.log(picture)
+        setImages([])
+        let img=[];
+        picture.map((file, index)=>{
+            getBase64(file).then((e)=>{
+                img.push(e.split('data:image/png;base64,')[1]);
+                if(index===picture.length-1){
+                    setCargandoImages(false);
+                    setImages(img)
+                }
+            });
+        });
+    }
+    
+    const getBase64 = file => {
+        let img=[];
+        return new Promise(resolve => {
+          let fileInfo;
+          let baseURL = "";
+          // Make new FileReader
+          let reader = new FileReader();
+    
+          // Convert the file to base64 text
+          reader.readAsDataURL(file);
+    
+          // on reader load somthing...
+          reader.onload = () => {
+            // Make a fileInfo Object
+            //console.log("Called", reader);
+            baseURL = reader.result;
+            img.push(baseURL);
+            //console.log(baseURL);
+            resolve(baseURL);
+          };
+          //console.log(fileInfo);
+        });
+      };
     const form=()=>{
         return (
             <div className="p-d-flex p-jc-center">
@@ -543,12 +561,21 @@ const initialValues=
                     validate={validate} render={({ handleSubmit }) => (
                        
                     <form onSubmit={handleSubmit} className="p-fluid">       
-                    <Dialog visible={pisoDialog} style={{ width: '450px' }} header="Adicionar Piso" modal className="p-fluid" 
+                    <Dialog visible={pisoDialog} style={{ width: '80%', marginTop:'150px',marginTop:'50px'}} header="Adicionar Piso" modal className="p-fluid" 
                         footer={<React.Fragment>
                             <Button label="Cancel" icon="pi pi-times" className="p-button-text" onClick={hideDialog} />,
-                            <Button type="submit" label="Submit" className="p-button-text" /></React.Fragment>
+                            <Button type="submit" label="Submit" disabled={cargandoImagenes} className="p-button-text" /></React.Fragment>
                         } onHide={hideDialog}
                     >
+                        <ImageUploader
+                            withIcon={true}
+                            withPreview={true}
+                            buttonText='Choose images'
+                            onChange={onDrop}
+                            imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                            maxFileSize={5242880}
+                        />
+                        
                         {fieldTextComponent('nombre','nombre')}
                         {fieldTextComponent('latitud','latitud')}
                         {fieldTextComponent('longitud','longitud')}
@@ -588,21 +615,12 @@ const initialValues=
             
         )
     }
-    /**{path: "", code: "required", message: "should have required property 'serviciosAdicionales'",…}
-1: {path: "", code: "required", message: "should have required property 'estacionamientoInstalaciones'",…}
-2: {path: "", code: "required", message: "should have required property 'cocinaComedor'",…}
-3: {path: "", code: "required", message: "should have required property 'internetOficina'",…}
-4: {path: "", code: "required", message: "should have required property 'seguridadHogar'",…}
-5: {path: "", code: "required", message: "should have required property 'calefaccionRefrigeracion'",…}
-6: {path: "", code: "required", message: "should have required property 'entretenimiento'",…}
-7: {path: "", code: "required", message: "should have required property 'paraFamilias'",…}
-8: {path: "", code: "required", message: "should have required property 'dormitorio'",…}
-9: {path: "", code: "required", message: "should have required property 'banno'",…} */
+
     return (
         <div className="datatable-crud-demo">
             <div className="card">
             <Toast ref={toast} />
-                <Toolbar className="p-mb-4" left={leftToolbarTemplate} /*right={rightToolbarTemplate}*/></Toolbar>
+                <Toolbar className="p-mb-4" right={leftToolbarTemplate} /*right={rightToolbarTemplate}*/></Toolbar>
                 {(pisos===null)?
                     (loadingPisos?
                         (<div className="p-col-12 p-text-center"><img src={cargando}/></div>)
@@ -615,7 +633,6 @@ const initialValues=
                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} pisos"
                 //    header={header}
                 >
-                    <Column selectionMode="multiple" headerStyle={{ width: '3rem' }}></Column>
                     <Column field="nombre" header="Nombre" sortable></Column>
                     <Column field="descripcion" header="Descripción" sortable></Column>
                     <Column field="direccion" header="Dirección" sortable></Column>
@@ -634,7 +651,7 @@ const initialValues=
             <Dialog visible={deletepisoDialog} style={{ width: '450px' }} header="Confirm" modal footer={deletepisoDialogFooter} onHide={hideDeletepisoDialog}>
                 <div className="confirmation-content">
                     <i className="pi pi-exclamation-triangle p-mr-3" style={{ fontSize: '2rem'}} />
-                    {piso && <span>Are you sure you want to delete <b>{piso.nombre}</b>?</span>}
+                    {piso && <span>{t("Are you sure you want to delete")} <b>{piso.nombre}</b>?</span>}
                 </div>
             </Dialog>
 
@@ -647,4 +664,4 @@ const initialValues=
         </div>
     );
 }
-export default AdicionarTabla;
+export default (withTranslation ("translations")(AdicionarTabla));
