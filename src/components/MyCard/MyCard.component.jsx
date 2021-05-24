@@ -41,8 +41,10 @@ function MyCard(props,{ match, destino, link, history, cantHab, nombre }) {
 
     try {
       const imagen = await AxiosConexionConfig.get(url);
+      console.log(imagen.data[0])
       if(imagen.data.length === 0) {
           const imagen1 = await AxiosConexionConfig.get(urlNoPortada); 
+          console.log(imagen1.data[0])
           if(imagen1.data.length !== 0) {
               setImagen(imagen1.data[0].imagen)
           }else{
