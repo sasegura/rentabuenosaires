@@ -44,13 +44,13 @@ const DialogDemo = ({open, setOpen, valor, setValor, acept,t}, props) => {
                     
                     <Form onSubmit={onSubmit} initialValues={{ name: '', email: ''}} validate={validate} render={({ handleSubmit }) => (
                         <form onSubmit={handleSubmit} className="p-fluid">
-                            <Dialog header={t("Pre-reservar")} visible={open} style={{ width: '50vw' }} onHide={() => setOpen(false)}
+                            <Dialog header={t("Pre-reserva")} visible={open} style={{ width: '50vw' }} onHide={() => setOpen(false)}
                                 footer={<div>
                                     <Button label="No" icon="pi pi-times" onClick={() => setOpen(false)} className="p-button-text" />
                                     <Button type="submit" label="Submit" icon="pi pi-check" className="p-button-text" />
                                 </div>}
                             >
-                                <h3>{t('Introdusca su nombre y correo para procesar la pre-reserva.')}</h3>
+                                <h3>{t('Introduzca sus datos para procesar la pre-reserva.')}</h3>
                                 <div className="p-field marginTop20">
                                     
                            <Field name="name" render={({ input, meta }) => (

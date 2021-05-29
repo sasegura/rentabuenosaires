@@ -306,7 +306,7 @@ const productTemplate = (imagenes) => {
       <div className='marginLeft20px'><h2 style={{fontFamily: 'playfair'}}>{data.nombre}</h2></div>
         {headerTarjeta()}
         <hr/>
-        <div className='marginLeft20px'>{t("Desde")} <i className="pi pi-euro"></i><span className="marginLeft5px">{data.precio}</span> {t("la noche")}</div>
+        <div className='marginLeft20px'>{t("Desde")} <i className="pi pi-euro"></i><span className="marginLeft5px">{data.precio}</span> {t("por noche")}</div>
         <div className="p-field p-col-12">
             <label className='marginLeft10px' htmlFor="calendar">{t("Seleccione un rango")}</label>
             <div>
@@ -316,6 +316,7 @@ const productTemplate = (imagenes) => {
                     value={dateBegin} 
                     minDate={today} 
                     locale="es" 
+                    placeholder='Check in'
                     onChange={(e) => (setDateBegin(e.value), setDateEnd(null))} 
                     disabledDates={disabledDates}
                     baseZIndex={500}
@@ -326,6 +327,7 @@ const productTemplate = (imagenes) => {
                     minDate={new Date(minDate)} 
                     value={dateEnd} 
                     locale="es" 
+                    placeholder='Check out'
                     disabled={disabledEndDate}
                     onChange={(e) => setDateEnd(e.value)} 
                     disabledDates={disabledDates}
@@ -353,7 +355,7 @@ const productTemplate = (imagenes) => {
           disabled={!calculo}
           onClick={(e) => (handleSubmit(e))}
         >
-          {t("Pre-reservar")}
+          {t("Pre-reserva")}
         </Button>
       </div>
     )

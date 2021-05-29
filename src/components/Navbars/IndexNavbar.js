@@ -96,7 +96,8 @@ const IndexNavbar = (props) => {
               }}
             >
               <i className="now-ui-icons users_single-02"></i>
-              <p>{t("Cerrar Sesión")}</p>
+              {/*<p>{t("Cerrar Sesión")}</p>*/}
+              {<p>Log Out</p>}
             </NavLink>
           </Link>
 
@@ -113,7 +114,8 @@ const IndexNavbar = (props) => {
             }}
           >
             <i className="now-ui-icons users_single-02"></i>
-            <p>{t("Entrar")}</p>
+            {/*<p>{t("Entrar")}</p>*/}
+            <p>Log In</p>
           </NavLink>
         </Link>
 
@@ -168,7 +170,6 @@ const IndexNavbar = (props) => {
               <NavItem>
                 <Link to={linkAdicionar}>
                   <NavLink target="_self">
-                    <i className="now-ui-icons ui-1_send"></i>
                     <p>{t("Administracion")}</p>
                   </NavLink>
                 </Link>
@@ -197,7 +198,6 @@ const IndexNavbar = (props) => {
               <NavItem>
                 <Link to={linkNosotros}>
                   <NavLink target="_self">
-                    <i className="now-ui-icons ui-1_send"></i>
                     <p>{t("Nosotros")}</p>
 
                   </NavLink>
@@ -207,7 +207,6 @@ const IndexNavbar = (props) => {
               <NavItem>
                 <Link to={linkPropietarios}>
                   <NavLink target="_self" >
-                    <i className="now-ui-icons ui-1_send"></i>
                     <p>{t("Propietarios")}</p>
 
                   </NavLink>
@@ -217,7 +216,6 @@ const IndexNavbar = (props) => {
               <NavItem>
                 <Link to={linkMensaje}>
                   <NavLink target="_self">
-                    <i className="now-ui-icons ui-1_send"></i>
                     <p>{t("Contactar")}</p>
 
                   </NavLink>
@@ -227,7 +225,6 @@ const IndexNavbar = (props) => {
               <UncontrolledDropdown nav>
                 <DropdownToggle caret color="default" href="#pablo" nav onClick={(e) => e.preventDefault()}>
                   <i className="now-ui-icons location_world"></i>
-                  <p>{t("Idioma")}</p>
                 </DropdownToggle>
                 <DropdownMenu>
                   <DropdownItem to='/' onClick={(e) => ChangeLenguage(e, "en")} tag={Link}>
@@ -246,7 +243,7 @@ const IndexNavbar = (props) => {
 
               <NavItem>
                 <NavLink
-                  href="https://www.facebook.com/CreativeTim?ref=creativetim"
+                  href="https://www.facebook.com/e-homeselect"
                   target="_blank"
                   id="facebook-tooltip"
                 >
@@ -259,7 +256,7 @@ const IndexNavbar = (props) => {
               </NavItem>
               <NavItem>
                 <NavLink
-                  href="https://www.instagram.com/CreativeTimOfficial?ref=creativetim"
+                  href="https://www.instagram.com/e-homeselect"
                   target="_blank"
                   id="instagram-tooltip"
                 >

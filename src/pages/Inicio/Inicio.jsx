@@ -161,7 +161,7 @@ function Inicio(props) {
         </div>
         <div
           id="enviar_mensaje"
-          className="section section-contact-us text-center"
+          className="section-contact-us text-center"
         >
           <Container>
             <MensajeComponent/>

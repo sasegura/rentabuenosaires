@@ -79,7 +79,7 @@ const responsiveOptions = [
   }
 ];
   const destino = () => {
-    console.log(pisos.length)
+    // console.log(pisos.length)
     return (<div className="pisoPrev">
       <h1 className="h1">{props.currentDestino.nombre.toUpperCase()}</h1>
       {/*<img src={"data:image/png;base64," + img} />*/}
