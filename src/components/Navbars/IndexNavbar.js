@@ -34,6 +34,9 @@ const IndexNavbar = (props) => {
   const [navbarColor, setNavbarColor] = React.useState(
     (props.currentNavBarColor === true) ? ("navbar-transparent") : ("")
   );
+  const [navbarTextColor, setNavbarTextColor] = React.useState(
+    (props.currentNavBarColor === true) ? ("white") : ("black")
+  );
   const [destinos, setDestinos] = useState(null)
 
   const ChangeLenguage = (e, language) => {
@@ -59,24 +62,27 @@ const IndexNavbar = (props) => {
   React.useEffect(() => {
       if (props.currentNavBarColor) {        
           setNavbarColor("navbar-transparent");
+          setNavbarTextColor('white')
           const updateNavbarColor = () => {
             if (
-              document.documentElement.scrollTop > 399 ||
-              document.body.scrollTop > 399
+              document.documentElement.scrollTop > 3 ||
+              document.body.scrollTop > 3
             ) {
               setNavbarColor("");
+              setNavbarTextColor('black')
             } else if (
-              document.documentElement.scrollTop < 400 ||
-              document.body.scrollTop < 400
+              document.documentElement.scrollTop < 4 ||
+              document.body.scrollTop < 4
             ) {
               setNavbarColor("navbar-transparent");
+              setNavbarTextColor('white')
             }
           };
           window.addEventListener("scroll", updateNavbarColor);
           return function cleanup() {
             window.removeEventListener("scroll", updateNavbarColor);
           };
-      }else{setNavbarColor("");}
+      }else{setNavbarColor("");setNavbarTextColor('black')}
         
       
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -88,7 +94,7 @@ const IndexNavbar = (props) => {
       return (
         <NavItem >
           <Link to={linkLogout}>
-            <NavLink
+            <NavLink className={navbarTextColor} 
               target="_self"
               onClick={() => {
                 document.documentElement.classList.toggle("nav-open");
@@ -108,6 +114,7 @@ const IndexNavbar = (props) => {
         <Link to={linkLogin}>
           <NavLink
             target="_self"
+            className={navbarTextColor} 
             onClick={() => {
               document.documentElement.classList.toggle("nav-open");
               setCollapseOpen(!collapseOpen);
@@ -125,24 +132,22 @@ const IndexNavbar = (props) => {
 
   return (
     <>
-      {collapseOpen ? (
-        <div
-          id="bodyClick"
-          onClick={() => {
-            document.documentElement.classList.toggle("nav-open");
-            setCollapseOpen(false);
-          }}
-        />
-      ) : null}
-      <Navbar className={"fixed-top " + navbarColor} expand="lg" color="info">
+      {collapseOpen ? 
+        (
+          <div
+            id="bodyClick"
+            onClick={() => {
+              document.documentElement.classList.toggle("nav-open");
+              setCollapseOpen(false);
+            }}
+          />
+        ) : null
+      }
+      <Navbar className={"fixed-top " + navbarColor} expand="lg" color="white">
         <Container>
           <div className="navbar-translate">
-
             {/*logo*/}
-
-
             <Link to={index}><div className="width20"><img alt={"Logo"} src={logo}/></div></Link>
-
             <button
               className="navbar-toggler navbar-toggler"
               onClick={() => {
@@ -164,20 +169,19 @@ const IndexNavbar = (props) => {
             isOpen={collapseOpen}
             navbar
           >
-            <Nav navbar>
-              
+            <Nav navbar >              
               {props?.currentUsuario?.rol===1?
-              <NavItem>
-                <Link to={linkAdicionar}>
-                  <NavLink target="_self">
-                    <p>{t("Administracion")}</p>
-                  </NavLink>
-                </Link>
-              </NavItem>:
-              null}
-
+                <NavItem>
+                  <Link to={linkAdicionar}>
+                    <NavLink target="_self" className={navbarTextColor}>
+                      <p>{t("Administracion")}</p>
+                    </NavLink>
+                  </Link>
+                </NavItem>:
+                null
+              }
               <UncontrolledDropdown nav>
-                <DropdownToggle caret color="default" href="#pablo" nav onClick={(e) => e.preventDefault()}>
+                <DropdownToggle className={navbarTextColor} caret color="default" href="#pablo" nav onClick={(e) => e.preventDefault()}>
                   <i className="now-ui-icons location_map-big"></i>
                   <p>{t("Destinos")}</p>
                 </DropdownToggle>
@@ -197,7 +201,7 @@ const IndexNavbar = (props) => {
               
               <NavItem>
                 <Link to={linkNosotros}>
-                  <NavLink target="_self">
+                  <NavLink target="_self" className={navbarTextColor} >
                     <p>{t("Nosotros")}</p>
 
                   </NavLink>
@@ -206,7 +210,7 @@ const IndexNavbar = (props) => {
 
               <NavItem>
                 <Link to={linkPropietarios}>
-                  <NavLink target="_self" >
+                  <NavLink target="_self" className={navbarTextColor} >
                     <p>{t("Propietarios")}</p>
 
                   </NavLink>
@@ -215,7 +219,7 @@ const IndexNavbar = (props) => {
 
               <NavItem>
                 <Link to={linkMensaje}>
-                  <NavLink target="_self">
+                  <NavLink target="_self" className={navbarTextColor} >
                     <p>{t("Contactar")}</p>
 
                   </NavLink>
@@ -223,7 +227,7 @@ const IndexNavbar = (props) => {
               </NavItem>
 
               <UncontrolledDropdown nav>
-                <DropdownToggle caret color="default" href="#pablo" nav onClick={(e) => e.preventDefault()}>
+                <DropdownToggle className={navbarTextColor}  caret color="default" href="#pablo" nav onClick={(e) => e.preventDefault()}>
                   <i className="now-ui-icons location_world"></i>
                 </DropdownToggle>
                 <DropdownMenu>
@@ -245,7 +249,7 @@ const IndexNavbar = (props) => {
                 <NavLink
                   href="https://www.facebook.com/e-homeselect"
                   target="_blank"
-                  id="facebook-tooltip"
+                  id="facebook-tooltip" className={navbarTextColor} 
                 >
                   <i className="fab fa-facebook-square"></i>
                   <p className="d-lg-none d-xl-none">Facebook</p>
@@ -258,7 +262,7 @@ const IndexNavbar = (props) => {
                 <NavLink
                   href="https://www.instagram.com/e-homeselect"
                   target="_blank"
-                  id="instagram-tooltip"
+                  id="instagram-tooltip" className={navbarTextColor} 
                 >
                   <i className="fab fa-instagram"></i>
                   <p className="d-lg-none d-xl-none">Instagram</p>

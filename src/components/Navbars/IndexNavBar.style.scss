@@ -1,3 +1,7 @@
 .bandera{
     margin-right: 10px;
 }
+.navbar-transparent .navbar a:not(.btn):not(.dropdown-item){
+    color: black!important;
+}
+

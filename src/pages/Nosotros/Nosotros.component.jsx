@@ -40,8 +40,9 @@ const Nosotros = (props) => {
           className="section section-contact-us text-center"
         >
           <Container>
-            <h2 className="title">{t("Te ofrecemos un servicio de alquiler de primer nivel.")}</h2>
-            <h2 className="title">{t("Queremos que te sientas especial.")}</h2>
+            <h2 className="title">{t('Nuestro equipo')}</h2>
+            <h3 >{t("Te ofrecemos un servicio de alquiler de primer nivel.")}</h3>
+            <h3 >{t("Queremos que te sientas especial.")}</h3>
 
             <p className="description">
               {t("Disfrutamos viajar por el mundo, conocer diferentes culturas y sentirnos parte de cada lugar.")}

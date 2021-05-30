@@ -48,7 +48,7 @@ function Inicio(props) {
     <>
       <div className="wrapper">
         <LandingPageHeader />
-        <div className="section section-about-us">
+        <div className="section-about-us">
           <Container>           
             <Row>
               <Col className="ml-auto mr-auto text-center" md="8">
