@@ -21,12 +21,10 @@ import LandingPageHeader from "components/Headers/LandingPageHeader.js";
 
 //Styles
 import './inicio.style.scss';
-import MensajeComponent from "pages/Mensaje/Mensaje.component";
+import Mensaje from "pages/Mensaje/Mensaje";
 
 function Inicio(props) {
   const {t}=props;
-  const [firstFocus, setFirstFocus] = React.useState(false);
-  const [lastFocus, setLastFocus] = React.useState(false);
   
   React.useEffect(() => {
     props.setCurrentNavBarColor(true);
@@ -164,7 +162,7 @@ function Inicio(props) {
           className="section-contact-us text-center"
         >
           <Container>
-            <MensajeComponent/>
+            <Mensaje/>
           </Container>
         </div>
       </div>
