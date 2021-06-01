@@ -73,13 +73,13 @@ const Mensaje = (props) => {
       try {
         const piso = await AxiosConexionConfig.post(url, JSON.stringify(values));
         console.log(piso)
-        /*if(piso.data){
+        if(piso.data){
           toast.current.show({severity:'success', summary: 'Success Message', detail:`Correo enviado al administrador.`, life: 3000});
         }else{
           toast.current.show({severity:'success', summary: 'Success Message', detail:`El correo no se envió correctamente.`, life: 3000});
-        }*/
+        }
       } catch (e) {
-        //toast.current.show({severity:'success', summary: 'Success Message', detail:e, life: 3000});
+        toast.current.show({severity:'success', summary: 'Success Message', detail:e, life: 3000});
         console.log(e);
       }
     }
@@ -90,7 +90,7 @@ const Mensaje = (props) => {
         /*setOpen(false)
         setValor(data)
         acept(true)*/
-        //form.restart();
+        form.restart();
     };
 
     const isFormFieldValid = (meta) => !!(meta.touched && meta.error);
