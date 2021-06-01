@@ -4,11 +4,8 @@ import { baseURL } from "configuracion/constantes";
 const axiosConexionConfig = () => {
     //Create default options
     const defaultOptions = {
-        baseURL: baseURL,
-        headers: {
-            'Access-Control-Max-Age': '600',
-            'Content-Type': 'application/json',
-        }
+        baseURL: baseURL
+        
     };
 
     // Create instance
