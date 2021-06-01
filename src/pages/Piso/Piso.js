@@ -175,7 +175,7 @@ const Piso = (props) => {
   React.useEffect(() => {
     if(acept){
       console.log(valorDialog)
-      setValorDialog('')
+      //setValorDialog('')
       
       sendMail();
       setAcept(false)
@@ -183,18 +183,26 @@ const Piso = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [acept]);
 
+  const getDate=(date)=>{
+    const temp=new Date(date);
+    let respuesta=temp.getFullYear()+'/'+temp.getMonth()+'/'+temp.getDay();
+    return (respuesta);
+
+  }
   async function sendMail() {
     const url = '/sendMailPreReserva';
     const values={
-      correoCliente: "sasegura.fernandez87@gmail.com",
-      correoAdmin: "sasegura.fernandez87@gmail.com",
-      fechaInicio: "10/10/2021",
-      fechaFin: "10/12/2021",
-      cantidadPersonas: 2,
-      precio: 25,
-      clienteNombre: "Sergio",
-      pisoNombre: "Piso2",
-      destino: "Buenos Aires"
+      correoCliente: valorDialog.email,
+      correoAdmin: "administrador@e-homeselect.com",
+      fechaInicio: getDate(dateBegin),
+      fechaFin: getDate(dateEnd),
+      cantidadPersonas: huesped,
+      precio: data.precio,
+      pisoNombre:data.nombre,
+      clienteNombre: valorDialog.name,
+      destino: destino.nombre,
+      telefono: valorDialog.telefono,
+      texto:valorDialog.texto
     }
     try {
       const piso = await AxiosConexionConfig.post(url, JSON.stringify(values));
