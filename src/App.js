@@ -30,6 +30,8 @@ import LogOut from "pages/LogOut/LogOut";
 import { index, linkPisos, linkAdicionar, linkLogin, linkMensaje, linkNosotros, linkPropietarios,linkLogout } from "configuracion/constantes";
 import Propietarios from "pages/Propietarios/Propietarios.component";
 import Nosotros from "pages/Nosotros/Nosotros.component";
+import Reservaciones from "pages/Reservaciones/Reservaciones";
+import { linkReservaciones } from "configuracion/constantes";
 
 function App() {
     return (
@@ -57,6 +59,10 @@ function App() {
                 <Route
                     exact path={linkAdicionar}
                     render={(props) => <Adicionar {...props} />}
+                />
+                <Route
+                    exact path={linkReservaciones}
+                    render={(props) => <Reservaciones {...props} />}
                 />
                 <Route
                     exact path={linkPropietarios}

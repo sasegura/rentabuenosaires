@@ -28,6 +28,7 @@ import { setCurrentUsuario } from "redux/usuario/usuario.action";
 import './IndexNavBar.style.scss'
 import AxiosConexionConfig from "conexion/AxiosConexionConfig";
 import { linkAdicionar, linkDestinos, linkPisos, index, linkMensaje, linkNosotros, linkPropietarios, linkLogin, linkLogout } from "configuracion/constantes";
+import { linkReservaciones } from "configuracion/constantes";
 
 const IndexNavbar = (props) => {
   const { t } = props
@@ -169,17 +170,26 @@ const IndexNavbar = (props) => {
             isOpen={collapseOpen}
             navbar
           >
-            <Nav navbar >              
+            <Nav navbar >
               {props?.currentUsuario?.rol===1?
-                <NavItem>
-                  <Link to={linkAdicionar}>
-                    <NavLink target="_self" className={navbarTextColor}>
-                      <p>{t("Administracion")}</p>
-                    </NavLink>
-                  </Link>
-                </NavItem>:
+                <UncontrolledDropdown nav>
+                  <DropdownToggle className={navbarTextColor} caret color="default" href="#" nav onClick={(e) => e.preventDefault()}>
+                    <p>{t("Administracion")}</p>
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem to={linkAdicionar} tag={Link}>
+                      <i className="now-ui-icons mr-1"></i>
+                      {t("Pisos")}
+                    </DropdownItem>    
+                    <DropdownItem to={linkReservaciones} tag={Link}>
+                      <i className="now-ui-icons mr-1"></i>
+                      {t("Reservaciones")}
+                    </DropdownItem>                
+                  </DropdownMenu>
+                </UncontrolledDropdown>:
                 null
               }
+              
               <UncontrolledDropdown nav>
                 <DropdownToggle className={navbarTextColor} caret color="default" href="#pablo" nav onClick={(e) => e.preventDefault()}>
                   <i className="now-ui-icons location_map-big"></i>
