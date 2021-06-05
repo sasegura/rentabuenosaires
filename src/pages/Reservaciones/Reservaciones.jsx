@@ -1,25 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 //redux
 import { connect } from 'react-redux';
 import { setCurrentNavBarColor } from 'redux/navBarColor/navBarColor.action';
 import { Button } from 'primereact/button';
+import { Toast } from 'primereact/toast';
+
 //reactstrap
 
 import { withTranslation } from 'react-i18next';
 import AxiosConexionConfig from 'conexion/AxiosConexionConfig';
 import moment from 'moment';
-import { apiUsuario, apiDestinos, apiPiso, apiReservaciones } from 'configuracion/constantes';
+import {
+	apiUsuario,
+	apiDestinos,
+	apiPiso,
+	apiReservaciones,
+	apiSendMailCitaConfirmada,
+	apisendMailCitaCancelada,
+} from 'configuracion/constantes';
 
 const Reservaciones = (props) => {
 	const { t } = props;
+	const toast = useRef(null);
 	const [load, setload] = useState(false);
 	const [pisos, setPisos] = useState(null);
 	const [destinos, setDestinos] = useState(null);
 	const [usuarios, setUsuarios] = useState(null);
 	const [reservaciones, setReservaciones] = useState([]);
 	props.setCurrentNavBarColor(false);
+
+	useEffect(() => {
+		setload(true);
+		AxiosConexionConfig.get(apiPiso).then((respuesta) => {
+			setPisos(respuesta.data);
+			AxiosConexionConfig.get(apiUsuario).then((respuesta) => {
+				setUsuarios(respuesta.data);
+				AxiosConexionConfig.get(apiDestinos).then((respuesta) => {
+					setDestinos(respuesta.data);
+
+					getReservaciones();
+				});
+			});
+		});
+	}, []);
 
 	//Obtener reservaciones
 	async function getReservaciones() {
@@ -68,7 +93,7 @@ const Reservaciones = (props) => {
 	const getPisoId = (id) => {
 		let respuesta = null;
 		pisos.map((piso) => {
-			if (piso.id === id) {
+			if (piso.idpiso === id) {
 				respuesta = piso;
 			}
 		});
@@ -77,7 +102,7 @@ const Reservaciones = (props) => {
 	const getUsuarioId = (id) => {
 		let respuesta = null;
 		usuarios.map((usuario) => {
-			if (usuario.id === id) {
+			if (usuario.idusuario === id) {
 				respuesta = usuario;
 			}
 		});
@@ -86,38 +111,21 @@ const Reservaciones = (props) => {
 	const getDestinoId = (id) => {
 		let respuesta = null;
 		destinos.map((destino) => {
-			if (destino.id === id) {
+			if (destino.iddestino === id) {
 				respuesta = destino;
 			}
 		});
 		return respuesta;
 	};
-	async function sendMailCitaConfirmada(datos) {
-		console.log(datos);
-		const url = '/sendMailCitaConfirmada';
-		const piso = getPisoId(datos.idpiso);
-		const usuario = getUsuarioId(datos.idusuario);
-		const values = {
-			correoCliente: usuario.email,
-			correoAdmin: 'administrador@e-homeselect.com',
-			fechaInicio: getDate(datos.fechaInicio),
-			fechaFin: getDate(datos.fechaFin),
-			cantidadPersonas: datos.cantPersonas,
-			precio: datos.precio,
-			pisoNombre: piso.nombre,
-			clienteNombre: usuario.name,
-			destino: getDestinoId(piso.iddestino).nombre,
-			telefono: usuario.telefono,
-			//texto: valorDialog.texto,
-		};
-		/*AxiosConexionConfig.post(url, JSON.stringify(values))
+	const confirmarCancelar = (url, values, text) => {
+		AxiosConexionConfig.post(url, JSON.stringify(values))
 			.then((response) => {
-				console.log(response);
+				getReservaciones();
 				if (response.data) {
 					toast.current.show({
 						severity: 'success',
 						summary: 'Success Message',
-						detail: `Correo enviado al cliente.`,
+						detail: text,
 						life: 3000,
 					});
 				} else {
@@ -137,36 +145,64 @@ const Reservaciones = (props) => {
 					life: 3000,
 				});
 				console.log(e);
-			});*/
+			});
+	};
+	async function sendMailCitaConfirmada(datos) {
+		const piso = getPisoId(datos.idpiso);
+		const usuario = getUsuarioId(datos.idusuario);
+		const values = {
+			correoCliente: usuario.correo,
+			correoAdmin: 'administrador@e-homeselect.com',
+			fechaInicio: getDate(datos.fechaInicio),
+			fechaFin: getDate(datos.fechaFin),
+			cantidadPersonas: datos.cantPersonas,
+			precio: datos.precio,
+			pisoNombre: piso.nombre,
+			clienteNombre: usuario.nombre,
+			destino: getDestinoId(piso.iddestino).nombre,
+			telefono: usuario.telefono,
+		};
+		const aceptada = {
+			aceptada: !datos.aceptada,
+		};
+		if (datos.aceptada) {
+			AxiosConexionConfig.patch(`${apiReservaciones}/${datos.id}`, JSON.stringify(aceptada));
+			confirmarCancelar(
+				apiSendMailCitaConfirmada,
+				values,
+				`Correo de cancelacion enviado al cliente.`
+			);
+		} else {
+			AxiosConexionConfig.patch(`${apiReservaciones}/${datos.id}`, JSON.stringify(aceptada));
+			confirmarCancelar(
+				apisendMailCitaCancelada,
+				values,
+				`Correo de confirmacion enviado al cliente.`
+			);
+		}
 	}
-
 	const getDate = (date) => {
 		const temp = new Date(date);
-		let respuesta = temp.getDay() + '/' + (temp.getMonth() + 1) + '/' + temp.getFullYear();
+		let respuesta = temp.getDate() + '/' + (temp.getMonth() + 1) + '/' + temp.getFullYear();
 		return respuesta;
 	};
-
-	useEffect(() => {
-		getReservaciones();
-		AxiosConexionConfig.get(apiPiso).then((respuesta) => {
-			setPisos(respuesta.data);
-		});
-		AxiosConexionConfig.get(apiUsuario).then((respuesta) => {
-			setUsuarios(respuesta.data);
-		});
-		AxiosConexionConfig.get(apiDestinos).then((respuesta) => {
-			setDestinos(respuesta.data);
-		});
-	}, []);
 
 	const actionBodyTemplate = (rowData) => {
 		return (
 			<React.Fragment>
-				<Button
-					icon='pi pi-pencil'
-					className='p-button-rounded p-button-success p-mr-2'
-					onClick={() => sendMailCitaConfirmada(rowData)}
-				/>
+				{!rowData.aceptada ? (
+					<Button
+						icon='pi pi-check'
+						className='p-button-rounded p-button-success p-mr-2'
+						onClick={() => sendMailCitaConfirmada(rowData)}
+					/>
+				) : (
+					<Button
+						icon='pi pi-times'
+						className='p-button-rounded p-button-danger p-mr-2'
+						onClick={() => sendMailCitaConfirmada(rowData)}
+					/>
+				)}
 				<Button
 					icon='pi pi-trash'
 					className='p-button-rounded p-button-warning'
@@ -179,13 +215,34 @@ const Reservaciones = (props) => {
 	const fechaBodyTemplate = (row) => {
 		return getDate(row);
 	};
+
+	const aceptadaTemplate = (rowData) => {
+		return <span>{rowData ? 'Si' : 'No'}</span>;
+	};
+	const columnTemplate = (rowData) => {
+		return <span>{rowData}</span>;
+	};
 	return (
 		<>
+			<Toast baseZIndex={500} ref={toast} />
 			<div className='section text-center text-center ml-auto mr-auto'>
 				<h2>Reservaciones</h2>
 				<DataTable value={reservaciones} loading={load}>
-					<Column field='idpiso' header='idpiso'></Column>
-					<Column field='idusuario' header='idusuario'></Column>
+					<Column
+						field='aceptada'
+						header='Confirmada'
+						body={(row) => aceptadaTemplate(row.aceptada)}
+					></Column>
+					<Column
+						field='idpiso'
+						header='idpiso'
+						body={(row) => columnTemplate(getPisoId(row.idpiso).nombre)}
+					></Column>
+					<Column
+						field='idusuario'
+						header='Usuario'
+						body={(row) => columnTemplate(getUsuarioId(row.idusuario).nombre)}
+					></Column>
 					<Column field='precio' header='Precio'></Column>
 					<Column
 						field='fechaInicio'

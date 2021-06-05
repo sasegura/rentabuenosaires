@@ -273,7 +273,9 @@ const Piso = (props) => {
 				AxiosConexionConfig.patch(
 					`${apiPiso}/${data.idpiso}`,
 					JSON.stringify({ diasReservados: diasReservados + ',' + data.diasReservados })
-				);
+				).then(() => {
+					getData();
+				});
 				AxiosConexionConfig.post(apiReservaciones, JSON.stringify(reservacion));
 			})
 			.catch((e) => {
