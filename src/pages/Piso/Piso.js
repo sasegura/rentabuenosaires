@@ -28,7 +28,6 @@ import { amenitiesGeneralesConst } from 'configuracion/constantes';
 import Maps from './Map';
 import DialogDemo from 'components/Dialog';
 import { linkUsuario } from 'configuracion/constantes';
-import { linkReservaciones } from 'configuracion/constantes';
 import { apiReservaciones } from 'configuracion/constantes';
 import { apiPiso } from 'configuracion/constantes';
 import moment from 'moment';
@@ -130,7 +129,7 @@ const Piso = (props) => {
 			setCalculo(false);
 		} else {
 			if (end > begin) {
-				settotalCalculo((end - begin) * huesped * data.precio);
+				settotalCalculo((end - begin) * data.precio);
 				setCalculo(true);
 				seterrorfecha('');
 			}
@@ -224,9 +223,7 @@ const Piso = (props) => {
 
 	React.useEffect(() => {
 		if (acept) {
-			//console.log(valorDialog)
 			createUsuario();
-			sendMail();
 			setAcept(false);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -249,27 +246,26 @@ const Piso = (props) => {
 		};
 		AxiosConexionConfig.post(linkUsuario, JSON.stringify(values))
 			.then((response) => {
+				sendMail();
 				const reservacion = {
 					idusuario: response.data.idusuario,
 					idpiso: data.idpiso,
 					fechaFin: dateEnd,
 					fechaInicio: dateBegin,
+					aceptada: false,
+					cantPersonas: huesped,
+					precio: totalCalculo,
 				};
 				let dias = [];
 				const inicio = moment(dateBegin);
 				const fin = moment(dateEnd);
 				const dateB = new Date(dateBegin);
 				let contador = fin.diff(inicio, 'days');
-				//let temp = dateB;
 				dias.push(sumarDias(dateB, 0));
 				while (contador > 0) {
-					//dias.push(new Date(dateBegin).setDate(new Date(dateBegin).getDate() + 1));
 					let a = new Date(dateBegin);
 					dias.push(sumarDias(a, contador));
 					console.log(dias);
-					//temp.setDate(temp.getDate() + 1);
-					//dias.push(new Date(dateBegin).getDate() + contador);
-
 					contador--;
 					console.log(contador);
 				}
@@ -404,13 +400,6 @@ const Piso = (props) => {
 	};
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		/*if(new Date(dateEnd)-new Date(dateBegin)<=0){
-      seterrorfecha("El rango seleccionado no es correcto")
-    }else if(BuscarEnIntervalo(dateBegin,dateEnd)){
-      seterrorfecha("En el intervalo seleccionado existen fechas reservadas previamente.")
-    }else{
-      seterrorfecha('');
-    }*/
 		setVisibleDialog(true);
 	};
 
@@ -488,7 +477,7 @@ const Piso = (props) => {
 							mode='decimal'
 							showButtons
 							min={1}
-							max={100}
+							max={data.cantpersonas}
 						/>
 					</div>
 					<div>
