@@ -168,14 +168,14 @@ const Reservaciones = (props) => {
 		if (datos.aceptada) {
 			AxiosConexionConfig.patch(`${apiReservaciones}/${datos.id}`, JSON.stringify(aceptada));
 			confirmarCancelar(
-				apiSendMailCitaConfirmada,
+				apisendMailCitaCancelada,
 				values,
 				`Correo de cancelacion enviado al cliente.`
 			);
 		} else {
 			AxiosConexionConfig.patch(`${apiReservaciones}/${datos.id}`, JSON.stringify(aceptada));
 			confirmarCancelar(
-				apisendMailCitaCancelada,
+				apiSendMailCitaConfirmada,
 				values,
 				`Correo de confirmacion enviado al cliente.`
 			);
