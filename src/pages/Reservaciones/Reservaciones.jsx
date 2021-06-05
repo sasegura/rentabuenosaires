@@ -188,22 +188,26 @@ const Reservaciones = (props) => {
 	};
 
 	const actionBodyTemplate = (rowData) => {
+		const s = new Date(rowData.fechaInicio) < new Date();
 		return (
 			<React.Fragment>
 				{!rowData.aceptada ? (
 					<Button
+						disabled={s}
 						icon='pi pi-check'
 						className='p-button-rounded p-button-success p-mr-2'
 						onClick={() => sendMailCitaConfirmada(rowData)}
 					/>
 				) : (
 					<Button
+						disabled={s}
 						icon='pi pi-times'
 						className='p-button-rounded p-button-danger p-mr-2'
 						onClick={() => sendMailCitaConfirmada(rowData)}
 					/>
 				)}
 				<Button
+					disabled={s}
 					icon='pi pi-trash'
 					className='p-button-rounded p-button-warning'
 					onClick={() => deleteReser(rowData)}
