@@ -29,9 +29,26 @@ const Reservaciones = (props) => {
 	const [destinos, setDestinos] = useState(null);
 	const [usuarios, setUsuarios] = useState(null);
 	const [reservaciones, setReservaciones] = useState([]);
+	const [result, setresult] = useState(null);
 	props.setCurrentNavBarColor(false);
-
+	const a = [[1, 2], 1, 2, 4, 8, [10, 10]];
+	var lista1 = [1, 4, 3, 0];
+	var lista2 = [1, 2, [5, 8], 4];
+	var lista3 = [0, [6, 2], null, 7, 1];
+	function sumar(arreglo) {
+		let suma = 0;
+		arreglo.forEach((elemento) => {
+			console.log(elemento);
+			if (elemento instanceof Array) {
+				suma += sumar(elemento);
+			} else {
+				suma += elemento;
+			}
+		});
+		return suma;
+	}
 	useEffect(() => {
+		setresult(sumar(lista3));
 		setload(true);
 		AxiosConexionConfig.get(apiPiso).then((respuesta) => {
 			setPisos(respuesta.data);
@@ -231,6 +248,7 @@ const Reservaciones = (props) => {
 			<Toast baseZIndex={500} ref={toast} />
 			<div className='section text-center text-center ml-auto mr-auto'>
 				<h2>Reservaciones</h2>
+				suma:{result}
 				<DataTable value={reservaciones} loading={load}>
 					<Column
 						field='aceptada'
