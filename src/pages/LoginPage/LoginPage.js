@@ -79,6 +79,7 @@ function LoginPage(props) {
 			if (respuesta.data.length > 0) {
 				const fecha = new Date(respuesta.data[0].expiracion);
 				const hoy = new Date();
+				console.log(respuesta);
 				console.log(fecha);
 				console.log(hoy);
 				if (fecha.getTime() > hoy.getTime()) {

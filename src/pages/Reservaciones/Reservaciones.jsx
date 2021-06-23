@@ -249,7 +249,15 @@ const Reservaciones = (props) => {
 			<div className='section text-center text-center ml-auto mr-auto'>
 				<h2>Reservaciones</h2>
 				suma:{result}
-				<DataTable value={reservaciones} loading={load}>
+				<DataTable
+					value={reservaciones}
+					loading={load}
+					paginator
+					paginatorTemplate='CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown'
+					currentPageReportTemplate='Showing {first} to {last} of {totalRecords}'
+					rows={10}
+					rowsPerPageOptions={[10, 20, 50]}
+				>
 					<Column
 						field='aceptada'
 						header='Confirmada'
