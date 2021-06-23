@@ -77,9 +77,11 @@ function LoginPage(props) {
 		try {
 			const respuesta = await AxiosConexionConfig.get(url + encodeURIComponent(valores));
 			if (respuesta.data.length > 0) {
-				const fecha = new Date(respuesta.data[0].expiracion);
+				const fecha = new Date(
+					respuesta.data[0].expiracion.replace(/ /g, 'T').split('+')[0]
+				);
 				const hoy = new Date();
-				console.log(respuesta);
+				console.log(respuesta.data[0].expiracion.replace(/ /g, 'T'));
 				console.log(fecha);
 				console.log(hoy);
 				if (fecha.getTime() > hoy.getTime()) {
