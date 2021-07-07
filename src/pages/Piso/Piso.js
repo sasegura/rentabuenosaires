@@ -431,7 +431,10 @@ const Piso = (props) => {
 		return (
 			<div className=''>
 				<div className='marginLeft20px'>
-					<h2 style={{ fontFamily: 'playfair' }}>{data.nombre}</h2>
+					<h4 style={{ fontFamily: 'playfair' }}>
+						{data.nombre.substr(0, 29)}
+						{data.nombre.length > 30 ? '...' : null}
+					</h4>
 				</div>
 				{headerTarjeta()}
 				<hr />
@@ -476,15 +479,19 @@ const Piso = (props) => {
 						<div>
 							<label htmlFor='minmax-buttons'>{t('Guests')}</label>
 						</div>
-						<InputNumber
-							id='minmax-buttons'
-							value={huesped}
-							onValueChange={(e) => sethuesped(e.value)}
-							mode='decimal'
-							showButtons
-							min={1}
-							max={data.cantpersonas}
-						/>
+						<div className='p-col-12'>
+							<InputNumber
+								id='minmax-buttons'
+								className='p-col-12'
+								value={huesped}
+								onValueChange={(e) => sethuesped(e.value)}
+								mode='decimal'
+								showButtons
+								min={1}
+								size={2}
+								max={data.cantpersonas}
+							/>
+						</div>
 					</div>
 					<div>
 						{calculo ? (

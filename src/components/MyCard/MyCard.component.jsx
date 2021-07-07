@@ -84,7 +84,10 @@ function MyCard(props, { match, destino, link, history, cantHab, nombre }) {
 				<CardBody className='cardbody col-12 '>
 					<div className='flex p-col-12 padding0'>
 						<div className=' p-col-12 p-md-7 padding0'>
-							<h5 className=''>{props.nombre}</h5>
+							<h5 className=''>
+								{props.nombre.substr(0, 29)}
+								{props.nombre.length > 30 ? '...' : null}
+							</h5>
 							<p className='card-location margin-bottom0'>{props.destino}</p>
 						</div>
 						<div className=' p-col-12 p-md-4 padding0'>
@@ -101,7 +104,7 @@ function MyCard(props, { match, destino, link, history, cantHab, nombre }) {
 						</div>
 					</div>
 					<div className='flex p-col-12 padding-top0'>
-						<div className=' p-col-12 p-md-7 padding11'>
+						<div className=' p-col-12 p-md-7 padding0'>
 							<CardHeader
 								margin={false}
 								cantpersonas={props.cantpersonas}

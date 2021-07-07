@@ -45,7 +45,7 @@ const Propietarios = (props) => {
 					</p>
 					<Button
 						label={t('CONTACTA CON NOSOTROS')}
-						className='p-button-rounded'
+						className='p-button-rounded margingTop50'
 						onClick={() => history.push(linkMensaje)}
 					/>
 				</Container>
