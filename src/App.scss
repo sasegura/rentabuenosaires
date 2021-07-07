@@ -1,128 +1,143 @@
-.floatLeft{
-    float: left;
+.floatLeft {
+	float: left;
 }
-.floatRigth{
-    float: right;
+.floatRigth {
+	float: right;
 }
-.displayFlex{
-    display: flex;
+.displayFlex {
+	display: flex;
 }
-.marginLeft5px{
-    margin-left: 5px!important;
+.marginLeft5px {
+	margin-left: 5px !important;
 }
-.marginRight5px{
-    margin-right: 5px!important;
+.marginRight5px {
+	margin-right: 5px !important;
 }
-.marginLeft10px{
-    margin-left: 10px!important;
+.marginLeft10px {
+	margin-left: 10px !important;
 }
-.marginRight10px{
-    margin-right: 10px!important;
+.marginRight10px {
+	margin-right: 10px !important;
 }
-.marginLeft20px{
-    margin-left: 20px!important;
+.marginLeft20px {
+	margin-left: 20px !important;
 }
-.marginRight20px{
-    margin-right: 20px!important;
+.marginRight20px {
+	margin-right: 20px !important;
 }
-.height500px{
-    height: 500px!important;
+.height500px {
+	height: 500px !important;
 }
-.height440px{
-    height: 440px!important;
+.height440px {
+	height: 440px !important;
 }
 .carousel-demo .product-item .product-item-content {
-    border: 1px solid var(--surface-d);
-    border-radius: 3px;
-    margin: .3rem;
-    text-align: center;
-    padding: 2rem 0;
+	border: 1px solid var(--surface-d);
+	border-radius: 3px;
+	margin: 0.3rem;
+	text-align: center;
+	padding: 2rem 0;
 }
 
 .carousel-demo .product-item .product-image {
-    width: 50%;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+	width: 50%;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
-.height50{
-    height: 50%!important;
+.height50 {
+	height: 50% !important;
 }
 
-.height200{
-    height: 200px!important;
+.height200 {
+	height: 200px !important;
 }
-.width100{
-    width: 100%!important;
+.width100 {
+	width: 100% !important;
 }
-.width20{
-    width: 40px!important;
+.width20 {
+	width: 40px !important;
 }
-.margin-bottom0{
-    margin-bottom:0px!important;
+.margin-bottom0 {
+	margin-bottom: 0px !important;
 }
-.marginTop20{
-    margin-top: 20px;
+.marginTop20 {
+	margin-top: 20px;
 }
-.flex{
-    display: flex;
-    flex-wrap: wrap-reverse;
+.flex {
+	display: flex;
+	flex-wrap: wrap-reverse;
 }
-.flexWrap{
-    display: flex;
-    flex-wrap: wrap;
+.flexWrap {
+	display: flex;
+	flex-wrap: wrap;
 }
-.padding11{
-    padding: 15px!important;
+.padding11 {
+	padding: 15px !important;
 }
-.padding-bottom0{
-    padding-bottom: 0px;
+.padding-bottom0 {
+	padding-bottom: 0px;
 }
-.padding-top0{
-    padding-top: 0px;
+.padding-top0 {
+	padding-top: 0px;
 }
-.textdecorationunderline{
-    text-decoration: underline;
+.textdecorationunderline {
+	text-decoration: underline;
 }
-.fontweightbold{
-    font-weight: bold;
+.fontweightbold {
+	font-weight: bold;
 }
-.borderradius30{
-    border-radius: 30px!important;
+.borderradius30 {
+	border-radius: 30px !important;
 }
-.margin0{
-    margin: 0px!important;
-}
-
-.p-md-5{    
-    padding: 0px!important;
+.margin0 {
+	margin: 0px !important;
 }
 
-.loaddingCenter{
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-}
-.amenitiesCenter{
-    margin-left: auto;
-    margin-right: auto;
-}
-.wrapper{
-    font-family: playfair;
-}
-.center{
-    text-align: center;
+.p-md-5 {
+	padding: 0px !important;
 }
 
-h4{
-    margin-top: 0px!important;
+.loaddingCenter {
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
 }
-.black{
-    color: black!important;
+.amenitiesCenter {
+	margin-left: auto;
+	margin-right: auto;
 }
-.white{
-    color: white!important;
+.wrapper {
+	font-family: playfair;
+}
+.center {
+	text-align: center;
 }
 
-.borderRadius2{
-    border-radius: 2rem
+h4 {
+	margin-top: 0px !important;
+}
+.black {
+	color: black !important;
+}
+.white {
+	color: white !important;
+}
+
+.borderRadius2 {
+	border-radius: 2rem;
+}
+.p-button {
+	background: #959595;
+	border-color: 1px solid #959595 !important;
+	&:hover {
+		background-color: #959595 !important;
+		border-color: 1px solid #959595 !important;
+	}
+	&:focus {
+		background-color: #959595 !important;
+		border-color: 1px solid #959595 !important;
+	}
+	&:active {
+		border-color: 1px solid #959595 !important;
+	}
 }

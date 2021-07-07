@@ -25,7 +25,7 @@ import foto3 from 'assets/img/eva.jpg';
 
 //Component
 import LandingPageHeader from 'components/Headers/LandingPageHeader.js';
-
+import Nosotros from 'pages/Nosotros/Nosotros.component';
 //Conexión
 
 //Styles
@@ -58,17 +58,8 @@ function Inicio(props) {
 				<div className='section-about-us'>
 					<Container>
 						<Row>
-							<Col className='ml-auto mr-auto text-center' md='8'>
-								<h2 className='title'>
-									<p>{t('Queremos que te sientas especial.')}</p>
-									<p>{t('Que has encontrado tu lugar.')}</p>
-									<p>{t('Vive lo mejor que puedas.')}</p>
-								</h2>
-								<h5 className='description'>
-									{t(
-										'Disfrutamos viajar por el mundo, conocer diferentes culturas y sentirnos parte de cada lugar. A lo largo de los últimos años hemos conocido más de 100 ciudades, lo que nos ayuda a entender qué necesitan y valoran los viajeros del lugar donde se hospedan. Nuestro objetivo es lograr que tu estadía sea lo más placentera posible, ofreciéndote un servicio completo y de primer nivel, no sólo sobre el hospedaje sino también sobre inquietudes que tengas durante tu viaje.'
-									)}
-								</h5>
+							<Col className='ml-auto mr-auto text-center'>
+								<Nosotros inicio />
 							</Col>
 						</Row>
 						<div className='separator separator-primary'></div>
@@ -81,8 +72,10 @@ function Inicio(props) {
 											backgroundImage: 'url(' + img1 + ')',
 										}}
 									>
-										<p className='blockquote blockquote-info' id='1234'>
-											<div>{t('Garantia')}</div>
+										<p className='blockquote ' id='1234'>
+											<div>
+												<h4>{t('Garantia')}</h4>
+											</div>
 											{t('+ Calidad')} <br />
 											{t('+ Comodidad')}
 											<br />
@@ -100,7 +93,9 @@ function Inicio(props) {
 											backgroundImage: 'url(' + img2 + ')',
 										}}
 									></div>
-									<p>Sericio 24/7</p>
+									<p>
+										<h4>Sericio 24/7</h4>
+									</p>
 									<p>
 										{t(
 											'Estamos a tu disposición 24/7 durante toda tu estancia. Cuidamos y mantenemos nuestras propiedades revisando cada detalle. Si hay algo que podamos hacer para mejorar tu estancia, avísanos y estaremos encantados de ayudarte.'

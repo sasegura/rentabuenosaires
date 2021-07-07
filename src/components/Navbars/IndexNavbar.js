@@ -109,7 +109,7 @@ const IndexNavbar = (props) => {
 							}}
 						>
 							{/*<p>{t("Cerrar Sesión")}</p>*/}
-							{<p>Log Out</p>}
+							{<p className='fontFamily'>Log Out</p>}
 						</NavLink>
 					</Link>
 				</NavItem>
@@ -127,7 +127,7 @@ const IndexNavbar = (props) => {
 							}}
 						>
 							{/*<p>{t("Entrar")}</p>*/}
-							<p>Log In</p>
+							<p className='fontFamily'>Log In</p>
 						</NavLink>
 					</Link>
 				</NavItem>
@@ -182,16 +182,16 @@ const IndexNavbar = (props) => {
 										nav
 										onClick={(e) => e.preventDefault()}
 									>
-										<p>{t('Administracion')}</p>
+										<p className='fontFamily'>{t('Administracion')}</p>
 									</DropdownToggle>
 									<DropdownMenu>
 										<DropdownItem to={linkAdicionar} tag={Link}>
 											<i className='now-ui-icons mr-1'></i>
-											{t('Pisos')}
+											<p className='fontFamily'>{t('Pisos')}</p>
 										</DropdownItem>
 										<DropdownItem to={linkReservaciones} tag={Link}>
 											<i className='now-ui-icons mr-1'></i>
-											{t('Reservaciones')}
+											<p className='fontFamily'>{t('Reservaciones')}</p>
 										</DropdownItem>
 									</DropdownMenu>
 								</UncontrolledDropdown>
@@ -206,7 +206,7 @@ const IndexNavbar = (props) => {
 									nav
 									onClick={(e) => e.preventDefault()}
 								>
-									<p>{t('Destinos')}</p>
+									<p className='fontFamily'>{t('Destinos')}</p>
 								</DropdownToggle>
 								<DropdownMenu>
 									{destinos !== null ? (
@@ -223,7 +223,7 @@ const IndexNavbar = (props) => {
 												tag={Link}
 											>
 												<i className='now-ui-icons mr-1'></i>
-												{nombre}
+												<p className='fontFamily'>{nombre}</p>
 											</DropdownItem>
 										))
 									) : (
@@ -235,7 +235,7 @@ const IndexNavbar = (props) => {
 							<NavItem>
 								<Link to={linkNosotros}>
 									<NavLink target='_self' className={navbarTextColor}>
-										<p>{t('Nosotros')}</p>
+										<p className='fontFamily'>{t('Nosotros')}</p>
 									</NavLink>
 								</Link>
 							</NavItem>
@@ -243,7 +243,7 @@ const IndexNavbar = (props) => {
 							<NavItem>
 								<Link to={linkPropietarios}>
 									<NavLink target='_self' className={navbarTextColor}>
-										<p>{t('Propietarios')}</p>
+										<p className='fontFamily'>{t('Propietarios')}</p>
 									</NavLink>
 								</Link>
 							</NavItem>
@@ -251,7 +251,7 @@ const IndexNavbar = (props) => {
 							<NavItem>
 								<Link to={linkMensaje}>
 									<NavLink target='_self' className={navbarTextColor}>
-										<p>{t('Contactar')}</p>
+										<p className='fontFamily'>{t('Contactar')}</p>
 									</NavLink>
 								</Link>
 							</NavItem>
@@ -274,7 +274,7 @@ const IndexNavbar = (props) => {
 										tag={Link}
 									>
 										<img alt='...' className='n-logo bandera' src={eng} />
-										{t('Inglés')}
+										<p className='fontFamily'>{t('Inglés')}</p>
 									</DropdownItem>
 									<DropdownItem
 										to='/'
@@ -282,7 +282,7 @@ const IndexNavbar = (props) => {
 										tag={Link}
 									>
 										<img alt='...' className='n-logo bandera' src={esp} />
-										{t('Español')}
+										<p className='fontFamily'>{t('Español')}</p>
 									</DropdownItem>
 								</DropdownMenu>
 							</UncontrolledDropdown>
@@ -300,7 +300,7 @@ const IndexNavbar = (props) => {
 									<p className='d-lg-none d-xl-none'>Facebook</p>
 								</NavLink>
 								<UncontrolledTooltip target='#facebook-tooltip'>
-									{t('Síguenos en Facebook')}
+									<p className='fontFamily'>{t('Síguenos en Facebook')}</p>
 								</UncontrolledTooltip>
 							</NavItem>
 							<NavItem>
@@ -314,7 +314,7 @@ const IndexNavbar = (props) => {
 									<p className='d-lg-none d-xl-none'>Instagram</p>
 								</NavLink>
 								<UncontrolledTooltip target='#instagram-tooltip'>
-									{t('Síguenos en Instagram')}
+									<p className='fontFamily'>{t('Síguenos en Instagram')}</p>
 								</UncontrolledTooltip>
 							</NavItem>
 						</Nav>

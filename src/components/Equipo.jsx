@@ -33,7 +33,7 @@ const Equipo = (props) => {
 									src={foto2}
 								></img>
 								<h4 className='title'>Jonathan Berman</h4>
-								<p className='category text-info'>
+								<p className='category '>
 									{t('Director ejecutivo & Co-Fundador')}{' '}
 								</p>
 							</div>
@@ -46,9 +46,7 @@ const Equipo = (props) => {
 									src={foto1}
 								></img>
 								<h4 className='title'>Luciana Carino Hasperué</h4>
-								<p className='category text-info'>
-									{t('Jefa de diseño & Co-Fundadora')}
-								</p>
+								<p className='category'>{t('Jefa de diseño & Co-Fundadora')}</p>
 							</div>
 						</Col>
 						<Col md='3'>
@@ -59,7 +57,7 @@ const Equipo = (props) => {
 									src={foto2}
 								></img>
 								<h4 className='title'>Luis Alberto</h4>
-								<p className='category text-info'>{t('Jefe de servicio')} </p>
+								<p className='category'>{t('Jefe de servicio')} </p>
 							</div>
 						</Col>
 						<Col md='3'>
@@ -70,7 +68,7 @@ const Equipo = (props) => {
 									src={foto3}
 								></img>
 								<h4 className='title'>Alicia Ghignone</h4>
-								<p className='category text-info'>
+								<p className='category'>
 									{t('Coordinadora de servicio al cliente')}{' '}
 								</p>
 							</div>
