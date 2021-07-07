@@ -1,63 +1,71 @@
 .collection-item {
-    width: 22%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 15px;
+	width: 22%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 15px;
 }
 
-.card1{
-  margin: 10px !important;
-  padding: 0 !important;
+.card1 {
+	margin: 10px !important;
+	padding: 0 !important;
 }
 .image {
-  width: 100%;
-  height: 95%;
-  background-size: cover;
-  background-position: center;
-  margin-bottom: 0px;
-  margin-top: 0px;
-} 
+	width: 100%;
+	height: 95%;
+	background-size: cover;
+	background-position: center;
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
 
 .card-title {
-  margin-top: 2px !important;
+	margin-top: 2px !important;
 }
 
-.cardbody{
-    text-align: center;
+.cardbody {
+	text-align: center;
 }
 
-.imagenDiv{
-  width: 100%;
-  height: 300px;
-  background: #fff;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
+.imagenDiv {
+	width: 100%;
+	height: 300px;
+	background: #fff;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
 }
 
-.imagenDiv img{
-  width: 100%;
-  height: auto;
-  
+.imagenDiv img {
+	width: 100%;
+	height: auto;
 }
 
-.imagenDiv .cargando{
-  
-  height: auto;
-  
+.imagenDiv .cargando {
+	height: auto;
 }
-@supports(object-fit: cover){
-    .imagenDiv img{
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
-    }
+@supports (object-fit: cover) {
+	.imagenDiv img {
+		height: 100%;
+		object-fit: cover;
+		object-position: center center;
+	}
 }
 
-.card-text{
-  font-size: 14px !important;
-  margin-bottom: 2px !important;
+.card-text {
+	font-size: 14px !important;
+	margin-bottom: 2px !important;
 }
-  
-  
+
+.padding05 {
+	padding: 0.5em !important;
+}
+.padding0 {
+	padding: 0em !important;
+}
+.minHeight135 {
+	min-height: 135px;
+}
+.maxHeight10 {
+	max-height: 50px;
+}

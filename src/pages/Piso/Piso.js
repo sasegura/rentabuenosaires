@@ -441,7 +441,7 @@ const Piso = (props) => {
 				</div>
 				<div className='p-field p-col-12'>
 					<label className='marginLeft10px' htmlFor='calendar'>
-						{t('Seleccione un rango')}
+						{t('Seleccione fechas')}
 					</label>
 					<div>
 						<Calendar
@@ -455,6 +455,7 @@ const Piso = (props) => {
 							disabledDates={disabledDates}
 							baseZIndex={500}
 							readOnlyInput
+							dateFormat='dd/mm/yy'
 						/>
 						<Calendar
 							id='calendarend'
@@ -468,6 +469,7 @@ const Piso = (props) => {
 							disabledDates={disabledDates}
 							baseZIndex={500}
 							readOnlyInput
+							dateFormat='dd/mm/yy'
 						/>
 					</div>
 					<div className='marginLeft10px'>
