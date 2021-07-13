@@ -50,6 +50,7 @@ function LandingPageHeader(props) {
 							{t('Tu vida es única')}
 							<br />
 							<br />
+							<br />
 							{t('Vive en un lugar extraordinario')}
 						</h1>
 					</Container>

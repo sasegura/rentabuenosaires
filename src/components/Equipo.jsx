@@ -14,9 +14,10 @@ import {
 import { setCurrentDestino } from 'redux/destino/destino.action';
 import { setCurrentNavBarColor } from 'redux/navBarColor/navBarColor.action';
 import { setCurrentUsuario } from 'redux/usuario/usuario.action';
-import foto1 from 'assets/img/avatar.jpg';
-import foto2 from 'assets/img/ryan.jpg';
-import foto3 from 'assets/img/eva.jpg';
+import foto1 from 'assets/img/luciana.jpg';
+import foto2 from 'assets/img/jona.jpg';
+import foto3 from 'assets/img/ryan.jpg';
+import foto4 from 'assets/img/alicia.jpg';
 const Equipo = (props) => {
 	const { t } = props;
 	return (
@@ -28,8 +29,8 @@ const Equipo = (props) => {
 						<Col md='3'>
 							<div className='team-player'>
 								<img
-									alt='Nombre Apellido 1'
-									className='rounded-circle img-fluid img-raised'
+									alt='Jonathan Berman'
+									className='rounded-circle img-fluid img-raised height100px'
 									src={foto2}
 								></img>
 								<h4 className='title'>Jonathan Berman</h4>
@@ -42,7 +43,7 @@ const Equipo = (props) => {
 							<div className='team-player'>
 								<img
 									alt='Luciana Carino Hasperué'
-									className='rounded-circle img-fluid img-raised'
+									className='rounded-circle img-fluid img-raised height100px'
 									src={foto1}
 								></img>
 								<h4 className='title'>Luciana Carino Hasperué</h4>
@@ -52,9 +53,9 @@ const Equipo = (props) => {
 						<Col md='3'>
 							<div className='team-player'>
 								<img
-									alt='Luis'
-									className='rounded-circle img-fluid img-raised'
-									src={foto2}
+									alt='Luis Alberto'
+									className='rounded-circle img-fluid img-raised height100px'
+									src={foto3}
 								></img>
 								<h4 className='title'>Luis Alberto</h4>
 								<p className='category'>{t('Jefe de servicio')} </p>
@@ -63,9 +64,9 @@ const Equipo = (props) => {
 						<Col md='3'>
 							<div className='team-player'>
 								<img
-									alt='Alicia'
-									className='rounded-circle img-fluid img-raised'
-									src={foto3}
+									alt='Alicia Ghignone'
+									className='rounded-circle img-fluid img-raised height100px'
+									src={foto4}
 								></img>
 								<h4 className='title'>Alicia Ghignone</h4>
 								<p className='category'>
