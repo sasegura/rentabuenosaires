@@ -151,7 +151,7 @@ const IndexNavbar = (props) => {
 					<div className='navbar-translate'>
 						{/*logo*/}
 						<Link to={index}>
-							<div className='width20'>
+							<div className='width100'>
 								<img alt={'Logo'} src={logo} />
 							</div>
 						</Link>
