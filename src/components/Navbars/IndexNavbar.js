@@ -75,12 +75,18 @@ const IndexNavbar = (props) => {
 			setNavbarColor('navbar-transparent');
 			setNavbarTextColor('white');
 			const updateNavbarColor = () => {
-				if (document.documentElement.scrollTop > 3 || document.body.scrollTop > 3) {
-					setNavbarColor('');
-					setNavbarTextColor('black');
-				} else if (document.documentElement.scrollTop < 4 || document.body.scrollTop < 4) {
-					setNavbarColor('navbar-transparent');
-					setNavbarTextColor('white');
+				if (props.currentNavBarColor) {
+					console.log(props);
+					if (document.documentElement.scrollTop > 3 || document.body.scrollTop > 3) {
+						setNavbarColor('');
+						setNavbarTextColor('black');
+					} else if (
+						document.documentElement.scrollTop < 4 ||
+						document.body.scrollTop < 4
+					) {
+						setNavbarColor('navbar-transparent');
+						setNavbarTextColor('white');
+					}
 				}
 			};
 			window.addEventListener('scroll', updateNavbarColor);

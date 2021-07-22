@@ -22,7 +22,8 @@ import {
 
 // Imagenes
 import img1 from 'assets/img/login.jpg';
-import img2 from 'assets/img/now-logo.png';
+import img2 from 'assets/img/logo-de-alquiler.png';
+import img3 from 'assets/img/now-logo.png';
 import AxiosConexionConfig from 'conexion/AxiosConexionConfig';
 import { index } from 'configuracion/constantes';
 import { useHistory } from 'react-router';
@@ -183,7 +184,7 @@ function LoginPage(props) {
 										<Button
 											block
 											className='btn-round'
-											color='info'
+											color='btn-primary'
 											href='#pablo'
 											onClick={(e) => handleSubmit(e)}
 											size='lg'

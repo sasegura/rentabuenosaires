@@ -84,7 +84,7 @@ function MyCard(props, { match, destino, link, history, cantHab, nombre }) {
 				<CardBody className='cardbody col-12 '>
 					<div className='flex p-col-12 padding0'>
 						<div className=' p-col-12 p-md-7 padding0'>
-							<h5 className=''>
+							<h5 className='p-mb-0'>
 								{props.nombre.substr(0, 29)}
 								{props.nombre.length > 30 ? '...' : null}
 							</h5>
