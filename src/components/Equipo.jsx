@@ -23,7 +23,7 @@ const Equipo = (props) => {
 	return (
 		<div className='sectionEquipo section-team text-center'>
 			<Container>
-				<h2 className='title'>{t('Este es nuestro equipo')}</h2>
+				<h2 className=''>{t('Este es nuestro equipo')}</h2>
 				<div className='team'>
 					<Row>
 						<Col md='3'>

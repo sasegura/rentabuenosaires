@@ -51,6 +51,7 @@ function LandingPageHeader(props) {
 							<br />
 							<br />
 							<br />
+							<br />
 							{t('Vive en un lugar extraordinario')}
 						</h1>
 					</Container>

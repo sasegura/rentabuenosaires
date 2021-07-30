@@ -85,8 +85,8 @@ function MyCard(props, { match, destino, link, history, cantHab, nombre }) {
 					<div className='flex p-col-12 padding0'>
 						<div className=' p-col-12 p-md-7 padding0'>
 							<h5 className='p-mb-0'>
-								{props.nombre.substr(0, 29)}
-								{props.nombre.length > 30 ? '...' : null}
+								{props.nombre.substr(0, 25)}
+								{props.nombre.length > 26 ? '...' : null}
 							</h5>
 							<p className='card-location margin-bottom0'>{props.destino}</p>
 						</div>
@@ -122,10 +122,8 @@ function MyCard(props, { match, destino, link, history, cantHab, nombre }) {
 						</div>
 						<div className=' p-col-12 p-md-5'>
 							<Button
-								type='submit'
 								color='primary'
-								href='#pablo'
-								className='margin0'
+								className='margin0 p-pb-1 p-pt-1 p-pl-2 p-pr-2'
 								onClick={(e) => handleSubmit(e)}
 							>
 								{t('Ver detalles')}

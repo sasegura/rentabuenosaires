@@ -30,7 +30,10 @@ const Nosotros = (props) => {
 
 	return (
 		<>
-			<div className={props.inicio ? null : 'section ' + 'section-contact-us text-center'}>
+			<div
+				id='enviar_mensaje'
+				className={props.inicio ? null : 'section ' + 'section-contact-us text-center'}
+			>
 				<Container>
 					<h2>{t('Te ofrecemos un servicio de alquiler')}</h2>
 					<h2>{t('de primer nivel.')}</h2>

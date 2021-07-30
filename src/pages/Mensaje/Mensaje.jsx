@@ -112,8 +112,8 @@ const Mensaje = (props) => {
 				}
 			>
 				<Container>
-					<h2 className='title'>{t('Envíanos un mensaje')}</h2>
-					<p className='description'>
+					<h2 className=''>{t('Envíanos un mensaje')}</h2>
+					<p className='fontFamily'>
 						{t('Tus comentarios son muy importantes para nosotros')}
 					</p>
 					<Form

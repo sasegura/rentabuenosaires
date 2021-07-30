@@ -54,7 +54,7 @@ const Piso = (props) => {
 	const amenitiesGenerales = amenitiesGeneralesConst;
 	const amenitiesGeneralesText = amenitiesGeneralesTextConst;
 	const [activeIndex, setactiveIndex] = useState([]);
-
+	const [reloadCarrusel, setReloadCarrusel] = useState(false);
 	const [visibleDialog, setVisibleDialog] = useState(false);
 	const [valorDialog, setValorDialog] = useState('');
 	const [acept, setAcept] = useState(false);
@@ -137,11 +137,35 @@ const Piso = (props) => {
 	}, [dateEnd, huesped]);
 
 	async function getImagenes() {
+		const url2 = '/imagen?filter=';
+		let imagenesTemp = null;
+		const valores = JSON.stringify({
+			where: {
+				and: [{ idpiso: idPiso }, { portada: true }],
+			},
+		});
+		const valores2 = JSON.stringify({
+			where: {
+				and: [{ idpiso: idPiso }, { portada: false }],
+			},
+		});
+		try {
+			const respuesta = await AxiosConexionConfig.get(url2 + encodeURIComponent(valores));
+			imagenesTemp = respuesta.data;
+			console.log(imagenesTemp);
+			setImagenes(imagenesTemp);
+			setLoadImg(true);
+		} catch (e) {
+			console.log(e);
+		}
+
 		const url = '/imagen?filter[where][idpiso]=' + idPiso;
 		try {
-			const imagen = await AxiosConexionConfig.get(url);
-			setImagenes(imagen.data);
-			setLoadImg(true);
+			const imagen = await AxiosConexionConfig.get(url2 + encodeURIComponent(valores2));
+			console.log(imagen.data);
+			imagen.data.forEach((im) => imagenesTemp.push(im));
+			setImagenes(imagenesTemp);
+			setReloadCarrusel(!reloadCarrusel);
 		} catch (e) {
 			console.log(e);
 		}
@@ -366,7 +390,7 @@ const Piso = (props) => {
 						<img
 							src={'data:image/png;base64,' + imagenes.imagen}
 							alt='imagen'
-							className='width100 product-image height440px'
+							className='product-image height440px'
 						/>
 					</div>
 				</div>
@@ -375,15 +399,12 @@ const Piso = (props) => {
 	};
 	const carrusel = () => {
 		return (
-			<div className='carruselDiv'>
+			<div className='carruselDiv' key={reloadCarrusel}>
 				<Carousel
 					value={imagenes}
-					circular={true}
-					verticalViewPortHeight='80px'
 					containerClassName=' '
 					numVisible={1}
 					numScroll={1}
-					responsiveOptions={responsiveOptions}
 					itemTemplate={productTemplate}
 				/>
 			</div>
@@ -432,8 +453,8 @@ const Piso = (props) => {
 			<div className=''>
 				<div className='marginLeft20px'>
 					<h4 style={{ fontFamily: 'playfair' }}>
-						{data.nombre.substr(0, 29)}
-						{data.nombre.length > 30 ? '...' : null}
+						{data.nombre.substr(0, 25)}
+						{data.nombre.length > 26 ? '...' : null}
 					</h4>
 				</div>
 				{headerTarjeta()}

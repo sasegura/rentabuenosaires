@@ -31,14 +31,14 @@ const Propietarios = (props) => {
 		<>
 			<div id='enviar_mensaje' className='section section-contact-us text-center'>
 				<Container>
-					<h2 className='title'>{t('Rentabiliza tu propiedad.')}</h2>
-					<p className='description'>
+					<h2 className=''>{t('Rentabiliza tu propiedad.')}</h2>
+					<p className='fontFamily'>
 						{t('Te ofrecemos una propuesta de alta rentabilidad para tu propiedad.')}
 						{t(
 							'Comercializamos por días, semanas o meses, y nos ocupamos de todo lo necesario.'
 						)}
 					</p>
-					<p className='description'>
+					<p className='fontFamily'>
 						{t(
 							'Cuidamos tu casa y obtenemos beneficios económicos cuando no estás en ella.'
 						)}
