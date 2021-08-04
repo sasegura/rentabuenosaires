@@ -42,11 +42,11 @@ const Equipo = (props) => {
 						<Col md='3'>
 							<div className='team-player'>
 								<img
-									alt='Luciana Carino Hasperué'
+									alt='Luciana Carino'
 									className='rounded-circle img-fluid img-raised height100px'
 									src={foto1}
 								></img>
-								<h4 className='title'>Luciana Carino Hasperué</h4>
+								<h4 className='title'>Luciana Carino </h4>
 								<p className='category'>{t('Jefa de diseño & Co-Fundadora')}</p>
 							</div>
 						</Col>

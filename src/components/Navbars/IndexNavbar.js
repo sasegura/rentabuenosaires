@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import esp from '../../assets/img/flags/ES.png';
 import eng from '../../assets/img/flags/GB.png';
+import mundoIcon from '../../assets/img/icon/mundoIcon.png';
 // reactstrap components
 import {
 	Collapse,
@@ -271,7 +272,11 @@ const IndexNavbar = (props) => {
 									nav
 									onClick={(e) => e.preventDefault()}
 								>
-									<i className='now-ui-icons location_world'></i>
+									<img
+										alt='...'
+										className='n-logo bandera width20x'
+										src={mundoIcon}
+									/>
 								</DropdownToggle>
 								<DropdownMenu>
 									<DropdownItem

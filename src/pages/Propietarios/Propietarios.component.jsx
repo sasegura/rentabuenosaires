@@ -31,9 +31,10 @@ const Propietarios = (props) => {
 		<>
 			<div id='enviar_mensaje' className='section section-contact-us text-center'>
 				<Container>
-					<h2 className=''>{t('Rentabiliza tu propiedad.')}</h2>
-					<p className='fontFamily'>
+					<h2 className=''>{t('Rentabiliza tu propiedad')}</h2>
+					<p className='fontFamily '>
 						{t('Te ofrecemos una propuesta de alta rentabilidad para tu propiedad.')}
+						{t(' ')}
 						{t(
 							'Comercializamos por días, semanas o meses, y nos ocupamos de todo lo necesario.'
 						)}

@@ -74,7 +74,9 @@ function Inicio(props) {
 									>
 										<p className='blockquote ' id='1234'>
 											<div>
-												<h4>{t('Garantia')}</h4>
+												<h4>
+													<b>{t('Garantia')}</b>
+												</h4>
 											</div>
 											{t('+ Calidad')} <br />
 											{t('+ Comodidad')}
@@ -94,7 +96,9 @@ function Inicio(props) {
 										}}
 									></div>
 									<p>
-										<h4>Sericio 24/7</h4>
+										<h4>
+											<b>{t('Sericio 24/7')}</b>
+										</h4>
 									</p>
 									<p>
 										{t(

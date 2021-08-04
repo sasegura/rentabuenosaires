@@ -676,9 +676,8 @@ const Piso = (props) => {
 				valor={valorDialog}
 				setValor={(e) => setValorDialog(e)}
 			/>
-			<div className='separador' style={{ fontFamily: 'gotham' }} />
 
-			<div className='flex p-col-12 p-d-flex'>
+			<div className='flex p-col-12 p-d-flex p-mt-4'>
 				<div className='center p-col-12 p-md-11 p-ml-4 p-d-flex'>
 					<div className='p-lg-9 p-col-12 '>
 						<Toast baseZIndex={500} ref={toast} />
