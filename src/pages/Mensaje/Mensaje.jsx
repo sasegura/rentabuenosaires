@@ -105,6 +105,7 @@ const Mensaje = (props) => {
 		<>
 			<Toast baseZIndex={500} ref={toast} />
 			<div
+				id='enviar_mensaje'
 				className={
 					!props.inicio
 						? 'section text-center text-center ml-auto mr-auto col-md-8 col-lg-6'

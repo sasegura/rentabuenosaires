@@ -15,6 +15,11 @@ import imagenTV from '../../assets/img/television.svg';
 import imagenAire from '../../assets/img/air-conditioner.svg';
 import imagencalefaccion from '../../assets/img/heating.svg';
 import imagenWifi from '../../assets/img/wifi.svg';
+import washingMachine from '../../assets/img/icon/washing-machine.svg';
+import jacuzzi from '../../assets/img/icon/jacuzzi.svg';
+import elevator from '../../assets/img/icon/elevator.svg';
+import frigorifico from '../../assets/img/icon/frigorifico.svg';
+import gym from '../../assets/img/icon/gym.svg';
 // reactstrap components
 import { Container, Row } from 'reactstrap';
 
@@ -51,8 +56,8 @@ const Piso = (props) => {
 	const [huesped, sethuesped] = useState(1);
 	const [totalCalculo, settotalCalculo] = useState(0);
 	const [calculo, setCalculo] = useState(false);
-	const amenitiesGenerales = amenitiesGeneralesConst;
-	const amenitiesGeneralesText = amenitiesGeneralesTextConst;
+	let amenitiesGenerales = amenitiesGeneralesConst;
+	let amenitiesGeneralesText = amenitiesGeneralesTextConst;
 	const [activeIndex, setactiveIndex] = useState([]);
 	const [reloadCarrusel, setReloadCarrusel] = useState(false);
 	const [visibleDialog, setVisibleDialog] = useState(false);
@@ -152,7 +157,6 @@ const Piso = (props) => {
 		try {
 			const respuesta = await AxiosConexionConfig.get(url2 + encodeURIComponent(valores));
 			imagenesTemp = respuesta.data;
-			console.log(imagenesTemp);
 			setImagenes(imagenesTemp);
 			setLoadImg(true);
 		} catch (e) {
@@ -162,7 +166,6 @@ const Piso = (props) => {
 		const url = '/imagen?filter[where][idpiso]=' + idPiso;
 		try {
 			const imagen = await AxiosConexionConfig.get(url2 + encodeURIComponent(valores2));
-			console.log(imagen.data);
 			imagen.data.forEach((im) => imagenesTemp.push(im));
 			setImagenes(imagenesTemp);
 			setReloadCarrusel(!reloadCarrusel);
@@ -171,39 +174,49 @@ const Piso = (props) => {
 		}
 	}
 	let datos = [];
+	const amenitieForm = (imagen, text) => {
+		amenitiesGeneralesText.map((pos, index) => {
+			if (pos === text) {
+				amenitiesGenerales.splice(index, 1);
+				amenitiesGeneralesText.splice(index, 1);
+			}
+		});
+		return (
+			<div className='p-col-12 p-md-3'>
+				<img src={imagen} alt='' width={'20px'} />
+				<span className='marginLeft5px'>{t(text)}</span>
+			</div>
+		);
+	};
 	const amenitiesList = (data) => {
 		let a = [];
 		if (data.wifi) {
-			a.push(
-				<div className='p-col-12 p-md-3'>
-					<img src={imagenWifi} alt='' width={'20px'} />
-					<span className='marginLeft5px'>Wifi</span>
-				</div>
-			);
+			a.push(amenitieForm(imagenWifi, 'Wifi'));
 		}
 		if (data.calefaccion) {
-			a.push(
-				<div className='p-col-12 p-md-3'>
-					<img src={imagencalefaccion} width={'20px'} alt='' />
-					<span className='marginLeft5px'>{t('Calefacción')}</span>
-				</div>
-			);
+			a.push(amenitieForm(imagencalefaccion, 'calefaccion'));
+			delete amenitiesGenerales.calefaccion;
 		}
 		if (data.aireacondicionado) {
-			a.push(
-				<div className='p-col-12 p-md-3'>
-					<img src={imagenAire} width={'20px'} alt='' />
-					<span className='marginLeft5px'>{t('Aire Acondicionado')}</span>
-				</div>
-			);
+			a.push(amenitieForm(imagenAire, 'aireacondicionado'));
 		}
 		if (data.tvcable) {
-			a.push(
-				<div className='p-col-12 p-md-3'>
-					<img src={imagenTV} alt='' width={'20px'} />
-					<span className='marginLeft5px'>TV</span>
-				</div>
-			);
+			a.push(amenitieForm(imagenTV, 'TV'));
+			delete amenitiesGenerales.tv;
+		}
+		if (data.lavasecadora || data.lavadora) {
+			if (data.lavasecadora) {
+				a.push(amenitieForm(washingMachine, 'Lavadora/Secadora'));
+			} else {
+				a.push(amenitieForm(washingMachine, 'Lavadora'));
+			}
+		}
+		if (data.gimnasio) {
+			a.push(amenitieForm(gym, 'Gimnasio'));
+			delete amenitiesGenerales.gimnasio;
+		}
+		if (data.jacuzzi) {
+			a.push(amenitieForm(jacuzzi, 'Jacuzzi'));
 		}
 		setAmenities(a);
 	};
@@ -412,8 +425,6 @@ const Piso = (props) => {
 	};
 
 	const BuscarEnIntervalo = (begin, end) => {
-		console.log(begin);
-		console.log(end);
 		let flag = false;
 		disabledDates.map((pos) => {
 			console.log(pos);
@@ -549,44 +560,68 @@ const Piso = (props) => {
 			</div>
 		);
 	};
+	const [readMore, setReadMore] = useState(false);
 	const DatosPiso = () => {
 		return (
-			<Container>
-				<div className='p-col-12 flex'>
-					<div className='p-col-12 p-md-1'></div>
-					<div className='p-col-12 p-md-11'>
-						<div>
-							<h1 style={{ fontFamily: 'playfair' }}>
-								{data.nombre}
-								<span className='marginLeft5px'></span>-
-								<span className='marginLeft5px'></span>
-								{destino?.nombre}
-							</h1>
-						</div>
-						{headerTarjeta()}
-						<div>
-							<h4>{data.descripcion}</h4>
-						</div>
-						<Row>{t('Comodidades')}</Row>
-						<Row>
-							{amenities?.map((dato, index) => {
-								return <Fragment key={index}>{dato}</Fragment>;
-							})}
-						</Row>
-						<Row>
-							{amenitiesGenerales.map((dato, index) => {
-								return data[dato] ? (
-									<div key={index} className='p-col-12 p-md-3'>
-										{amenitiesGeneralesText[index]}
-									</div>
-								) : (
-									''
-								);
-							})}
-						</Row>
+			<div className='p-col-12 flex'>
+				<div className='p-col-12 p-md-1'></div>
+				<div className='p-col-12 p-md-11'>
+					<div>
+						<h1 style={{ fontFamily: 'playfair' }}>
+							{data.nombre}
+							<span className='marginLeft5px'></span>-
+							<span className='marginLeft5px'></span>
+							{destino?.nombre}
+						</h1>
 					</div>
+					{headerTarjeta()}
+
+					{!readMore ? (
+						<div>
+							<h5>
+								{data.descripcion.substr(0, 255)}
+
+								<a
+									onClick={() => setReadMore(true)}
+									className=' p-text-bold read-more-less'
+								>
+									...{t('read more')}
+								</a>
+							</h5>
+						</div>
+					) : (
+						<div>
+							<h5>
+								{data.descripcion}
+								<a
+									onClick={() => setReadMore(false)}
+									className=' p-text-bold read-more-less'
+								>
+									{t('read less')}
+								</a>
+							</h5>
+						</div>
+					)}
+
+					<Row>{t('Comodidades')}</Row>
+					<Row>
+						{amenities?.map((dato, index) => {
+							return <Fragment key={index}>{dato}</Fragment>;
+						})}
+					</Row>
+					<Row>
+						{amenitiesGenerales.map((dato, index) => {
+							return data[dato] ? (
+								<div key={index} className='p-col-12 p-md-3'>
+									{amenitiesGeneralesText[index]}
+								</div>
+							) : (
+								''
+							);
+						})}
+					</Row>
 				</div>
-			</Container>
+			</div>
 		);
 	};
 	const fila = (datosFila, texto) => {
@@ -643,10 +678,9 @@ const Piso = (props) => {
 			/>
 			<div className='separador' style={{ fontFamily: 'gotham' }} />
 
-			<div className='flex p-col-12'>
-				<div className='p-col-12 p-md-1'></div>
-				<div className='center p-col-12 p-md-10'>
-					<div className='p-lg-9 p-col-12 floatLeft'>
+			<div className='flex p-col-12 p-d-flex'>
+				<div className='center p-col-12 p-md-11 p-ml-4 p-d-flex'>
+					<div className='p-lg-9 p-col-12 '>
 						<Toast baseZIndex={500} ref={toast} />
 						{loadImg ? (
 							carrusel()
@@ -656,7 +690,7 @@ const Piso = (props) => {
 							</div>
 						)}
 					</div>
-					<div className='p-lg-3 p-col-12 floatLeft'>
+					<div className='p-lg-3 p-col-12 p-p-0'>
 						<div className='card p-col-12' style={{ fontFamily: 'gotham' }}>
 							{loadData ? (
 								TarjetPiso()
@@ -670,7 +704,7 @@ const Piso = (props) => {
 				</div>
 			</div>
 			<div className='floatLeft p-col-12'>
-				<div className='floatLeft p-col-12 p-md-12 p-lg-8' style={{ fontFamily: 'gotham' }}>
+				<div className='floatLeft p-col-12 p-md-12' style={{ fontFamily: 'gotham' }}>
 					{loadData ? (
 						DatosPiso()
 					) : (
@@ -679,9 +713,12 @@ const Piso = (props) => {
 						</div>
 					)}
 				</div>
-				<div className='p-lg-3 p-col-12 floatLeft' style={{ fontFamily: 'gotham' }}>
+			</div>
+			<div className=' p-col-12 p-d-flex'>
+				<div className=' p-col-12 p-md-1'></div>
+				<div className=' p-col-12 p-md-10 p-p-0 floatLeft' style={{ fontFamily: 'gotham' }}>
 					{loadData ? (
-						<div className='p-col-12 card'>
+						<div className='p-col-12 p-p-0 card'>
 							<Maps piso={data} />
 						</div>
 					) : (

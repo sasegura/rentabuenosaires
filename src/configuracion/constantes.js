@@ -37,6 +37,8 @@ export const amenitiesGeneralesConst = [
 	'utensiliosCocina',
 	'zonaTrabajar',
 	'platosCubiertos',
+	'calefaccion',
+	'wifi',
 ];
 export const amenitiesGeneralesTextConst = [
 	'Tendedero para ropa',
@@ -55,6 +57,8 @@ export const amenitiesGeneralesTextConst = [
 	'Utensilios de Cocina',
 	'Zona de Trabajar',
 	'Platos y Cubiertos',
+	'Calefacción',
+	'Wifi',
 ];
 export const pisos = [
 	{

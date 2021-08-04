@@ -4,7 +4,7 @@
 }
 
 .separador {
-	height: 65px !important;
+	height: 0px !important;
 }
 
 .carruselDiv {
@@ -19,7 +19,7 @@
 }
 .leaflet-container {
 	width: 100%;
-	height: 40vh;
+	height: 100vh;
 }
 
 .seccion {
@@ -52,4 +52,32 @@
 	font-size: 14px;
 	color: #757575;
 	font-weight: 700;
+}
+
+h5 {
+	.textButton {
+		background-color: transparent !important;
+		color: #2196f3 !important;
+		border-color: transparent !important;
+		&:hover {
+			background-color: transparent !important;
+			color: #2196f3 !important;
+			border: 0px transparent !important;
+		}
+		&:focus {
+			background-color: transparent !important;
+			color: #2196f3 !important;
+			border: 0px transparent !important;
+		}
+		&:active {
+			background-color: transparent !important;
+			color: #2196f3 !important;
+			border: 0px transparent !important;
+		}
+	}
+}
+.read-more-less {
+	&:hover {
+		cursor: pointer;
+	}
 }
