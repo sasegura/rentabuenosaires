@@ -26,7 +26,6 @@ function DarkFooter(props) {
 						<Link to={linkMensaje}>
 							<p className='fontFamily'>{t('Contactar')}</p>
 						</Link>
-						© 2021 E-HomeSelect. All Rights Reserved.
 					</div>
 					<div className='p-col-12 p-md-4'>
 						<p>{t('Nuestros objetivos')}:</p>"
@@ -35,41 +34,36 @@ function DarkFooter(props) {
 						<br />"{t('Limpieza y seguridad son nuestras prioridades')}"
 					</div>
 					<div className='p-col-12 p-md-4'>
-						WHATSAPP
-						<br />
+						<p>{t('Contáctanos')}</p>
 						{t('Reservas')}: +34 626 151 223
 						<br />
 						{t('Atención al cliente')}: +54 911 3848 4956
 						<br />
 						<br />
-						<SocialIcon url='https://api.whatsapp.com/send?phone=34123456789' />
-						<SocialIcon url='https://facebook.com/e-homeselect' />
-						<SocialIcon url='mailto:administrador@e-homeselect.com' network='mailto' />
-						<SocialIcon url='https://linkedin.com/e-homeselect' />
+						<SocialIcon
+							className='p-mr-2'
+							style={{ width: '40px', height: '40px' }}
+							url='https://api.whatsapp.com/send?phone=34123456789'
+						/>
+						<SocialIcon
+							style={{ width: '40px', height: '40px' }}
+							className='p-mr-2'
+							url='https://facebook.com/e-homeselect'
+						/>
+						<SocialIcon
+							className='p-mr-2'
+							style={{ width: '40px', height: '40px' }}
+							url='mailto:administrador@e-homeselect.com'
+							network='mailto'
+						/>
+						<SocialIcon
+							style={{ width: '40px', height: '40px' }}
+							className='p-mr-2'
+							url='https://linkedin.com/e-homeselect'
+						/>
 					</div>
 				</div>
-				<nav>
-					<ul>
-						<li>
-							<a
-								href='https://www.creative-tim.com?ref=nukr-dark-footer'
-								target='_blank'
-							></a>
-						</li>
-						<li>
-							<a
-								href='http://presentation.creative-tim.com?ref=nukr-dark-footer'
-								target='_blank'
-							></a>
-						</li>
-						<li>
-							<a
-								href='http://blog.creative-tim.com?ref=nukr-dark-footer'
-								target='_blank'
-							></a>
-						</li>
-					</ul>
-				</nav>
+				<div className='p-text-center'>© 2021 E-HomeSelect. All Rights Reserved.</div>
 			</Container>
 		</footer>
 	);
