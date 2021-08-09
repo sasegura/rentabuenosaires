@@ -4,6 +4,7 @@ import { linkPropietarios } from 'configuracion/constantes';
 import { linkNosotros } from 'configuracion/constantes';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { SocialIcon } from 'react-social-icons';
 // reactstrap components
 import { Container } from 'reactstrap';
 import { withTranslation } from 'react-i18next';
@@ -25,21 +26,26 @@ function DarkFooter(props) {
 						<Link to={linkMensaje}>
 							<p className='fontFamily'>{t('Contactar')}</p>
 						</Link>
+						© 2021 E-HomeSelect. All Rights Reserved.
 					</div>
 					<div className='p-col-12 p-md-4'>
-						<p>{t('Nosotros')}:</p>
-						Te ofrecemos un servicio de alquiler de primer nivel. Queremos que te
-						sientas especial. <br />A lo largo de los últimos años hemos conocido más de
-						100 ciudades, lo que nos ayuda a entender qué necesitas y valoras del lugar
-						donde te hospedas.
+						<p>{t('Nuestros objetivos')}:</p>"
+						{t('Servicio de alquiler de primer nivel')}"
+						<br />"{t('Tu estancia será perfecta')}"
+						<br />"{t('Limpieza y seguridad son nuestras prioridades')}"
 					</div>
 					<div className='p-col-12 p-md-4'>
-						<p>Get in touch</p>
-						Reservations: +34 911 438 350
-						<img src={whatsapp} alt={'Whatsapp'} style={{ width: '15px' }} />
+						WHATSAPP
 						<br />
-						Guest Services: +34 911 43 83 32
-						<img src={whatsapp} alt={'Whatsapp'} style={{ width: '15px' }} />
+						{t('Reservas')}: +34 626 151 223
+						<br />
+						{t('Atención al cliente')}: +54 911 3848 4956
+						<br />
+						<br />
+						<SocialIcon url='https://api.whatsapp.com/send?phone=34123456789' />
+						<SocialIcon url='https://facebook.com/e-homeselect' />
+						<SocialIcon url='mailto:administrador@e-homeselect.com' network='mailto' />
+						<SocialIcon url='https://linkedin.com/e-homeselect' />
 					</div>
 				</div>
 				<nav>
