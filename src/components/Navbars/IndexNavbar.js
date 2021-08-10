@@ -77,7 +77,6 @@ const IndexNavbar = (props) => {
 			setNavbarTextColor('white');
 			const updateNavbarColor = () => {
 				if (props.currentNavBarColor) {
-					console.log(props);
 					if (document.documentElement.scrollTop > 3 || document.body.scrollTop > 3) {
 						setNavbarColor('');
 						setNavbarTextColor('black');
