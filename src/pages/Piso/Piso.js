@@ -609,17 +609,6 @@ const Piso = (props) => {
 							return <Fragment key={index}>{dato}</Fragment>;
 						})}
 					</Row>
-					<Row>
-						{amenitiesGenerales.map((dato, index) => {
-							return data[dato] ? (
-								<div key={index} className='p-col-12 p-md-3'>
-									{amenitiesGeneralesText[index]}
-								</div>
-							) : (
-								''
-							);
-						})}
-					</Row>
 				</div>
 			</div>
 		);
@@ -631,7 +620,7 @@ const Piso = (props) => {
 					<Row>
 						{datosFila.split(',').map((dato, index) => {
 							return dato ? (
-								<div key={index} className='p-col-4'>
+								<div key={index} className='p-col-12 p-md-3 p-sm-6'>
 									{t(dato.trim())}
 								</div>
 							) : (
@@ -677,29 +666,27 @@ const Piso = (props) => {
 				setValor={(e) => setValorDialog(e)}
 			/>
 			{loadData ? (
-				<div>
-					<div className='flex p-col-12 p-d-flex p-mt-4'>
-						<div className='center p-col-12 p-md-11 p-ml-4 p-d-flex'>
-							<div className='p-lg-9 p-col-12 '>
-								<Toast baseZIndex={500} ref={toast} />
-								{loadImg ? (
-									carrusel()
+				<div className='p-col-12'>
+					<div className='center p-col-12 p-md-11 p-ml-4 p-mt-4 p-d-flex'>
+						<div className='p-md-9 p-col-12 '>
+							<Toast baseZIndex={500} ref={toast} />
+							{loadImg ? (
+								carrusel()
+							) : (
+								<div className='loaddingCenter'>
+									<img alt='imagen' src={imagenLoading} />
+								</div>
+							)}
+						</div>
+						<div className='p-md-3 p-col-12 p-p-0'>
+							<div className='card p-col-12' style={{ fontFamily: 'gotham' }}>
+								{loadData ? (
+									TarjetPiso()
 								) : (
 									<div className='loaddingCenter'>
 										<img alt='imagen' src={imagenLoading} />
 									</div>
 								)}
-							</div>
-							<div className='p-lg-3 p-col-12 p-p-0'>
-								<div className='card p-col-12' style={{ fontFamily: 'gotham' }}>
-									{loadData ? (
-										TarjetPiso()
-									) : (
-										<div className='loaddingCenter'>
-											<img alt='imagen' src={imagenLoading} />
-										</div>
-									)}
-								</div>
 							</div>
 						</div>
 					</div>
