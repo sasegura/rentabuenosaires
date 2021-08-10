@@ -24,6 +24,7 @@ import Equipo from 'components/Equipo';
 
 const Nosotros = (props) => {
 	const { t } = props;
+	const { isInicioPage } = props;
 	const [firstFocus, setFirstFocus] = React.useState(false);
 	const [lastFocus, setLastFocus] = React.useState(false);
 
@@ -98,7 +99,7 @@ const Nosotros = (props) => {
 					</div>
 				</Container>
 			</div>
-			<Equipo />
+			{!isInicioPage && <Equipo />}
 		</>
 	);
 };

@@ -59,7 +59,7 @@ function Inicio(props) {
 					<Container>
 						<Row>
 							<Col className='ml-auto mr-auto text-center'>
-								<Nosotros inicio />
+								<Nosotros isInicioPage />
 							</Col>
 						</Row>
 						<div className='separator separator-primary'></div>
