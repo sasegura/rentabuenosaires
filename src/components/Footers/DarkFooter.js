@@ -13,10 +13,11 @@ function DarkFooter(props) {
 	const { t } = props;
 	return (
 		<footer className='footer' data-background-color='black'>
-			<Container>
-				<div className='p-col-12 p-d-flex'>
-					<div className='p-col-12 p-md-4'>
-						<p>Enlaces comunes:</p>
+			<div className='p-col-12 p-p-0 p-d-flex'>
+				<div className='p-col-12 p-p-0 p-md-1'></div>
+				<div className='p-col-12 p-p-0 p-md-10 p-d-flex'>
+					<div className='p-col-12  p-md-4'>
+						<p>{t('Enlaces comunes')}:</p>
 						<Link to={linkNosotros}>
 							<p className='fontFamily'>{t('Nosotros')}</p>
 						</Link>
@@ -63,8 +64,9 @@ function DarkFooter(props) {
 						/>
 					</div>
 				</div>
-				<div className='p-text-center'>© 2021 E-HomeSelect. All Rights Reserved.</div>
-			</Container>
+				<div className='p-col-12 p-md-1'></div>
+			</div>
+			<div className='p-text-center'>© 2021 E-HomeSelect. All Rights Reserved.</div>
 		</footer>
 	);
 }

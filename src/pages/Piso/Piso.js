@@ -625,7 +625,8 @@ const Piso = (props) => {
 		);
 	};
 	const fila = (datosFila, texto) => {
-		if (datosFila !== null) {
+		console.log(datosFila);
+		if (datosFila) {
 			return (
 				<AccordionTab header={t(texto)}>
 					<Row>
@@ -642,7 +643,7 @@ const Piso = (props) => {
 				</AccordionTab>
 			);
 		} else {
-			return <AccordionTab header={texto}>{t('Sin servicios.')}</AccordionTab>;
+			return null;
 		}
 	};
 

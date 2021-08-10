@@ -16,7 +16,7 @@ import { setCurrentNavBarColor } from 'redux/navBarColor/navBarColor.action';
 import { setCurrentUsuario } from 'redux/usuario/usuario.action';
 import foto1 from 'assets/img/luciana.jpg';
 import foto2 from 'assets/img/jona.jpg';
-import foto3 from 'assets/img/ryan.jpg';
+import foto3 from 'assets/img/Luis.jpg';
 import foto4 from 'assets/img/alicia.jpg';
 const Equipo = (props) => {
 	const { t } = props;
