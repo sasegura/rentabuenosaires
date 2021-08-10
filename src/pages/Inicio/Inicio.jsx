@@ -72,11 +72,12 @@ function Inicio(props) {
 											backgroundImage: 'url(' + img1 + ')',
 										}}
 									>
-										<p className='blockquote ' id='1234'>
-											<div>
-												<h4>
-													<b>{t('Garantia')}</b>
-												</h4>
+										<div className='blockquote ' id='1234'>
+											<div
+												className='p-text-bold'
+												style={{ fontSize: '1.5em', lineHeight: '1.45em' }}
+											>
+												{t('Garantia')}
 											</div>
 											{t('+ Calidad')} <br />
 											{t('+ Comodidad')}
@@ -85,7 +86,7 @@ function Inicio(props) {
 											{t('+ Ubicación')}
 											<br />
 											{t('+ Seguridad')}
-										</p>
+										</div>
 									</div>
 								</Col>
 								<Col md='5'>
@@ -95,11 +96,14 @@ function Inicio(props) {
 											backgroundImage: 'url(' + img2 + ')',
 										}}
 									></div>
-									<p>
-										<h4>
-											<b>{t('Sericio 24/7')}</b>
-										</h4>
-									</p>
+									<div>
+										<div
+											className='p-text-bold'
+											style={{ fontSize: '1.5em', lineHeight: '1.45em' }}
+										>
+											{t('Sericio 24/7')}
+										</div>
+									</div>
 									<p>
 										{t(
 											'Estamos a tu disposición 24/7 durante toda tu estancia. Cuidamos y mantenemos nuestras propiedades revisando cada detalle. Si hay algo que podamos hacer para mejorar tu estancia, avísanos y estaremos encantados de ayudarte.'

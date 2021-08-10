@@ -169,3 +169,13 @@ h4 {
 .font25px {
 	font-size: 25px !important;
 }
+
+.section-story-overview div.blockquote {
+	width: 220px;
+	min-height: 180px;
+	text-align: left;
+	position: absolute;
+	top: 376px;
+	right: 155px;
+	z-index: 0;
+}
