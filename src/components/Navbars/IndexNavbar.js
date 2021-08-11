@@ -160,6 +160,7 @@ const IndexNavbar = (props) => {
 					}}
 				/>
 			) : null}
+			{console.log(collapseOpen)}
 			<Navbar className={'fixed-top ' + navbarColor} expand='lg' color='white'>
 				<Container>
 					<div className='navbar-translate'>
@@ -199,11 +200,19 @@ const IndexNavbar = (props) => {
 										<p className='fontFamily'>{t('Administracion')}</p>
 									</DropdownToggle>
 									<DropdownMenu>
-										<DropdownItem to={linkAdicionar} tag={Link}>
+										<DropdownItem
+											to={linkAdicionar}
+											tag={Link}
+											onClick={() => setCollapseOpen(false)}
+										>
 											<i className='now-ui-icons mr-1'></i>
 											<p className='fontFamily'>{t('Pisos')}</p>
 										</DropdownItem>
-										<DropdownItem to={linkReservaciones} tag={Link}>
+										<DropdownItem
+											to={linkReservaciones}
+											tag={Link}
+											onClick={() => setCollapseOpen(false)}
+										>
 											<i className='now-ui-icons mr-1'></i>
 											<p className='fontFamily'>{t('Reservaciones')}</p>
 										</DropdownItem>
@@ -227,6 +236,7 @@ const IndexNavbar = (props) => {
 											<DropdownItem
 												to={linkPisos}
 												onClick={() => {
+													setCollapseOpen(false);
 													props.setCurrentDestino({
 														nombre: nombre,
 														id: iddestino,

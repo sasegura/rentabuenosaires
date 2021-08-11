@@ -77,7 +77,6 @@ const PisoPreview = (props) => {
 		},
 	];
 	const destino = () => {
-		// console.log(pisos.length)
 		return (
 			<div className='pisoPrev'>
 				<h1 className='h1 fontFamily'>{props.currentDestino.nombre.toUpperCase()}</h1>
@@ -90,7 +89,7 @@ const PisoPreview = (props) => {
 									value={pisos}
 									numVisible={3}
 									numScroll={1}
-									className='p-col-11 fontFamily'
+									className='p-col-12 p-md-11 fontFamily'
 									responsiveOptions={responsiveOptions}
 									itemTemplate={MyCardComponent}
 								/>
