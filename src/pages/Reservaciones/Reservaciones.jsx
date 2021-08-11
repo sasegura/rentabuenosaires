@@ -38,7 +38,6 @@ const Reservaciones = (props) => {
 	function sumar(arreglo) {
 		let suma = 0;
 		arreglo.forEach((elemento) => {
-			console.log(elemento);
 			if (elemento instanceof Array) {
 				suma += sumar(elemento);
 			} else {
@@ -47,6 +46,19 @@ const Reservaciones = (props) => {
 		});
 		return suma;
 	}
+
+	React.useEffect(() => {
+		document.body.classList.add('landing-page');
+		document.body.classList.add('sidebar-collapse');
+		document.documentElement.classList.remove('nav-open');
+		window.scrollTo(0, 0);
+		document.body.scrollTop = 0;
+		return function cleanup() {
+			document.body.classList.remove('landing-page');
+			document.body.classList.remove('sidebar-collapse');
+		};
+	}, []);
+
 	useEffect(() => {
 		setresult(sumar(lista3));
 		setload(true);

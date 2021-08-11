@@ -26,7 +26,17 @@ const Propietarios = (props) => {
 	const { t } = props;
 	const history = useHistory();
 	props.setCurrentNavBarColor(false);
-
+	React.useEffect(() => {
+		document.body.classList.add('landing-page');
+		document.body.classList.add('sidebar-collapse');
+		document.documentElement.classList.remove('nav-open');
+		window.scrollTo(0, 0);
+		document.body.scrollTop = 0;
+		return function cleanup() {
+			document.body.classList.remove('landing-page');
+			document.body.classList.remove('sidebar-collapse');
+		};
+	}, []);
 	return (
 		<>
 			<div id='enviar_mensaje' className='section section-contact-us text-center'>

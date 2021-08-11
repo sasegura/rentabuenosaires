@@ -70,12 +70,11 @@ const IndexNavbar = (props) => {
 				console.log(e);
 			});
 	}
-	React.useEffect(() => {});
 	React.useEffect(() => {
 		if (props.currentNavBarColor) {
 			setNavbarColor('navbar-transparent');
 			setNavbarTextColor('white');
-			const updateNavbarColor = () => {
+			/* const updateNavbarColor = () => {
 				if (props.currentNavBarColor) {
 					if (document.documentElement.scrollTop > 3 || document.body.scrollTop > 3) {
 						setNavbarColor('');
@@ -87,6 +86,15 @@ const IndexNavbar = (props) => {
 						setNavbarColor('navbar-transparent');
 						setNavbarTextColor('white');
 					}
+				}
+			}; */
+			const updateNavbarColor = () => {
+				if (document.documentElement.scrollTop > 3 || document.body.scrollTop > 3) {
+					setNavbarColor('');
+					setNavbarTextColor('black');
+				} else if (document.documentElement.scrollTop < 4 || document.body.scrollTop < 4) {
+					setNavbarColor('navbar-transparent');
+					setNavbarTextColor('white');
 				}
 			};
 			window.addEventListener('scroll', updateNavbarColor);
@@ -177,6 +185,7 @@ const IndexNavbar = (props) => {
 					</div>
 
 					<Collapse className='justify-content-end' isOpen={collapseOpen} navbar>
+						{console.log(collapseOpen)}
 						<Nav navbar>
 							{props?.currentUsuario?.rol === 1 ? (
 								<UncontrolledDropdown nav>
@@ -184,7 +193,6 @@ const IndexNavbar = (props) => {
 										className={navbarTextColor}
 										caret
 										color='default'
-										href='#'
 										nav
 										onClick={(e) => e.preventDefault()}
 									>
@@ -208,7 +216,6 @@ const IndexNavbar = (props) => {
 									className={navbarTextColor}
 									caret
 									color='default'
-									href='#pablo'
 									nav
 									onClick={(e) => e.preventDefault()}
 								>
@@ -240,7 +247,11 @@ const IndexNavbar = (props) => {
 
 							<NavItem>
 								<Link to={linkNosotros}>
-									<NavLink target='_self' className={navbarTextColor}>
+									<NavLink
+										target='_self'
+										className={navbarTextColor}
+										onClick={() => setCollapseOpen(false)}
+									>
 										<p className='fontFamily'>{t('Nosotros')}</p>
 									</NavLink>
 								</Link>
@@ -248,7 +259,11 @@ const IndexNavbar = (props) => {
 
 							<NavItem>
 								<Link to={linkPropietarios}>
-									<NavLink target='_self' className={navbarTextColor}>
+									<NavLink
+										target='_self'
+										className={navbarTextColor}
+										onClick={() => setCollapseOpen(false)}
+									>
 										<p className='fontFamily'>{t('Propietarios')}</p>
 									</NavLink>
 								</Link>
@@ -256,7 +271,11 @@ const IndexNavbar = (props) => {
 
 							<NavItem>
 								<Link to={linkMensaje}>
-									<NavLink target='_self' className={navbarTextColor}>
+									<NavLink
+										target='_self'
+										className={navbarTextColor}
+										onClick={() => setCollapseOpen(false)}
+									>
 										<p className='fontFamily'>{t('Contactar')}</p>
 									</NavLink>
 								</Link>
@@ -267,7 +286,6 @@ const IndexNavbar = (props) => {
 									className={navbarTextColor}
 									caret
 									color='default'
-									href='#pablo'
 									nav
 									onClick={(e) => e.preventDefault()}
 								>
