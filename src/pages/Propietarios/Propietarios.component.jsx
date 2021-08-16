@@ -5,20 +5,11 @@ import { connect } from 'react-redux';
 import { setCurrentNavBarColor } from 'redux/navBarColor/navBarColor.action';
 
 //reactstrap
-import {
-	Col,
-	Container,
-	Input,
-	InputGroup,
-	InputGroupAddon,
-	InputGroupText,
-	Row,
-} from 'reactstrap';
+import { Container } from 'reactstrap';
 import { Button } from 'primereact/button';
 //CSS
 import './Propietarios.style.scss';
-import { Link, useHistory } from 'react-router-dom';
-import { linkNosotros } from 'configuracion/constantes';
+import { useHistory } from 'react-router-dom';
 import { linkMensaje } from 'configuracion/constantes';
 import { withTranslation } from 'react-i18next';
 

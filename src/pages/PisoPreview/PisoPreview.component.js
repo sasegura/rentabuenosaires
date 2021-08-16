@@ -1,17 +1,11 @@
 import React, { Fragment } from 'react';
 import { useState } from 'react';
 
-//redux
 import { connect } from 'react-redux';
 import { setCurrentNavBarColor } from 'redux/navBarColor/navBarColor.action';
 
-//CSS
 import './pisoPreview.scss';
-//Components
-import MyCard from 'components/MyCard/MyCard.component';
 import { Carousel } from 'primereact/carousel';
-import CardPiso from './CardPiso';
-//Conexion
 import AxiosConexionConfig from 'conexion/AxiosConexionConfig';
 import cargando from '../../assets/img/loading.gif';
 import MyCardComponent from 'components/MyCard/MyCard.component';

@@ -5,23 +5,11 @@ import { setCurrentDestino } from 'redux/destino/destino.action';
 import { setCurrentNavBarColor } from 'redux/navBarColor/navBarColor.action';
 import { setCurrentUsuario } from 'redux/usuario/usuario.action';
 //Reactstrap
-import {
-	Button,
-	Input,
-	InputGroupAddon,
-	InputGroupText,
-	InputGroup,
-	Container,
-	Row,
-	Col,
-} from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 
 // Imagenes
 import img1 from 'assets/img/bg1.jpg';
 import img2 from 'assets/img/bg4.jpg';
-import foto1 from 'assets/img/avatar.jpg';
-import foto2 from 'assets/img/ryan.jpg';
-import foto3 from 'assets/img/eva.jpg';
 
 //Component
 import LandingPageHeader from 'components/Headers/LandingPageHeader.js';

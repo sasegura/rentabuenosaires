@@ -7,16 +7,7 @@ import { setCurrentNavBarColor } from 'redux/navBarColor/navBarColor.action';
 import { withTranslation } from 'react-i18next';
 
 //reactstrap
-import {
-	Button,
-	Col,
-	Container,
-	Input,
-	InputGroup,
-	InputGroupAddon,
-	InputGroupText,
-	Row,
-} from 'reactstrap';
+import { Container } from 'reactstrap';
 
 //CSS
 import './Nosotros.style.scss';
@@ -25,8 +16,6 @@ import Equipo from 'components/Equipo';
 const Nosotros = (props) => {
 	const { t } = props;
 	const { isInicioPage } = props;
-	const [firstFocus, setFirstFocus] = React.useState(false);
-	const [lastFocus, setLastFocus] = React.useState(false);
 	React.useEffect(() => {
 		document.body.classList.add('landing-page');
 		document.body.classList.add('sidebar-collapse');
@@ -44,7 +33,7 @@ const Nosotros = (props) => {
 		<>
 			<div
 				id='enviar_mensaje'
-				className={props.inicio ? null : 'section ' + 'section-contact-us text-center'}
+				className={props.inicio ? null : 'section section-contact-us text-center'}
 			>
 				<Container>
 					<div className='p-col-12 p-d-flex'>

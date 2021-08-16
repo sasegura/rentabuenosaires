@@ -17,16 +17,14 @@ import imagencalefaccion from '../../assets/img/heating.svg';
 import imagenWifi from '../../assets/img/wifi.svg';
 import washingMachine from '../../assets/img/icon/washing-machine.svg';
 import jacuzzi from '../../assets/img/icon/jacuzzi.svg';
-import elevator from '../../assets/img/icon/elevator.svg';
-import frigorifico from '../../assets/img/icon/frigorifico.svg';
+// import elevator from '../../assets/img/icon/elevator.svg';
+// import frigorifico from '../../assets/img/icon/frigorifico.svg';
 import gym from '../../assets/img/icon/gym.svg';
 // reactstrap components
-import { Container, Row } from 'reactstrap';
+import { Row } from 'reactstrap';
 
-//CSS
 import './Piso.scss';
 
-//Conexión
 import AxiosConexionConfig from 'conexion/AxiosConexionConfig';
 import { amenitiesGeneralesTextConst } from 'configuracion/constantes';
 import { amenitiesGeneralesConst } from 'configuracion/constantes';
@@ -163,7 +161,7 @@ const Piso = (props) => {
 			console.log(e);
 		}
 
-		const url = '/imagen?filter[where][idpiso]=' + idPiso;
+		// const url = '/imagen?filter[where][idpiso]=' + idPiso;
 		try {
 			const imagen = await AxiosConexionConfig.get(url2 + encodeURIComponent(valores2));
 			imagen.data.forEach((im) => imagenesTemp.push(im));
@@ -175,7 +173,7 @@ const Piso = (props) => {
 	}
 	let datos = [];
 	const amenitieForm = (imagen, text) => {
-		amenitiesGeneralesText.map((pos, index) => {
+		amenitiesGeneralesText.forEach((pos, index) => {
 			if (pos === text) {
 				amenitiesGenerales.splice(index, 1);
 				amenitiesGeneralesText.splice(index, 1);
@@ -275,6 +273,7 @@ const Piso = (props) => {
 	};
 
 	function createUsuario() {
+		setCalculo(false);
 		const values = {
 			nombre: valorDialog.name,
 			apellidos: '',
@@ -304,9 +303,7 @@ const Piso = (props) => {
 				while (contador > 0) {
 					let a = new Date(dateBegin);
 					dias.push(sumarDias(a, contador));
-					console.log(dias);
 					contador--;
-					console.log(contador);
 				}
 				const diasReservados = dias.toString();
 				AxiosConexionConfig.patch(
@@ -350,7 +347,6 @@ const Piso = (props) => {
 		};
 		AxiosConexionConfig.post(url, JSON.stringify(values))
 			.then((response) => {
-				console.log(response);
 				if (response.data) {
 					toast.current.show({
 						severity: 'success',
@@ -378,23 +374,6 @@ const Piso = (props) => {
 			});
 	}
 
-	const responsiveOptions = [
-		{
-			breakpoint: '1024px',
-			numVisible: 3,
-			numScroll: 3,
-		},
-		{
-			breakpoint: '600px',
-			numVisible: 2,
-			numScroll: 2,
-		},
-		{
-			breakpoint: '480px',
-			numVisible: 1,
-			numScroll: 1,
-		},
-	];
 	const productTemplate = (imagenes) => {
 		return (
 			<div className='product-item '>
@@ -426,8 +405,7 @@ const Piso = (props) => {
 
 	const BuscarEnIntervalo = (begin, end) => {
 		let flag = false;
-		disabledDates.map((pos) => {
-			console.log(pos);
+		disabledDates.forEach((pos) => {
 			if (pos > begin && pos < end) {
 				flag = true;
 			}
@@ -486,7 +464,10 @@ const Piso = (props) => {
 							minDate={today}
 							locale='es'
 							placeholder='Check in'
-							onChange={(e) => (setDateBegin(e.value), setDateEnd(null))}
+							onChange={(e) => {
+								setDateBegin(e.value);
+								setDateEnd(null);
+							}}
 							disabledDates={disabledDates}
 							baseZIndex={500}
 							readOnlyInput
@@ -579,7 +560,7 @@ const Piso = (props) => {
 					{!readMore ? (
 						<div>
 							<h5>
-								{data.descripcion.substr(0, 255)}
+								{`${data.descripcion.substr(0, 255)}`}
 
 								<a
 									onClick={() => setReadMore(true)}

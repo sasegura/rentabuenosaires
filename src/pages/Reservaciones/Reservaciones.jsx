@@ -22,30 +22,14 @@ import {
 } from 'configuracion/constantes';
 
 const Reservaciones = (props) => {
-	const { t } = props;
 	const toast = useRef(null);
 	const [load, setload] = useState(false);
 	const [pisos, setPisos] = useState(null);
 	const [destinos, setDestinos] = useState(null);
 	const [usuarios, setUsuarios] = useState(null);
 	const [reservaciones, setReservaciones] = useState([]);
-	const [result, setresult] = useState(null);
+
 	props.setCurrentNavBarColor(false);
-	const a = [[1, 2], 1, 2, 4, 8, [10, 10]];
-	var lista1 = [1, 4, 3, 0];
-	var lista2 = [1, 2, [5, 8], 4];
-	var lista3 = [0, [6, 2], null, 7, 1];
-	function sumar(arreglo) {
-		let suma = 0;
-		arreglo.forEach((elemento) => {
-			if (elemento instanceof Array) {
-				suma += sumar(elemento);
-			} else {
-				suma += elemento;
-			}
-		});
-		return suma;
-	}
 
 	React.useEffect(() => {
 		document.body.classList.add('landing-page');
@@ -60,7 +44,6 @@ const Reservaciones = (props) => {
 	}, []);
 
 	useEffect(() => {
-		setresult(sumar(lista3));
 		setload(true);
 		AxiosConexionConfig.get(apiPiso).then((respuesta) => {
 			setPisos(respuesta.data);
@@ -81,7 +64,6 @@ const Reservaciones = (props) => {
 		AxiosConexionConfig.get(apiReservaciones)
 			.then((response) => {
 				setReservaciones(response.data);
-				console.log(response.data);
 				setload(false);
 			})
 			.catch((e) => {
@@ -121,7 +103,7 @@ const Reservaciones = (props) => {
 
 	const getPisoId = (id) => {
 		let respuesta = null;
-		pisos.map((piso) => {
+		pisos.forEach((piso) => {
 			if (piso.idpiso === id) {
 				respuesta = piso;
 			}
@@ -130,7 +112,7 @@ const Reservaciones = (props) => {
 	};
 	const getUsuarioId = (id) => {
 		let respuesta = null;
-		usuarios.map((usuario) => {
+		usuarios.forEach((usuario) => {
 			if (usuario.idusuario === id) {
 				respuesta = usuario;
 			}
@@ -139,7 +121,7 @@ const Reservaciones = (props) => {
 	};
 	const getDestinoId = (id) => {
 		let respuesta = null;
-		destinos.map((destino) => {
+		destinos.forEach((destino) => {
 			if (destino.iddestino === id) {
 				respuesta = destino;
 			}
@@ -260,7 +242,6 @@ const Reservaciones = (props) => {
 			<Toast baseZIndex={500} ref={toast} />
 			<div className='section text-center text-center ml-auto mr-auto'>
 				<h2>Reservaciones</h2>
-				suma:{result}
 				<DataTable
 					value={reservaciones}
 					loading={load}

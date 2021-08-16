@@ -1,19 +1,14 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 
-//redux
 import { connect } from 'react-redux';
 import { setCurrentNavBarColor } from 'redux/navBarColor/navBarColor.action';
 
-//primereact
-import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Form, Field } from 'react-final-form';
 import classNames from 'classnames';
 import { Toast } from 'primereact/toast';
 
-//reactstrap
-// import { Button, Col, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import { Container } from 'reactstrap';
 //CSS
 import './Mensaje.style.scss';
@@ -24,8 +19,6 @@ import AxiosConexionConfig from 'conexion/AxiosConexionConfig';
 const Mensaje = (props) => {
 	const { t } = props;
 	const toast = useRef(null);
-	const [firstFocus, setFirstFocus] = React.useState(false);
-	const [lastFocus, setLastFocus] = React.useState(false);
 
 	props.setCurrentNavBarColor(false);
 	React.useEffect(() => {

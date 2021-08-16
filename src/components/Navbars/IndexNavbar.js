@@ -160,7 +160,6 @@ const IndexNavbar = (props) => {
 					}}
 				/>
 			) : null}
-			{console.log(collapseOpen)}
 			<Navbar className={'fixed-top ' + navbarColor} expand='lg' color='white'>
 				<Container>
 					<div className='navbar-translate'>
@@ -186,7 +185,6 @@ const IndexNavbar = (props) => {
 					</div>
 
 					<Collapse className='justify-content-end' isOpen={collapseOpen} navbar>
-						{console.log(collapseOpen)}
 						<Nav navbar>
 							{props?.currentUsuario?.rol === 1 ? (
 								<UncontrolledDropdown nav>

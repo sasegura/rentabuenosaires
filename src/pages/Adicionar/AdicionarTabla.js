@@ -60,7 +60,7 @@ const AdicionarTabla = (props) => {
 	const [deletepisoDialog, setDeletepisoDialog] = useState(false);
 	const [piso, setpiso] = useState(emptypiso);
 	const [selectedpisos, setSelectedpisos] = useState(null);
-	const [submitted, setSubmitted] = useState(false);
+	// const [submitted, setSubmitted] = useState(false);
 	const toast = useRef(null);
 	const dt = useRef(null);
 	const amenitiesGenerales = amenitiesGeneralesConst;
@@ -83,7 +83,6 @@ const AdicionarTabla = (props) => {
 		const urlImagen = '/imagen?filter=';
 		try {
 			const pisos = await AxiosConexionConfig.get(url);
-			const a = pisos.data;
 			let go = 0;
 			pisos.data.forEach((piso, index) => {
 				const uri = {
@@ -114,12 +113,12 @@ const AdicionarTabla = (props) => {
 
 	const openNew = () => {
 		setpiso(getEmptyPiso());
-		setSubmitted(false);
+		// setSubmitted(false);
 		setpisoDialog(true);
 	};
 
 	const hideDialog = () => {
-		setSubmitted(false);
+		// setSubmitted(false);
 		setpisoDialog(false);
 		setActiveIndex(0);
 	};
@@ -154,7 +153,7 @@ const AdicionarTabla = (props) => {
 					if (imagenData.data.length === 0) {
 						del();
 					}
-					imagenData.data.map((imData, index) => {
+					imagenData.data.forEach((imData, index) => {
 						AxiosConexionConfig.delete('/imagen/' + imData.id).then((e) => {
 							// console.log(e)
 							if (index === imagenData.data.length - 1) {
@@ -261,7 +260,7 @@ const AdicionarTabla = (props) => {
 		// console.log(images)
 		// console.log(props.destino)
 		pisoData.iddestino = props.destino.iddestino;
-		setSubmitted(true);
+		// setSubmitted(true);
 		setloadingpisos(true);
 		let modificar = false;
 		let id = 0;
@@ -292,7 +291,7 @@ const AdicionarTabla = (props) => {
 					AxiosConexionConfig.post(url, pisoData).then((data) => {
 						// console.log(data);
 						let uri = '/imagen';
-						images.map((imagen, index) => {
+						images.forEach((imagen, index) => {
 							const imagenData = {
 								idpiso: data.data.idpiso,
 								imagen,
@@ -558,15 +557,14 @@ const AdicionarTabla = (props) => {
 	function onDrop(picture) {
 		setCargandoImages(true);
 		setImages([]);
-		let img = [];
 		let peticiones = [];
-		picture.map((file, index) => {
+		picture.forEach((file, index) => {
 			peticiones.push(getBase64(file));
 		});
 		Promise.all(peticiones).then((imagens) => {
 			setCargandoImages(false);
 			let response = [];
-			imagens.map((imgn) => {
+			imagens.forEach((imgn) => {
 				response.push(imgn.split('data:image/jpeg;base64,')[1]);
 			});
 			setImages(response);
@@ -576,7 +574,6 @@ const AdicionarTabla = (props) => {
 	const getBase64 = (file) => {
 		let img = [];
 		return new Promise((resolve) => {
-			let fileInfo;
 			let baseURL = '';
 			// Make new FileReader
 			let reader = new FileReader();
@@ -596,11 +593,7 @@ const AdicionarTabla = (props) => {
 			//console.log(fileInfo);
 		});
 	};
-	const tabChanged = (e) => {
-		console.log(e);
-		console.log(activeIndex);
-		setActiveIndex(e.index);
-	};
+
 	const form = () => {
 		return (
 			<div className='p-d-flex p-jc-center'>
@@ -613,7 +606,7 @@ const AdicionarTabla = (props) => {
 							<form onSubmit={handleSubmit} className='p-fluid'>
 								<Dialog
 									visible={pisoDialog}
-									style={{ width: '80%', marginTop: '150px', marginTop: '50px' }}
+									style={{ width: '80%', marginTop: '150px' }}
 									header='Adicionar Piso'
 									modal
 									className='p-fluid'
@@ -792,7 +785,7 @@ const AdicionarTabla = (props) => {
 				{pisos === null ? (
 					loadingPisos ? (
 						<div className='p-col-12 p-text-center'>
-							<img src={cargando} />
+							<img src={cargando} alt='cargando' />
 						</div>
 					) : (
 						<div className='p-col-12 p-text-center'>

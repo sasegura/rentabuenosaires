@@ -21,7 +21,7 @@ import AxiosConexionConfig from 'conexion/AxiosConexionConfig';
 
 //Componente
 import AdicionarTabla from './AdicionarTabla';
-import { Col, Container, Input, InputGroup, Row } from 'reactstrap';
+import { Col, Container, InputGroup, Row } from 'reactstrap';
 
 const Adicionar = (props) => {
 	props.setCurrentNavBarColor(false);
@@ -31,7 +31,6 @@ const Adicionar = (props) => {
 	const [carga, setCarga] = useState(true);
 	const [nombreDestino, setNombreDestino] = useState('');
 	const [emptyNombreDestino, setEmptyNombreDestino] = useState('');
-	const [nameDestino, setNameDestino] = useState('');
 	const [destinoDialog, setDestinoDialog] = useState(false);
 	const [destinoDeleteDialog, setDestinoDeleteDialog] = useState(false);
 	const [destino, setDestino] = useState(null);
@@ -93,25 +92,6 @@ const Adicionar = (props) => {
 
 	const setSelectedDestino = (valor) => {
 		setSelectesDestino(valor);
-	};
-
-	const BotonesAdicionar = () => {
-		return (
-			<React.Fragment>
-				<Button
-					label='New'
-					icon='pi pi-plus'
-					className='p-button-success p-mr-2'
-					onClick={() => alert('New')}
-				/>
-				<Button
-					label='Delete'
-					icon='pi pi-trash'
-					className='p-button-danger'
-					onClick={() => alert('Delete')}
-				/>
-			</React.Fragment>
-		);
 	};
 
 	const AdicionarDestno = () => {
@@ -233,10 +213,7 @@ const Adicionar = (props) => {
 		setSubmitted(true);
 		const url = '/destinos';
 		try {
-			const pisoDatos = await AxiosConexionConfig.patch(
-				url + '/' + destino.iddestino,
-				destino
-			);
+			await AxiosConexionConfig.patch(url + '/' + destino.iddestino, destino);
 		} catch (e) {
 			console.log(e);
 		}

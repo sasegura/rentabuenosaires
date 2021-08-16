@@ -1,16 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import {
-	Button,
-	Input,
-	InputGroupAddon,
-	InputGroupText,
-	InputGroup,
-	Container,
-	Row,
-	Col,
-} from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import { setCurrentDestino } from 'redux/destino/destino.action';
 import { setCurrentNavBarColor } from 'redux/navBarColor/navBarColor.action';
 import { setCurrentUsuario } from 'redux/usuario/usuario.action';
