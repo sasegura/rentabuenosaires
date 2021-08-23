@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import esp from '../../assets/img/flags/ES.png';
 import eng from '../../assets/img/flags/GB.png';
-import mundoIcon from '../../assets/img/icon/mundoIcon.svg';
+import mundoIcon from '../../assets/img/icon/mundo.jpg';
 // reactstrap components
 import {
 	Collapse,

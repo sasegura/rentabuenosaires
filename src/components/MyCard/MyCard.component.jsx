@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { withTranslation } from 'react-i18next';
 // reactstrap components
 import { Card, CardImg, CardBody, Button } from 'reactstrap';

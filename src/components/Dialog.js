@@ -55,16 +55,16 @@ const DialogDemo = ({ open, setOpen, valor, setValor, acept, t }, props) => {
 								footer={
 									<div>
 										<Button
-											label='No'
+											label={t('Cancelar')}
 											icon='pi pi-times'
 											onClick={() => setOpen(false)}
 											className=''
 										/>
 										<Button
 											type='submit'
-											label='Submit'
+											label={t('Submit')}
 											icon='pi pi-check'
-											className='p-button-text'
+											className='p-button-text nocolor'
 											onClick={() => handleSubmit()}
 										/>
 									</div>
@@ -82,9 +82,13 @@ const DialogDemo = ({ open, setOpen, valor, setValor, acept, t }, props) => {
 															id='name'
 															{...input}
 															autoFocus
-															className={classNames({
-																'p-invalid': isFormFieldValid(meta),
-															})}
+															className={
+																'p-col-12 ' +
+																classNames({
+																	'p-invalid':
+																		isFormFieldValid(meta),
+																})
+															}
 														/>
 														<label
 															htmlFor='name'
@@ -108,9 +112,13 @@ const DialogDemo = ({ open, setOpen, valor, setValor, acept, t }, props) => {
 															id='telefono'
 															{...input}
 															autoFocus
-															className={classNames({
-																'p-invalid': isFormFieldValid(meta),
-															})}
+															className={
+																'p-col-12 ' +
+																classNames({
+																	'p-invalid':
+																		isFormFieldValid(meta),
+																})
+															}
 														/>
 														<label
 															htmlFor='telefono'
@@ -131,14 +139,18 @@ const DialogDemo = ({ open, setOpen, valor, setValor, acept, t }, props) => {
 											name='email'
 											render={({ input, meta }) => (
 												<div className='p-field  p-col-12'>
-													<span className='p-float-label p-input-icon-right'>
+													<span className='p-float-label p-input-icon-right p-col-12 '>
 														<i className='pi pi-envelope' />
 														<InputText
 															id='email'
 															{...input}
-															className={classNames({
-																'p-invalid': isFormFieldValid(meta),
-															})}
+															className={
+																'p-col-12 ' +
+																classNames({
+																	'p-invalid':
+																		isFormFieldValid(meta),
+																})
+															}
 														/>
 														<label
 															htmlFor='email'
@@ -164,9 +176,13 @@ const DialogDemo = ({ open, setOpen, valor, setValor, acept, t }, props) => {
 															id='texto'
 															{...input}
 															autoFocus
-															className={classNames({
-																'p-invalid': isFormFieldValid(meta),
-															})}
+															className={
+																'p-col-12 ' +
+																classNames({
+																	'p-invalid':
+																		isFormFieldValid(meta),
+																})
+															}
 														/>
 														<label
 															htmlFor='texto'

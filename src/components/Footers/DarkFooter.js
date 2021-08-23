@@ -31,36 +31,52 @@ function DarkFooter(props) {
 					<div className='p-col-12 p-md-4'>
 						<p>{t('Nuestros objetivos')}:</p>"
 						{t('Servicio de alquiler de primer nivel')}"
+						<br />
 						<br />"{t('Tu estancia será perfecta')}"
+						<br />
 						<br />"{t('Limpieza y seguridad son nuestras prioridades')}"
 					</div>
 					<div className='p-col-12 p-md-4'>
 						<p>{t('Contáctanos')}</p>
-						{t('Reservas')}: +34 626 151 223
+						{t('Atención al cliente')}/{t('Reservas')}
 						<br />
-						{t('Atención al cliente')}: +54 911 3848 4956
-						<br />
-						<br />
+						Argentina:{' '}
 						<SocialIcon
-							className='p-mr-2'
-							style={{ width: '40px', height: '40px' }}
+							className='p-ml-2'
+							style={{ width: '20px', height: '20px' }}
 							url='https://api.whatsapp.com/send?phone=34123456789'
+							bgColor='grey'
 						/>
+						+54 911 3848 4956
+						<br />
+						España:{' '}
+						<SocialIcon
+							className=' p-ml-2'
+							style={{ width: '20px', height: '20px' }}
+							url='https://api.whatsapp.com/send?phone=34123456789'
+							bgColor='grey'
+						/>
+						+34 626 151 223
+						<br />
+						<br />
 						<SocialIcon
 							style={{ width: '40px', height: '40px' }}
 							className='p-mr-2'
 							url='https://facebook.com/e-homeselect'
+							bgColor='grey'
 						/>
 						<SocialIcon
 							className='p-mr-2'
 							style={{ width: '40px', height: '40px' }}
 							url='mailto:administrador@e-homeselect.com'
 							network='mailto'
+							bgColor='grey'
 						/>
 						<SocialIcon
 							style={{ width: '40px', height: '40px' }}
 							className='p-mr-2'
-							url='https://linkedin.com/e-homeselect'
+							url='https://www.instagram.com/e-homeselect'
+							bgColor='grey'
 						/>
 					</div>
 				</div>

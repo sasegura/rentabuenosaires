@@ -44,8 +44,9 @@ function LandingPageHeader(props) {
 								fontVariant: 'normal',
 							}}
 						>
-							{t('Tu vida es única')}
 							<br />
+							{t('Tu vida es única')}
+
 							<br />
 							<br />
 							<br />

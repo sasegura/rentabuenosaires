@@ -50,8 +50,7 @@ function Inicio(props) {
 								<Nosotros isInicioPage />
 							</Col>
 						</Row>
-						<div className='separator separator-primary'></div>
-						<div className='section-story-overview'>
+						<div className='section-story-overview p-pt-0'>
 							<Row>
 								<Col md='6'>
 									<div
@@ -89,7 +88,7 @@ function Inicio(props) {
 											className='p-text-bold'
 											style={{ fontSize: '1.5em', lineHeight: '1.45em' }}
 										>
-											{t('Sericio 24/7')}
+											{t('Servicio 24/7')}
 										</div>
 									</div>
 									<p>

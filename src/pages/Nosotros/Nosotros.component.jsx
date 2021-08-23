@@ -33,17 +33,15 @@ const Nosotros = (props) => {
 		<>
 			<div
 				id='enviar_mensaje'
-				className={props.inicio ? null : 'section section-contact-us text-center'}
+				className={
+					props.isInicioPage ? null : 'section section-contact-us text-center p-pb-0'
+				}
 			>
 				<Container>
 					<div className='p-col-12 p-d-flex'>
 						<div className='p-col-12 p-md-1'></div>
 						<div className='p-col-12 p-md-10'>
-							<h2>
-								{t('Te ofrecemos un servicio de alquiler')}
-								<br />
-								{t('de primer nivel.')}
-							</h2>
+							<h2>{t('Te ofrecemos un servicio de alquiler')}</h2>
 							<h2>{t('Queremos que te sientas especial.')}</h2>
 
 							<p className='fontFamily'>
@@ -68,13 +66,15 @@ const Nosotros = (props) => {
 								<>
 									<br />
 									<h3>
-										<b className='fontFamily'>{t('Garantia')}:</b>
-										<br />
-										<b className='fontFamily'>
-											{t(
-												'+ Calidad + Comodidad + Limpieza + Ubicación + Seguridad +'
-											)}
-										</b>
+										<i>
+											<b className='fontFamily'>{t('Garantia')}:</b>
+											<br />
+											<b className='fontFamily'>
+												{t(
+													'+ Calidad + Comodidad + Limpieza + Ubicación + Seguridad +'
+												)}
+											</b>
+										</i>
 									</h3>
 									<br />
 									<p className='fontFamily'>

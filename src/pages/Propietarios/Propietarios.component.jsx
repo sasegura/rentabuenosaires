@@ -35,7 +35,8 @@ const Propietarios = (props) => {
 					<h2 className=''>{t('Rentabiliza tu propiedad')}</h2>
 					<p className='fontFamily '>
 						{t('Te ofrecemos una propuesta de alta rentabilidad para tu propiedad.')}
-						{t(' ')}
+					</p>
+					<p className='fontFamily'>
 						{t(
 							'Comercializamos por días, semanas o meses, y nos ocupamos de todo lo necesario.'
 						)}

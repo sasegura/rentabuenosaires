@@ -131,10 +131,16 @@ const Piso = (props) => {
 			seterrorfecha('En el intervalo seleccionado existen fechas reservadas previamente.');
 			setCalculo(false);
 		} else {
-			if (end > begin) {
-				settotalCalculo((end - begin) * data.precio);
-				setCalculo(true);
-				seterrorfecha('');
+			if (end === begin && begin) {
+				console.log(begin);
+				seterrorfecha('Seleccione una fecha de salida válida.');
+				setCalculo(false);
+			} else {
+				if (end > begin) {
+					settotalCalculo((end - begin) * data.precio);
+					setCalculo(true);
+					seterrorfecha('');
+				}
 			}
 		}
 	}, [dateEnd, huesped]);
@@ -466,17 +472,21 @@ const Piso = (props) => {
 							placeholder='Check in'
 							onChange={(e) => {
 								setDateBegin(e.value);
-								setDateEnd(null);
+								setDateEnd(e.value);
 							}}
 							disabledDates={disabledDates}
 							baseZIndex={500}
 							readOnlyInput
+							monthNavigator
+							yearNavigator
+							yearRange='2010:2100'
 							dateFormat='dd/mm/yy'
 						/>
 						<Calendar
 							id='calendarend'
 							className={'p-col-12 p-md-6'}
-							minDate={new Date(minDate)}
+							minDate={new Date(dateBegin)}
+							viewDate={new Date(dateBegin)}
 							value={dateEnd}
 							locale='es'
 							placeholder='Check out'
@@ -485,6 +495,9 @@ const Piso = (props) => {
 							disabledDates={disabledDates}
 							baseZIndex={500}
 							readOnlyInput
+							monthNavigator
+							yearNavigator
+							yearRange='2010:2100'
 							dateFormat='dd/mm/yy'
 						/>
 					</div>
@@ -527,7 +540,7 @@ const Piso = (props) => {
 							<Fragment></Fragment>
 						)}
 					</div>
-					<small className='p-error'>{errorfecha}</small>
+					<p className='p-error'>{t(errorfecha)}</p>
 				</div>
 				<Button
 					type='submit'
@@ -584,7 +597,9 @@ const Piso = (props) => {
 						</div>
 					)}
 
-					<Row>{t('Comodidades')}</Row>
+					<Row>
+						<b>{t('Comodidades')}</b>
+					</Row>
 					<Row>
 						{amenities?.map((dato, index) => {
 							return <Fragment key={index}>{dato}</Fragment>;
@@ -671,22 +686,13 @@ const Piso = (props) => {
 							</div>
 						</div>
 					</div>
-
-					<div className='floatLeft p-col-12'>
-						<div
-							className='floatLeft p-col-12 p-md-12'
-							style={{ fontFamily: 'gotham' }}
-						>
-							{DatosPiso()}
-						</div>
-					</div>
 					<div className=' p-col-12 p-d-flex'>
-						<div className=' p-col-12 p-md-1'></div>
 						<div
-							className=' p-col-12 p-md-10 p-p-0 floatLeft'
+							className=' p-col-12 p-md-12 p-d-flex p-p-0 floatLeft'
 							style={{ fontFamily: 'gotham' }}
 						>
-							<div className='p-col-12 p-p-0 card'>
+							<div className=' p-col-12 p-md-8 p-p-0 floatLeft'>{DatosPiso()}</div>
+							<div className='p-col-12 p-md-3 p-p-0 '>
 								<Maps piso={data} />
 							</div>
 						</div>

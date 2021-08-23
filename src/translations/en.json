@@ -173,7 +173,7 @@
 		"Nuestra garantia:": "Our guarantee:",
 		"Garantia": "Our guarantee",
 		"Garantia:": "Our guarantee:",
-		"Sericio 24/7": "Service 24/7",
+		"Servicio 24/7": "Service 24/7",
 		"+ Calidad": "+ Quality",
 		"+ Ubicación": "+ Location",
 		"+ Seguridad": "+ Security",
@@ -192,18 +192,22 @@
 		"Are you sure you want to delete": "Are you sure you want to delete",
 		"Rentabiliza tu propiedad": "Make your property profitable",
 		"Te ofrecemos una propuesta de alta rentabilidad para tu propiedad.": "We offer you a high profitability proposal for your property.",
-		"Comercializamos por días, semanas o meses, y nos ocupamos de todo lo necesario.": "We sell for days, weeks or months, and we take care of everything you need.",
+		"Comercializamos por días, semanas o meses, y nos ocupamos de todo lo necesario.": "We rent for days, weeks or months, and we take care of everything you need.",
 		"Cuidamos tu casa y obtenemos beneficios económicos cuando no estás en ella.": "We take care of your house and we obtain economic benefits when you are not in it.",
 		"CONTACTA CON NOSOTROS": "CONTACT US",
-		"Te ofrecemos un servicio de alquiler": "We offer you a rental service",
-		"de primer nivel.": "first level.",
+		"Te ofrecemos un servicio de alquiler": "We offer you a first class rental service",
+
 		"Disfrutamos viajar por el mundo, conocer diferentes culturas y sentirnos parte de cada lugar.": "We enjoy traveling the world, knowing different cultures and feeling part of each place.",
-		"A lo largo de los últimos años hemos conocido más de 100 ciudades, lo que nos ayuda a entender qué necesitas y valoras del lugar donde te hospedas.": "Over the last few years we have known more than 100 cities, which helps us understand what travelers need and value from the place where they stay.",
+		"A lo largo de los últimos años hemos conocido más de 100 ciudades, lo que nos ayuda a entender qué necesitas y valoras del lugar donde te hospedas.": "Over the last few years we have known more tan 100 cities, which helps us understand what  you need and value where you are staying.",
 		"Nuestro objetivo es lograr que tu estadía sea perfecta, ofreciendo un servicio completo y de primer nivel, no sólo en el hospedaje sino también en las inquietudes que tengas durante toda tu estancia.": "Our goal is to ensure that your stay is perfect, offering a complete and first level service, not only in the accommodation but also in the concerns you have throughout your stay.",
 		"Alquila por días, semanas o meses con nosotros.": "Rent for days, weeks or months with us.",
 		"+ Calidad + Comodidad + Limpieza + Ubicación + Seguridad +": "+ Quality + Comfort + Cleanliness + Location + Security +",
 		"Estamos a tu disposición 24/7 durante toda tu estadía.": "We are at your disposal 24/7 throughout your stay.",
-		"Cuidamos y mantenemos nuestras propiedades revisando cada detalle.": "We take care and maintain our properties by reviewing every detail.",
-		"Si hay algo que podamos hacer para mejorar tu experiencia, avísanos y estaremos encantados de ayudarte.": "If there is anything we can do to improve your experience, let us know and we will be happy to help you."
+		"Cuidamos y mantenemos nuestras propiedades revisando cada detalle.": "We take care of and maintain our properties, reviewing every detail.",
+		"Si hay algo que podamos hacer para mejorar tu experiencia, avísanos y estaremos encantados de ayudarte.": "If there is anything we can do to improve your experience please let us know and we will be happy to assit you.",
+		"En el intervalo seleccionado existen fechas reservadas previamente.": "In the selected interval there are previously reserved dates.",
+		"Seleccione una fecha de salida válida.": "Select a valid check out date.",
+		"Submit": "Submit",
+		"Cancelar": "Cancel"
 	}
 }
