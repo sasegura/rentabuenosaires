@@ -45,6 +45,7 @@ function DarkFooter(props) {
 							className='p-ml-2'
 							style={{ width: '20px', height: '20px' }}
 							url='https://wa.me/34123456789'
+							target='_blank'
 							bgColor='grey'
 						/>
 						+54 911 3848 4956
