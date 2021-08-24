@@ -44,9 +44,10 @@ function DarkFooter(props) {
 						<SocialIcon
 							className='p-ml-2'
 							style={{ width: '20px', height: '20px' }}
-							url='https://wa.me/34123456789'
+							url='https://wa.me/54 911 3848 4956'
 							target='_blank'
 							bgColor='grey'
+							network='whatsapp'
 						/>
 						+54 911 3848 4956
 						<br />
@@ -54,7 +55,9 @@ function DarkFooter(props) {
 						<SocialIcon
 							className=' p-ml-2'
 							style={{ width: '20px', height: '20px' }}
-							url='https://api.whatsapp.com/send?phone=34123456789'
+							target='_blank'
+							network='whatsapp'
+							url='https://wa.me/34 626 151 223'
 							bgColor='grey'
 						/>
 						+34 626 151 223
