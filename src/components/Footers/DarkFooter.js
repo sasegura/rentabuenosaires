@@ -38,13 +38,13 @@ function DarkFooter(props) {
 					</div>
 					<div className='p-col-12 p-md-4'>
 						<p>{t('Contáctanos')}</p>
-						{t('Atención al cliente')}/{t('Reservas')}
+						{t('Atención al cliente')} / {t('Reservas')}
 						<br />
 						Argentina:{' '}
 						<SocialIcon
 							className='p-ml-2'
 							style={{ width: '20px', height: '20px' }}
-							url='https://api.whatsapp.com/send?phone=34123456789'
+							url='https://wa.me/34123456789'
 							bgColor='grey'
 						/>
 						+54 911 3848 4956
