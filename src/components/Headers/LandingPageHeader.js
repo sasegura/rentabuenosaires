@@ -33,26 +33,27 @@ function LandingPageHeader(props) {
 						backgroundImage: 'url(' + Banner + ')',
 					}}
 					ref={pageHeader}
-				></div>
-				<div className='content-center'>
-					<Container>
-						<h1
-							className=''
-							style={{
-								fontFamily: 'Playfair Display',
-								fontStyle: 'normal',
-								fontVariant: 'normal',
-							}}
-						>
-							<br />
-							{t('Tu vida es única')}
+				>
+					<div className='content-center'>
+						<Container>
+							<h1
+								className=''
+								style={{
+									fontFamily: 'Playfair Display',
+									fontStyle: 'normal',
+									fontVariant: 'normal',
+								}}
+							>
+								<br />
+								{t('Tu vida es única')}
 
-							<br />
-							<br />
-							<br />
-							{t('Vive en un lugar extraordinario')}
-						</h1>
-					</Container>
+								<br />
+								<br />
+								<br />
+								{t('Vive en un lugar extraordinario')}
+							</h1>
+						</Container>
+					</div>
 				</div>
 			</div>
 		</>

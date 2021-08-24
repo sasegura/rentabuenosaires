@@ -445,7 +445,7 @@ const Piso = (props) => {
 	};
 	const TarjetPiso = () => {
 		return (
-			<div className=''>
+			<div className='fontFamily'>
 				<div className='marginLeft20px'>
 					<h4 style={{ fontFamily: 'playfair' }}>
 						{data.nombre.substr(0, 25)}
@@ -458,7 +458,7 @@ const Piso = (props) => {
 					{t('Desde')} <i className='pi pi-euro'></i>
 					<span className='marginLeft5px'>{data.precio}</span> {t('por noche')}
 				</div>
-				<div className='p-field p-col-12'>
+				<div className='p-field p-col-12 fontFamily'>
 					<label className='marginLeft10px' htmlFor='calendar'>
 						{t('Seleccione fechas')}
 					</label>
@@ -543,6 +543,7 @@ const Piso = (props) => {
 					<p className='p-error'>{t(errorfecha)}</p>
 				</div>
 				<Button
+					className='fontFamily'
 					type='submit'
 					color='primary'
 					href='#pablo'
@@ -559,7 +560,7 @@ const Piso = (props) => {
 		return (
 			<div className='p-col-12 flex'>
 				<div className='p-col-12 p-md-1'></div>
-				<div className='p-col-12 p-md-11'>
+				<div className='p-col-12 p-md-11 fontFamily'>
 					<div>
 						<h1 style={{ fontFamily: 'playfair' }}>
 							{data.nombre}

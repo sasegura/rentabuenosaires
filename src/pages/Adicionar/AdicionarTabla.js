@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { Editor } from 'primereact/editor';
 //import pisoservice from '../service/pisoservice';
 import ImageUploader from 'react-images-upload';
 
@@ -391,14 +392,13 @@ const AdicionarTabla = (props) => {
 	};
 
 	const onSubmit = (data, form) => {
+		console.log(form);
 		console.log(data);
 		setpisoDialog(false);
-		// console.log(images)
 		SavePiso(data);
 		form.restart();
 	};
 	const validate = (data) => {
-		//console.log(images)
 		let errors = {};
 		if (!data.nombre || data.nombre === '') {
 			errors.nombre = 'Nombre is required.';
@@ -436,6 +436,7 @@ const AdicionarTabla = (props) => {
 		/*else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
             errors.email = 'Invalid email address. E.g. example@email.com';
         }*/
+
 		return errors;
 	};
 
@@ -451,6 +452,34 @@ const AdicionarTabla = (props) => {
 								{...input}
 								autoFocus
 								className={classNames({ 'p-invalid': isFormFieldValid(meta) })}
+							/>
+							<label
+								htmlFor={campo}
+								className={classNames({
+									'p-error': isFormFieldValid('canthabitaciones'),
+								})}
+							>
+								{texto}*
+							</label>
+						</span>
+						{getFormErrorMessage(campo)}
+					</div>
+				)}
+			/>
+		</div>
+	);
+	const fieldEditorComponent = (campo, texto, visib) => (
+		<div style={{ display: visib ? 'none' : 'line' }}>
+			<Field
+				name={campo}
+				render={({ input, meta }) => (
+					<div className='p-field'>
+						<span className='p-float-label'>
+							<Editor
+								id={'descripcion'}
+								style={{ height: '320px' }}
+								value={input.value}
+								onTextChange={(e) => input.onChange(e.htmlValue)}
 							/>
 							<label
 								htmlFor={campo}
@@ -593,7 +622,7 @@ const AdicionarTabla = (props) => {
 			//console.log(fileInfo);
 		});
 	};
-
+	const [err, setE] = useState('');
 	const form = () => {
 		return (
 			<div className='p-d-flex p-jc-center'>
@@ -672,6 +701,7 @@ const AdicionarTabla = (props) => {
 												'descripcion',
 												false
 											)}
+
 											{fieldTextComponent(
 												'descripcionI',
 												'descripcionI',

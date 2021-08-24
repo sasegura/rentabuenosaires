@@ -73,7 +73,7 @@ const IndexNavbar = (props) => {
 	React.useEffect(() => {
 		if (props.currentNavBarColor) {
 			setNavbarColor('navbar-transparent');
-			setNavbarTextColor('white');
+			setNavbarTextColor('black');
 			/* const updateNavbarColor = () => {
 				if (props.currentNavBarColor) {
 					if (document.documentElement.scrollTop > 3 || document.body.scrollTop > 3) {
@@ -94,7 +94,7 @@ const IndexNavbar = (props) => {
 					setNavbarTextColor('black');
 				} else if (document.documentElement.scrollTop < 4 || document.body.scrollTop < 4) {
 					setNavbarColor('navbar-transparent');
-					setNavbarTextColor('white');
+					setNavbarTextColor('black');
 				}
 			};
 			window.addEventListener('scroll', updateNavbarColor);
@@ -166,7 +166,7 @@ const IndexNavbar = (props) => {
 						{/*logo*/}
 						<Link to={index}>
 							<div className='width100'>
-								<img alt={'Logo'} src={logo} />
+								<img style={{ height: '50px' }} alt={'Logo'} src={logo} />
 							</div>
 						</Link>
 						<button
