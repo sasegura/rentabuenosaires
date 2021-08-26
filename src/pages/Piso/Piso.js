@@ -34,6 +34,7 @@ import { linkUsuario } from 'configuracion/constantes';
 import { apiReservaciones } from 'configuracion/constantes';
 import { apiPiso } from 'configuracion/constantes';
 import moment from 'moment';
+import IndexNavbar from 'components/Navbars/IndexNavbar';
 
 const Piso = (props) => {
 	const { t } = props;
@@ -655,6 +656,7 @@ const Piso = (props) => {
 	};
 	return (
 		<>
+			<IndexNavbar />
 			<DialogDemo
 				acept={(e) => setAcept(e)}
 				open={visibleDialog}

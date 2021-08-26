@@ -12,6 +12,7 @@ import { Container } from 'reactstrap';
 //CSS
 import './Nosotros.style.scss';
 import Equipo from 'components/Equipo';
+import IndexNavbar from 'components/Navbars/IndexNavbar';
 
 const Nosotros = (props) => {
 	const { t } = props;
@@ -31,6 +32,7 @@ const Nosotros = (props) => {
 
 	return (
 		<>
+			<IndexNavbar />
 			<div
 				id='enviar_mensaje'
 				className={

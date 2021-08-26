@@ -10,6 +10,7 @@ import AxiosConexionConfig from 'conexion/AxiosConexionConfig';
 import cargando from '../../assets/img/loading.gif';
 import MyCardComponent from 'components/MyCard/MyCard.component';
 import { withTranslation } from 'react-i18next';
+import IndexNavbar from 'components/Navbars/IndexNavbar';
 
 const PisoPreview = (props) => {
 	const { t } = props;
@@ -111,6 +112,7 @@ const PisoPreview = (props) => {
 
 	return (
 		<Fragment>
+			<IndexNavbar />
 			<div className='separador' />
 			{props.currentDestino !== null ? destino() : nodestino()}
 		</Fragment>

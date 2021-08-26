@@ -12,6 +12,7 @@ import './Propietarios.style.scss';
 import { useHistory } from 'react-router-dom';
 import { linkMensaje } from 'configuracion/constantes';
 import { withTranslation } from 'react-i18next';
+import IndexNavbar from 'components/Navbars/IndexNavbar';
 
 const Propietarios = (props) => {
 	const { t } = props;
@@ -30,6 +31,7 @@ const Propietarios = (props) => {
 	}, []);
 	return (
 		<>
+			<IndexNavbar />
 			<div id='enviar_mensaje' className='section section-contact-us text-center'>
 				<Container>
 					<h2 className=''>{t('Rentabiliza tu propiedad')}</h2>

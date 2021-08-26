@@ -46,7 +46,6 @@ function App() {
 	return (
 		<Fragment>
 			{/**TopBar */}
-			<IndexNavbar />
 
 			{/**Ruteo */}
 			<Switch>

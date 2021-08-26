@@ -15,6 +15,7 @@ import './Mensaje.style.scss';
 
 import { withTranslation } from 'react-i18next';
 import AxiosConexionConfig from 'conexion/AxiosConexionConfig';
+import IndexNavbar from 'components/Navbars/IndexNavbar';
 
 const Mensaje = (props) => {
 	const { t } = props;
@@ -106,6 +107,7 @@ const Mensaje = (props) => {
 
 	return (
 		<>
+			<IndexNavbar />
 			<Toast baseZIndex={500} ref={toast} />
 			<div
 				id='enviar_mensaje'

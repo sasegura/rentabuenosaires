@@ -26,6 +26,7 @@ import img2 from 'assets/img/logo-de-alquiler.png';
 import AxiosConexionConfig from 'conexion/AxiosConexionConfig';
 import { index } from 'configuracion/constantes';
 import { useHistory } from 'react-router';
+import IndexNavbar from 'components/Navbars/IndexNavbar';
 
 function LoginPage(props) {
 	const history = useHistory();
@@ -101,6 +102,7 @@ function LoginPage(props) {
 
 	return (
 		<>
+			<IndexNavbar />
 			<div className='page-header clear-filter' filter-color='blue'>
 				<div
 					className='page-header-image'

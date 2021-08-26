@@ -22,6 +22,7 @@ import AxiosConexionConfig from 'conexion/AxiosConexionConfig';
 //Componente
 import AdicionarTabla from './AdicionarTabla';
 import { Col, Container, InputGroup, Row } from 'reactstrap';
+import IndexNavbar from 'components/Navbars/IndexNavbar';
 
 const Adicionar = (props) => {
 	props.setCurrentNavBarColor(false);
@@ -231,6 +232,7 @@ const Adicionar = (props) => {
 	const getDestino = () => {
 		return (
 			<>
+				<IndexNavbar />
 				<div className='section datatable-responsive-demo p-mb-6'>
 					<Toast ref={toast} />
 					<div className='p-md-6 p-col-12 floatLeft'>

@@ -20,6 +20,7 @@ import Nosotros from 'pages/Nosotros/Nosotros.component';
 import './inicio.style.scss';
 import Mensaje from 'pages/Mensaje/Mensaje';
 import Equipo from 'components/Equipo';
+import IndexNavbar from 'components/Navbars/IndexNavbar';
 
 function Inicio(props) {
 	const { t } = props;
@@ -41,6 +42,7 @@ function Inicio(props) {
 
 	return (
 		<>
+			<IndexNavbar />
 			<div className='wrapper'>
 				<LandingPageHeader />
 				<div className='section-about-us'>

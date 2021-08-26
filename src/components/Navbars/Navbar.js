@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import esp from '../../assets/img/flags/ES.png';
 import eng from '../../assets/img/flags/GB.png';
-import mundoIcon from '../../assets/img/icon/mundo.png';
+import mundoIcon from '../../assets/img/icon/mundo.jpg';
 // reactstrap components
 import {
 	Collapse,
@@ -23,7 +23,6 @@ import logo from '../../assets/img/logo-de-alquiler.png';
 
 import { connect } from 'react-redux';
 import { setCurrentDestino } from 'redux/destino/destino.action';
-import { setCurrentNavBarColor } from 'redux/navBarColor/navBarColor.action';
 import { setCurrentUsuario } from 'redux/usuario/usuario.action';
 
 import './IndexNavBar.style.scss';
@@ -41,14 +40,10 @@ import {
 } from 'configuracion/constantes';
 import { linkReservaciones } from 'configuracion/constantes';
 
-const IndexNavbar = (props) => {
+const NavbarOthers = (props) => {
 	const { t } = props;
-	const [navbarColor, setNavbarColor] = React.useState(
-		props.currentNavBarColor === true ? 'navbar-transparent' : ''
-	);
-	const [navbarTextColor, setNavbarTextColor] = React.useState(
-		props.currentNavBarColor === true ? 'white' : 'black'
-	);
+	const [navbarColor, setNavbarColor] = React.useState('');
+	const [navbarTextColor, setNavbarTextColor] = React.useState('black');
 	const [destinos, setDestinos] = useState(null);
 
 	const ChangeLenguage = (e, language) => {
@@ -71,48 +66,10 @@ const IndexNavbar = (props) => {
 			});
 	}
 	React.useEffect(() => {
-		console.log(props.currentNavBarColor);
-		const updateNavbarColor = () => {
-			if (document.documentElement.scrollTop > 3 || document.body.scrollTop > 3) {
-				setNavbarColor('');
-				setNavbarTextColor('black');
-			} else if (document.documentElement.scrollTop < 4 || document.body.scrollTop < 4) {
-				setNavbarColor('navbar-transparent');
-				setNavbarTextColor('white');
-			}
-		};
-		if (props.currentNavBarColor) {
-			setNavbarColor('navbar-transparent');
-			setNavbarTextColor('white');
-			/* const updateNavbarColor = () => {
-				if (props.currentNavBarColor) {
-					if (document.documentElement.scrollTop > 3 || document.body.scrollTop > 3) {
-						setNavbarColor('');
-						setNavbarTextColor('black');
-					} else if (
-						document.documentElement.scrollTop < 4 ||
-						document.body.scrollTop < 4
-					) {
-						setNavbarColor('navbar-transparent');
-						setNavbarTextColor('white');
-					}
-				}
-			}; */
-
-			window.addEventListener('scroll', updateNavbarColor);
-			return function cleanup() {
-				window.removeEventListener('scroll', updateNavbarColor);
-			};
-		} else {
-			setNavbarColor('');
-			setNavbarTextColor('black');
-			return function cleanup() {
-				window.removeEventListener('scroll', updateNavbarColor);
-			};
-		}
-
+		setNavbarColor('');
+		setNavbarTextColor('black');
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [props.currentNavBarColor]);
+	}, []);
 
 	const Login = () => {
 		if (props.currentUsuario !== '') {
@@ -305,7 +262,6 @@ const IndexNavbar = (props) => {
 									<img
 										alt='...'
 										className='n-logo bandera width20x'
-										style={{ borderRadius: '2rem' }}
 										src={mundoIcon}
 									/>
 								</DropdownToggle>
@@ -369,7 +325,6 @@ const IndexNavbar = (props) => {
 
 const mapDispatchToProps = (dispatch) => ({
 	setCurrentDestino: (destino) => dispatch(setCurrentDestino(destino)),
-	setCurrentNavBarColor: (navBarColor) => dispatch(setCurrentNavBarColor(navBarColor)),
 	setCurrentUsuario: (usuario) => dispatch(setCurrentUsuario(usuario)),
 });
 
@@ -381,4 +336,4 @@ const mapStateToProps = (state) => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(withTranslation('translations')(IndexNavbar));
+)(withTranslation('translations')(NavbarOthers));

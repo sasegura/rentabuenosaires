@@ -20,6 +20,7 @@ import {
 	apiSendMailCitaConfirmada,
 	apisendMailCitaCancelada,
 } from 'configuracion/constantes';
+import IndexNavbar from 'components/Navbars/IndexNavbar';
 
 const Reservaciones = (props) => {
 	const toast = useRef(null);
@@ -239,6 +240,7 @@ const Reservaciones = (props) => {
 	};
 	return (
 		<>
+			<IndexNavbar />
 			<Toast baseZIndex={500} ref={toast} />
 			<div className='section text-center text-center ml-auto mr-auto'>
 				<h2>Reservaciones</h2>
