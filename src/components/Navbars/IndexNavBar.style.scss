@@ -11,3 +11,21 @@ ul li {
 .fontFamily {
 	font-family: 'Playfair Display' !important;
 }
+
+.contenedor {
+	width: 100px;
+	height: 30px;
+	overflow: hidden;
+	margin: 10px;
+	position: relative;
+}
+.contenedor > .crop {
+	position: absolute;
+	left: -100%;
+	right: -100%;
+	top: -100%;
+	bottom: -100%;
+	margin: auto;
+	min-height: 100%;
+	min-width: 100%;
+}
