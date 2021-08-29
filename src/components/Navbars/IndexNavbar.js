@@ -20,6 +20,7 @@ import {
 } from 'reactstrap';
 
 import logo from '../../assets/img/logo-de-alquiler.png';
+import logo2 from '../../assets/img/logo-de-alquiler01.png';
 
 import { connect } from 'react-redux';
 import { setCurrentDestino } from 'redux/destino/destino.action';
@@ -56,7 +57,7 @@ const IndexNavbar = (props) => {
 		props.i18n.changeLanguage(language);
 	};
 	const [collapseOpen, setCollapseOpen] = React.useState(false);
-
+	const [logoIcon, setLogoIcon] = useState(logo);
 	useEffect(() => {
 		getDestinos();
 	}, []);
@@ -76,14 +77,17 @@ const IndexNavbar = (props) => {
 			if (document.documentElement.scrollTop > 3 || document.body.scrollTop > 3) {
 				setNavbarColor('');
 				setNavbarTextColor('black');
+				setLogoIcon(logo);
 			} else if (document.documentElement.scrollTop < 4 || document.body.scrollTop < 4) {
 				setNavbarColor('navbar-transparent');
 				setNavbarTextColor('white');
+				setLogoIcon(logo2);
 			}
 		};
 		if (props.currentNavBarColor) {
 			setNavbarColor('navbar-transparent');
 			setNavbarTextColor('white');
+			setLogoIcon(logo2);
 			/* const updateNavbarColor = () => {
 				if (props.currentNavBarColor) {
 					if (document.documentElement.scrollTop > 3 || document.body.scrollTop > 3) {
@@ -174,9 +178,9 @@ const IndexNavbar = (props) => {
 								<div className='contenedor'>
 									<img
 										className='crop'
-										style={{ height: '100px' }}
+										style={{ height: '150px' }}
 										alt={'Logo'}
-										src={logo}
+										src={logoIcon}
 									/>
 								</div>
 							</div>
