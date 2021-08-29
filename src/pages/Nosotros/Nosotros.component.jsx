@@ -32,7 +32,7 @@ const Nosotros = (props) => {
 
 	return (
 		<>
-			<IndexNavbar />
+			{props.isInicioPage ? null : <IndexNavbar />}
 			<div
 				id='enviar_mensaje'
 				className={

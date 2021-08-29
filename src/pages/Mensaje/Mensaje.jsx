@@ -107,7 +107,7 @@ const Mensaje = (props) => {
 
 	return (
 		<>
-			<IndexNavbar />
+			{props.inicio ? null : <IndexNavbar />}
 			<Toast baseZIndex={500} ref={toast} />
 			<div
 				id='enviar_mensaje'

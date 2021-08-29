@@ -27,33 +27,26 @@ function LandingPageHeader(props) {
 	return (
 		<>
 			<div className='page-header page-header-small'>
-				<div
-					className='page-header-image'
-					style={{
-						backgroundImage: 'url(' + Banner + ')',
-					}}
-					ref={pageHeader}
-				>
-					<div className='content-center'>
-						<Container>
-							<h1
-								className=''
-								style={{
-									fontFamily: 'Playfair Display',
-									fontStyle: 'normal',
-									fontVariant: 'normal',
-								}}
-							>
-								<br />
-								{t('Tu vida es única')}
+				<img src={Banner} ref={pageHeader} className='page-header-image'></img>
+				<div className='content-center'>
+					<Container>
+						<h1
+							className=''
+							style={{
+								fontFamily: 'Playfair Display',
+								fontStyle: 'normal',
+								fontVariant: 'normal',
+							}}
+						>
+							<br />
+							{t('Tu vida es única')}
 
-								<br />
-								<br />
-								<br />
-								{t('Vive en un lugar extraordinario')}
-							</h1>
-						</Container>
-					</div>
+							<br />
+							<br />
+							<br />
+							{t('Vive en un lugar extraordinario')}
+						</h1>
+					</Container>
 				</div>
 			</div>
 		</>
