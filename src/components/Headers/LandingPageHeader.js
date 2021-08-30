@@ -27,7 +27,15 @@ function LandingPageHeader(props) {
 	return (
 		<>
 			<div className='page-header page-header-small'>
-				<img src={Banner} ref={pageHeader} className='page-header-image'></img>
+				<div
+					className='page-header-image'
+					style={{
+						backgroundImage: `url(${Banner})`,
+						width: '100%',
+						height: '100%',
+					}}
+					ref={pageHeader}
+				></div>
 				<div className='content-center'>
 					<Container>
 						<h1
