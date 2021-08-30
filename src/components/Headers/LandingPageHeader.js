@@ -26,11 +26,13 @@ function LandingPageHeader(props) {
 	});
 	return (
 		<>
-			<div className='page-header page-header-small'>
+			<div className='page-header clear-filter  page-header-small'>
 				<div
-					className='page-header-image '
+					className='page-header-image'
 					style={{
 						backgroundImage: `url(${Banner})`,
+						width: '100%',
+						height: '100%',
 					}}
 					ref={pageHeader}
 				></div>
