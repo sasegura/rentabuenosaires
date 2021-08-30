@@ -176,12 +176,7 @@ const IndexNavbar = (props) => {
 						<Link to={index}>
 							<div className='width100'>
 								<div className='contenedor'>
-									<img
-										className='crop'
-										style={{ height: '150px' }}
-										alt={'Logo'}
-										src={logoIcon}
-									/>
+									<img className='crop' alt={'Logo'} src={logoIcon} />
 								</div>
 							</div>
 						</Link>

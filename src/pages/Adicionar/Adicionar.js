@@ -233,7 +233,7 @@ const Adicionar = (props) => {
 		return (
 			<>
 				<IndexNavbar />
-				<div className='section datatable-responsive-demo p-mb-6'>
+				<div className='section datatable-responsive-demo p-mb-6 fontFamily'>
 					<Toast ref={toast} />
 					<div className='p-md-6 p-col-12 floatLeft'>
 						<div className={'p-md-6 p-col-12 floatLeft'}>{AdicionarDestno()}</div>

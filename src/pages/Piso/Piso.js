@@ -678,7 +678,7 @@ const Piso = (props) => {
 							)}
 						</div>
 						<div className='p-md-3 p-col-12 p-p-0'>
-							<div className='card p-col-12' style={{ fontFamily: 'gotham' }}>
+							<div className='card p-col-12 fontFamily'>
 								{loadData ? (
 									TarjetPiso()
 								) : (
@@ -690,10 +690,7 @@ const Piso = (props) => {
 						</div>
 					</div>
 					<div className=' p-col-12 p-d-flex'>
-						<div
-							className=' p-col-12 p-md-12 p-d-flex p-p-0 floatLeft'
-							style={{ fontFamily: 'gotham' }}
-						>
+						<div className=' p-col-12 p-md-12 p-d-flex p-p-0 floatLeft fontFamily'>
 							<div className=' p-col-12 p-md-8 p-p-0 floatLeft'>{DatosPiso()}</div>
 							<div className='p-col-12 p-md-3 p-p-0 '>
 								<Maps piso={data} />

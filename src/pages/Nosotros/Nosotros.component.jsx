@@ -40,7 +40,7 @@ const Nosotros = (props) => {
 				}
 			>
 				<Container>
-					<div className='p-col-12 p-d-flex'>
+					<div className='p-col-12 p-d-flex fontFamily'>
 						<div className='p-col-12 p-md-1'></div>
 						<div className='p-col-12 p-md-10'>
 							<h2>{t('Te ofrecemos un servicio de alquiler')}</h2>

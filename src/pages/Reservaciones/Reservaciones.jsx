@@ -242,7 +242,7 @@ const Reservaciones = (props) => {
 		<>
 			<IndexNavbar />
 			<Toast baseZIndex={500} ref={toast} />
-			<div className='section text-center text-center ml-auto mr-auto'>
+			<div className='section text-center text-center ml-auto mr-auto fontFamily'>
 				<h2>Reservaciones</h2>
 				<DataTable
 					value={reservaciones}

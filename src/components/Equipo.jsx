@@ -12,7 +12,7 @@ import foto4 from 'assets/img/alicia.jpg';
 const Equipo = (props) => {
 	const { t } = props;
 	return (
-		<div className='sectionEquipo section-team text-center'>
+		<div className='sectionEquipo section-team text-center fontFamily'>
 			<Container>
 				<h2 className=''>{t('Este es nuestro equipo')}</h2>
 				<div className='team'>

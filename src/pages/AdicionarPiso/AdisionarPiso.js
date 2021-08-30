@@ -113,7 +113,9 @@ const AdisionarPiso = (props) => {
 
 	return (
 		<Fragment>
-			<div className='p-col-12'>{loadPiso ? pisoSelecionado() : <Fragment></Fragment>}</div>
+			<div className='p-col-12 fontFamily'>
+				{loadPiso ? pisoSelecionado() : <Fragment></Fragment>}
+			</div>
 			<Button label='Submit' onClick={() => submitValues()} />
 		</Fragment>
 	);

@@ -54,7 +54,7 @@ function Inicio(props) {
 						</Row>
 						<div className='section-story-overview p-pt-0'>
 							<Row>
-								<Col md='6'>
+								<Col md='6' className='fontFamily'>
 									<div
 										className='image-container image-left'
 										style={{
@@ -78,7 +78,7 @@ function Inicio(props) {
 										</div>
 									</div>
 								</Col>
-								<Col md='5'>
+								<Col md='5' className='fontFamily'>
 									<div
 										className='image-container image-right'
 										style={{
@@ -87,7 +87,7 @@ function Inicio(props) {
 									></div>
 									<div>
 										<div
-											className='p-text-bold'
+											className='p-text-bold '
 											style={{ fontSize: '1.5em', lineHeight: '1.45em' }}
 										>
 											{t('Servicio 24/7')}

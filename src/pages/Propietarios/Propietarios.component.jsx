@@ -34,7 +34,7 @@ const Propietarios = (props) => {
 			<IndexNavbar />
 			<div id='enviar_mensaje' className='section section-contact-us text-center'>
 				<Container>
-					<h2 className=''>{t('Rentabiliza tu propiedad')}</h2>
+					<h2 className='fontFamily'>{t('Rentabiliza tu propiedad')}</h2>
 					<p className='fontFamily '>
 						{t('Te ofrecemos una propuesta de alta rentabilidad para tu propiedad.')}
 					</p>
