@@ -408,3 +408,17 @@
 		margin-top: -330px;
 	}
 }
+
+@media only screen and (min-height: 769px) {
+	.page-header-image {
+		width: '100%';
+		height: '100%';
+	}
+}
+
+@media only screen and (max-height: 768px) {
+	.page-header-image {
+		height: '50%';
+		width: '100%';
+	}
+}
