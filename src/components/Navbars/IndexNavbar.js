@@ -322,7 +322,7 @@ const IndexNavbar = (props) => {
 										tag={Link}
 									>
 										<img alt='...' className='n-logo bandera' src={eng} />
-										<p className='fontFamily'>{t('Inglés')}</p>
+										<p className='fontFamily'>English</p>
 									</DropdownItem>
 									<DropdownItem
 										to='/'
@@ -330,7 +330,7 @@ const IndexNavbar = (props) => {
 										tag={Link}
 									>
 										<img alt='...' className='n-logo bandera' src={esp} />
-										<p className='fontFamily'>{t('Español')}</p>
+										<p className='fontFamily'>Español</p>
 									</DropdownItem>
 								</DropdownMenu>
 							</UncontrolledDropdown>
