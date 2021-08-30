@@ -14,8 +14,8 @@ const Equipo = (props) => {
 	return (
 		<div className='sectionEquipo section-team text-center fontFamily'>
 			<Container>
-				<h2 className=''>{t('Este es nuestro equipo')}</h2>
-				<div className='team'>
+				<h2 className='fontFamily'>{t('Este es nuestro equipo')}</h2>
+				<div className='team fontFamily'>
 					<Row>
 						<Col md='3'>
 							<div className='team-player'>

@@ -95,7 +95,11 @@ function Inicio(props) {
 									</div>
 									<p>
 										{t(
-											'Estamos a tu disposición 24/7 durante toda tu estancia. Cuidamos y mantenemos nuestras propiedades revisando cada detalle. Si hay algo que podamos hacer para mejorar tu estancia, avísanos y estaremos encantados de ayudarte.'
+											'Estamos a tu disposición 24/7 durante toda tu estancia. Cuidamos y mantenemos nuestras propiedades revisando cada detalle.'
+										)}
+										<br />
+										{t(
+											'Si hay algo que podamos hacer para mejorar tu estancia, avísanos y estaremos encantados de ayudarte.'
 										)}
 									</p>
 								</Col>
