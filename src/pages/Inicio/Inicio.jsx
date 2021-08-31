@@ -62,11 +62,8 @@ function Inicio(props) {
 										}}
 									>
 										<div className='blockquote ' id='1234'>
-											<div
-												className='p-text-bold'
-												style={{ fontSize: '1.5em', lineHeight: '1.45em' }}
-											>
-												{t('Garantia')}
+											<div className=''>
+												<h3 className='p-mb-0'>{t('Garantia')}</h3>
 											</div>
 											{t('+ Calidad')} <br />
 											{t('+ Comodidad')}
@@ -86,11 +83,8 @@ function Inicio(props) {
 										}}
 									></div>
 									<div>
-										<div
-											className='p-text-bold '
-											style={{ fontSize: '1.5em', lineHeight: '1.45em' }}
-										>
-											{t('Servicio 24/7')}
+										<div className='p-mb-0 '>
+											<h3 className='p-mb-0 '>{t('Servicio 24/7')}</h3>
 										</div>
 									</div>
 									<p>

@@ -128,7 +128,7 @@ const Mensaje = (props) => {
 						validate={validate}
 						render={({ handleSubmit }) => (
 							<form onSubmit={handleSubmit} className='p-fluid'>
-								<h3>
+								<h3 className='fontFamily'>
 									{props.consulta
 										? t('Introduce tus datos para enviar tu consulta')
 										: t('Introduzca sus datos para procesar la pre-reserva.')}
