@@ -666,7 +666,7 @@ const Piso = (props) => {
 			/>
 			{loadData ? (
 				<div className='p-col-12'>
-					<div className='center p-col-12 p-md-11 p-ml-4 p-mt-4 p-d-flex'>
+					<div className='center p-col-12 p-md-11 p-ml-4 p-mt-4 p-d-flex p-flex-column p-flex-md-row'>
 						<div className='p-md-9 p-col-12 '>
 							<Toast baseZIndex={500} ref={toast} />
 							{loadImg ? (
@@ -689,8 +689,8 @@ const Piso = (props) => {
 							</div>
 						</div>
 					</div>
-					<div className=' p-col-12 p-d-flex'>
-						<div className=' p-col-12 p-md-12 p-d-flex p-p-0 floatLeft fontFamily'>
+					<div className=' p-col-12 '>
+						<div className=' p-col-12 p-md-12 p-d-flex p-flex-column p-flex-md-row p-p-0 floatLeft fontFamily'>
 							<div className=' p-col-12 p-md-8 p-p-0 floatLeft'>{DatosPiso()}</div>
 							<div className='p-col-12 p-md-3 p-p-0 '>
 								<Maps piso={data} />
