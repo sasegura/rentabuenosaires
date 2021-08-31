@@ -35,7 +35,7 @@
 	height: 100px !important;
 }
 .height440px {
-	height: 440px !important;
+	max-height: 440px !important;
 }
 .carousel-demo .product-item .product-item-content {
 	border: 1px solid var(--surface-d);
@@ -174,7 +174,7 @@ h4 {
 }
 
 .section-story-overview div.blockquote {
-	width: 220px;
+	width: 255px;
 	min-height: 180px;
 	text-align: left;
 	position: absolute;

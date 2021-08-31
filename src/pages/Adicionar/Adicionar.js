@@ -98,9 +98,9 @@ const Adicionar = (props) => {
 	const AdicionarDestno = () => {
 		return (
 			<Container>
-				<h2 className='title'>Adicionar Destino</h2>
+				<h2 className=''>Adicionar Destino</h2>
 				<Row>
-					<Col className='text-center ml-auto mr-auto' lg='6' md='8'>
+					<Col className='text-center  mr-auto' lg='6' md='8'>
 						<InputGroup>
 							<InputText
 								value={nombreDestino}
@@ -233,22 +233,24 @@ const Adicionar = (props) => {
 		return (
 			<>
 				<IndexNavbar />
-				<div className='section datatable-responsive-demo p-mb-6 fontFamily'>
+				<div className='section datatable-responsive-demo fontFamily'>
 					<Toast ref={toast} />
-					<div className='p-md-6 p-col-12 floatLeft'>
-						<div className={'p-md-6 p-col-12 floatLeft'}>{AdicionarDestno()}</div>
+					<div className='p-d-flex'>
+						<div className='p-md-6 p-col-12 floatLeft'>
+							<div className={'p-md-6 p-col-12 floatLeft'}>{AdicionarDestno()}</div>
+						</div>
+						<DataTable
+							className='p-datatable-responsive-demo roboto p-col-12 p-md-6 floatLeft'
+							value={destinos}
+							selection={selectedDestino}
+							selectionMode='single'
+							onSelectionChange={(e) => setSelectedDestino(e.value)}
+							dataKey='iddestino'
+						>
+							<Column field='nombre' header='Destinos'></Column>
+							<Column body={actionBodyTemplate}></Column>
+						</DataTable>
 					</div>
-					<DataTable
-						className='p-datatable-responsive-demo roboto p-col-12 p-md-6 floatLeft'
-						value={destinos}
-						selection={selectedDestino}
-						selectionMode='single'
-						onSelectionChange={(e) => setSelectedDestino(e.value)}
-						dataKey='iddestino'
-					>
-						<Column field='nombre' header='Destinos'></Column>
-						<Column body={actionBodyTemplate}></Column>
-					</DataTable>
 					<Dialog
 						visible={destinoDialog}
 						style={{ width: '450px' }}
