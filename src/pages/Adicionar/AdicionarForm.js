@@ -1,48 +1,117 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 //import pisoservice from '../service/pisoservice';
 import ImageUploader from 'react-images-upload';
 
 import { Button } from 'primereact/button';
-import { RadioButton } from 'primereact/radiobutton';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputText } from 'primereact/inputtext';
 import { Form, Field } from 'react-final-form';
-import { SelectButton } from 'primereact/selectbutton';
-import { TabView, TabPanel } from 'primereact/tabview';
+import { AutoComplete } from 'primereact/autocomplete';
 
 import { withTranslation } from 'react-i18next';
 
 import './Adicionar.style.scss';
 import AxiosConexionConfig from 'conexion/AxiosConexionConfig';
+import cargando from '../../assets/img/loading.gif';
+import servicios from '../../configuracion/servicios.json';
 
 const AdicionarForm = (props) => {
-	console.log(props);
-	const { t } = props;
-
-	const options = ['Yes', 'No'];
-	const [activeIndex, setActiveIndex] = useState(0);
-	const [pisos, setpisos] = useState(null);
-	const [loadingPisos, setloadingpisos] = useState(false);
-	const [pisoDialog, setpisoDialog] = useState(props.dialogVisible);
+	const [savingPisos, setSavingPisos] = useState(false);
 	const { piso } = props;
-	// const [submitted, setSubmitted] = useState(false);
 	const [images, setImages] = useState([]);
 	const [cargandoImagenes, setCargandoImages] = useState(false);
-	//const pisoservice = new pisoservice();
+
+	const [serviciosAdicionales, setserviciosAdicionales] = useState([]);
+	const [selectedserviciosAdicionales, setSelectedserviciosAdicionales] = useState(null);
+	const [filteredserviciosAdicionales, setFilteredserviciosAdicionales] = useState(null);
+
+	const [cocinaComedor, setCocinaComedor] = useState([]);
+	const [selectedCocinaComedor, setSelectedCocinaComedor] = useState(null);
+	const [filteredCocinaComedor, setFilteredCocinaComedor] = useState(null);
+
+	const [estacionamientoInstalaciones, setEstacionamientoInstalaciones] = useState([]);
+	const [selectedEstacionamientoInstalaciones, setSelectedEstacionamientoInstalaciones] =
+		useState(null);
+	const [filteredEstacionamientoInstalaciones, setFilteredEstacionamientoInstalaciones] =
+		useState(null);
+
+	const [internetOficina, setinternetOficina] = useState([]);
+	const [selectedinternetOficina, setSelectedinternetOficina] = useState(null);
+	const [filteredinternetOficina, setFilteredinternetOficina] = useState(null);
+
+	const [seguridadHogar, setseguridadHogar] = useState([]);
+	const [selectedseguridadHogar, setSelectedseguridadHogar] = useState(null);
+	const [filteredseguridadHogar, setFilteredseguridadHogar] = useState(null);
+
+	const [calefaccionRefrigeracion, setcalefaccionRefrigeracion] = useState([]);
+	const [selectedcalefaccionRefrigeracion, setSelectedcalefaccionRefrigeracion] = useState(null);
+	const [filteredcalefaccionRefrigeracion, setFilteredcalefaccionRefrigeracion] = useState(null);
+
+	const [paraFamilias, setparaFamilias] = useState([]);
+	const [selectedparaFamilias, setSelectedparaFamilias] = useState(null);
+	const [filteredparaFamilias, setFilteredparaFamilias] = useState(null);
+
+	const [entretenimiento, setentretenimiento] = useState([]);
+	const [selectedentretenimiento, setSelectedentretenimiento] = useState(null);
+	const [filteredentretenimiento, setFilteredentretenimiento] = useState(null);
+
+	const [Dormitorio, setDormitorio] = useState([]);
+	const [selectedDormitorio, setSelectedDormitorio] = useState(null);
+	const [filteredDormitorio, setFilteredDormitorio] = useState(null);
+
+	const [banno, setbanno] = useState([]);
+	const [selectedbanno, setSelectedbanno] = useState(null);
+	const [filteredbanno, setFilteredbanno] = useState(null);
+
+	useEffect(() => {
+		setserviciosAdicionales(servicios.serviciosAdicionales);
+		setCocinaComedor(servicios.cocinaComedor);
+		setEstacionamientoInstalaciones(servicios.estacionamientoInstalaciones);
+		setinternetOficina(servicios.internetOficina);
+		setseguridadHogar(servicios.seguridadHogar);
+		setcalefaccionRefrigeracion(servicios.calefaccionRefrigeracion);
+		setparaFamilias(servicios.paraFamilias);
+		setentretenimiento(servicios.entretenimiento);
+		setDormitorio(servicios.Dormitorio);
+		setbanno(servicios.banno);
+	}, []);
 
 	async function SavePiso(pisoData) {
-		console.log(pisoData);
-		// console.log(images)
-		// console.log(props.destino)
+		pisoData.cocinaComedor = selectedCocinaComedor
+			? selectedCocinaComedor.map((v) => v.name).join(',')
+			: '';
+		pisoData.entretenimiento = selectedentretenimiento
+			? selectedentretenimiento.map((v) => v.name).join(',')
+			: '';
+		pisoData.paraFamilias = selectedparaFamilias
+			? selectedparaFamilias.map((v) => v.name).join(',')
+			: '';
+		pisoData.dormitorio = selectedDormitorio
+			? selectedDormitorio.map((v) => v.name).join(',')
+			: '';
+		pisoData.banno = selectedbanno ? selectedbanno.map((v) => v.name).join(',') : '';
+		pisoData.calefaccionRefrigeracion = selectedcalefaccionRefrigeracion
+			? selectedcalefaccionRefrigeracion.map((v) => v.name).join(',')
+			: '';
+		pisoData.seguridadHogar = selectedseguridadHogar
+			? selectedseguridadHogar.map((v) => v.name).join(',')
+			: '';
+		//pisoData.cocinaComedor = cocinaComedor.join();
+		pisoData.internetOficina = selectedinternetOficina
+			? selectedinternetOficina.map((v) => v.name).join(',')
+			: '';
+		pisoData.estacionamientoInstalaciones = selectedEstacionamientoInstalaciones
+			? selectedEstacionamientoInstalaciones.map((v) => v.name).join(',')
+			: '';
+		pisoData.serviciosAdicionales = selectedserviciosAdicionales
+			? selectedserviciosAdicionales.map((v) => v.name).join(',')
+			: '';
 		pisoData.iddestino = props.destino.iddestino;
-		// setSubmitted(true);
-		setloadingpisos(true);
+		setSavingPisos(true);
 		let modificar = false;
 		let id = 0;
 		if (pisoData.nombre.trim()) {
-			let _pisos = [...pisos];
-			_pisos.push(pisoData);
 			if (pisoData.idpiso) {
 				id = pisoData.idpiso;
 				modificar = true;
@@ -51,19 +120,19 @@ const AdicionarForm = (props) => {
 			if (pisoData.imagen) {
 				delete pisoData.imagen;
 			}
-			//let _piso = {...piso};
 			const url = '/pisos';
 			if (modificar) {
-				console.log('asd');
 				try {
+					console.log('modificar');
 					const pisoDatos = await AxiosConexionConfig.patch(url + '/' + id, pisoData);
 					console.log(pisoDatos.data);
+					props.getPiso();
 				} catch (e) {
 					console.log(e);
 				}
 			} else {
 				try {
-					console.log('vvv');
+					console.log('crear');
 					AxiosConexionConfig.post(url, pisoData).then((data) => {
 						// console.log(data);
 						let uri = '/imagen';
@@ -74,18 +143,18 @@ const AdicionarForm = (props) => {
 								portada: index === 0 ? true : false,
 							};
 							AxiosConexionConfig.post(uri, imagenData).then((data) => {
-								// console.log(data)
+								console.log(data);
 							});
 						});
 					});
+					setSavingPisos(false);
+					props.getPiso();
 				} catch (e) {
 					console.log(e);
+					setSavingPisos(false);
 				}
 			}
-			setpisoDialog(false);
-
-			//setpisos(_pisos);
-			//setpiso(emptypiso);
+			props.setpisoDialog(false);
 		}
 	}
 
@@ -154,78 +223,68 @@ const AdicionarForm = (props) => {
 	};
 
 	const onSubmit = (data, form) => {
-		console.log(data);
-		setpisoDialog(false);
-		// console.log(images)
+		props.setpisoDialog(false);
 		SavePiso(data);
 		form.restart();
 	};
 	const validate = (data) => {
-		//console.log(images)
 		let errors = {};
 		if (!data.nombre || data.nombre === '') {
-			errors.nombre = 'Nombre is required.';
+			errors.nombre = 'Nombre es requerido.';
 		}
 		if (!data.descripcion || data.descripcion === '') {
-			errors.descripcion = 'descripcion is required.';
+			errors.descripcion = 'descripcion es requerida.';
+		}
+		if (!data.descripcionI || data.descripcionI === '') {
+			errors.descripcionI = 'descripcion en inglés es requerida.';
 		}
 		if (!data.latitud || data.latitud === '') {
-			errors.latitud = 'latitud is required.';
+			errors.latitud = 'latitud es requerida.';
 		}
 		if (!data.longitud || data.longitud === '') {
-			errors.longitud = 'longitud is required.';
+			errors.longitud = 'longitud es requerida.';
 		}
 		if (!data.cantpersonas || data.cantpersonas === '') {
-			errors.cantpersonas = 'cantpersonas is required.';
+			errors.cantpersonas = 'cant de personas es requerida.';
 		}
 		if (!data.metroscuadrados || data.metroscuadrados === '') {
-			errors.metroscuadrados = 'metroscuadrados is required.';
+			errors.metroscuadrados = 'metros cuadrados es requerido.';
 		}
 		if (!data.canthabitaciones || data.canthabitaciones === '') {
-			errors.canthabitaciones = 'canthabitaciones is required.';
+			errors.canthabitaciones = 'cant de habitaciones es requerida.';
 		}
 		if (!data.cantbannos || data.cantbannos === '') {
-			errors.cantbannos = 'cantbannos is required.';
+			errors.cantbannos = 'cant de baños es requerido.';
 		}
 		if (!data.precio || data.precio === '') {
-			errors.precio = 'precio is required.';
-		}
-		if (!data.cantbannos || data.cantbannos === '') {
-			errors.cantbannos = 'cantbannos is required.';
-		}
-		if (!data.cantbannos || data.cantbannos === '') {
-			errors.cantbannos = 'cantbannos is required.';
+			errors.precio = 'precio es requerido.';
 		}
 		/*else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
             errors.email = 'Invalid email address. E.g. example@email.com';
         }*/
-		console.log(data);
-		console.log(errors);
 		return errors;
 	};
 
 	const fieldTextComponent = (campo, texto, visib) => (
-		<div style={{ display: visib ? 'none' : 'line' }}>
+		<div style={{ display: visib ? 'none' : 'line' }} className='p-col-12'>
 			<Field
 				name={campo}
 				render={({ input, meta }) => (
 					<div className='p-field'>
-						<span className='p-float-label'>
-							<InputText
-								id={campo}
-								{...input}
-								autoFocus
-								className={classNames({ 'p-invalid': isFormFieldValid(meta) })}
-							/>
-							<label
-								htmlFor={campo}
-								className={classNames({
-									'p-error': isFormFieldValid('canthabitaciones'),
-								})}
-							>
-								{texto}*
-							</label>
-						</span>
+						<label
+							htmlFor={campo}
+							className={classNames({
+								'p-error': isFormFieldValid('canthabitaciones'),
+							})}
+						>
+							{texto}*
+						</label>
+						<InputText
+							id={campo}
+							{...input}
+							className={classNames({ 'p-invalid': isFormFieldValid(meta) })}
+						/>
+
 						{getFormErrorMessage(campo)}
 					</div>
 				)}
@@ -238,23 +297,23 @@ const AdicionarForm = (props) => {
 				name={campo}
 				render={({ input, meta }) => (
 					<div className='p-field'>
-						<span className='p-float-label'>
-							<InputNumber
-								id={campo}
-								value={input.value}
-								onValueChange={(e) => input.onChange(e.value)}
-								autoFocus
-								className={classNames({ 'p-invalid': isFormFieldValid(meta) })}
-							/>
-							<label
-								htmlFor={campo}
-								className={classNames({
-									'p-error': isFormFieldValid('canthabitaciones'),
-								})}
-							>
-								{texto}*
-							</label>
-						</span>
+						<label
+							htmlFor={campo}
+							className={classNames({
+								'p-error': isFormFieldValid('canthabitaciones'),
+							})}
+						>
+							{texto}*
+						</label>
+						<InputNumber
+							id={campo}
+							value={input.value}
+							showButtons
+							min={0}
+							onValueChange={(e) => input.onChange(e.value)}
+							className={classNames({ 'p-invalid': isFormFieldValid(meta) })}
+						/>
+
 						{getFormErrorMessage(campo)}
 					</div>
 				)}
@@ -291,26 +350,187 @@ const AdicionarForm = (props) => {
 
 			// on reader load somthing...
 			reader.onload = () => {
-				// Make a fileInfo Object
-				//console.log("Called", reader);
 				baseURL = reader.result;
 				img.push(baseURL);
-				//console.log(baseURL);
 				resolve(baseURL);
 			};
-			//console.log(fileInfo);
 		});
 	};
 
+	const searchserviciosAdicionales = (event) => {
+		setTimeout(() => {
+			let _filteredCountries;
+			if (!event.query.trim().length) {
+				_filteredCountries = [...serviciosAdicionales];
+			} else {
+				_filteredCountries = serviciosAdicionales.filter((country) => {
+					return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+				});
+			}
+
+			setFilteredserviciosAdicionales(_filteredCountries);
+		}, 250);
+	};
+
+	const searchCocinaComedor = (event) => {
+		setTimeout(() => {
+			let _filteredCountries;
+			if (!event.query.trim().length) {
+				_filteredCountries = [...cocinaComedor];
+			} else {
+				_filteredCountries = cocinaComedor.filter((country) => {
+					return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+				});
+			}
+
+			setFilteredCocinaComedor(_filteredCountries);
+		}, 250);
+	};
+
+	const searchEstacionamientoInstalaciones = (event) => {
+		setTimeout(() => {
+			let _filteredCountries;
+			if (!event.query.trim().length) {
+				_filteredCountries = [...estacionamientoInstalaciones];
+			} else {
+				_filteredCountries = estacionamientoInstalaciones.filter((country) => {
+					return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+				});
+			}
+
+			setFilteredEstacionamientoInstalaciones(_filteredCountries);
+		}, 250);
+	};
+
+	const searchbanno = (event) => {
+		setTimeout(() => {
+			let _filteredCountries;
+			if (!event.query.trim().length) {
+				_filteredCountries = [...banno];
+			} else {
+				_filteredCountries = banno.filter((country) => {
+					return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+				});
+			}
+
+			setFilteredbanno(_filteredCountries);
+		}, 250);
+	};
+
+	const searchDormitorio = (event) => {
+		setTimeout(() => {
+			let _filteredCountries;
+			if (!event.query.trim().length) {
+				_filteredCountries = [...Dormitorio];
+			} else {
+				_filteredCountries = Dormitorio.filter((country) => {
+					return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+				});
+			}
+
+			setFilteredDormitorio(_filteredCountries);
+		}, 250);
+	};
+
+	const searchentretenimiento = (event) => {
+		setTimeout(() => {
+			let _filteredCountries;
+			if (!event.query.trim().length) {
+				_filteredCountries = [...entretenimiento];
+			} else {
+				_filteredCountries = entretenimiento.filter((country) => {
+					return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+				});
+			}
+
+			setFilteredentretenimiento(_filteredCountries);
+		}, 250);
+	};
+
+	const searchparaFamilias = (event) => {
+		setTimeout(() => {
+			let _filteredCountries;
+			if (!event.query.trim().length) {
+				_filteredCountries = [...paraFamilias];
+			} else {
+				_filteredCountries = paraFamilias.filter((country) => {
+					return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+				});
+			}
+
+			setFilteredparaFamilias(_filteredCountries);
+		}, 250);
+	};
+
+	const searchcalefaccionRefrigeracion = (event) => {
+		setTimeout(() => {
+			let _filteredCountries;
+			if (!event.query.trim().length) {
+				_filteredCountries = [...calefaccionRefrigeracion];
+			} else {
+				_filteredCountries = calefaccionRefrigeracion.filter((country) => {
+					return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+				});
+			}
+
+			setFilteredcalefaccionRefrigeracion(_filteredCountries);
+		}, 250);
+	};
+
+	const searchseguridadHogar = (event) => {
+		setTimeout(() => {
+			let _filteredCountries;
+			if (!event.query.trim().length) {
+				_filteredCountries = [...seguridadHogar];
+			} else {
+				_filteredCountries = seguridadHogar.filter((country) => {
+					return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+				});
+			}
+
+			setFilteredseguridadHogar(_filteredCountries);
+		}, 250);
+	};
+	const searchinternetOficina = (event) => {
+		setTimeout(() => {
+			let _filteredCountries;
+			if (!event.query.trim().length) {
+				_filteredCountries = [...internetOficina];
+			} else {
+				_filteredCountries = internetOficina.filter((country) => {
+					return country.name.toLowerCase().startsWith(event.query.toLowerCase());
+				});
+			}
+
+			setFilteredinternetOficina(_filteredCountries);
+		}, 250);
+	};
+
+	const autocompleteElement = (text, valores, SetValores, valoresFiltrados, metodoCompletar) => (
+		<div className='p-col-12 p-md-4'>
+			<span className='p-fluid'>
+				<h5>{text}</h5>
+				<AutoComplete
+					value={valores}
+					suggestions={valoresFiltrados}
+					completeMethod={metodoCompletar}
+					field='name'
+					multiple
+					dropdown
+					onChange={(e) => SetValores(e.value)}
+				/>
+			</span>
+		</div>
+	);
 	return (
-		<Form
-			onSubmit={onSubmit}
-			initialValues={initialValues}
-			validate={validate}
-			render={({ handleSubmit }) => (
-				<form onSubmit={handleSubmit} className='p-fluid'>
-					<TabView activeIndex={activeIndex} renderActiveOnly={false}>
-						<TabPanel header='Imagenes'>
+		<>
+			{!savingPisos ? (
+				<Form
+					onSubmit={onSubmit}
+					initialValues={initialValues}
+					validate={validate}
+					render={({ handleSubmit }) => (
+						<form onSubmit={handleSubmit} className='p-fluid'>
 							<ImageUploader
 								withIcon={true}
 								withPreview={true}
@@ -319,32 +539,27 @@ const AdicionarForm = (props) => {
 								imgExtension={['.jpg', '.gif', '.png', '.gif']}
 								maxFileSize={5242880}
 							/>
-						</TabPanel>
-						<TabPanel header='Header II'>
 							<div className='flexWrap p-col-12'>
 								<div className='p-col-12 p-md-4'>
 									<Field
 										name='nombre'
 										render={({ input, meta }) => (
 											<div className='p-field'>
-												<span className='p-float-label'>
-													<InputText
-														id='nombre'
-														{...input}
-														autoFocus
-														className={classNames({
-															'p-invalid': isFormFieldValid(meta),
-														})}
-													/>
-													<label
-														htmlFor='nombre'
-														className={classNames({
-															'p-error': isFormFieldValid(meta),
-														})}
-													>
-														Nombre*
-													</label>
-												</span>
+												<label
+													htmlFor='nombre'
+													className={classNames({
+														'p-error': isFormFieldValid(meta),
+													})}
+												>
+													Nombre*
+												</label>
+												<InputText
+													id='nombre'
+													{...input}
+													className={classNames({
+														'p-invalid': isFormFieldValid(meta),
+													})}
+												/>
 												{getFormErrorMessage(meta)}
 											</div>
 										)}
@@ -373,42 +588,101 @@ const AdicionarForm = (props) => {
 								{fieldNumberComponent('metroscuadrados', 'metroscuadrados', false)}
 								{fieldNumberComponent('cantbannos', 'cantbannos', false)}
 							</div>
-						</TabPanel>
 
-						<TabPanel header='Header III'>
-							{fieldTextComponent(
-								'serviciosAdicionales',
-								'serviciosAdicionales',
-								false
-							)}
-							{fieldTextComponent(
-								'estacionamientoInstalaciones',
-								'estacionamientoInstalaciones',
-								false
-							)}
-							{fieldTextComponent('cocinaComedor', 'cocinaComedor', false)}
-							{fieldTextComponent('internetOficina', 'internetOficina', false)}
-							{fieldTextComponent('seguridadHogar', 'seguridadHogar', false)}
-							{fieldTextComponent(
-								'calefaccionRefrigeracion',
-								'calefaccionRefrigeracion',
-								false
-							)}
-							{fieldTextComponent('entretenimiento', 'entretenimiento', false)}
-							{fieldTextComponent('paraFamilias', 'paraFamilias', false)}
-							{fieldTextComponent('dormitorio', 'dormitorio', false)}
-							{fieldTextComponent('banno', 'banno', false)}
-						</TabPanel>
-					</TabView>
-					<Button
-						type='submit'
-						label='Submit'
-						disabled={cargandoImagenes}
-						className='p-button-text'
-					/>
-				</form>
+							<div className='p-d-flex p-flex-column p-flex-md-row'>
+								{autocompleteElement(
+									'Servicios Adicionales',
+									selectedserviciosAdicionales,
+									setSelectedserviciosAdicionales,
+									filteredserviciosAdicionales,
+									searchserviciosAdicionales
+								)}
+
+								{autocompleteElement(
+									'Cocina y comedor',
+									selectedCocinaComedor,
+									setSelectedCocinaComedor,
+									filteredCocinaComedor,
+									searchCocinaComedor
+								)}
+								{autocompleteElement(
+									'Estacionamiento e instalaciones',
+									selectedEstacionamientoInstalaciones,
+									setSelectedEstacionamientoInstalaciones,
+									filteredEstacionamientoInstalaciones,
+									searchEstacionamientoInstalaciones
+								)}
+							</div>
+							<div className='p-d-flex p-flex-column p-flex-md-row'>
+								{autocompleteElement(
+									'Baño',
+									selectedbanno,
+									setSelectedbanno,
+									filteredbanno,
+									searchbanno
+								)}
+								{autocompleteElement(
+									'Dormitorio',
+									selectedDormitorio,
+									setSelectedDormitorio,
+									filteredDormitorio,
+									searchDormitorio
+								)}
+								{autocompleteElement(
+									'Entretenimiento',
+									selectedentretenimiento,
+									setSelectedentretenimiento,
+									filteredentretenimiento,
+									searchentretenimiento
+								)}
+							</div>
+							<div className='p-d-flex p-flex-column p-flex-md-row'>
+								{autocompleteElement(
+									'para Familias',
+									selectedparaFamilias,
+									setSelectedparaFamilias,
+									filteredparaFamilias,
+									searchparaFamilias
+								)}
+								{autocompleteElement(
+									'Calefacción y refrigeración',
+									selectedcalefaccionRefrigeracion,
+									setSelectedcalefaccionRefrigeracion,
+									filteredcalefaccionRefrigeracion,
+									searchcalefaccionRefrigeracion
+								)}
+								{autocompleteElement(
+									'Seguridad Hogar',
+									selectedseguridadHogar,
+									setSelectedseguridadHogar,
+									filteredseguridadHogar,
+									searchseguridadHogar
+								)}
+							</div>
+							<div className='p-d-flex p-flex-column p-flex-md-row'>
+								{autocompleteElement(
+									'Internet y oficina',
+									selectedinternetOficina,
+									setSelectedinternetOficina,
+									filteredinternetOficina,
+									searchinternetOficina
+								)}
+							</div>
+							<Button
+								type='submit'
+								label='Submit'
+								disabled={cargandoImagenes}
+								className='p-button-text'
+							/>
+						</form>
+					)}
+				/>
+			) : (
+				<div className='p-col-12 p-text-center'>
+					<img src={cargando} alt='cargando' />
+				</div>
 			)}
-		/>
+		</>
 	);
 };
 export default withTranslation('translations')(AdicionarForm);

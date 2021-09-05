@@ -50,6 +50,7 @@ const Adicionar = (props) => {
 			document.body.classList.remove('sidebar-collapse');
 		};
 	}, []);
+
 	React.useEffect(() => {
 		getDestinos();
 	}, [carga]);
@@ -172,14 +173,15 @@ const Adicionar = (props) => {
 		const url = '/destinos/' + destino.iddestino;
 		AxiosConexionConfig.delete(url).then(() => {
 			setCarga(!carga);
-		});
-		setDestinoDeleteDialog(false);
-		setDestino(emptydestino);
-		toast.current.show({
-			severity: 'success',
-			summary: 'Successful',
-			detail: 'Destino Deleted',
-			life: 3000,
+			setDestinoDeleteDialog(false);
+			setDestino(emptydestino);
+			toast.current.show({
+				severity: 'success',
+				summary: 'Successful',
+				detail: 'Destino Deleted',
+				life: 3000,
+			});
+			setSelectesDestino(null);
 		});
 	}
 
@@ -233,7 +235,7 @@ const Adicionar = (props) => {
 		return (
 			<>
 				<IndexNavbar />
-				<div className='section datatable-responsive-demo fontFamily'>
+				<div className='section datatable-responsive-demo fontFamily p-ml-4 p-mr-4'>
 					<Toast ref={toast} />
 					<div className='p-d-flex'>
 						<div className='p-md-6 p-col-12 floatLeft'>

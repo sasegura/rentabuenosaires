@@ -1,101 +1,100 @@
-
 {
-    "serviciosAdicionales":[
-        "Desayuno",
-        "Traslados",
-        "Limpieza"        
-    ],
-    "Estacionamiento e instalacione":[
-        "Estacionamiento gratuito en las instalaciones",
-        "Estacionamiento pago en las instalaciones",
-        "Estacionamiento gratuito fuera de las instalaciones",
-        "Estacionamiento pago fuera de las instalaciones",
-        "Cargador para coches eléctricos",
-        "Piscina",
-        "Gimnasio",
-        "Salón de usos múltiples"
-    ],
-    "cocinaComedor":[
-        "Utensilios de parrilla",
-        "Panificadora",
-        "Cafetera",
-        "Cafetera de filtro",
-        "Cafetera Nespresso",
-        "Cafetera con cápsulas",
-        "Utensilios de cocina",
-        "Procesador de alimentos eléctrico",
-        "Mesa de comedor",
-        "Platos y cubiertos",
-        "Lavavajillas",
-        "Hervidor de agua",
-        "Microondas",
-        "Horno",
-        "Heladera con freezer",
-        "Tostadora eléctrica",
-        "Copas de vino",
-        "Cava de vinos eléctrica"
-    ],
-    "internetOficina":[
-        "Zona para trabajar",
-        "Wifi móvil",
-        "Wifi",
-        "Conexión Ethernet"
-    ],
-    "seguridadHogar":[
-        "Detector de monóxido de carbono",
-        "Detector de humo",        
-        "Detector de gas",        
-        "Extintor de incendios",        
-        "Botiquín"
-    ],
-    "calefaccionRefrigeracion":[
-        "Aire acondicionado",
-        "Ventilador de techo",        
-        "Ventiladores portátiles",        
-        "Calefacción eléctrica",        
-        "Calefacción por suelo radiante",        
-        "Chimenea interior"
-    ],
-    "paraFamilias":[
-        "Bañera para bebés",
-        "Monitor de bebés",        
-        "Barreras de seguridad para bebés",        
-        "Juegos de mesa",        
-        "Mesa para cambiar pañales",        
-        "Libros y juguetes para niños",        
-        "Platos y cubiertos para niños",        
-        "Cuna",        
-        "Protectores de enchufes",        
-        "Protectores para esquinas de mesa",        
-        "Seguros para ventanas"
-    ],
-    "entretenimiento":[
-        "TV por cable",
-        "TV",        
-        "Videoconsola",        
-        "Sistema de sonido",        
-        "Elementos para la playa",
-        "Bicicletas"
-    ],
-    "Dormitorio":[
-        "Elementos básicos Toallas, sábanas, jabón, papel higiénico y almohadas",
-        "Ropa de cama",        
-        "Espacio para guardar la ropa",        
-        "Almohadas y mantas adicionales",        
-        "Perchas",        
-        "Mosquitera",        
-        "Persianas o cortinas opacas",        
-        "Caja fuerte"
-    ],
-    "banno":[
-        "Bañera",
-        "Bidé",        
-        "Jabón de ducha",        
-        "Shampoo",        
-        "Acondicionador",        
-        "Secador de pelo",        
-        "Gel de ducha",        
-        "Jacuzzi"
-    ]
-
+	"serviciosAdicionales": [
+		{ "name": "Desayuno", "code": "AF" },
+		{ "name": "Traslados", "code": "AF" },
+		{ "name": "Limpieza", "code": "AF" }
+	],
+	"estacionamientoInstalaciones": [
+		{ "name": "Estacionamiento gratuito en las instalaciones", "code": "AF" },
+		{ "name": "Estacionamiento pago en las instalaciones", "code": "AF" },
+		{ "name": "Estacionamiento gratuito fuera de las instalaciones", "code": "AF" },
+		{ "name": "Estacionamiento pago fuera de las instalaciones", "code": "AF" },
+		{ "name": "Cargador para coches eléctricos", "code": "AF" },
+		{ "name": "Piscina", "code": "AF" },
+		{ "name": "Gimnasio", "code": "AF" },
+		{ "name": "Salón de usos múltiples", "code": "AF" }
+	],
+	"cocinaComedor": [
+		{ "name": "Utensilios de parrilla", "code": "AF" },
+		{ "name": "Panificadora", "code": "AF" },
+		{ "name": "Cafetera", "code": "AF" },
+		{ "name": "Cafetera de filtro", "code": "AF" },
+		{ "name": "Cafetera Nespresso", "code": "AF" },
+		{ "name": "Cafetera con cápsulas", "code": "AF" },
+		{ "name": "Procesador de alimentos eléctrico", "code": "AF" },
+		{ "name": "Mesa de comedor", "code": "AF" },
+		{ "name": "Platos y cubiertos", "code": "AF" },
+		{ "name": "Lavavajillas", "code": "AF" },
+		{ "name": "Hervidor de agua", "code": "AF" },
+		{ "name": "Microondas", "code": "AF" },
+		{ "name": "Horno", "code": "AF" },
+		{ "name": "Heladera con freezer", "code": "AF" },
+		{ "name": "Tostadora eléctrica", "code": "AF" },
+		{ "name": "Copas de vino", "code": "AF" },
+		{ "name": "Cava de vinos eléctrica", "code": "AF" }
+	],
+	"internetOficina": [
+		{ "name": "Zona para trabajar", "code": "AF" },
+		{ "name": "Wifi móvil", "code": "AF" },
+		{ "name": "Wifi", "code": "AF" },
+		{ "name": "Conexión Ethernet", "code": "AF" }
+	],
+	"seguridadHogar": [
+		{ "name": "Detector de monóxido de carbono", "code": "AF" },
+		{ "name": "Detector de humo", "code": "AF" },
+		{ "name": "Detector de gas", "code": "AF" },
+		{ "name": "Extintor de incendios", "code": "AF" },
+		{ "name": "Botiquín", "code": "AF" }
+	],
+	"calefaccionRefrigeracion": [
+		{ "name": "Aire acondicionado", "code": "AF" },
+		{ "name": "Ventilador de techo", "code": "AF" },
+		{ "name": "Ventiladores portátiles", "code": "AF" },
+		{ "name": "Calefacción eléctrica", "code": "AF" },
+		{ "name": "Calefacción por suelo radiante", "code": "AF" },
+		{ "name": "Chimenea interior", "code": "AF" }
+	],
+	"paraFamilias": [
+		{ "name": "Bañera para bebés", "code": "AF" },
+		{ "name": "Monitor de bebés", "code": "AF" },
+		{ "name": "Barreras de seguridad para bebés", "code": "AF" },
+		{ "name": "Juegos de mesa", "code": "AF" },
+		{ "name": "Mesa para cambiar pañales", "code": "AF" },
+		{ "name": "Libros y juguetes para niños", "code": "AF" },
+		{ "name": "Platos y cubiertos para niños", "code": "AF" },
+		{ "name": "Cuna", "code": "AF" },
+		{ "name": "Protectores de enchufes", "code": "AF" },
+		{ "name": "Protectores para esquinas de mesa", "code": "AF" },
+		{ "name": "Seguros para ventanas", "code": "AF" }
+	],
+	"entretenimiento": [
+		{ "name": "TV por cable", "code": "AF" },
+		{ "name": "TV", "code": "AF" },
+		{ "name": "Videoconsola", "code": "AF" },
+		{ "name": "Sistema de sonido", "code": "AF" },
+		{ "name": "Elementos para la playa", "code": "AF" },
+		{ "name": "Bicicletas", "code": "AF" }
+	],
+	"Dormitorio": [
+		{
+			"name": "Elementos básicos Toallas, sábanas, jabón, papel higiénico y almohadas",
+			"code": "AF"
+		},
+		{ "name": "Ropa de cama", "code": "AF" },
+		{ "name": "Espacio para guardar la ropa", "code": "AF" },
+		{ "name": "Almohadas y mantas adicionales", "code": "AF" },
+		{ "name": "Perchas", "code": "AF" },
+		{ "name": "Mosquitera", "code": "AF" },
+		{ "name": "Persianas o cortinas opacas", "code": "AF" },
+		{ "name": "Caja fuerte", "code": "AF" }
+	],
+	"banno": [
+		{ "name": "Bañera", "code": "AF" },
+		{ "name": "Bidé", "code": "AF" },
+		{ "name": "Jabón de ducha", "code": "AF" },
+		{ "name": "Shampoo", "code": "AF" },
+		{ "name": "Secador de pelo", "code": "AF" },
+		{ "name": "Gel de ducha", "code": "AF" },
+		{ "name": "Jacuzzi", "code": "AF" }
+	]
 }

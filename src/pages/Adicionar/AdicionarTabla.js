@@ -830,6 +830,7 @@ const AdicionarTabla = (props) => {
 					setpisoDialog={(value) => setpisoDialog(value)}
 					destino={props.destino}
 					piso={piso}
+					getPiso={() => getPiso()}
 				/>
 			) : null}
 
