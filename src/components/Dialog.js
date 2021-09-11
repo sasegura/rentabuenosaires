@@ -49,8 +49,8 @@ const DialogDemo = ({ open, setOpen, valor, setValor, acept, t }, props) => {
 						<form onSubmit={handleSubmit} className='p-fluid'>
 							<Dialog
 								header={t('Pre-reserva')}
+								className='p-dialog-form'
 								visible={open}
-								style={{ width: '50vw' }}
 								onHide={() => setOpen(false)}
 								footer={
 									<div>
@@ -81,7 +81,6 @@ const DialogDemo = ({ open, setOpen, valor, setValor, acept, t }, props) => {
 														<InputText
 															id='name'
 															{...input}
-															autoFocus
 															className={
 																'p-col-12 ' +
 																classNames({
@@ -111,7 +110,6 @@ const DialogDemo = ({ open, setOpen, valor, setValor, acept, t }, props) => {
 														<InputText
 															id='telefono'
 															{...input}
-															autoFocus
 															className={
 																'p-col-12 ' +
 																classNames({
@@ -175,7 +173,6 @@ const DialogDemo = ({ open, setOpen, valor, setValor, acept, t }, props) => {
 														<InputText
 															id='texto'
 															{...input}
-															autoFocus
 															className={
 																'p-col-12 ' +
 																classNames({

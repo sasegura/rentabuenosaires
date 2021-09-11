@@ -31,8 +31,6 @@ function LandingPageHeader(props) {
 					className='page-header-image'
 					style={{
 						backgroundImage: `url(${Banner})`,
-						width: '100%',
-						height: '100%',
 					}}
 					ref={pageHeader}
 				></div>

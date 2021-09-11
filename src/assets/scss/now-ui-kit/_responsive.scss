@@ -248,10 +248,30 @@
 	.headercontainer {
 		font-size: 50px;
 	}
+	.p-dialog-form {
+		width: 50vw;
+	}
+	.page-header-image {
+		width: 100%;
+		height: 100%;
+	}
 }
 @media screen and (max-width: 768px) {
 	.headercontainer {
 		font-size: 18px;
+	}
+	.p-dialog-form {
+		width: 80%;
+	}
+	.page-header-image {
+		width: 100%;
+		height: 100%;
+	}
+	.page-header .content-center {
+		top: 50% !important;
+	}
+	.page-header.page-header-small {
+		min-height: 40vh !important;
 	}
 }
 
