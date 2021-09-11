@@ -69,7 +69,6 @@ function App() {
 				<Route exact path={linkLogout} render={(props) => <LogOut {...props} />} />
 				<Route exact path={linkMensaje} render={(props) => <EnviarMensaje {...props} />} />
 			</Switch>
-			<div> -</div>
 
 			<DarkFooter />
 		</Fragment>

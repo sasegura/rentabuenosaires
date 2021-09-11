@@ -187,9 +187,9 @@ const Piso = (props) => {
 			}
 		});
 		return (
-			<div className='p-col-12 p-md-3'>
+			<div className='p-col-12 p-md-3 p-m-0'>
 				<img src={imagen} alt='' width={'20px'} />
-				<span className='marginLeft5px'>{t(text)}</span>
+				<span className='marginLeft5px font-size-12'>{t(text)}</span>
 			</div>
 		);
 	};
@@ -426,7 +426,7 @@ const Piso = (props) => {
 
 	const headerTarjeta = () => {
 		return (
-			<div className='marginLeft20px'>
+			<div className=''>
 				<i className='fa fa-user'></i>
 				<span className='marginLeft5px amenitie'>{data.cantpersonas}</span>
 				<span className='marginLeft10px'></span>
@@ -459,7 +459,7 @@ const Piso = (props) => {
 					{t('Desde')} <i className='pi pi-euro'></i>
 					<span className='marginLeft5px'>{data.precio}</span> {t('por noche')}
 				</div>
-				<div className='p-field p-col-12 fontFamily'>
+				<div className='p-field p-col-12 fontFamily p-mb-0 p-pb-0'>
 					<label className='marginLeft10px' htmlFor='calendar'>
 						{t('Seleccione fechas')}
 					</label>
@@ -504,12 +504,14 @@ const Piso = (props) => {
 					</div>
 					<div className='marginLeft10px'>
 						<div>
-							<label htmlFor='minmax-buttons'>{t('Guests')}</label>
+							<label htmlFor='minmax-buttons' className='p-mb-0'>
+								{t('Guests')}
+							</label>
 						</div>
-						<div className='p-col-12'>
+						<div className=''>
 							<InputNumber
 								id='minmax-buttons'
-								className='p-col-12'
+								className='p-col-12 p-p-0'
 								value={huesped}
 								onValueChange={(e) => sethuesped(e.value)}
 								mode='decimal'
@@ -541,7 +543,7 @@ const Piso = (props) => {
 							<Fragment></Fragment>
 						)}
 					</div>
-					<p className='p-error'>{t(errorfecha)}</p>
+					<p className='p-error font-size-12'>{t(errorfecha)}</p>
 				</div>
 				<Button
 					className='fontFamily'
@@ -575,7 +577,9 @@ const Piso = (props) => {
 					{!readMore ? (
 						<div>
 							<h5>
-								{`${data.descripcion.substr(0, 255)}`}
+								{props.i18n.language === 'en'
+									? `${data.descripcionI.substr(0, 255)}`
+									: `${data.descripcion.substr(0, 255)}`}
 
 								<a
 									onClick={() => setReadMore(true)}
@@ -588,7 +592,9 @@ const Piso = (props) => {
 					) : (
 						<div>
 							<h5>
-								{data.descripcion}
+								{props.i18n.language === 'en'
+									? data.descripcionI
+									: data.descripcion}
 								<a
 									onClick={() => setReadMore(false)}
 									className=' p-text-bold read-more-less'
@@ -634,7 +640,7 @@ const Piso = (props) => {
 	};
 
 	const acordion = () => {
-		return (
+		return data.banno ? (
 			<Accordion
 				multiple
 				activeIndex={activeIndex}
@@ -652,6 +658,8 @@ const Piso = (props) => {
 				{fila(data.estacionamientoInstalaciones, 'Estacionamiento e instalaciones')}
 				{fila(data.serviciosAdicionales, 'Servicios adicionales con recargo')}
 			</Accordion>
+		) : (
+			<div className='p-col-12'>-</div>
 		);
 	};
 	return (
@@ -678,7 +686,7 @@ const Piso = (props) => {
 							)}
 						</div>
 						<div className='p-md-3 p-col-12 p-p-0'>
-							<div className='card p-col-12 fontFamily'>
+							<div className='card fontFamily'>
 								{loadData ? (
 									TarjetPiso()
 								) : (
@@ -697,7 +705,7 @@ const Piso = (props) => {
 							</div>
 						</div>
 					</div>
-					<div className='p-col-12 p-lg-10 amenitiesCenter'>{acordion()}</div>
+					{true ? <div className='p-col-12 p-lg-10 '>{acordion()}</div> : null}
 				</div>
 			) : (
 				<div className='loaddingCenter'>
