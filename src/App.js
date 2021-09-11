@@ -45,32 +45,46 @@ import { linkReservaciones } from 'configuracion/constantes';
 function App() {
 	return (
 		<Fragment>
-			{/**TopBar */}
+			<div className=''>
+				{/**TopBar */}
 
-			{/**Ruteo */}
-			<Switch>
-				<Route exact path={index} render={(props) => <Inicio {...props} />} />
-				<Route exact path={linkPisos} render={(props) => <PisoPreview {...props} />} />
-				<Route exact path='/piso' render={(props) => <Piso {...props} />} />
-				<Route exact path={linkAdicionar} render={(props) => <Adicionar {...props} />} />
-				<Route
-					exact
-					path={linkReservaciones}
-					render={(props) => <Reservaciones {...props} />}
-				/>
-				<Route
-					exact
-					path={linkPropietarios}
-					render={(props) => <Propietarios {...props} />}
-				/>
-				<Route exact path={linkNosotros} render={(props) => <Nosotros {...props} />} />
-				<Route exact path='/nucleo-icons' render={(props) => <NucleoIcons {...props} />} />
-				<Route exact path={linkLogin} render={(props) => <LoginPage {...props} />} />
-				<Route exact path={linkLogout} render={(props) => <LogOut {...props} />} />
-				<Route exact path={linkMensaje} render={(props) => <EnviarMensaje {...props} />} />
-			</Switch>
+				{/**Ruteo */}
+				<Switch>
+					<Route exact path={index} render={(props) => <Inicio {...props} />} />
+					<Route exact path={linkPisos} render={(props) => <PisoPreview {...props} />} />
+					<Route exact path='/piso' render={(props) => <Piso {...props} />} />
+					<Route
+						exact
+						path={linkAdicionar}
+						render={(props) => <Adicionar {...props} />}
+					/>
+					<Route
+						exact
+						path={linkReservaciones}
+						render={(props) => <Reservaciones {...props} />}
+					/>
+					<Route
+						exact
+						path={linkPropietarios}
+						render={(props) => <Propietarios {...props} />}
+					/>
+					<Route exact path={linkNosotros} render={(props) => <Nosotros {...props} />} />
+					<Route
+						exact
+						path='/nucleo-icons'
+						render={(props) => <NucleoIcons {...props} />}
+					/>
+					<Route exact path={linkLogin} render={(props) => <LoginPage {...props} />} />
+					<Route exact path={linkLogout} render={(props) => <LogOut {...props} />} />
+					<Route
+						exact
+						path={linkMensaje}
+						render={(props) => <EnviarMensaje {...props} />}
+					/>
+				</Switch>
 
-			<DarkFooter />
+				<DarkFooter />
+			</div>
 		</Fragment>
 	);
 }

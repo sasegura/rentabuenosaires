@@ -459,11 +459,11 @@ const Piso = (props) => {
 					{t('Desde')} <i className='pi pi-euro'></i>
 					<span className='marginLeft5px'>{data.precio}</span> {t('por noche')}
 				</div>
-				<div className='p-field p-col-12 fontFamily p-mb-0 p-pb-0'>
+				<div className='p-field p-col-12 fontFamily '>
 					<label className='marginLeft10px' htmlFor='calendar'>
 						{t('Seleccione fechas')}
 					</label>
-					<div>
+					<div className='p-mr-1 p-ml-1'>
 						<Calendar
 							id='calendar'
 							className={'p-col-12 p-md-6'}
@@ -502,9 +502,9 @@ const Piso = (props) => {
 							dateFormat='dd/mm/yy'
 						/>
 					</div>
-					<div className='marginLeft10px'>
+					<div className='p-ml-1 p-mr-1'>
 						<div>
-							<label htmlFor='minmax-buttons' className='p-mb-0'>
+							<label htmlFor='minmax-buttons' className=''>
 								{t('Guests')}
 							</label>
 						</div>
@@ -522,7 +522,7 @@ const Piso = (props) => {
 							/>
 						</div>
 					</div>
-					<div>
+					<div className='p-ml-1 p-mr-1'>
 						{calculo ? (
 							<Fragment>
 								<div>
@@ -581,12 +581,23 @@ const Piso = (props) => {
 									? `${data.descripcionI.substr(0, 255)}`
 									: `${data.descripcion.substr(0, 255)}`}
 
-								<a
-									onClick={() => setReadMore(true)}
-									className=' p-text-bold read-more-less'
-								>
-									...{t('read more')}
-								</a>
+								{props.i18n.language === 'en' ? (
+									data.descripcionI.length > 255 ? (
+										<a
+											onClick={() => setReadMore(true)}
+											className=' p-text-bold read-more-less'
+										>
+											...{t('read more')}
+										</a>
+									) : null
+								) : data.descripcion.length > 255 ? (
+									<a
+										onClick={() => setReadMore(true)}
+										className=' p-text-bold read-more-less'
+									>
+										...{t('read more')}
+									</a>
+								) : null}
 							</h5>
 						</div>
 					) : (
@@ -640,7 +651,16 @@ const Piso = (props) => {
 	};
 
 	const acordion = () => {
-		return data.banno ? (
+		return data.banno ||
+			data.dormitorio ||
+			data.entretenimiento ||
+			data.paraFamilias ||
+			data.calefaccionRefrigeracion ||
+			data.seguridadHogar ||
+			data.internetOficina ||
+			data.cocinaComedor ||
+			data.estacionamientoInstalaciones ||
+			data.serviciosAdicionales ? (
 			<Accordion
 				multiple
 				activeIndex={activeIndex}
@@ -674,7 +694,7 @@ const Piso = (props) => {
 			/>
 			{loadData ? (
 				<div className='p-col-12'>
-					<div className='center p-col-12 p-md-11 p-ml-4 p-mt-4 p-d-flex p-flex-column p-flex-md-row'>
+					<div className='center p-col-12 p-md-11 p-mt-4 p-d-flex p-flex-column p-flex-md-row'>
 						<div className='p-md-9 p-col-12 '>
 							<Toast baseZIndex={500} ref={toast} />
 							{loadImg ? (
@@ -705,7 +725,7 @@ const Piso = (props) => {
 							</div>
 						</div>
 					</div>
-					{true ? <div className='p-col-12 p-lg-10 '>{acordion()}</div> : null}
+					{true ? <div className='p-col-12 '>{acordion()}</div> : null}
 				</div>
 			) : (
 				<div className='loaddingCenter'>

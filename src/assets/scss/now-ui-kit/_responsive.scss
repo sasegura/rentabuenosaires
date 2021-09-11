@@ -244,16 +244,29 @@
 		}
 	}
 }
+@media screen and (min-width: 768px) {
+	.headercontainer {
+		font-size: 50px;
+	}
+}
+@media screen and (max-width: 768px) {
+	.headercontainer {
+		font-size: 18px;
+	}
+}
 
 @media screen and (max-width: 768px) {
 	.image-container {
 		&.image-left {
-			margin-bottom: 220px;
+			margin-bottom: 270px;
 
 			p.blockquote {
 				margin: 0 auto;
 				position: relative;
 				right: 0;
+			}
+			.blockquote {
+				left: 0;
 			}
 		}
 	}

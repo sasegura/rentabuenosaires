@@ -12,11 +12,10 @@ import whatsapp from '../../assets/img/whatsapp--v13.png';
 function DarkFooter(props) {
 	const { t } = props;
 	return (
-		<footer className='footer' data-background-color='black'>
-			<div className='p-col-12 p-p-0 p-d-flex'>
-				<div className='p-col-12 p-p-0 p-md-1'></div>
-				<div className='p-col-12 p-p-0 p-md-10 p-d-flex'>
-					<div className='p-col-12  p-md-4'>
+		<footer className='footer p-col-12' data-background-color='black'>
+			<div className='p-col-12 p-p-0 '>
+				<div className='p-col-12 p-p-0 p-d-flex p-flex-column p-flex-md-row'>
+					<div className=' p-md-4 p-col-12'>
 						<p>{t('Enlaces comunes')}:</p>
 						<Link to={linkNosotros}>
 							<p className='fontFamily'>{t('Nosotros')}</p>
@@ -84,7 +83,6 @@ function DarkFooter(props) {
 						/>
 					</div>
 				</div>
-				<div className='p-col-12 p-md-1'></div>
 			</div>
 			<div className='p-text-center'>© 2021 E-HomeSelect. All Rights Reserved.</div>
 		</footer>

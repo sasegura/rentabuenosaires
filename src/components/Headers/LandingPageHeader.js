@@ -37,9 +37,9 @@ function LandingPageHeader(props) {
 					ref={pageHeader}
 				></div>
 				<div className='content-center'>
-					<Container>
-						<h1
-							className=''
+					<div>
+						<div
+							className='headercontainer'
 							style={{
 								fontFamily: 'Playfair Display',
 								fontStyle: 'normal',
@@ -53,8 +53,8 @@ function LandingPageHeader(props) {
 							<br />
 							<br />
 							{t('Vive en un lugar extraordinario')}
-						</h1>
-					</Container>
+						</div>
+					</div>
 				</div>
 			</div>
 		</>
