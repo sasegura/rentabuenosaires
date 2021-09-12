@@ -15,12 +15,18 @@ import './Adicionar.style.scss';
 import AxiosConexionConfig from 'conexion/AxiosConexionConfig';
 import cargando from '../../assets/img/loading.gif';
 import servicios from '../../configuracion/servicios.json';
+import { amenitiesGeneralesConst } from 'configuracion/constantes';
+import { amenitiesGeneralesTextConst } from 'configuracion/constantes';
+import { RadioButton } from 'primereact/radiobutton';
+import { Checkbox } from 'primereact/checkbox';
 
 const AdicionarForm = (props) => {
 	const [savingPisos, setSavingPisos] = useState(false);
 	const { piso } = props;
 	const [images, setImages] = useState([]);
 	const [cargandoImagenes, setCargandoImages] = useState(false);
+	const amenitiesGenerales = amenitiesGeneralesConst;
+	const amenitiesGeneralesText = amenitiesGeneralesTextConst;
 
 	const [serviciosAdicionales, setserviciosAdicionales] = useState([]);
 	const [selectedserviciosAdicionales, setSelectedserviciosAdicionales] = useState(null);
@@ -64,6 +70,17 @@ const AdicionarForm = (props) => {
 	const [selectedbanno, setSelectedbanno] = useState(null);
 	const [filteredbanno, setFilteredbanno] = useState(null);
 
+	const serviciosFilter = (listText, listObject) => {
+		let fil = [];
+		listText.forEach((text) => {
+			fil.push(
+				listObject.filter((country) => {
+					return country.name.toLowerCase().startsWith(text.toLowerCase());
+				})[0]
+			);
+		});
+		return fil;
+	};
 	useEffect(() => {
 		setserviciosAdicionales(servicios.serviciosAdicionales);
 		setCocinaComedor(servicios.cocinaComedor);
@@ -73,11 +90,69 @@ const AdicionarForm = (props) => {
 		setcalefaccionRefrigeracion(servicios.calefaccionRefrigeracion);
 		setparaFamilias(servicios.paraFamilias);
 		setentretenimiento(servicios.entretenimiento);
-		setDormitorio(servicios.Dormitorio);
+		setDormitorio(servicios.dormitorio);
 		setbanno(servicios.banno);
+		setSelectedserviciosAdicionales(
+			piso?.serviciosAdicionales?.length > 0
+				? serviciosFilter(
+						piso.serviciosAdicionales.split(','),
+						servicios.serviciosAdicionales
+				  )
+				: null
+		);
+		setSelectedCocinaComedor(
+			piso?.cocinaComedor?.length > 0
+				? serviciosFilter(piso.cocinaComedor.split(','), servicios.cocinaComedor)
+				: null
+		);
+		setSelectedEstacionamientoInstalaciones(
+			piso?.estacionamientoInstalaciones?.length > 0
+				? serviciosFilter(
+						piso.estacionamientoInstalaciones.split(','),
+						servicios.estacionamientoInstalaciones
+				  )
+				: null
+		);
+		setSelectedinternetOficina(
+			piso?.internetOficina?.length > 0
+				? serviciosFilter(piso.internetOficina.split(','), servicios.internetOficina)
+				: null
+		);
+		setSelectedseguridadHogar(
+			piso?.seguridadHogar?.length > 0
+				? serviciosFilter(piso.seguridadHogar.split(','), servicios.seguridadHogar)
+				: null
+		);
+		setSelectedcalefaccionRefrigeracion(
+			piso?.calefaccionRefrigeracion?.length > 0
+				? serviciosFilter(
+						piso.calefaccionRefrigeracion.split(','),
+						servicios.calefaccionRefrigeracion
+				  )
+				: null
+		);
+		setSelectedparaFamilias(
+			piso?.paraFamilias?.length > 0
+				? serviciosFilter(piso.paraFamilias.split(','), servicios.paraFamilias)
+				: null
+		);
+		setSelectedentretenimiento(
+			piso?.entretenimiento?.length > 0
+				? serviciosFilter(piso.entretenimiento.split(','), servicios.entretenimiento)
+				: null
+		);
+		setSelectedDormitorio(
+			piso?.dormitorio?.length > 0
+				? serviciosFilter(piso.dormitorio.split(','), servicios.dormitorio)
+				: null
+		);
+		setSelectedbanno(
+			piso?.banno?.length > 0 ? serviciosFilter(piso.banno.split(','), servicios.banno) : null
+		);
 	}, []);
 
 	async function SavePiso(pisoData) {
+		console.log(pisoData);
 		pisoData.cocinaComedor = selectedCocinaComedor
 			? selectedCocinaComedor.map((v) => v.name).join(',')
 			: '';
@@ -157,7 +232,6 @@ const AdicionarForm = (props) => {
 			props.setpisoDialog(false);
 		}
 	}
-
 	const initialValues = {
 		// Tab2
 		idpiso: piso.idpiso,
@@ -177,28 +251,26 @@ const AdicionarForm = (props) => {
 		iddestino: piso?.iddestino ? piso?.iddestino : '',
 
 		// Tab3
-		aireacondicionado: true,
-		tendederoRopa: piso?.tendederoRopa ? piso?.tendederoRopa : true,
-		patioBalcon: piso?.patioBalcon ? piso?.patioBalcon : true,
-		gimnasio: piso?.gimnasio ? piso?.gimnasio : true,
-		productosLimpieza: piso?.productosLimpieza ? piso?.productosLimpieza : true,
-		sauna: piso?.sauna ? piso?.sauna : true,
-		plancha: piso?.plancha ? piso?.plancha : true,
-		lavasecadora: piso?.lavasecadora ? piso?.lavasecadora : true,
-		lavadora: piso?.lavadora ? piso?.lavadora : true,
-		tv: piso?.tv ? piso?.tv : true,
-		piscina: piso?.piscina ? piso?.piscina : true,
-		cocina: piso?.cocina ? piso?.cocina : true,
-		jacuzzi: piso?.jacuzzi ? piso?.jacuzzi : true,
-		secadorPelo: piso?.secadorPelo ? piso?.secadorPelo : true,
-		utensiliosCocina: piso?.utensiliosCocina ? piso?.utensiliosCocina : true,
-		zonaTrabajar: piso?.zonaTrabajar ? piso?.zonaTrabajar : true,
-		platosCubiertos: piso?.platosCubiertos ? piso?.platosCubiertos : true,
-
-		wifi: true,
-		tvcable: true,
-
-		calefaccion: true,
+		aireacondicionado: false,
+		tendederoRopa: piso?.tendederoRopa ? piso?.tendederoRopa : false,
+		patioBalcon: piso?.patioBalcon ? piso?.patioBalcon : false,
+		gimnasio: piso?.gimnasio ? piso?.gimnasio : false,
+		productosLimpieza: piso?.productosLimpieza ? piso?.productosLimpieza : false,
+		sauna: piso?.sauna ? piso?.sauna : false,
+		plancha: piso?.plancha ? piso?.plancha : false,
+		lavasecadora: piso?.lavasecadora ? piso?.lavasecadora : false,
+		lavadora: piso?.lavadora ? piso?.lavadora : false,
+		tv: piso?.tv ? piso?.tv : false,
+		piscina: piso?.piscina ? piso?.piscina : false,
+		cocina: piso?.cocina ? piso?.cocina : false,
+		jacuzzi: piso?.jacuzzi ? piso?.jacuzzi : false,
+		secadorPelo: piso?.secadorPelo ? piso?.secadorPelo : false,
+		utensiliosCocina: piso?.utensiliosCocina ? piso?.utensiliosCocina : false,
+		zonaTrabajar: piso?.zonaTrabajar ? piso?.zonaTrabajar : false,
+		platosCubiertos: piso?.platosCubiertos ? piso?.platosCubiertos : false,
+		wifi: piso?.wifi ? piso?.wifi : false,
+		tvcable: piso?.tvcable ? piso?.tvcable : false,
+		calefaccion: piso?.calefaccion ? piso?.calefaccion : false,
 
 		// Tab4
 		serviciosAdicionales: piso?.serviciosAdicionales ? piso?.serviciosAdicionales : '',
@@ -215,6 +287,7 @@ const AdicionarForm = (props) => {
 		paraFamilias: piso?.paraFamilias ? piso?.paraFamilias : '',
 		dormitorio: piso?.dormitorio ? piso?.dormitorio : '',
 		banno: piso?.banno ? piso?.banno : '',
+		serviciosAdicionales: piso.serviciosAdicionales ? piso.serviciosAdicionales : '',
 	};
 
 	const isFormFieldValid = (meta) => !!(meta.touched && meta.error);
@@ -233,16 +306,23 @@ const AdicionarForm = (props) => {
 			errors.nombre = 'Nombre es requerido.';
 		}
 		if (!data.descripcion || data.descripcion === '') {
-			errors.descripcion = 'descripcion es requerida.';
+			errors.descripcion = 'La descripcion es requerida.';
+		}
+		if (!data.direccion || data.direccion === '') {
+			errors.direccion = 'La descripcion es requerida.';
 		}
 		if (!data.descripcionI || data.descripcionI === '') {
-			errors.descripcionI = 'descripcion en inglés es requerida.';
+			errors.descripcionI = 'La descripcion en inglés es requerida.';
 		}
 		if (!data.latitud || data.latitud === '') {
-			errors.latitud = 'latitud es requerida.';
+			errors.latitud = 'latitud requerida.';
+		} else if (data.latitud > 180 || data.latitud < -180) {
+			errors.latitud = 'Valor permitido entre 180 y -180.';
 		}
 		if (!data.longitud || data.longitud === '') {
-			errors.longitud = 'longitud es requerida.';
+			errors.longitud = 'longitud requerida.';
+		} else if (data.longitud > 90 || data.longitud < -90) {
+			errors.longitud = 'Valor permitido entre 90 y -90.';
 		}
 		if (!data.cantpersonas || data.cantpersonas === '') {
 			errors.cantpersonas = 'cant de personas es requerida.';
@@ -274,7 +354,7 @@ const AdicionarForm = (props) => {
 						<label
 							htmlFor={campo}
 							className={classNames({
-								'p-error': isFormFieldValid('canthabitaciones'),
+								'p-error': isFormFieldValid(meta),
 							})}
 						>
 							{texto}*
@@ -285,7 +365,7 @@ const AdicionarForm = (props) => {
 							className={classNames({ 'p-invalid': isFormFieldValid(meta) })}
 						/>
 
-						{getFormErrorMessage(campo)}
+						{getFormErrorMessage(meta)}
 					</div>
 				)}
 			/>
@@ -300,7 +380,7 @@ const AdicionarForm = (props) => {
 						<label
 							htmlFor={campo}
 							className={classNames({
-								'p-error': isFormFieldValid('canthabitaciones'),
+								'p-error': isFormFieldValid(meta),
 							})}
 						>
 							{texto}*
@@ -314,7 +394,37 @@ const AdicionarForm = (props) => {
 							className={classNames({ 'p-invalid': isFormFieldValid(meta) })}
 						/>
 
-						{getFormErrorMessage(campo)}
+						{getFormErrorMessage(meta)}
+					</div>
+				)}
+			/>
+		</div>
+	);
+	const fieldLatLongComponent = (campo, texto) => (
+		<div className='p-col-12 p-md-4	'>
+			<Field
+				name={campo}
+				render={({ input, meta }) => (
+					<div className='p-field'>
+						<label
+							htmlFor={campo}
+							className={classNames({
+								'p-error': isFormFieldValid(meta),
+							})}
+						>
+							{texto}*
+						</label>
+						<InputNumber
+							id={campo}
+							value={input.value}
+							mode='decimal'
+							minFractionDigits={2}
+							maxFractionDigits={7}
+							onValueChange={(e) => input.onChange(e.value)}
+							className={classNames({ 'p-invalid': isFormFieldValid(meta) })}
+						/>
+
+						{getFormErrorMessage(meta)}
 					</div>
 				)}
 			/>
@@ -522,6 +632,87 @@ const AdicionarForm = (props) => {
 			</span>
 		</div>
 	);
+
+	const autocompleteElement100 = (
+		text,
+		valores,
+		SetValores,
+		valoresFiltrados,
+		metodoCompletar
+	) => (
+		<div className='p-col-12'>
+			<span className='p-fluid'>
+				<h5>{text}</h5>
+				<AutoComplete
+					value={valores}
+					suggestions={valoresFiltrados}
+					completeMethod={metodoCompletar}
+					field='name'
+					multiple
+					dropdown
+					onChange={(e) => SetValores(e.value)}
+				/>
+			</span>
+		</div>
+	);
+
+	const elementoBoolean = (text, elemento, valor) => {
+		return (
+			<div className='floatLeft p-field p-col-12 p-md-3'>
+				<label className='p-mb-3'>{text}</label>
+				<div className='p-formgrid p-grid'>
+					<div className='p-field-radiobutton p-col-6'>
+						<RadioButton
+							inputId={elemento + '1'}
+							name={elemento}
+							value={true}
+							checked={valor === true}
+						/>
+						<label htmlFor={elemento + '1'}>Si</label>
+					</div>
+					<div className='p-field-radiobutton p-col-6'>
+						<RadioButton
+							inputId={elemento + '2'}
+							name={elemento}
+							value={false}
+							checked={valor === false}
+						/>
+						<label htmlFor={elemento + '2'}>No</label>
+					</div>
+				</div>
+			</div>
+		);
+	};
+
+	const elementoCheck = (name, text) => {
+		return (
+			<div className='p-col-12 p-md-3 floatLeft'>
+				<Field
+					name={name}
+					type='checkbox'
+					render={({ input, meta }) => (
+						<div className='p-field-checkbox'>
+							<Checkbox
+								inputId={name}
+								{...input}
+								className={classNames({
+									'p-invalid': isFormFieldValid(meta),
+								})}
+							/>
+							<label
+								htmlFor={name}
+								className={classNames({
+									'p-error': isFormFieldValid(meta),
+								})}
+							>
+								{text}
+							</label>
+						</div>
+					)}
+				/>
+			</div>
+		);
+	};
 	return (
 		<>
 			{!savingPisos ? (
@@ -565,30 +756,53 @@ const AdicionarForm = (props) => {
 										)}
 									/>
 								</div>
-								<div className='p-col-12 p-md-4'>
-									{fieldTextComponent('latitud', 'latitud', false)}
-								</div>
-								<div className='p-col-12 p-md-4'>
-									{fieldTextComponent('longitud', 'longitud', false)}
-								</div>
-								{fieldTextComponent('idpiso', 'idpiso', true)}
-								{fieldTextComponent('diasReservados', 'diasReservados', true)}
+								{fieldLatLongComponent('latitud', 'Latitud')}
+								{fieldLatLongComponent('longitud', 'Longitud')}
 							</div>
-							{fieldTextComponent('direccion', 'direccion', false)}
-							{fieldTextComponent('descripcion', 'descripcion', false)}
-							{fieldTextComponent('descripcionI', 'descripcionI', false)}
+							{fieldTextComponent('idpiso', 'idpiso', true)}
+							{fieldTextComponent('diasReservados', 'diasReservados', true)}
+
+							{fieldTextComponent('direccion', 'Dirección', false)}
+							{fieldTextComponent('descripcion', 'Descripción', false)}
+							{fieldTextComponent('descripcionI', 'Description(Inglés)', false)}
 							<div className='flexWrap p-col-12'>
-								{fieldNumberComponent('precio', 'precio', false)}
+								{fieldNumberComponent('precio', 'Precio', false)}
 								{fieldNumberComponent(
 									'canthabitaciones',
 									'canthabitaciones',
 									false
 								)}
-								{fieldNumberComponent('cantpersonas', 'cantpersonas', false)}
-								{fieldNumberComponent('metroscuadrados', 'metroscuadrados', false)}
-								{fieldNumberComponent('cantbannos', 'cantbannos', false)}
+								{fieldNumberComponent('cantpersonas', 'Cant. personas', false)}
+								{fieldNumberComponent('metroscuadrados', 'Metros cuadrados', false)}
+								{fieldNumberComponent('cantbannos', 'Cant bannos', false)}
 							</div>
-
+							<div className='p-col-12 p-d-flex p-flex-column p-flex-md-row '>
+								{elementoCheck('sauna', 'sauna')}
+								{elementoCheck('tendederoRopa', 'Tendedero de Ropa')}
+								{elementoCheck('patioBalcon', 'Patio Balcon')}
+								{elementoCheck('gimnasio', 'Gimnasio')}
+							</div>
+							<div className='p-col-12 p-d-flex p-flex-column p-flex-md-row '>
+								{elementoCheck('productosLimpieza', 'Productos de Limpieza')}
+								{elementoCheck('plancha', 'Plancha')}
+								{elementoCheck('lavasecadora', 'Lavadora/Secadora')}
+								{elementoCheck('tv', 'tv')}
+							</div>
+							<div className='p-col-12 p-d-flex p-flex-column p-flex-md-row '>
+								{elementoCheck('piscina', 'Piscina')}
+								{elementoCheck('cocina', 'Cocina')}
+								{elementoCheck('jacuzzi', 'Jacuzzi')}
+								{elementoCheck('secadorPelo', 'Secador de Pelo')}
+							</div>
+							<div className='p-col-12 p-d-flex p-flex-column p-flex-md-row '>
+								{elementoCheck('utensiliosCocina', 'Utensilios de Cocina')}
+								{elementoCheck('zonaTrabajar', 'Zona para Trabajar')}
+								{elementoCheck('platosCubiertos', 'Platos y Cubiertos')}
+								{elementoCheck('calefaccion', 'Calefaccion')}
+							</div>
+							<div className='p-col-12 p-d-flex p-flex-column p-flex-md-row '>
+								{elementoCheck('wifi', 'Wifi')}
+							</div>
 							<div className='p-d-flex p-flex-column p-flex-md-row'>
 								{autocompleteElement(
 									'Servicios Adicionales',
@@ -622,11 +836,11 @@ const AdicionarForm = (props) => {
 									searchbanno
 								)}
 								{autocompleteElement(
-									'Dormitorio',
-									selectedDormitorio,
-									setSelectedDormitorio,
-									filteredDormitorio,
-									searchDormitorio
+									'Internet y oficina',
+									selectedinternetOficina,
+									setSelectedinternetOficina,
+									filteredinternetOficina,
+									searchinternetOficina
 								)}
 								{autocompleteElement(
 									'Entretenimiento',
@@ -636,6 +850,7 @@ const AdicionarForm = (props) => {
 									searchentretenimiento
 								)}
 							</div>
+
 							<div className='p-d-flex p-flex-column p-flex-md-row'>
 								{autocompleteElement(
 									'para Familias',
@@ -659,13 +874,13 @@ const AdicionarForm = (props) => {
 									searchseguridadHogar
 								)}
 							</div>
-							<div className='p-d-flex p-flex-column p-flex-md-row'>
-								{autocompleteElement(
-									'Internet y oficina',
-									selectedinternetOficina,
-									setSelectedinternetOficina,
-									filteredinternetOficina,
-									searchinternetOficina
+							<div>
+								{autocompleteElement100(
+									'Dormitorio',
+									selectedDormitorio,
+									setSelectedDormitorio,
+									filteredDormitorio,
+									searchDormitorio
 								)}
 							</div>
 							<Button

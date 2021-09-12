@@ -75,9 +75,9 @@
 		{ "name": "Elementos para la playa", "code": "AF" },
 		{ "name": "Bicicletas", "code": "AF" }
 	],
-	"Dormitorio": [
+	"dormitorio": [
 		{
-			"name": "Elementos básicos Toallas, sábanas, jabón, papel higiénico y almohadas",
+			"name": "Elementos básicos Toallas-sábanas-jabón-papel higiénico y almohadas",
 			"code": "AF"
 		},
 		{ "name": "Ropa de cama", "code": "AF" },

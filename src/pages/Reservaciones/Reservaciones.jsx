@@ -219,7 +219,6 @@ const Reservaciones = (props) => {
 					/>
 				)}
 				<Button
-					disabled={s}
 					icon='pi pi-trash'
 					className='p-button-rounded p-button-warning'
 					onClick={() => deleteReser(rowData)}

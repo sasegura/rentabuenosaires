@@ -810,17 +810,27 @@ const AdicionarTabla = (props) => {
 						currentPageReportTemplate='Showing {first} to {last} of {totalRecords} pisos'
 						//    header={header}
 					>
-						<Column field='idpiso' header='Id' sortable></Column>
+						<Column
+							field='idpiso'
+							header='Id'
+							sortable
+							headerClassName='width-80px'
+						></Column>
 						<Column field='nombre' header='Nombre' sortable></Column>
 						<Column body={descripcionTemplate} header='Descripción' sortable></Column>
 						<Column field='direccion' header='Dirección' sortable></Column>
 						<Column header='Imagen' body={(r) => imageBodyTemplate(r)}></Column>
-						<Column field='precio' header='Precio' sortable></Column>
+						<Column
+							field='precio'
+							header='Precio'
+							sortable
+							headerClassName='width-120px'
+						></Column>
 						<Column field='cantpersonas' header='Cant. de personas' sortable></Column>
 						<Column field='metroscuadrados' header='Metros Cuadrados' sortable></Column>
 						<Column field='canthabitaciones' header='Habitaciones' sortable></Column>
 						<Column field='cantbannos' header='Baños' sortable></Column>
-						<Column body={actionBodyTemplate}></Column>
+						<Column body={actionBodyTemplate} headerClassName='width-120px'></Column>
 					</DataTable>
 				) : null}
 			</div>
