@@ -35,6 +35,7 @@ import { apiReservaciones } from 'configuracion/constantes';
 import { apiPiso } from 'configuracion/constantes';
 import moment from 'moment';
 import IndexNavbar from 'components/Navbars/IndexNavbar';
+import Currency from 'components/Currency';
 
 const Piso = (props) => {
 	const { t } = props;
@@ -456,7 +457,7 @@ const Piso = (props) => {
 				{headerTarjeta()}
 				<hr />
 				<div className='marginLeft20px'>
-					{t('Desde')} <i className='pi pi-euro'></i>
+					{t('Desde')} {Currency(data.moneda)}
 					<span className='marginLeft5px'>{data.precio}</span> {t('por noche')}
 				</div>
 				<div className='p-field p-col-12 fontFamily '>
@@ -534,9 +535,9 @@ const Piso = (props) => {
 								</div>
 								<div>
 									{t('Total')}:{' '}
-									<i className='pi pi-euro floatRigth'>
-										<span className='marginLeft5px'>{totalCalculo}</span>
-									</i>
+									<div className='floatRigth'>
+										{Currency(data.moneda, totalCalculo)}
+									</div>
 								</div>
 							</Fragment>
 						) : (

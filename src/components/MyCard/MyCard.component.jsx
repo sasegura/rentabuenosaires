@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { withTranslation } from 'react-i18next';
 // reactstrap components
 import { Card, CardImg, CardBody, Button } from 'reactstrap';
-
+import { Tooltip } from 'primereact/tooltip';
 import './MyCard.style.scss';
 import { useHistory, withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +12,7 @@ import AxiosConexionConfig from 'conexion/AxiosConexionConfig';
 import cargando from '../../assets/img/loading.gif';
 import noImagenDisponible from '../../assets/img/Imagen-no-disponible.png';
 import CardHeader from './CardHeader';
+import Currency from 'components/Currency';
 // core components
 
 function MyCard(props, { match, destino, link, history, cantHab, nombre }) {
@@ -94,9 +95,9 @@ function MyCard(props, { match, destino, link, history, cantHab, nombre }) {
 								{t('desde')}
 							</span>
 							<div>
-								<i className='pi pi-euro'></i>
-								<span className='marginLeft5px'></span>
 								<span className='fontweightbold'>{props.precio}</span>
+								<span className='marginLeft5px'></span>
+								{Currency(props.moneda)}
 							</div>
 							<span className='marginLeft10px'></span>
 							{t('la noche')}

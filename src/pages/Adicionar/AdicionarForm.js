@@ -19,6 +19,7 @@ import { amenitiesGeneralesConst } from 'configuracion/constantes';
 import { amenitiesGeneralesTextConst } from 'configuracion/constantes';
 import { RadioButton } from 'primereact/radiobutton';
 import { Checkbox } from 'primereact/checkbox';
+import { Dropdown } from 'primereact/dropdown';
 
 const AdicionarForm = (props) => {
 	const [savingPisos, setSavingPisos] = useState(false);
@@ -69,6 +70,13 @@ const AdicionarForm = (props) => {
 	const [banno, setbanno] = useState([]);
 	const [selectedbanno, setSelectedbanno] = useState(null);
 	const [filteredbanno, setFilteredbanno] = useState(null);
+
+	const [currency, setCurrency] = useState('USD');
+	const currencies = [
+		{ label: 'Us Dolar', value: 'USD' },
+		{ label: 'Peso Argentino', value: 'PA' },
+		{ label: 'Euro', value: 'EU' },
+	];
 
 	const serviciosFilter = (listText, listObject) => {
 		let fil = [];
@@ -304,6 +312,9 @@ const AdicionarForm = (props) => {
 	};
 	const validate = (data) => {
 		let errors = {};
+		if (!data.moneda || data.moneda === '') {
+			errors.moneda = 'Moneda es requerido.';
+		}
 		if (!data.nombre || data.nombre === '') {
 			errors.nombre = 'Nombre es requerido.';
 		}
@@ -403,7 +414,7 @@ const AdicionarForm = (props) => {
 		</div>
 	);
 	const fieldLatLongComponent = (campo, texto) => (
-		<div className='p-col-12 p-md-4	'>
+		<div className='p-col-12 p-md-3	'>
 			<Field
 				name={campo}
 				render={({ input, meta }) => (
@@ -733,7 +744,7 @@ const AdicionarForm = (props) => {
 								maxFileSize={5242880}
 							/>
 							<div className='flexWrap p-col-12'>
-								<div className='p-col-12 p-md-4'>
+								<div className='p-col-12 p-md-4 p-p-3'>
 									<Field
 										name='nombre'
 										render={({ input, meta }) => (
@@ -760,6 +771,34 @@ const AdicionarForm = (props) => {
 								</div>
 								{fieldLatLongComponent('latitud', 'Latitud')}
 								{fieldLatLongComponent('longitud', 'Longitud')}
+								<div className='p-col-12 p-md-2'>
+									<Field
+										name='moneda'
+										render={({ input, meta }) => (
+											<div className='p-field'>
+												<label
+													htmlFor='moneda'
+													className={classNames({
+														'p-error': isFormFieldValid(meta),
+													})}
+												>
+													Moneda*
+												</label>
+												<Dropdown
+													id='moneda'
+													{...input}
+													options={currencies}
+													optionLabel='label'
+													className={classNames({
+														'p-invalid': isFormFieldValid(meta),
+													})}
+												/>
+
+												{getFormErrorMessage(meta)}
+											</div>
+										)}
+									/>
+								</div>
 							</div>
 							{fieldTextComponent('idpiso', 'idpiso', true)}
 							{fieldTextComponent('diasReservados', 'diasReservados', true)}
