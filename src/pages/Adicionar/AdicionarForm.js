@@ -183,6 +183,8 @@ const AdicionarForm = (props) => {
 			? selectedserviciosAdicionales.map((v) => v.name).join(',')
 			: '';
 		pisoData.iddestino = props.destino.iddestino;
+		pisoData.longitud = pisoData.longitud.toString();
+		pisoData.latitud = pisoData.latitud.toString();
 		setSavingPisos(true);
 		let modificar = false;
 		let id = 0;
