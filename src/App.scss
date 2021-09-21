@@ -200,3 +200,19 @@ h4 {
 .width-120px {
 	width: 120px;
 }
+
+.page-login-image:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.logo-container1 {
+	width: 219px;
+	margin: 0 auto;
+	margin-bottom: -89px;
+}

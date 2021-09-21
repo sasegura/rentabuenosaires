@@ -22,7 +22,7 @@ import {
 
 // Imagenes
 import img1 from 'assets/img/login.jpg';
-import img2 from 'assets/img/logo-de-alquiler.png';
+import img2 from 'assets/img/logo-de-alquiler01.png';
 import AxiosConexionConfig from 'conexion/AxiosConexionConfig';
 import { index } from 'configuracion/constantes';
 import { useHistory } from 'react-router';
@@ -105,7 +105,7 @@ function LoginPage(props) {
 			<IndexNavbar />
 			<div className='page-header clear-filter' filter-color='blue'>
 				<div
-					className='page-header-image'
+					className='page-header-image page-login-image'
 					style={{
 						backgroundImage: 'url(' + img11 + ')',
 					}}
@@ -116,7 +116,7 @@ function LoginPage(props) {
 							<Card className='card-login card-plain'>
 								<Form action='' className='form' method=''>
 									<CardHeader className='text-center'>
-										<div className='logo-container'>
+										<div className='logo-container1'>
 											<img alt='...' src={img2}></img>
 										</div>
 									</CardHeader>
