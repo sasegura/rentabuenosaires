@@ -50,7 +50,7 @@ function DarkFooter(props) {
 						/>
 						+54 911 3848 4956
 						<br />
-						España:{' '}
+						{t('España')}:{' '}
 						<SocialIcon
 							className=' p-ml-2'
 							style={{ width: '20px', height: '20px' }}

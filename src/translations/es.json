@@ -208,6 +208,23 @@
 		"En el intervalo seleccionado existen fechas reservadas previamente.": "En el intervalo seleccionado existen fechas reservadas previamente.",
 		"Seleccione una fecha de salida válida.": "Seleccione una fecha de salida válida.",
 		"Submit": "Enviar",
-		"Cancelar": "Cancelar"
+		"Cancelar": "Cancelar",
+		"Are you sure you want to delete ": "Está seguro de que desea eliminar ",
+		" destiny?": " destino?",
+		"Moneda es requerido.": "Moneda es requerido.",
+		"Nombre es requerido.": "Nombre es requerido.",
+		"La descripción es requerida.": "La descripción es requerida.",
+		"La dirección es requerida.": "La dirección es requerida.",
+		"La descripción en inglés es requerida.": "La descripción en inglés es requerida.",
+		"Latitud requerida.": "Latitud requerida.",
+		"Valor permitido entre 180 y -180.": "Valor permitido entre 180 y -180.",
+		"Longitud requerida.": "",
+		"Valor permitido entre 90 y -90.": "Valor permitido entre 90 y -90.",
+		"Cant de personas es requerida.": "Cant de personas es requerida.",
+		"Metros cuadrados es requerido.": "Metros cuadrados es requerido.",
+		"Cant de habitaciones es requerida.": "Cant de habitaciones es requerida.",
+		"Cant de baños es requerido.": "Cant de baños es requerido.",
+		"precio es requerido.": "precio es requerido.",
+		"España": "España"
 	}
 }

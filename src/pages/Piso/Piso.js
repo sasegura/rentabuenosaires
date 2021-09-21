@@ -477,7 +477,7 @@ const Piso = (props) => {
 								setDateEnd(e.value);
 							}}
 							disabledDates={disabledDates}
-							baseZIndex={500}
+							baseZIndex={1000}
 							readOnlyInput
 							monthNavigator
 							yearNavigator
@@ -495,7 +495,7 @@ const Piso = (props) => {
 							disabled={disabledEndDate}
 							onChange={(e) => setDateEnd(e.value)}
 							disabledDates={disabledDates}
-							baseZIndex={500}
+							baseZIndex={1000}
 							readOnlyInput
 							monthNavigator
 							yearNavigator

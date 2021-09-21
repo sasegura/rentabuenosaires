@@ -61,23 +61,19 @@ const AdicionarTabla = (props) => {
 	const [deletepisoDialog, setDeletepisoDialog] = useState(false);
 	const [piso, setpiso] = useState(emptypiso);
 	const [selectedpisos, setSelectedpisos] = useState(null);
-	// const [submitted, setSubmitted] = useState(false);
 	const toast = useRef(null);
 	const dt = useRef(null);
 	const amenitiesGenerales = amenitiesGeneralesConst;
 	const amenitiesGeneralesText = amenitiesGeneralesTextConst;
 	const [images, setImages] = useState([]);
 	const [cargandoImagenes, setCargandoImages] = useState(false);
-	//const pisoservice = new pisoservice();
 
 	useEffect(() => {
 		getPiso();
-		//pisoservice.getpisos().then(data => setpisos(data));
 		// eslint-disable-line react-hooks/exhaustive-deps
 	}, [props.destino]);
 
 	async function getPiso() {
-		// console.log(pisos)
 		setpisos(null);
 		setloadingpisos(true);
 		const url = '/pisos?filter[where][iddestino]=' + props.destino.iddestino;
@@ -105,8 +101,6 @@ const AdicionarTabla = (props) => {
 			if (pisos.data.length === 0) {
 				setloadingpisos(false);
 			}
-			//setImagenes(img1);
-			//setpiso(pisos)
 		} catch (e) {
 			console.log(e);
 		}
@@ -139,6 +133,10 @@ const AdicionarTabla = (props) => {
 		setDeletepisoDialog(true);
 	};
 
+	const mensajeToast = (severity, summary, detail, life) => {
+		toast.current.show({ severity, summary, detail, life });
+	};
+
 	async function deletepiso() {
 		setloadingpisos(true);
 		const uri = '/imagen?filter=';
@@ -147,45 +145,48 @@ const AdicionarTabla = (props) => {
 				idpiso: piso.idpiso,
 			},
 		};
-		try {
-			AxiosConexionConfig.get(uri + JSON.stringify(condicion))
-				.then((imagenData) => {
-					// console.log(imagenData)
-					if (imagenData.data.length === 0) {
-						del();
-					}
-					imagenData.data.forEach((imData, index) => {
-						AxiosConexionConfig.delete('/imagen/' + imData.id).then((e) => {
-							// console.log(e)
-							if (index === imagenData.data.length - 1) {
+
+		AxiosConexionConfig.get('/reservacions?filter=' + JSON.stringify(condicion)).then(
+			(respuesta) => {
+				if (respuesta.data.length > 0) {
+					mensajeToast(
+						'error',
+						'Error',
+						'Elimine las reservaciones hechas a este piso.',
+						3000
+					);
+					setDeletepisoDialog(false);
+					setloadingpisos(false);
+				} else {
+					AxiosConexionConfig.get(uri + JSON.stringify(condicion))
+						.then((imagenData) => {
+							if (imagenData.data.length === 0) {
 								del();
 							}
+							imagenData.data.forEach((imData, index) => {
+								AxiosConexionConfig.delete('/imagen/' + imData.id).then((e) => {
+									if (index === imagenData.data.length - 1) {
+										del();
+									}
+								});
+							});
+						})
+						.catch((e) => {
+							console.log(e);
 						});
-					});
-				})
-				.catch((e) => {
-					console.log(e);
-				});
-		} catch (e) {
-			console.log(e);
-		}
-		let _pisos = pisos.filter((val) => val.id !== piso.id);
-		setpiso(_pisos);
-		setDeletepisoDialog(false);
-		setpiso(emptypiso);
-
-		toast.current.show({
-			severity: 'success',
-			summary: 'Successful',
-			detail: 'piso Deleted',
-			life: 3000,
-		});
+					let _pisos = pisos.filter((val) => val.id !== piso.id);
+					setpiso(_pisos);
+					setDeletepisoDialog(false);
+					setpiso(emptypiso);
+					mensajeToast('success', 'Successful', 'Piso eliminado.', 3000);
+				}
+			}
+		);
 	}
 
 	const del = () => {
 		const url = '/pisos/' + piso.idpiso;
 		AxiosConexionConfig.delete(url).then((e) => {
-			console.log(e.data);
 			getPiso();
 		});
 	};

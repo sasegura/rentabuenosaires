@@ -79,12 +79,30 @@ const PisoPreview = (props) => {
 				<div className='p-col-12'>
 					<div className='collection-preview'>
 						{!loadding ? (
-							pisos.length > 0 ? (
+							pisos.length > 2 ? (
 								<Carousel
 									value={pisos}
 									numVisible={3}
 									numScroll={1}
 									className='p-col-12 p-md-11 fontFamily'
+									responsiveOptions={responsiveOptions}
+									itemTemplate={MyCardComponent}
+								/>
+							) : pisos.length > 1 ? (
+								<Carousel
+									value={pisos}
+									numVisible={2}
+									numScroll={1}
+									className='p-col-12 p-md-8 fontFamily'
+									responsiveOptions={responsiveOptions}
+									itemTemplate={MyCardComponent}
+								/>
+							) : pisos.length > 0 ? (
+								<Carousel
+									value={pisos}
+									numVisible={1}
+									numScroll={1}
+									className='p-col-12 p-md-4 fontFamily'
 									responsiveOptions={responsiveOptions}
 									itemTemplate={MyCardComponent}
 								/>

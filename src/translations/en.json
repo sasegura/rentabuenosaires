@@ -198,7 +198,7 @@
 		"CONTACTA CON NOSOTROS": "CONTACT US",
 		"Te ofrecemos un servicio de alquiler": "We offer you a first class rental service.",
 
-		"Disfrutamos viajar por el mundo, conocer diferentes culturas y sentirnos parte de cada lugar.": "We enjoy traveling the world, knowing different cultures and feeling part of each place.",
+		"Disfrutamos viajar por el mundo, conocer diferentes culturas y sentirnos parte de cada lugar.": "We enjoy travelling the world, knowing different cultures and feeling part of each place.",
 		"A lo largo de los últimos años hemos conocido más de 100 ciudades, lo que nos ayuda a entender qué necesitas y valoras del lugar donde te hospedas.": "Over the last few years we have known more than 100 cities, which helps us understand what  you need and value where you are staying.",
 		"Nuestro objetivo es lograr que tu estadía sea perfecta, ofreciendo un servicio completo y de primer nivel, no sólo en el hospedaje sino también en las inquietudes que tengas durante toda tu estancia.": "Our goal is to ensure that your stay is perfect, offering a complete and first level service, not only in the accommodation but also in the concerns you have throughout your stay.",
 		"Alquila por días, semanas o meses con nosotros.": "Rent for days, weeks or months with us.",
@@ -209,6 +209,23 @@
 		"En el intervalo seleccionado existen fechas reservadas previamente.": "In the selected interval there are previously reserved dates.",
 		"Seleccione una fecha de salida válida.": "Select a valid check out date.",
 		"Submit": "Submit",
-		"Cancelar": "Cancel"
+		"Cancelar": "Cancel",
+		"Are you sure you want to delete ": "Are you sure you want to delete ",
+		" destiny?": " destiny?",
+		"Moneda es requerido.": "Currency is required.",
+		"Nombre es requerido.": "Name is required.",
+		"La descripción es requerida.": "Description is required.",
+		"La dirección es requerida.": "The address is required.",
+		"La descripción en inglés es requerida.": "The description in English is required.",
+		"Latitud requerida.": "Required latitude.",
+		"Valor permitido entre 180 y -180.": "Allowed value between 180 and -180.",
+		"Longitud requerida.": "Required length.",
+		"Valor permitido entre 90 y -90.": "Allowed value between 90 and -90.",
+		"Cant de personas es requerida.": "Number of people is required.",
+		"Metros cuadrados es requerido.": "Square meters is required.",
+		"Cant de habitaciones es requerida.": "Number of rooms is required.",
+		"Cant de baños es requerido.": "Number of bathrooms is required.",
+		"precio es requerido.": "Price is required.",
+		"España": "Spain"
 	}
 }

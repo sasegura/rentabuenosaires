@@ -23,8 +23,10 @@ import AxiosConexionConfig from 'conexion/AxiosConexionConfig';
 import AdicionarTabla from './AdicionarTabla';
 import { Col, Container, InputGroup, Row } from 'reactstrap';
 import IndexNavbar from 'components/Navbars/IndexNavbar';
+import { withTranslation } from 'react-i18next';
 
 const Adicionar = (props) => {
+	const { t } = props;
 	props.setCurrentNavBarColor(false);
 
 	const [destinos, setDestinos] = useState(null);
@@ -165,11 +167,11 @@ const Adicionar = (props) => {
 		setDestinoDeleteDialog(true);
 	};
 
-	const hideDeletepisosDialog = () => {
+	const hideDeleteDestinoDialog = () => {
 		setDestinoDeleteDialog(false);
 	};
 
-	async function deletepiso() {
+	async function deleteDestino() {
 		const url = '/destinos/' + destino.iddestino;
 		AxiosConexionConfig.delete(url).then(() => {
 			setCarga(!carga);
@@ -201,7 +203,7 @@ const Adicionar = (props) => {
 			/>
 		</React.Fragment>
 	);
-	const deletepisosDialogFooter = (
+	const deleteDestinoDialogFooter = (
 		<React.Fragment>
 			<Button
 				label='No'
@@ -209,7 +211,12 @@ const Adicionar = (props) => {
 				className='p-button-text'
 				onClick={hideDeleteDialog}
 			/>
-			<Button label='Yes' icon='pi pi-check' className='p-button-text' onClick={deletepiso} />
+			<Button
+				label='Yes'
+				icon='pi pi-check'
+				className='p-button-text'
+				onClick={deleteDestino}
+			/>
 		</React.Fragment>
 	);
 	async function savedestino() {
@@ -284,8 +291,8 @@ const Adicionar = (props) => {
 						style={{ width: '450px' }}
 						header='Confirm'
 						modal
-						footer={deletepisosDialogFooter}
-						onHide={hideDeletepisosDialog}
+						footer={deleteDestinoDialogFooter}
+						onHide={hideDeleteDestinoDialog}
 					>
 						<div className='confirmation-content'>
 							<i
@@ -293,7 +300,10 @@ const Adicionar = (props) => {
 								style={{ fontSize: '2rem' }}
 							/>
 							{destino && (
-								<span>Are you sure you want to delete the selected pisos?</span>
+								<span>
+									{t('Are you sure you want to delete ')} "{destino.nombre}"
+									{t(' destiny?')}
+								</span>
 							)}
 						</div>
 					</Dialog>
@@ -325,4 +335,7 @@ const mapDispatchToProps = (dispatch) => ({
 	setCurrentNavBarColor: (navBarColor) => dispatch(setCurrentNavBarColor(navBarColor)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Adicionar);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withTranslation('translations')(Adicionar));

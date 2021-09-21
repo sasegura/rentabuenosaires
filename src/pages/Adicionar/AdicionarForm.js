@@ -28,7 +28,7 @@ const AdicionarForm = (props) => {
 	const [cargandoImagenes, setCargandoImages] = useState(false);
 	const amenitiesGenerales = amenitiesGeneralesConst;
 	const amenitiesGeneralesText = amenitiesGeneralesTextConst;
-
+	const { t } = props;
 	const [serviciosAdicionales, setserviciosAdicionales] = useState([]);
 	const [selectedserviciosAdicionales, setSelectedserviciosAdicionales] = useState(null);
 	const [filteredserviciosAdicionales, setFilteredserviciosAdicionales] = useState(null);
@@ -313,44 +313,44 @@ const AdicionarForm = (props) => {
 	const validate = (data) => {
 		let errors = {};
 		if (!data.moneda || data.moneda === '') {
-			errors.moneda = 'Moneda es requerido.';
+			errors.moneda = t('Moneda es requerido.');
 		}
 		if (!data.nombre || data.nombre === '') {
-			errors.nombre = 'Nombre es requerido.';
+			errors.nombre = t('Nombre es requerido.');
 		}
 		if (!data.descripcion || data.descripcion === '') {
-			errors.descripcion = 'La descripcion es requerida.';
+			errors.descripcion = t('La descripción es requerida.');
 		}
 		if (!data.direccion || data.direccion === '') {
-			errors.direccion = 'La descripcion es requerida.';
+			errors.direccion = t('La dirección es requerida.');
 		}
 		if (!data.descripcionI || data.descripcionI === '') {
-			errors.descripcionI = 'La descripcion en inglés es requerida.';
+			errors.descripcionI = t('La descripción en inglés es requerida.');
 		}
 		if (!data.latitud || data.latitud === '') {
-			errors.latitud = 'latitud requerida.';
+			errors.latitud = t('Latitud requerida.');
 		} else if (data.latitud > 180 || data.latitud < -180) {
-			errors.latitud = 'Valor permitido entre 180 y -180.';
+			errors.latitud = t('Valor permitido entre 180 y -180.');
 		}
 		if (!data.longitud || data.longitud === '') {
-			errors.longitud = 'longitud requerida.';
+			errors.longitud = t('Longitud requerida.');
 		} else if (data.longitud > 90 || data.longitud < -90) {
-			errors.longitud = 'Valor permitido entre 90 y -90.';
+			errors.longitud = t('Valor permitido entre 90 y -90.');
 		}
 		if (!data.cantpersonas || data.cantpersonas === '') {
-			errors.cantpersonas = 'cant de personas es requerida.';
+			errors.cantpersonas = t('Cant de personas es requerida.');
 		}
 		if (!data.metroscuadrados || data.metroscuadrados === '') {
-			errors.metroscuadrados = 'metros cuadrados es requerido.';
+			errors.metroscuadrados = t('Metros cuadrados es requerido.');
 		}
 		if (!data.canthabitaciones || data.canthabitaciones === '') {
-			errors.canthabitaciones = 'cant de habitaciones es requerida.';
+			errors.canthabitaciones = t('Cant de habitaciones es requerida.');
 		}
 		if (!data.cantbannos || data.cantbannos === '') {
-			errors.cantbannos = 'cant de baños es requerido.';
+			errors.cantbannos = t('Cant de baños es requerido.');
 		}
 		if (!data.precio || data.precio === '') {
-			errors.precio = 'precio es requerido.';
+			errors.precio = t('precio es requerido.');
 		}
 		/*else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
             errors.email = 'Invalid email address. E.g. example@email.com';
