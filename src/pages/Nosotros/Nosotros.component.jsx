@@ -62,7 +62,7 @@ const Nosotros = (props) => {
 						<p className='fontFamily'>
 							{t('Alquila por días, semanas o meses con nosotros.')}
 						</p>
-						{props.inicio ? null : (
+						{props.isInicioPage ? null : (
 							<>
 								<br />
 								<h3>

@@ -21,6 +21,7 @@ import {
 	apisendMailCitaCancelada,
 } from 'configuracion/constantes';
 import IndexNavbar from 'components/Navbars/IndexNavbar';
+import { arrayExpression } from '@babel/types';
 
 const Reservaciones = (props) => {
 	const toast = useRef(null);
@@ -93,14 +94,32 @@ const Reservaciones = (props) => {
 			console.log(contador);
 		}
 		AxiosConexionConfig.delete(`${apiReservaciones}/${data.id}`)
-			.then((response) => {
+			.then(() => {
+				eliminarDias(data.fechaInicio, data.fechaFin, data.idpiso);
 				getReservaciones();
-				console.log(response.data);
 			})
 			.catch((e) => {
 				console.log(e);
 			});
 	}
+
+	const eliminarDias = (fechaInicial, fechaFinal, idpiso) => {
+		const pis = pisos.filter((piso) => piso.idpiso === idpiso);
+		const dias = [fechaInicial, fechaFinal];
+		const diasReservados = [];
+		pis[0]?.diasReservados?.split(',').forEach((pi) => {
+			const te = dias.filter(
+				(fi) => moment(pi).format('DD/MM/YYYY') === moment(fi).format('DD/MM/YYYY')
+			);
+			te.length === 0 ? diasReservados.push(pi) : console.log(te);
+		});
+		AxiosConexionConfig.patch(
+			`${apiPiso}/${idpiso}`,
+			JSON.stringify({ diasReservados: diasReservados.toString() || null })
+		).then((re) => {
+			console.log(re);
+		});
+	};
 
 	const getPisoId = (id) => {
 		let respuesta = null;

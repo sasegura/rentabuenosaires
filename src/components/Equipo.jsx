@@ -17,7 +17,7 @@ const Equipo = (props) => {
 				<h2 className='fontFamily'>{t('Este es nuestro equipo')}</h2>
 				<div className='team fontFamily'>
 					<Row>
-						<Col md='3'>
+						<Col md='3' className='p-p-0'>
 							<div className='team-player'>
 								<img
 									alt='Jonathan Berman'
@@ -30,7 +30,7 @@ const Equipo = (props) => {
 								</p>
 							</div>
 						</Col>
-						<Col md='3'>
+						<Col md='3' className='p-p-0'>
 							<div className='team-player'>
 								<img
 									alt='Luciana Carino'
@@ -41,7 +41,7 @@ const Equipo = (props) => {
 								<p className='category'>{t('Jefa de diseño & Co-Fundadora')}</p>
 							</div>
 						</Col>
-						<Col md='3'>
+						<Col md='3' className='p-p-0'>
 							<div className='team-player'>
 								<img
 									alt='Luis Alberto'
@@ -52,7 +52,7 @@ const Equipo = (props) => {
 								<p className='category'>{t('Jefe de servicio')} </p>
 							</div>
 						</Col>
-						<Col md='3'>
+						<Col md='3' className='p-p-0'>
 							<div className='team-player'>
 								<img
 									alt='Alicia Ghignone'

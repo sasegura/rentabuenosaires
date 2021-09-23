@@ -197,7 +197,6 @@
 		"Cuidamos tu casa y obtenemos beneficios económicos cuando no estás en ella.": "We take care of your house and we obtain economic benefits when you are not in it.",
 		"CONTACTA CON NOSOTROS": "CONTACT US",
 		"Te ofrecemos un servicio de alquiler": "We offer you a first class rental service.",
-
 		"Disfrutamos viajar por el mundo, conocer diferentes culturas y sentirnos parte de cada lugar.": "We enjoy travelling the world, knowing different cultures and feeling part of each place.",
 		"A lo largo de los últimos años hemos conocido más de 100 ciudades, lo que nos ayuda a entender qué necesitas y valoras del lugar donde te hospedas.": "Over the last few years we have known more than 100 cities, which helps us understand what  you need and value where you are staying.",
 		"Nuestro objetivo es lograr que tu estadía sea perfecta, ofreciendo un servicio completo y de primer nivel, no sólo en el hospedaje sino también en las inquietudes que tengas durante toda tu estancia.": "Our goal is to ensure that your stay is perfect, offering a complete and first level service, not only in the accommodation but also in the concerns you have throughout your stay.",
@@ -212,6 +211,9 @@
 		"Cancelar": "Cancel",
 		"Are you sure you want to delete ": "Are you sure you want to delete ",
 		" destiny?": " destiny?",
+		"España": "Spain",
+
+		"___________________________validations": "Validations",
 		"Moneda es requerido.": "Currency is required.",
 		"Nombre es requerido.": "Name is required.",
 		"La descripción es requerida.": "Description is required.",
@@ -226,6 +228,9 @@
 		"Cant de habitaciones es requerida.": "Number of rooms is required.",
 		"Cant de baños es requerido.": "Number of bathrooms is required.",
 		"precio es requerido.": "Price is required.",
-		"España": "Spain"
+		"Teléfono es requerido.": "Phone number is required.",
+		"Teléfono no válido. Ej, +3485698545": "Invalid Phone. E.g +3485698545",
+		"Email es requerido.": "Email is required.",
+		"Dirección de correo electrónico no válida. Ej, ejemplo@email.com": "Invalid email address. E.g. example@email.com"
 	}
 }

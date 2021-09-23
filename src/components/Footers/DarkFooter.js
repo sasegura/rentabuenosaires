@@ -78,7 +78,7 @@ function DarkFooter(props) {
 						<SocialIcon
 							style={{ width: '40px', height: '40px' }}
 							className='p-mr-2'
-							url='https://www.instagram.com/e-homeselect'
+							url='https://www.instagram.com/enjoy_homeselect'
 							bgColor='grey'
 						/>
 					</div>

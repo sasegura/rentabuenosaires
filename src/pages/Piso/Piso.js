@@ -44,7 +44,7 @@ const Piso = (props) => {
 	const [imagenes, setImagenes] = useState(null);
 	const [loadImg, setLoadImg] = useState(false);
 	const [loadData, setLoadData] = useState(false);
-	const [data, setData] = useState(false);
+	const [data, setData] = useState(null);
 	const [destino, setDestino] = useState(null);
 	const [dateBegin, setDateBegin] = useState(null);
 	const [dateEnd, setDateEnd] = useState(null);
@@ -139,7 +139,7 @@ const Piso = (props) => {
 				setCalculo(false);
 			} else {
 				if (end > begin) {
-					settotalCalculo((end - begin) * data.precio);
+					settotalCalculo(diffDates(dateBegin, dateEnd) * data.precio);
 					setCalculo(true);
 					seterrorfecha('');
 				}
@@ -296,7 +296,7 @@ const Piso = (props) => {
 				const reservacion = {
 					idusuario: response.data.idusuario,
 					idpiso: data.idpiso,
-					fechaFin: dateEnd,
+					fechaFin: moment(dateEnd).subtract(1, 'days'),
 					fechaInicio: dateBegin,
 					aceptada: false,
 					cantPersonas: huesped,
@@ -306,7 +306,7 @@ const Piso = (props) => {
 				const inicio = moment(dateBegin);
 				const fin = moment(dateEnd);
 				const dateB = new Date(dateBegin);
-				let contador = fin.diff(inicio, 'days');
+				let contador = fin.diff(inicio, 'days') - 1;
 				dias.push(sumarDias(dateB, 0));
 				while (contador > 0) {
 					let a = new Date(dateBegin);
@@ -343,8 +343,8 @@ const Piso = (props) => {
 		const values = {
 			correoCliente: valorDialog.email,
 			correoAdmin: 'administrador@e-homeselect.com',
-			fechaInicio: getDate(dateBegin),
-			fechaFin: getDate(dateEnd),
+			fechaInicio: moment(dateBegin).format('DD/MM/YYYY'),
+			fechaFin: moment(dateEnd).format('DD/MM/YYYY'),
 			cantidadPersonas: huesped,
 			precio: data.precio,
 			pisoNombre: data.nombre,
@@ -445,6 +445,7 @@ const Piso = (props) => {
 			</div>
 		);
 	};
+	const diffDates = (beginDate, endDate) => moment(endDate).diff(moment(beginDate), 'days');
 	const TarjetPiso = () => {
 		return (
 			<div className='fontFamily'>
@@ -458,7 +459,7 @@ const Piso = (props) => {
 				<hr />
 				<div className='marginLeft20px'>
 					{t('Desde')} {Currency(data.moneda)}
-					<span className='marginLeft5px'>{data.precio}</span> {t('por noche')}
+					<span className=''>{data.precio}</span> {t('por noche')}
 				</div>
 				<div className='p-field p-col-12 fontFamily '>
 					<label className='marginLeft10px' htmlFor='calendar'>
@@ -529,7 +530,7 @@ const Piso = (props) => {
 								<div>
 									{t('Estancia')}
 									<span className='floatRigth'>
-										{'(' + (dateEnd?.getDate() - dateBegin?.getDate()) + ')'}
+										{`( ${diffDates(dateBegin, dateEnd)})`}
 										{t('noches')}
 									</span>
 								</div>
@@ -566,12 +567,7 @@ const Piso = (props) => {
 				<div className='p-col-12 p-md-1'></div>
 				<div className='p-col-12 p-md-11 fontFamily'>
 					<div>
-						<h1 style={{ fontFamily: 'playfair' }}>
-							{data.nombre}
-							<span className='marginLeft5px'></span>-
-							<span className='marginLeft5px'></span>
-							{destino?.nombre}
-						</h1>
+						<h1 style={{ fontFamily: 'playfair' }}>{data.nombre}</h1>
 					</div>
 					{headerTarjeta()}
 

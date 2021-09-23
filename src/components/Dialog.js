@@ -10,18 +10,18 @@ const DialogDemo = ({ open, setOpen, valor, setValor, acept, t }, props) => {
 	const validate = (data) => {
 		let errors = {};
 		if (!data.name) {
-			errors.name = 'Name is required.';
+			errors.name = t('Nombre es requerido.');
 		}
 		if (!data.telefono) {
-			errors.telefono = 'Name is required.';
+			errors.telefono = t('Teléfono es requerido.');
 		}
 		if (!/^[+][0-9]{6,14}$/i.test(data.telefono)) {
-			errors.telefono = 'Invalid Phone. E.g +3485698545';
+			errors.telefono = t('Teléfono no válido. Ej, +3485698545');
 		}
 		if (!data.email) {
-			errors.email = 'Email is required.';
+			errors.email = t('Email es requerido.');
 		} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
-			errors.email = 'Invalid email address. E.g. example@email.com';
+			errors.email = t('Dirección de correo electrónico no válida. Ej, ejemplo@email.com');
 		}
 		return errors;
 	};

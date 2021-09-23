@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import esp from '../../assets/img/flags/ES.png';
 import eng from '../../assets/img/flags/GB.png';
-import mundoIcon from '../../assets/img/icon/mundo.png';
+import mundoIcon from '../../assets/img/icon/mundo1.png';
 // reactstrap components
 import {
 	Collapse,
@@ -311,7 +311,7 @@ const IndexNavbar = (props) => {
 									<img
 										alt='...'
 										className='n-logo bandera width20x'
-										style={{ borderRadius: '2rem' }}
+										style={{ borderRadius: '2rem', backgroundColor: 'white' }}
 										src={mundoIcon}
 									/>
 								</DropdownToggle>
