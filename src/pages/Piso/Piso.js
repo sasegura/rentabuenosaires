@@ -199,6 +199,9 @@ const Piso = (props) => {
 		if (data.wifi) {
 			a.push(amenitieForm(imagenWifi, 'Wifi'));
 		}
+		if (data.lavadora) {
+			a.push(amenitieForm(washingMachine, 'Lavadora'));
+		}
 		if (data.calefaccion) {
 			a.push(amenitieForm(imagencalefaccion, 'calefaccion'));
 			delete amenitiesGenerales.calefaccion;
@@ -210,12 +213,8 @@ const Piso = (props) => {
 			a.push(amenitieForm(imagenTV, 'TV'));
 			delete amenitiesGenerales.tv;
 		}
-		if (data.lavasecadora || data.lavadora) {
-			if (data.lavasecadora) {
-				a.push(amenitieForm(washingMachine, 'Lavadora/Secadora'));
-			} else {
-				a.push(amenitieForm(washingMachine, 'Lavadora'));
-			}
+		if (data.lavasecadora) {
+			a.push(amenitieForm(washingMachine, 'Lavadora/Secadora'));
 		}
 		if (data.gimnasio) {
 			a.push(amenitieForm(gym, 'Gimnasio'));

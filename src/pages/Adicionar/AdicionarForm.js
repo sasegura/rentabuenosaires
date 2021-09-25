@@ -260,59 +260,56 @@ const AdicionarForm = (props) => {
 	const initialValues = {
 		// Tab2
 		idpiso: piso.idpiso,
-		diasReservados: piso?.diasReservados ? piso?.diasReservados : '',
-		nombre: piso.nombre ? piso.nombre : '',
-		latitud: piso?.latitud ? piso?.latitud : '',
-		longitud: piso?.longitud ? piso?.longitud : '',
-		direccion: piso?.direccion ? piso?.direccion : '',
-		descripcion: piso?.descripcion ? piso?.descripcion : '',
-		descripcionI: piso?.descripcionI ? piso?.descripcionI : '',
-		precio: piso?.precio ? piso?.precio : '',
-		canthabitaciones: piso?.canthabitaciones ? piso?.canthabitaciones : '',
-		cantpersonas: piso?.cantpersonas ? piso?.cantpersonas : '',
-		metroscuadrados: piso?.metroscuadrados ? piso?.metroscuadrados : '',
-		cantbannos: piso?.cantbannos ? piso?.cantbannos : '',
+		diasReservados: piso?.diasReservados || '',
+		nombre: piso.nombre || '',
+		latitud: piso?.latitud || '',
+		longitud: piso?.longitud || '',
+		direccion: piso?.direccion || '',
+		descripcion: piso?.descripcion || '',
+		descripcionI: piso?.descripcionI || '',
+		precio: piso?.precio || '',
+		moneda: piso?.moneda || '',
+		canthabitaciones: piso?.canthabitaciones || '',
+		cantpersonas: piso?.cantpersonas || '',
+		metroscuadrados: piso?.metroscuadrados || '',
+		cantbannos: piso?.cantbannos || '',
 
-		iddestino: piso?.iddestino ? piso?.iddestino : '',
+		iddestino: piso?.iddestino || '',
 
 		// Tab3
-		aireacondicionado: false,
-		tendederoRopa: piso?.tendederoRopa ? piso?.tendederoRopa : false,
-		patioBalcon: piso?.patioBalcon ? piso?.patioBalcon : false,
-		gimnasio: piso?.gimnasio ? piso?.gimnasio : false,
-		productosLimpieza: piso?.productosLimpieza ? piso?.productosLimpieza : false,
-		sauna: piso?.sauna ? piso?.sauna : false,
-		plancha: piso?.plancha ? piso?.plancha : false,
-		lavasecadora: piso?.lavasecadora ? piso?.lavasecadora : false,
-		lavadora: piso?.lavadora ? piso?.lavadora : false,
-		tv: piso?.tv ? piso?.tv : false,
-		piscina: piso?.piscina ? piso?.piscina : false,
-		cocina: piso?.cocina ? piso?.cocina : false,
-		jacuzzi: piso?.jacuzzi ? piso?.jacuzzi : false,
-		secadorPelo: piso?.secadorPelo ? piso?.secadorPelo : false,
-		utensiliosCocina: piso?.utensiliosCocina ? piso?.utensiliosCocina : false,
-		zonaTrabajar: piso?.zonaTrabajar ? piso?.zonaTrabajar : false,
-		platosCubiertos: piso?.platosCubiertos ? piso?.platosCubiertos : false,
-		wifi: piso?.wifi ? piso?.wifi : false,
-		tvcable: piso?.tvcable ? piso?.tvcable : false,
-		calefaccion: piso?.calefaccion ? piso?.calefaccion : false,
+		aireacondicionado: piso?.aireacondicionado || false,
+		// tendederoRopa: piso?.tendederoRopa || false,
+		// patioBalcon: piso?.patioBalcon || false,
+		gimnasio: piso?.gimnasio || false,
+		// productosLimpieza: piso?.productosLimpieza || false,
+		// sauna: piso?.sauna || false,
+		// plancha: piso?.plancha || false,
+		lavasecadora: piso?.lavasecadora || false,
+		lavadora: piso?.lavadora || false,
+		tv: piso?.tv || false,
+		// piscina: piso?.piscina || false,
+		// cocina: piso?.cocina || false,
+		jacuzzi: piso?.jacuzzi || false,
+		// secadorPelo: piso?.secadorPelo || false,
+		// utensiliosCocina: piso?.utensiliosCocina || false,
+		// zonaTrabajar: piso?.zonaTrabajar || false,
+		// platosCubiertos: piso?.platosCubiertos || false,
+		wifi: piso?.wifi || false,
+		// tvcable: piso?.tvcable || false,
+		calefaccion: piso?.calefaccion || false,
 
 		// Tab4
-		serviciosAdicionales: piso?.serviciosAdicionales ? piso?.serviciosAdicionales : '',
-		estacionamientoInstalaciones: piso?.estacionamientoInstalaciones
-			? piso?.estacionamientoInstalaciones
-			: '',
-		cocinaComedor: piso?.cocinaComedor ? piso?.cocinaComedor : '',
-		internetOficina: piso?.internetOficina ? piso?.internetOficina : '',
-		seguridadHogar: piso?.seguridadHogar ? piso?.seguridadHogar : '',
-		calefaccionRefrigeracion: piso?.calefaccionRefrigeracion
-			? piso?.calefaccionRefrigeracion
-			: '',
-		entretenimiento: piso?.entretenimiento ? piso?.entretenimiento : '',
-		paraFamilias: piso?.paraFamilias ? piso?.paraFamilias : '',
-		dormitorio: piso?.dormitorio ? piso?.dormitorio : '',
-		banno: piso?.banno ? piso?.banno : '',
-		serviciosAdicionales: piso.serviciosAdicionales ? piso.serviciosAdicionales : '',
+		serviciosAdicionales: piso?.serviciosAdicionales || '',
+		estacionamientoInstalaciones: piso?.estacionamientoInstalaciones || '',
+		cocinaComedor: piso?.cocinaComedor || '',
+		internetOficina: piso?.internetOficina || '',
+		seguridadHogar: piso?.seguridadHogar || '',
+		calefaccionRefrigeracion: piso?.calefaccionRefrigeracion || '',
+		entretenimiento: piso?.entretenimiento || '',
+		paraFamilias: piso?.paraFamilias || '',
+		dormitorio: piso?.dormitorio || '',
+		banno: piso?.banno || '',
+		serviciosAdicionales: piso.serviciosAdicionales || '',
 	};
 
 	const isFormFieldValid = (meta) => !!(meta.touched && meta.error);
@@ -534,7 +531,6 @@ const AdicionarForm = (props) => {
 					return country.name.toLowerCase().startsWith(event.query.toLowerCase());
 				});
 			}
-
 			setFilteredEstacionamientoInstalaciones(_filteredCountries);
 		}, 250);
 	};
@@ -549,7 +545,6 @@ const AdicionarForm = (props) => {
 					return country.name.toLowerCase().startsWith(event.query.toLowerCase());
 				});
 			}
-
 			setFilteredbanno(_filteredCountries);
 		}, 250);
 	};
@@ -564,7 +559,6 @@ const AdicionarForm = (props) => {
 					return country.name.toLowerCase().startsWith(event.query.toLowerCase());
 				});
 			}
-
 			setFilteredDormitorio(_filteredCountries);
 		}, 250);
 	};
@@ -579,7 +573,6 @@ const AdicionarForm = (props) => {
 					return country.name.toLowerCase().startsWith(event.query.toLowerCase());
 				});
 			}
-
 			setFilteredentretenimiento(_filteredCountries);
 		}, 250);
 	};
@@ -594,7 +587,6 @@ const AdicionarForm = (props) => {
 					return country.name.toLowerCase().startsWith(event.query.toLowerCase());
 				});
 			}
-
 			setFilteredparaFamilias(_filteredCountries);
 		}, 250);
 	};
@@ -609,7 +601,6 @@ const AdicionarForm = (props) => {
 					return country.name.toLowerCase().startsWith(event.query.toLowerCase());
 				});
 			}
-
 			setFilteredcalefaccionRefrigeracion(_filteredCountries);
 		}, 250);
 	};
@@ -624,7 +615,6 @@ const AdicionarForm = (props) => {
 					return country.name.toLowerCase().startsWith(event.query.toLowerCase());
 				});
 			}
-
 			setFilteredseguridadHogar(_filteredCountries);
 		}, 250);
 	};
@@ -638,7 +628,6 @@ const AdicionarForm = (props) => {
 					return country.name.toLowerCase().startsWith(event.query.toLowerCase());
 				});
 			}
-
 			setFilteredinternetOficina(_filteredCountries);
 		}, 250);
 	};
@@ -742,6 +731,7 @@ const AdicionarForm = (props) => {
 	};
 	return (
 		<>
+			{console.log(piso)}
 			{!savingPisos ? (
 				<Form
 					onSubmit={onSubmit}
@@ -832,32 +822,36 @@ const AdicionarForm = (props) => {
 								{fieldNumberComponent('cantbannos', 'Cant bannos', false)}
 							</div>
 							<div className='p-col-12 p-d-flex p-flex-column p-flex-md-row '>
-								{elementoCheck('sauna', 'sauna')}
-								{elementoCheck('tendederoRopa', 'Tendedero de Ropa')}
-								{elementoCheck('patioBalcon', 'Patio Balcon')}
-								{elementoCheck('gimnasio', 'Gimnasio')}
-							</div>
-							<div className='p-col-12 p-d-flex p-flex-column p-flex-md-row '>
-								{elementoCheck('productosLimpieza', 'Productos de Limpieza')}
-								{elementoCheck('plancha', 'Plancha')}
-								{elementoCheck('lavasecadora', 'Lavadora/Secadora')}
+								{elementoCheck('wifi', 'Wifi')}
 								{elementoCheck('tv', 'tv')}
+								{elementoCheck('gimnasio', 'Gimnasio')}
+								{elementoCheck('lavasecadora', 'Lavadora/Secadora')}
 							</div>
 							<div className='p-col-12 p-d-flex p-flex-column p-flex-md-row '>
+								{elementoCheck('calefaccion', 'Calefaccion')}
+								{elementoCheck('lavadora', 'Lavadora')}
+								{elementoCheck('jacuzzi', 'Jacuzzi')}
+								{elementoCheck('aireacondicionado', 'Aire Acondicionado')}
+							</div>
+
+							{/*<div className='p-col-12 p-d-flex p-flex-column p-flex-md-row '>
 								{elementoCheck('piscina', 'Piscina')}
 								{elementoCheck('cocina', 'Cocina')}
-								{elementoCheck('jacuzzi', 'Jacuzzi')}
 								{elementoCheck('secadorPelo', 'Secador de Pelo')}
 							</div>
 							<div className='p-col-12 p-d-flex p-flex-column p-flex-md-row '>
 								{elementoCheck('utensiliosCocina', 'Utensilios de Cocina')}
 								{elementoCheck('zonaTrabajar', 'Zona para Trabajar')}
 								{elementoCheck('platosCubiertos', 'Platos y Cubiertos')}
-								{elementoCheck('calefaccion', 'Calefaccion')}
+								{elementoCheck('plancha', 'Plancha')}
 							</div>
 							<div className='p-col-12 p-d-flex p-flex-column p-flex-md-row '>
-								{elementoCheck('wifi', 'Wifi')}
+								{elementoCheck('productosLimpieza', 'Productos de Limpieza')}
+								{elementoCheck('sauna', 'sauna')}
+								{elementoCheck('tendederoRopa', 'Tendedero de Ropa')}
+								{elementoCheck('patioBalcon', 'Patio Balcon')}
 							</div>
+								*/}
 							<div className='p-d-flex p-flex-column p-flex-md-row'>
 								{autocompleteElement(
 									'Servicios Adicionales',

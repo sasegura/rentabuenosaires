@@ -12,7 +12,11 @@
 		{ "name": "Cargador para coches eléctricos", "code": "AF" },
 		{ "name": "Piscina", "code": "AF" },
 		{ "name": "Gimnasio", "code": "AF" },
-		{ "name": "Salón de usos múltiples", "code": "AF" }
+		{ "name": "Salón de usos múltiples", "code": "AF" },
+
+		{ "name": "Patio y balcon", "code": "AF" },
+		{ "name": "Sauna", "code": "AF" },
+		{ "name": "Piscina", "code": "AF" }
 	],
 	"cocinaComedor": [
 		{ "name": "Utensilios de parrilla", "code": "AF" },
@@ -31,7 +35,12 @@
 		{ "name": "Heladera con freezer", "code": "AF" },
 		{ "name": "Tostadora eléctrica", "code": "AF" },
 		{ "name": "Copas de vino", "code": "AF" },
-		{ "name": "Cava de vinos eléctrica", "code": "AF" }
+		{ "name": "Cava de vinos eléctrica", "code": "AF" },
+
+		{ "name": "Tendedero de ropa", "code": "AF" },
+		{ "name": "Utensilios Cocina", "code": "AF" },
+		{ "name": "Plancha", "code": "AF" },
+		{ "name": "Platos y cubiertos", "code": "AF" }
 	],
 	"internetOficina": [
 		{ "name": "Zona para trabajar", "code": "AF" },
