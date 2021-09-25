@@ -212,36 +212,51 @@ const AdicionarForm = (props) => {
 					const pisoDatos = await AxiosConexionConfig.patch(url + '/' + id, pisoData);
 					console.log(pisoDatos.data);
 					props.getPiso();
+					props.setpisoDialog(false);
 				} catch (e) {
 					console.log(e);
+					props.setpisoDialog(false);
 				}
 			} else {
 				try {
 					console.log('crear');
 					AxiosConexionConfig.post(url, pisoData).then((data) => {
-						// console.log(data);
-						let uri = '/imagen';
-						images.forEach((imagen, index) => {
-							const imagenData = {
-								idpiso: data.data.idpiso,
-								imagen,
-								portada: index === 0 ? true : false,
-							};
-							AxiosConexionConfig.post(uri, imagenData).then((data) => {
-								console.log(data);
-							});
-						});
+						console.log(images);
+						const { idpiso } = data.data;
+						saveImages(idpiso, images, true);
 					});
-					setSavingPisos(false);
-					props.getPiso();
 				} catch (e) {
 					console.log(e);
 					setSavingPisos(false);
+					props.setpisoDialog(false);
 				}
 			}
-			props.setpisoDialog(false);
 		}
 	}
+
+	const saveImages = (idpiso, imagenesArray, portada) => {
+		let uri = '/imagen';
+		const imagenData = {
+			idpiso,
+			imagen: imagenesArray[0],
+			portada,
+		};
+		AxiosConexionConfig.post(uri, imagenData)
+			.then((data) => {
+				console.log(data);
+				imagenesArray.splice(0, 1);
+				console.log(imagenesArray.length);
+				if (imagenesArray.length > 0) {
+					saveImages(idpiso, imagenesArray, false);
+				} else {
+					setSavingPisos(false);
+					props.getPiso();
+					props.setpisoDialog(false);
+				}
+			})
+			.catch((e) => console.log(e));
+	};
+
 	const initialValues = {
 		// Tab2
 		idpiso: piso.idpiso,
@@ -306,7 +321,6 @@ const AdicionarForm = (props) => {
 	};
 
 	const onSubmit = (data, form) => {
-		props.setpisoDialog(false);
 		SavePiso(data);
 		form.restart();
 	};
