@@ -6,6 +6,7 @@ import ImageUploader from 'react-images-upload';
 import { Button } from 'primereact/button';
 import { InputNumber } from 'primereact/inputnumber';
 import { InputText } from 'primereact/inputtext';
+import { Editor } from 'primereact/editor';
 import { Form, Field } from 'react-final-form';
 import { AutoComplete } from 'primereact/autocomplete';
 
@@ -262,6 +263,7 @@ const AdicionarForm = (props) => {
 		idpiso: piso.idpiso,
 		diasReservados: piso?.diasReservados || '',
 		nombre: piso.nombre || '',
+		nombreI: piso.nombreI || '',
 		latitud: piso?.latitud || '',
 		longitud: piso?.longitud || '',
 		direccion: piso?.direccion || '',
@@ -322,12 +324,16 @@ const AdicionarForm = (props) => {
 		form.restart();
 	};
 	const validate = (data) => {
+		console.log(data);
 		let errors = {};
 		if (!data.moneda || data.moneda === '') {
 			errors.moneda = t('Moneda es requerido.');
 		}
 		if (!data.nombre || data.nombre === '') {
 			errors.nombre = t('Nombre es requerido.');
+		}
+		if (!data.nombreI || data.nombreI === '') {
+			errors.nombreI = t('Nombre en Inglés es requerido.');
 		}
 		if (!data.descripcion || data.descripcion === '') {
 			errors.descripcion = t('La descripción es requerida.');
@@ -388,7 +394,33 @@ const AdicionarForm = (props) => {
 							{...input}
 							className={classNames({ 'p-invalid': isFormFieldValid(meta) })}
 						/>
-
+						{getFormErrorMessage(meta)}
+					</div>
+				)}
+			/>
+		</div>
+	);
+	const fieldEditorComponent = (campo, texto) => (
+		<div className='p-col-12'>
+			<Field
+				name={campo}
+				render={({ input, meta }) => (
+					<div className='p-field'>
+						<label
+							htmlFor={campo}
+							className={classNames({
+								'p-error': isFormFieldValid(meta),
+							})}
+						>
+							{texto}*
+						</label>
+						<Editor
+							id={campo}
+							{...input}
+							style={{ height: '320px' }}
+							onTextChange={(e) => input.onChange(e.htmlValue)}
+							className={classNames({ 'p-invalid': isFormFieldValid(meta) })}
+						/>
 						{getFormErrorMessage(meta)}
 					</div>
 				)}
@@ -773,6 +805,31 @@ const AdicionarForm = (props) => {
 										)}
 									/>
 								</div>
+								<div className='p-col-12 p-md-4 p-p-3'>
+									<Field
+										name='nombreI'
+										render={({ input, meta }) => (
+											<div className='p-field'>
+												<label
+													htmlFor='nombreI'
+													className={classNames({
+														'p-error': isFormFieldValid(meta),
+													})}
+												>
+													Nombre en Inglés*
+												</label>
+												<InputText
+													id='nombreI'
+													{...input}
+													className={classNames({
+														'p-invalid': isFormFieldValid(meta),
+													})}
+												/>
+												{getFormErrorMessage(meta)}
+											</div>
+										)}
+									/>
+								</div>
 								{fieldLatLongComponent('latitud', 'Latitud')}
 								{fieldLatLongComponent('longitud', 'Longitud')}
 								<div className='p-col-12 p-md-2'>
@@ -808,8 +865,8 @@ const AdicionarForm = (props) => {
 							{fieldTextComponent('diasReservados', 'diasReservados', true)}
 
 							{fieldTextComponent('direccion', 'Dirección', false)}
-							{fieldTextComponent('descripcion', 'Descripción', false)}
-							{fieldTextComponent('descripcionI', 'Description(Inglés)', false)}
+							{fieldEditorComponent('descripcion', 'Descripción')}
+							{fieldEditorComponent('descripcionI', 'Description(Inglés)')}
 							<div className='flexWrap p-col-12'>
 								{fieldNumberComponent('precio', 'Precio', false)}
 								{fieldNumberComponent(

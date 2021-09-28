@@ -25,6 +25,8 @@ import { Row } from 'reactstrap';
 
 import './Piso.scss';
 
+import parse from 'html-react-parser';
+
 import AxiosConexionConfig from 'conexion/AxiosConexionConfig';
 import { amenitiesGeneralesTextConst } from 'configuracion/constantes';
 import { amenitiesGeneralesConst } from 'configuracion/constantes';
@@ -450,8 +452,11 @@ const Piso = (props) => {
 			<div className='fontFamily'>
 				<div className='marginLeft20px'>
 					<h4 style={{ fontFamily: 'playfair' }}>
-						{data.nombre.substr(0, 25)}
-						{data.nombre.length > 26 ? '...' : null}
+						{props.i18n.language === 'es'
+							? `${data.nombre.substr(0, 25)}${data.nombre.length > 26 ? '...' : ''}`
+							: `${data.nombreI.substr(0, 25)}${
+									data.nombreI.length > 26 ? '...' : ''
+							  }`}
 					</h4>
 				</div>
 				{headerTarjeta()}
@@ -559,6 +564,7 @@ const Piso = (props) => {
 			</div>
 		);
 	};
+
 	const [readMore, setReadMore] = useState(false);
 	const DatosPiso = () => {
 		return (
@@ -566,51 +572,18 @@ const Piso = (props) => {
 				<div className='p-col-12 p-md-1'></div>
 				<div className='p-col-12 p-md-11 fontFamily'>
 					<div>
-						<h1 style={{ fontFamily: 'playfair' }}>{data.nombre}</h1>
+						<h1 style={{ fontFamily: 'playfair' }}>
+							{props.i18n.language === 'es' ? data.nombre : data.nombreI}
+						</h1>
 					</div>
 					{headerTarjeta()}
-
-					{!readMore ? (
-						<div>
-							<h5>
-								{props.i18n.language === 'en'
-									? `${data.descripcionI.substr(0, 255)}`
-									: `${data.descripcion.substr(0, 255)}`}
-
-								{props.i18n.language === 'en' ? (
-									data.descripcionI.length > 255 ? (
-										<a
-											onClick={() => setReadMore(true)}
-											className=' p-text-bold read-more-less'
-										>
-											...{t('read more')}
-										</a>
-									) : null
-								) : data.descripcion.length > 255 ? (
-									<a
-										onClick={() => setReadMore(true)}
-										className=' p-text-bold read-more-less'
-									>
-										...{t('read more')}
-									</a>
-								) : null}
-							</h5>
-						</div>
-					) : (
-						<div>
-							<h5>
-								{props.i18n.language === 'en'
-									? data.descripcionI
-									: data.descripcion}
-								<a
-									onClick={() => setReadMore(false)}
-									className=' p-text-bold read-more-less'
-								>
-									{t('read less')}
-								</a>
-							</h5>
-						</div>
-					)}
+					<div>
+						<h5 className='description'>
+							{props.i18n.language === 'en'
+								? parse(data.descripcionI)
+								: parse(data.descripcion)}
+						</h5>
+					</div>
 
 					<Row>
 						<b>{t('Comodidades')}</b>
