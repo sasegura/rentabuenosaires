@@ -14,6 +14,7 @@ import IndexNavbar from 'components/Navbars/IndexNavbar';
 
 const PisoPreview = (props) => {
 	const { t } = props;
+	props.setCurrentNavBarColor(false);
 	const [loadding, setLoadding] = useState(true);
 	const [reload, setreload] = useState(true);
 	const [pisos, setPisos] = useState([]);

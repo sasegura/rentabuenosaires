@@ -38,6 +38,7 @@ import { apiPiso } from 'configuracion/constantes';
 import moment from 'moment';
 import IndexNavbar from 'components/Navbars/IndexNavbar';
 import Currency from 'components/Currency';
+import { setCurrentPiso } from 'redux/piso/piso.action';
 
 const Piso = (props) => {
 	const { t } = props;
@@ -65,6 +66,7 @@ const Piso = (props) => {
 	const [visibleDialog, setVisibleDialog] = useState(false);
 	const [valorDialog, setValorDialog] = useState('');
 	const [acept, setAcept] = useState(false);
+	const [piso,setPiso]=useState(null)
 
 	let today = new Date();
 	addLocale('es', {
@@ -119,6 +121,13 @@ const Piso = (props) => {
 		};
 	}, []);
 
+	
+	useEffect(() => {
+		if (piso) {
+			amenitiesList(piso.data)
+		}
+	}, [props.i18n.language]);
+
 	useEffect(() => {
 		if (dateBegin) {
 			setdisabledEndDate(false);
@@ -129,20 +138,23 @@ const Piso = (props) => {
 	}, [dateBegin]);
 
 	useEffect(() => {
-		let begin = dateBegin?.getDate();
-		let end = dateEnd?.getDate();
+		console.log(dateBegin)
+		console.log(dateEnd)
+		let begin = new Date(dateBegin).getTime();
+		let end = new Date(dateEnd).getTime();
 		if (BuscarEnIntervalo(dateBegin, dateEnd)) {
 			seterrorfecha('En el intervalo seleccionado existen fechas reservadas previamente.');
 			setCalculo(false);
 		} else {
 			if (end === begin && begin) {
-				console.log(begin);
 				seterrorfecha('Seleccione una fecha de salida válida.');
 				setCalculo(false);
 			} else {
 				if (end > begin) {
 					settotalCalculo(diffDates(dateBegin, dateEnd) * data.precio);
 					setCalculo(true);
+					seterrorfecha('');
+				}else{
 					seterrorfecha('');
 				}
 			}
@@ -233,6 +245,7 @@ const Piso = (props) => {
 			const piso = await AxiosConexionConfig.get(url);
 			// console.log(piso.data)
 			setData(piso.data);
+			setPiso(piso)
 			amenitiesList(piso.data);
 			getDestino(piso.data.iddestino);
 			let temp = [];
@@ -341,6 +354,8 @@ const Piso = (props) => {
 
 	async function sendMail() {
 		const url = '/sendMailPreReserva';
+		console.log(dateBegin)
+		console.log(dateEnd)
 		const values = {
 			correoCliente: valorDialog.email,
 			correoAdmin: 'administrador@e-homeselect.com',
@@ -348,7 +363,7 @@ const Piso = (props) => {
 			fechaFin: moment(dateEnd).format('DD/MM/YYYY'),
 			cantidadPersonas: huesped,
 			precio: data.precio,
-			pisoNombre: data.nombre,
+			pisoNombre: props.i18n.language === 'es'?data.nombre :data.nombreI,
 			clienteNombre: valorDialog.name,
 			destino: destino.nombre,
 			telefono: valorDialog.telefono,
@@ -588,7 +603,7 @@ const Piso = (props) => {
 					<Row>
 						<b>{t('Comodidades')}</b>
 					</Row>
-					<Row>
+					<Row >
 						{amenities?.map((dato, index) => {
 							return <Fragment key={index}>{dato}</Fragment>;
 						})}

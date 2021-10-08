@@ -47,6 +47,10 @@ const Reservaciones = (props) => {
 
 	useEffect(() => {
 		setload(true);
+		getData();
+	}, []);
+
+	const getData = () => {
 		AxiosConexionConfig.get(apiPiso).then((respuesta) => {
 			setPisos(respuesta.data);
 			AxiosConexionConfig.get(apiUsuario).then((respuesta) => {
@@ -58,8 +62,7 @@ const Reservaciones = (props) => {
 				});
 			});
 		});
-	}, []);
-
+	};
 	//Obtener reservaciones
 	async function getReservaciones() {
 		setload(true);
@@ -96,7 +99,7 @@ const Reservaciones = (props) => {
 		AxiosConexionConfig.delete(`${apiReservaciones}/${data.id}`)
 			.then(() => {
 				eliminarDias(data.fechaInicio, data.fechaFin, data.idpiso);
-				getReservaciones();
+				//getReservaciones();
 			})
 			.catch((e) => {
 				console.log(e);
@@ -105,20 +108,30 @@ const Reservaciones = (props) => {
 
 	const eliminarDias = (fechaInicial, fechaFinal, idpiso) => {
 		const pis = pisos.filter((piso) => piso.idpiso === idpiso);
-		const dias = [fechaInicial, fechaFinal];
-		const diasReservados = [];
-		pis[0]?.diasReservados?.split(',').forEach((pi) => {
-			const te = dias.filter(
-				(fi) => moment(pi).format('DD/MM/YYYY') === moment(fi).format('DD/MM/YYYY')
+		const reservedDays = [];
+		console.log(pis[0]?.diasReservados?.split(','));
+		pis[0]?.diasReservados?.split(',').forEach((day) => {
+			console.log(moment(day));
+			console.log(moment(fechaInicial));
+
+			if (
+				moment(day).valueOf() < moment(fechaInicial).valueOf() ||
+				moment(day).valueOf() > moment(fechaFinal).valueOf()
+			) {
+				reservedDays.push(day);
+			}
+			/*const te = dias.filter(
+				(fi) => moment(pi).getTime() >= moment(fi).getTime() && 
 			);
-			te.length === 0 ? diasReservados.push(pi) : console.log(te);
+			te.length === 0 ? diasReservados.push(day) : console.log(te);*/
 		});
-		AxiosConexionConfig.patch(
-			`${apiPiso}/${idpiso}`,
-			JSON.stringify({ diasReservados: diasReservados.toString() || null })
-		).then((re) => {
-			console.log(re);
-		});
+		const diasReservados = reservedDays.length > 0 ? reservedDays.toString() : '';
+		AxiosConexionConfig.patch(`${apiPiso}/${idpiso}`, JSON.stringify({ diasReservados })).then(
+			(re) => {
+				console.log(re);
+				getData();
+			}
+		);
 	};
 
 	const getPisoId = (id) => {
@@ -185,10 +198,11 @@ const Reservaciones = (props) => {
 			correoCliente: usuario.correo,
 			correoAdmin: 'administrador@e-homeselect.com',
 			fechaInicio: getDate(datos.fechaInicio),
-			fechaFin: getDate(datos.fechaFin),
+			fechaFin: moment(datos.fechaFin).add(2, 'days'),
 			cantidadPersonas: datos.cantPersonas,
 			precio: datos.precio,
 			pisoNombre: piso.nombre,
+			pisoNombreI: piso.nombreI,
 			clienteNombre: usuario.nombre,
 			destino: getDestinoId(piso.iddestino).nombre,
 			telefono: usuario.telefono,
