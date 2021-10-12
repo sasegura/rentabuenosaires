@@ -339,7 +339,7 @@ const IndexNavbar = (props) => {
 
 							<NavItem>
 								<NavLink
-									href='https://www.facebook.com/e-homeselect'
+									href='https://facebook.com/EnjoyHomeSelect'
 									target='_blank'
 									id='facebook-tooltip'
 									className={navbarTextColor}
@@ -353,7 +353,7 @@ const IndexNavbar = (props) => {
 							</NavItem>
 							<NavItem>
 								<NavLink
-									href='https://www.instagram.com/e-homeselect'
+									href='https://www.instagram.com/enjoy_homeselect/'
 									target='_blank'
 									id='instagram-tooltip'
 									className={navbarTextColor}

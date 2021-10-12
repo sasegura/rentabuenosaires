@@ -67,6 +67,7 @@ function DarkFooter(props) {
 							className='p-mr-2'
 							url='https://facebook.com/EnjoyHomeSelect'
 							bgColor='grey'
+							target='_blank'
 						/>
 						<SocialIcon
 							className='p-mr-2'
@@ -80,6 +81,7 @@ function DarkFooter(props) {
 							className='p-mr-2'
 							url='https://www.instagram.com/enjoy_homeselect/'
 							bgColor='grey'
+							target='_blank'
 						/>
 					</div>
 				</div>
