@@ -10,17 +10,17 @@ export default function Currency(moneda, precio) {
 			<Tooltip target='.dollar-argentino' content={`Peso Argentino`} />
 			{moneda === 'EU' ? (
 				<>
-					<img src={euro} style={{ width: '10px' }} />
+					<img src={euro} style={{ width: '10px' }} className='euro' />
 					<span className='p-ml-1'>{precio}</span>
 				</>
 			) : moneda === 'USD' ? (
 				<>
-					<img src={dollar} style={{ width: '18px' }} />
+					<img src={dollar} style={{ width: '18px' }} className='usd' />
 					{precio}
 				</>
 			) : (
 				<>
-					<img src={peso} style={{ width: '12px' }} />
+					<img src={peso} style={{ width: '12px' }} className='dollar-argentino' />
 					{precio}
 				</>
 			)}
