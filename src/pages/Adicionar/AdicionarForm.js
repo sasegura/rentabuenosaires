@@ -359,10 +359,7 @@ const AdicionarForm = (props) => {
 		}
 		if (!data.metroscuadrados || data.metroscuadrados === '') {
 			errors.metroscuadrados = t('Metros cuadrados es requerido.');
-		}
-		if (!data.canthabitaciones || data.canthabitaciones === '') {
-			errors.canthabitaciones = t('Cant de habitaciones es requerida.');
-		}
+		}		
 		if (!data.cantbannos || data.cantbannos === '') {
 			errors.cantbannos = t('Cant de baños es requerido.');
 		}

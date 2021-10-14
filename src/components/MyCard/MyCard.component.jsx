@@ -39,16 +39,21 @@ function MyCard(props, { match, destino, link, history, cantHab, nombre }) {
 
 		try {
 			const imagen = await AxiosConexionConfig.get(url);
-			if (imagen.data.length === 0) {
-				const imagen1 = await AxiosConexionConfig.get(urlNoPortada);
-				console.log(imagen1.data[0]);
-				if (imagen1.data.length !== 0) {
-					setImagen(imagen1.data[0].imagen);
-				} else {
-					setNoImagen(true);
-				}
+			console.log(imagen);
+			if (imagen.data[0].imagen === null) {
+				setNoImagen(true);
 			} else {
-				setImagen(imagen.data[0].imagen);
+				if (imagen.data.length === 0) {
+					const imagen1 = await AxiosConexionConfig.get(urlNoPortada);
+					console.log(imagen1.data[0]);
+					if (imagen1.data.length !== 0) {
+						setImagen(imagen1.data[0].imagen);
+					} else {
+						setNoImagen(true);
+					}
+				} else {
+					imagen.data[0].imagen && setImagen(imagen.data[0].imagen);
+				}
 			}
 		} catch (e) {
 			console.log(e);
@@ -85,8 +90,13 @@ function MyCard(props, { match, destino, link, history, cantHab, nombre }) {
 					<div className='flex p-col-12 padding0'>
 						<div className=' p-col-12 p-md-7 padding0'>
 							<h5 className='p-mb-0'>
-								{props.nombre.substr(0, 25)}
-								{props.nombre.length > 26 ? '...' : null}
+								{props.i18n.language === 'en'
+									? `${props.nombreI.substr(0, 25)} ${
+											props.nombreI.length > 26 ? '...' : null
+									  }`
+									: `${props.nombre.substr(0, 25)} ${
+											props.nombre.length > 26 ? '...' : null
+									  }`}
 							</h5>
 							<p className='card-location margin-bottom0'>{props.destino}</p>
 						</div>

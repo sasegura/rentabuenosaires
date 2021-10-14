@@ -75,7 +75,7 @@ const PisoPreview = (props) => {
 	const destino = () => {
 		return (
 			<div className='pisoPrev'>
-				<h1 className='h1 fontFamily'>{props.currentDestino.nombre.toUpperCase()}</h1>
+				<h1 className='h1 fontFamily'>{props.i18n.language === 'es'?props.currentDestino.nombre.toUpperCase():props.currentDestino.nombreI.toUpperCase()}</h1>
 				{/*<img src={"data:image/png;base64," + img} />*/}
 				<div className='p-col-12'>
 					<div className='collection-preview'>

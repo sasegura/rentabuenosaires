@@ -33,6 +33,7 @@ const Adicionar = (props) => {
 	const [selectedDestino, setSelectesDestino] = useState(null);
 	const [carga, setCarga] = useState(true);
 	const [nombreDestino, setNombreDestino] = useState('');
+	const [nombreDestinoI, setNombreDestinoI] = useState('');
 	const [emptyNombreDestino, setEmptyNombreDestino] = useState('');
 	const [destinoDialog, setDestinoDialog] = useState(false);
 	const [destinoDeleteDialog, setDestinoDeleteDialog] = useState(false);
@@ -79,18 +80,20 @@ const Adicionar = (props) => {
 		const url = '/destinos';
 		let destino = {
 			nombre: nombreDestino,
+			nombreI: nombreDestinoI,
 		};
-		if (nombreDestino !== '') {
+		if (nombreDestino !== ''&& nombreDestinoI !== '') {
 			AxiosConexionConfig.post(url, destino)
 				.then((respuesta) => {
 					setCarga(!carga);
 					setNombreDestino('');
+					setNombreDestinoI('');
 				})
 				.catch((e) => {
 					console.log(e);
 				});
 		} else {
-			setEmptyNombreDestino('El nombre no puede ser vacio');
+			setEmptyNombreDestino('El nombre o nombre en inglés no puede ser vacio');
 		}
 	}
 
@@ -105,13 +108,21 @@ const Adicionar = (props) => {
 				<Row>
 					<Col className='text-center  mr-auto' lg='6' md='8'>
 						<InputGroup>
-							<InputText
+						Nombre:<InputText
 								value={nombreDestino}
 								className='borderradius30'
 								onChange={(e) => setNombreDestino(e.target.value)}
 							/>
 						</InputGroup>
-						<small className='p-error'>{emptyNombreDestino}</small>
+						<InputGroup>
+							Nombre en inglés:
+							<InputText
+								value={nombreDestinoI}
+								className='borderradius30'
+								onChange={(e) => setNombreDestinoI(e.target.value)}
+							/>
+						</InputGroup>
+						<small className='p-error p-col-12'>{emptyNombreDestino}</small>
 						<div className='send-button'>
 							<Button
 								block
@@ -130,13 +141,13 @@ const Adicionar = (props) => {
 		);
 	};
 
-	const actionBodyTemplate = (rowData) => {
+	const actionBodyTemplateDestino = (rowData) => {
 		return (
 			<React.Fragment>
 				<Button
 					icon='pi pi-pencil'
 					className='p-button-rounded p-button-success p-mr-2'
-					onClick={() => editpiso(rowData)}
+					onClick={() => editDestino(rowData)}
 				/>
 				<Button
 					icon='pi pi-trash'
@@ -147,8 +158,8 @@ const Adicionar = (props) => {
 		);
 	};
 
-	const editpiso = (piso) => {
-		setDestino({ ...piso });
+	const editDestino = (destino) => {
+		setDestino({ ...destino });
 		setDestinoDialog(true);
 	};
 
@@ -187,7 +198,7 @@ const Adicionar = (props) => {
 		});
 	}
 
-	const pisoDialogFooter = (
+	const destinoDialogFooter = (
 		<React.Fragment>
 			<Button
 				label='Cancel'
@@ -246,7 +257,7 @@ const Adicionar = (props) => {
 					<Toast ref={toast} />
 					<div className='p-d-flex'>
 						<div className='p-md-6 p-col-12 floatLeft'>
-							<div className={'p-md-6 p-col-12 floatLeft'}>{AdicionarDestno()}</div>
+							{AdicionarDestno()}
 						</div>
 						<DataTable
 							className='p-datatable-responsive-demo roboto p-col-12 p-md-6 floatLeft'
@@ -257,16 +268,16 @@ const Adicionar = (props) => {
 							dataKey='iddestino'
 						>
 							<Column field='nombre' header='Destinos'></Column>
-							<Column body={actionBodyTemplate}></Column>
+							<Column body={actionBodyTemplateDestino}></Column>
 						</DataTable>
 					</div>
 					<Dialog
 						visible={destinoDialog}
 						style={{ width: '450px' }}
-						header='Adicionar Piso'
+						header='Editar destino'
 						modal
 						className='p-fluid'
-						footer={pisoDialogFooter}
+						footer={destinoDialogFooter}
 						onHide={hideDialog}
 					>
 						<div className='p-field'>
@@ -283,6 +294,22 @@ const Adicionar = (props) => {
 							/>
 							{submitted && !destino?.nombre && (
 								<small className='p-error'>Name is required.</small>
+							)}
+						</div>
+						<div className='p-field'>
+							<label htmlFor='nombredestino'>Nombre</label>
+							<InputText
+								id='nombredestinoI'
+								value={destino?.nombreI}
+								onChange={(e) => onInputChange(e, 'nombreI')}
+								required
+								autoFocus
+								className={classNames({
+									'p-invalid': submitted && !destino.nombreI,
+								})}
+							/>
+							{submitted && !destino?.nombreI && (
+								<small className='p-error'>Name in English is required.</small>
 							)}
 						</div>
 					</Dialog>

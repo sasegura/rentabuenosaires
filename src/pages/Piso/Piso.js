@@ -21,7 +21,7 @@ import jacuzzi from '../../assets/img/icon/jacuzzi.svg';
 // import frigorifico from '../../assets/img/icon/frigorifico.svg';
 import gym from '../../assets/img/icon/gym.svg';
 // reactstrap components
-import { Row } from 'reactstrap';
+import { CardImg, Row } from 'reactstrap';
 
 import './Piso.scss';
 
@@ -39,6 +39,7 @@ import moment from 'moment';
 import IndexNavbar from 'components/Navbars/IndexNavbar';
 import Currency from 'components/Currency';
 import { setCurrentPiso } from 'redux/piso/piso.action';
+import noImagenDisponible from '../../assets/img/Imagen-no-disponible.png';
 
 const Piso = (props) => {
 	const { t } = props;
@@ -177,20 +178,26 @@ const Piso = (props) => {
 		try {
 			const respuesta = await AxiosConexionConfig.get(url2 + encodeURIComponent(valores));
 			imagenesTemp = respuesta.data;
-			setImagenes(imagenesTemp);
+			if(imagenesTemp[0].imagen!==null){
+				setImagenes(imagenesTemp);
+			}			
 			setLoadImg(true);
 		} catch (e) {
 			console.log(e);
 		}
 
 		// const url = '/imagen?filter[where][idpiso]=' + idPiso;
-		try {
+		if (imagenesTemp[0].imagen!==null){
+			try {
 			const imagen = await AxiosConexionConfig.get(url2 + encodeURIComponent(valores2));
 			imagen.data.forEach((im) => imagenesTemp.push(im));
 			setImagenes(imagenesTemp);
 			setReloadCarrusel(!reloadCarrusel);
 		} catch (e) {
 			console.log(e);
+		}}
+		else{
+			setImagenes([])
 		}
 	}
 	let datos = [];
@@ -416,13 +423,20 @@ const Piso = (props) => {
 	const carrusel = () => {
 		return (
 			<div className='carruselDiv' key={reloadCarrusel}>
+				{imagenes?.length>0?
 				<Carousel
 					value={imagenes}
 					containerClassName=' '
 					numVisible={1}
 					numScroll={1}
 					itemTemplate={productTemplate}
-				/>
+				/>:
+				<CardImg
+							className='cargando'
+							style={{height: "200px",width: "200px"}}
+							src={noImagenDisponible}
+							top
+						></CardImg>}
 			</div>
 		);
 	};

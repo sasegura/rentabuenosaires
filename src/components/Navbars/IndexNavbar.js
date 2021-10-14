@@ -241,13 +241,14 @@ const IndexNavbar = (props) => {
 								</DropdownToggle>
 								<DropdownMenu>
 									{destinos !== null ? (
-										destinos.map(({ iddestino, nombre }) => (
+										destinos.map(({ iddestino, nombre, nombreI }) => (
 											<DropdownItem
 												to={linkPisos}
 												onClick={() => {
 													setCollapseOpen(false);
 													props.setCurrentDestino({
 														nombre: nombre,
+														nombreI: nombreI,
 														id: iddestino,
 													});
 												}}
@@ -255,7 +256,7 @@ const IndexNavbar = (props) => {
 												tag={Link}
 											>
 												<i className='now-ui-icons mr-1'></i>
-												<p className='fontFamily'>{nombre}</p>
+												<p className='fontFamily'>{props.i18n.language === 'en'?nombreI:nombre}</p>
 											</DropdownItem>
 										))
 									) : (
