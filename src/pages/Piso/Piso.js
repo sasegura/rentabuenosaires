@@ -317,7 +317,7 @@ const Piso = (props) => {
 				const reservacion = {
 					idusuario: response.data.idusuario,
 					idpiso: data.idpiso,
-					fechaFin: moment(dateEnd).subtract(1, 'days'),
+					fechaFin: dateEnd,
 					fechaInicio: dateBegin,
 					aceptada: false,
 					cantPersonas: huesped,
@@ -328,7 +328,7 @@ const Piso = (props) => {
 				const fin = moment(dateEnd);
 				const dateB = new Date(dateBegin);
 				let contador = fin.diff(inicio, 'days') - 1;
-				dias.push(sumarDias(dateB, 0));
+				contador<1? dias.push(sumarDias(dateB, 0)):console.log(`Noches reservadas: ${contador}`);
 				while (contador > 0) {
 					let a = new Date(dateBegin);
 					dias.push(sumarDias(a, contador));
