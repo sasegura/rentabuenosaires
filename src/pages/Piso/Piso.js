@@ -40,6 +40,7 @@ import IndexNavbar from 'components/Navbars/IndexNavbar';
 import Currency from 'components/Currency';
 import { setCurrentPiso } from 'redux/piso/piso.action';
 import noImagenDisponible from '../../assets/img/Imagen-no-disponible.png';
+import getUsuario from './getUsuario';
 
 const Piso = (props) => {
 	const { t } = props;
@@ -139,8 +140,6 @@ const Piso = (props) => {
 	}, [dateBegin]);
 
 	useEffect(() => {
-		console.log(dateBegin)
-		console.log(dateEnd)
 		let begin = new Date(dateBegin).getTime();
 		let end = new Date(dateEnd).getTime();
 		if (BuscarEnIntervalo(dateBegin, dateEnd)) {
@@ -288,6 +287,7 @@ const Piso = (props) => {
 	React.useEffect(() => {
 		if (acept) {
 			createUsuario();
+			
 			setAcept(false);
 			setDateBegin(null);
 			setDateEnd(null);
@@ -295,65 +295,83 @@ const Piso = (props) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [acept]);
 
-	const getDate = (date) => {
-		const temp = new Date(date);
-		let respuesta = temp.getFullYear() + '/' + temp.getMonth() + '/' + temp.getDay();
-		return respuesta;
-	};
-
-	function createUsuario() {
+	async function createUsuario() {
 		setCalculo(false);
+		const usuarioFromMail=await getUsuario(valorDialog.email);
 		const values = {
 			nombre: valorDialog.name,
 			apellidos: '',
 			correo: valorDialog.email,
-			contrasenna: '',
+			contrasenna: generatePassword(10),
 			expiracion: new Date().toString(),
 			rol: 2,
 		};
-		AxiosConexionConfig.post(linkUsuario, JSON.stringify(values))
-			.then((response) => {
-				sendMail();
-				const reservacion = {
-					idusuario: response.data.idusuario,
-					idpiso: data.idpiso,
-					fechaFin: dateEnd,
-					fechaInicio: dateBegin,
-					aceptada: false,
-					cantPersonas: huesped,
-					precio: totalCalculo,
-				};
-				let dias = [];
-				const inicio = moment(dateBegin);
-				const fin = moment(dateEnd);
-				const dateB = new Date(dateBegin);
-				let contador = fin.diff(inicio, 'days') - 1;
-				contador<1? dias.push(sumarDias(dateB, 0)):console.log(`Noches reservadas: ${contador}`);
-				while (contador > 0) {
-					let a = new Date(dateBegin);
-					dias.push(sumarDias(a, contador));
-					contador--;
-				}
-				const diasReservados = dias.toString();
-				AxiosConexionConfig.patch(
-					`${apiPiso}/${data.idpiso}`,
-					JSON.stringify({ diasReservados: diasReservados + ',' + data.diasReservados })
-				).then(() => {
-					getData();
+		if(usuarioFromMail.length===0){			
+			AxiosConexionConfig.post(linkUsuario, JSON.stringify(values))
+				.then((response) => {				
+					const diasReservados=cantDias()
+					createReservation(response.data.idusuario,diasReservados)
+				})
+				.catch((e) => {
+					toast.current.show({
+						severity: 'error',
+						summary: 'Error Usuario',
+						detail: e,
+						life: 3000,
+					});
+					console.log(e);
 				});
-				AxiosConexionConfig.post(apiReservaciones, JSON.stringify(reservacion));
-			})
-			.catch((e) => {
-				toast.current.show({
-					severity: 'error',
-					summary: 'Error Usuario',
-					detail: e,
-					life: 3000,
-				});
-				console.log(e);
-			});
+		}else{			
+			const diasReservados=cantDias()
+			createReservation(usuarioFromMail[0].idusuario,diasReservados)
+		}		
 	}
 
+	const cantDias=()=>{
+		let dias = [];
+		const inicio = moment(dateBegin);
+		const fin = moment(dateEnd);
+		const dateB = new Date(dateBegin);
+		let contador = fin.diff(inicio, 'days') - 1;
+		if(contador<1) dias.push(sumarDias(dateB, 0));
+		while (contador > 0) {
+			let a = new Date(dateBegin);
+			dias.push(sumarDias(a, contador));
+			contador--;
+		}
+		const diasReservados = dias.toString();
+		return diasReservados;
+	}
+
+	const createReservation=(idUsuario,diasReservados)=>{
+		const reservacion = {
+			idusuario: idUsuario,
+			idpiso: data.idpiso,
+			fechaFin: dateEnd,
+			fechaInicio: dateBegin,
+			aceptada: false,
+			cantPersonas: huesped,
+			precio: totalCalculo,
+		};		
+		AxiosConexionConfig.post(apiReservaciones, JSON.stringify(reservacion))
+		.then(() => {
+			AxiosConexionConfig.patch(`${apiPiso}/${data.idpiso}`,
+				JSON.stringify({ diasReservados: diasReservados + ',' + data.diasReservados }))
+				.then(() => {
+				getData();
+				sendMail();
+			});
+		});
+	}
+
+	const generatePassword=(length)=>{
+		let pass='';
+		const characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789*/&%"
+		for (let i=0; i < length; i++){
+			pass += characters.charAt(Math.floor(Math.random()*characters.length));			
+		}
+		return pass;
+	}
 	function sumarDias(fecha, dias) {
 		fecha.setDate(fecha.getDate() + dias);
 		return fecha;
@@ -361,8 +379,6 @@ const Piso = (props) => {
 
 	async function sendMail() {
 		const url = '/sendMailPreReserva';
-		console.log(dateBegin)
-		console.log(dateEnd)
 		const values = {
 			correoCliente: valorDialog.email,
 			correoAdmin: 'administrador@e-homeselect.com',

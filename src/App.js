@@ -41,6 +41,7 @@ import Propietarios from 'pages/Propietarios/Propietarios.component';
 import Nosotros from 'pages/Nosotros/Nosotros.component';
 import Reservaciones from 'pages/Reservaciones/Reservaciones';
 import { linkReservaciones } from 'configuracion/constantes';
+import Tips from 'pages/Tips/Tips';
 
 function App() {
 	return (
@@ -62,6 +63,11 @@ function App() {
 						exact
 						path={linkReservaciones}
 						render={(props) => <Reservaciones {...props} />}
+					/>
+					<Route
+						exact
+						path={'/tips'}
+						render={(props) => <Tips {...props} />}
 					/>
 					<Route
 						exact
