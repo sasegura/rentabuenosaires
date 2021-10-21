@@ -194,7 +194,7 @@ const Reservaciones = (props) => {
 			correoCliente: usuario.correo,
 			correoAdmin: 'administrador@e-homeselect.com',
 			fechaInicio: getDate(datos.fechaInicio),
-			fechaFin: moment(datos.fechaFin).add(2, 'days').format('DD/MM/YYYY'),
+			fechaFin: moment(datos.fechaFin).add(0, 'days').format('DD/MM/YYYY'),
 			cantidadPersonas: datos.cantPersonas,
 			precio: datos.precio,
 			pisoNombre: piso.nombre,
