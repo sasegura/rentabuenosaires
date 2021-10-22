@@ -30,6 +30,8 @@ const Tips = (props) => {
 	const [selectedPiso, setSelectedPiso] = useState(null);
 	const [nombre, setNombre] = useState('');
 	const [descripcion, setDescripcion] = useState('');
+	const [nombreI, setNombreI] = useState('');
+	const [descripcionI, setDescripcionI] = useState('');
 	const [tipDialog, settipDialog] = useState(false);
 	const [newT, setNewT] = useState(false);
 
@@ -91,6 +93,8 @@ const Tips = (props) => {
 						setTip(rowData);
 						setNombre(rowData.nombre);
 						setDescripcion(rowData.descripcion);
+						setNombreI(rowData.nombreI);
+						setDescripcionI(rowData.descripcionI);
 						settipDialog(rowData);
 					}}
 				/>
@@ -151,9 +155,23 @@ const Tips = (props) => {
 					{!nombre && <small className='p-error'>Name is required.</small>}
 				</div>
 				<div className='p-field'>
-					<label htmlFor='nombredestino'>Descripcion</label>
+					<label htmlFor='nombreTip'>Name</label>
 					<InputText
-						id='nombredestinoI'
+						id='nombreTip'
+						value={nombreI}
+						onChange={(e) => setNombreI(e.target.value)}
+						required
+						autoFocus
+						className={classNames({
+							'p-invalid': !nombreI,
+						})}
+					/>
+					{!nombreI && <small className='p-error'>Name in english is required.</small>}
+				</div>
+				<div className='p-field'>
+					<label htmlFor='descripcion'>Descripción</label>
+					<InputText
+						id='descripcion'
 						value={descripcion}
 						onChange={(e) => {
 							setDescripcion(e.target.value);
@@ -165,6 +183,23 @@ const Tips = (props) => {
 					/>
 					{!descripcion && <small className='p-error'>Descripcion is required.</small>}
 				</div>
+				<div className='p-field'>
+					<label htmlFor='descripcionI'>Description</label>
+					<InputText
+						id='descripcionI'
+						value={descripcionI}
+						onChange={(e) => {
+							setDescripcionI(e.target.value);
+						}}
+						required
+						className={classNames({
+							'p-invalid': !descripcionI,
+						})}
+					/>
+					{!descripcionI && (
+						<small className='p-error'>Descripcion in english is required.</small>
+					)}
+				</div>
 			</Dialog>
 		);
 	};
@@ -174,6 +209,8 @@ const Tips = (props) => {
 		const valores = {
 			nombre,
 			descripcion,
+			nombreI,
+			descripcionI,
 		};
 		try {
 			if (!newT) {
@@ -203,6 +240,8 @@ const Tips = (props) => {
 					setNewT(true);
 					setNombre('');
 					setDescripcion('');
+					setNombreI('');
+					setDescripcionI('');
 					settipDialog(true);
 				}}
 			/>

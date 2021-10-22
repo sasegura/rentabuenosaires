@@ -220,6 +220,9 @@
 		" destiny?": " destiny?",
 		"España": "Spain",
 
+		"----tips": "tips",
+		"Información relevante": "Relevant information",
+
 		"___________________________validations": "Validations",
 		"Moneda es requerido.": "Currency is required.",
 		"Nombre es requerido.": "Name is required.",

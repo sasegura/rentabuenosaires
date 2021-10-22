@@ -220,6 +220,9 @@
 		" destiny?": " destino?",
 		"España": "España",
 
+		"----tips": "tips",
+		"Información relevante": "Información relevante",
+
 		"__________Validaciones": "Validaciones",
 		"Moneda es requerido.": "Moneda es requerido.",
 		"Nombre es requerido.": "Nombre es requerido.",

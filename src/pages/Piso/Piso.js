@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { withTranslation } from 'react-i18next';
+import classNames from 'classnames';
 import { Carousel } from 'primereact/carousel';
 import { Calendar } from 'primereact/calendar';
 import { addLocale } from 'primereact/api';
@@ -41,6 +42,7 @@ import Currency from 'components/Currency';
 import { setCurrentPiso } from 'redux/piso/piso.action';
 import noImagenDisponible from '../../assets/img/Imagen-no-disponible.png';
 import getUsuario from './getUsuario';
+import getTips from 'pages/Reservaciones/getTips';
 
 const Piso = (props) => {
 	const { t } = props;
@@ -69,6 +71,7 @@ const Piso = (props) => {
 	const [valorDialog, setValorDialog] = useState('');
 	const [acept, setAcept] = useState(false);
 	const [piso,setPiso]=useState(null)
+	const [tips, setTips]=useState(null)
 
 	let today = new Date();
 	addLocale('es', {
@@ -109,9 +112,11 @@ const Piso = (props) => {
 	});
 	props.setCurrentNavBarColor(false);
 
-	React.useEffect(() => {
+	
+	React.useEffect(async () => {
 		//setdisabledDays([2])
 		//setddisabledDates([today])
+		if(props.currentUsuario!=='' && idPiso) setTips(await getTips(idPiso))
 		document.body.classList.add('landing-page');
 		document.body.classList.add('sidebar-collapse');
 		document.documentElement.classList.remove('nav-open');
@@ -610,7 +615,6 @@ const Piso = (props) => {
 		);
 	};
 
-	const [readMore, setReadMore] = useState(false);
 	const DatosPiso = () => {
 		return (
 			<div className='p-col-12 flex'>
@@ -696,6 +700,30 @@ const Piso = (props) => {
 			<div className='p-col-12'>-</div>
 		);
 	};
+
+	const showTips=()=>{		
+		if(props.currentUsuario!=='' && tips!==null){
+			const res=tips.map((tip, index)=>(
+				<div className='p-d-flex p-col-12' key={index}>
+					<div className='p-col-3 p-text-bold' >
+						{props.i18n.language === 'es'?tip.nombre :tip.nombreI}:
+					</div>
+					<div className='p-col-9'>
+						{props.i18n.language === 'es'?tip.descripcion :tip.descripcionI}
+					</div>
+				</div>
+			))
+			return (
+				<div className='p-col-12 p-md-8'>
+					<div>
+						<b>{t('Información relevante')}:</b>
+					</div>
+					<div>
+						{res}
+					</div>
+				</div>)
+		}
+	}
 	return (
 		<>
 			<IndexNavbar />
@@ -733,13 +761,34 @@ const Piso = (props) => {
 					</div>
 					<div className=' p-col-12 '>
 						<div className=' p-col-12 p-md-12 p-d-flex p-flex-column p-flex-md-row p-p-0 floatLeft fontFamily'>
-							<div className=' p-col-12 p-md-8 p-p-0 floatLeft'>{DatosPiso()}</div>
-							<div className='p-col-12 p-md-3 p-p-0 '>
-								<Maps piso={data} />
-							</div>
+							<div className=' p-col-12 p-p-0 floatLeft'>{DatosPiso()}</div>
+							
 						</div>
 					</div>
-					{true ? <div className='p-col-12 '>{acordion()}</div> : null}
+					<div className='p-col-12 p-d-flex p-flex-column p-flex-md-row'>
+						<div className='p-col-12 p-md-1'></div>
+						<div className='p-col-12 p-md-10'>
+							{acordion()}
+						</div>
+					</div>
+					<div className=' p-col-12 p-d-flex p-flex-column p-flex-md-row'>
+					<div className='p-col-12 p-md-1'></div>
+						<div className=' p-col-12 p-md-10 p-d-flex p-flex-column p-flex-md-row p-p-0  fontFamily'>
+							{tips!==null && tips?.length!==0 ? 
+							(
+								<>
+									{showTips()}
+									<div className={`p-col-12 p-md-4 p-p-0`}>
+										<Maps piso={data} />
+									</div>
+								</>
+							)
+							:
+							<div className={`p-col-12  p-p-0`}>
+								<Maps piso={data} />
+							</div>}
+						</div>
+					</div>
 				</div>
 			) : (
 				<div className='loaddingCenter'>
@@ -752,6 +801,7 @@ const Piso = (props) => {
 
 const mapStateToProps = (state) => ({
 	currentPiso: state.piso.currentPiso,
+	currentUsuario: state.usuario.currentUsuario
 });
 
 const mapDispatchToProps = (dispatch) => ({
