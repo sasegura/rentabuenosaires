@@ -41,6 +41,7 @@ import {
 	linkLogout,
 } from 'configuracion/constantes';
 import { linkReservaciones } from 'configuracion/constantes';
+import { linkTips } from 'configuracion/constantes';
 
 const IndexNavbar = (props) => {
 	const { t } = props;
@@ -224,6 +225,14 @@ const IndexNavbar = (props) => {
 										>
 											<i className='now-ui-icons mr-1'></i>
 											<p className='fontFamily'>{t('Reservaciones')}</p>
+										</DropdownItem>
+										<DropdownItem
+											to={linkTips}
+											tag={Link}
+											onClick={() => setCollapseOpen(false)}
+										>
+											<i className='now-ui-icons mr-1'></i>
+											<p className='fontFamily'>{t('Tips')}</p>
 										</DropdownItem>
 									</DropdownMenu>
 								</UncontrolledDropdown>

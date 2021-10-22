@@ -9,6 +9,7 @@ export const linkNosotros = '/nosotros';
 export const linkPropietarios = '/propietarios';
 export const linkAdicionar = '/adicionar';
 export const linkReservaciones = '/reservaciones';
+export const linkTips = '/tips';
 export const linkLogin = '/login';
 export const linkUsuario = '/usuarios';
 export const apiUsuario = '/usuarios';

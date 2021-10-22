@@ -259,7 +259,7 @@ const Tips = (props) => {
 					options={pisos}
 					onChange={onPisosChange}
 					optionLabel='nombre'
-					placeholder='Select a City'
+					placeholder='Select an apartment'
 					className='p-col-8'
 				/>
 				{selectedPiso && (
@@ -272,10 +272,10 @@ const Tips = (props) => {
 						rows={10}
 						rowsPerPageOptions={[10, 20, 50]}
 					>
-						<Column field='idtips' header='idtips'></Column>
 						<Column field='nombre' header='Nombre'></Column>
+						<Column field='nombreI' header='Name'></Column>
 						<Column field='descripcion' header='Descripción'></Column>
-						<Column field='idpiso' header='idpiso'></Column>
+						<Column field='descripcionI' header='Description'></Column>
 
 						<Column header={headerColumnTemplate} body={actionBodyTemplate}></Column>
 					</DataTable>
