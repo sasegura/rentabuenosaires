@@ -6,7 +6,7 @@ import { Calendar } from 'primereact/calendar';
 import { addLocale } from 'primereact/api';
 import { Button } from 'primereact/button';
 import { InputNumber } from 'primereact/inputnumber';
-import { Accordion, AccordionTab } from 'primereact/accordion';
+
 import { Toast } from 'primereact/toast';
 //redux
 import { connect } from 'react-redux';
@@ -39,10 +39,10 @@ import { apiPiso } from 'configuracion/constantes';
 import moment from 'moment';
 import IndexNavbar from 'components/Navbars/IndexNavbar';
 import Currency from 'components/Currency';
-import { setCurrentPiso } from 'redux/piso/piso.action';
 import noImagenDisponible from '../../assets/img/Imagen-no-disponible.png';
 import getUsuario from './getUsuario';
 import getTips from 'pages/Reservaciones/getTips';
+import Acordion from './Acordion';
 
 const Piso = (props) => {
 	const { t } = props;
@@ -65,7 +65,7 @@ const Piso = (props) => {
 	const [calculo, setCalculo] = useState(false);
 	let amenitiesGenerales = amenitiesGeneralesConst;
 	let amenitiesGeneralesText = amenitiesGeneralesTextConst;
-	const [activeIndex, setactiveIndex] = useState([]);
+	
 	const [reloadCarrusel, setReloadCarrusel] = useState(false);
 	const [visibleDialog, setVisibleDialog] = useState(false);
 	const [valorDialog, setValorDialog] = useState('');
@@ -204,7 +204,9 @@ const Piso = (props) => {
 			setImagenes([])
 		}
 	}
+
 	let datos = [];
+
 	const amenitieForm = (imagen, text) => {
 		amenitiesGeneralesText.forEach((pos, index) => {
 			if (pos === text) {
@@ -219,6 +221,7 @@ const Piso = (props) => {
 			</div>
 		);
 	};
+
 	const amenitiesList = (data) => {
 		let a = [];
 		if (data.wifi) {
@@ -250,6 +253,7 @@ const Piso = (props) => {
 		}
 		setAmenities(a);
 	};
+
 	async function getData() {
 		const url = '/pisos/' + idPiso;
 		try {
@@ -273,6 +277,7 @@ const Piso = (props) => {
 			console.log(e);
 		}
 	}
+
 	async function getDestino(idDestino) {
 		const url = '/destinos/' + idDestino;
 		try {
@@ -377,6 +382,7 @@ const Piso = (props) => {
 		}
 		return pass;
 	}
+	
 	function sumarDias(fecha, dias) {
 		fecha.setDate(fecha.getDate() + dias);
 		return fecha;
@@ -497,6 +503,7 @@ const Piso = (props) => {
 		);
 	};
 	const diffDates = (beginDate, endDate) => moment(endDate).diff(moment(beginDate), 'days');
+	
 	const TarjetPiso = () => {
 		return (
 			<div className='fontFamily'>
@@ -646,60 +653,7 @@ const Piso = (props) => {
 			</div>
 		);
 	};
-	const fila = (datosFila, texto) => {
-		if (datosFila) {
-			return (
-				<AccordionTab header={t(texto)}>
-					<Row>
-						{datosFila.split(',').map((dato, index) => {
-							return dato ? (
-								<div key={index} className='p-col-12 p-md-3 p-sm-6'>
-									{t(dato.trim())}
-								</div>
-							) : (
-								''
-							);
-						})}
-					</Row>
-				</AccordionTab>
-			);
-		} else {
-			return null;
-		}
-	};
-
-	const acordion = () => {
-		return data.banno ||
-			data.dormitorio ||
-			data.entretenimiento ||
-			data.paraFamilias ||
-			data.calefaccionRefrigeracion ||
-			data.seguridadHogar ||
-			data.internetOficina ||
-			data.cocinaComedor ||
-			data.estacionamientoInstalaciones ||
-			data.serviciosAdicionales ? (
-			<Accordion
-				multiple
-				activeIndex={activeIndex}
-				headerClassName='seccion'
-				onTabChange={(e) => setactiveIndex(e.index)}
-			>
-				{fila(data.banno, 'Baño')}
-				{fila(data.dormitorio, 'Dormitorio')}
-				{fila(data.entretenimiento, 'Entretenimiento')}
-				{fila(data.paraFamilias, 'Para familias')}
-				{fila(data.calefaccionRefrigeracion, 'Calefacción y refrigeración')}
-				{fila(data.seguridadHogar, 'Seguridad en el hogar')}
-				{fila(data.internetOficina, 'Internet y oficina')}
-				{fila(data.cocinaComedor, 'Cocina y comedor')}
-				{fila(data.estacionamientoInstalaciones, 'Estacionamiento e instalaciones')}
-				{fila(data.serviciosAdicionales, 'Servicios adicionales con recargo')}
-			</Accordion>
-		) : (
-			<div className='p-col-12'>-</div>
-		);
-	};
+	
 
 	const showTips=()=>{		
 		if(props.currentUsuario!=='' && tips!==null){
@@ -768,7 +722,7 @@ const Piso = (props) => {
 					<div className='p-col-12 p-d-flex p-flex-column p-flex-md-row'>
 						<div className='p-col-12 p-md-1'></div>
 						<div className='p-col-12 p-md-10'>
-							{acordion()}
+							<Acordion data={data}/>
 						</div>
 					</div>
 					<div className=' p-col-12 p-d-flex p-flex-column p-flex-md-row'>
