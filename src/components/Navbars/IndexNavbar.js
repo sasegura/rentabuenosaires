@@ -73,7 +73,6 @@ const IndexNavbar = (props) => {
 			});
 	}
 	React.useEffect(() => {
-		console.log(props.currentNavBarColor);
 		const updateNavbarColor = () => {
 			if (document.documentElement.scrollTop > 3 || document.body.scrollTop > 3) {
 				setNavbarColor('');
@@ -123,18 +122,9 @@ const IndexNavbar = (props) => {
 		if (props.currentUsuario !== '') {
 			return (
 				<NavItem>
-					<Link to={linkLogout}>
-						<NavLink
-							className={navbarTextColor}
-							target='_self'
-							onClick={() => {
-								document.documentElement.classList.toggle('nav-open');
-								setCollapseOpen(!collapseOpen);
-							}}
-						>
-							{/*<p>{t("Cerrar Sesión")}</p>*/}
-							{<p className='fontFamily'>Log Out</p>}
-						</NavLink>
+					<Link to={linkLogout}>						
+						{/*<p>{t("Cerrar Sesión")}</p>*/}
+						{<p className={navbarTextColor + ' fontFamily nav-link'}>Log Out</p>}						
 					</Link>
 				</NavItem>
 			);
@@ -275,38 +265,20 @@ const IndexNavbar = (props) => {
 							</UncontrolledDropdown>
 
 							<NavItem>
-								<Link to={linkNosotros}>
-									<NavLink
-										target='_self'
-										className={navbarTextColor}
-										onClick={() => setCollapseOpen(false)}
-									>
-										<p className='fontFamily'>{t('Nosotros')}</p>
-									</NavLink>
+								<Link to={linkNosotros}>									
+									<p className={navbarTextColor + ' fontFamily nav-link'}>{t('Nosotros')}</p>
 								</Link>
 							</NavItem>
 
 							<NavItem>
-								<Link to={linkPropietarios}>
-									<NavLink
-										target='_self'
-										className={navbarTextColor}
-										onClick={() => setCollapseOpen(false)}
-									>
-										<p className='fontFamily'>{t('Propietarios')}</p>
-									</NavLink>
+								<Link to={linkPropietarios}>									
+									<p className={navbarTextColor + ' fontFamily nav-link'}>{t('Propietarios')}</p>									
 								</Link>
 							</NavItem>
 
 							<NavItem>
 								<Link to={linkMensaje}>
-									<NavLink
-										target='_self'
-										className={navbarTextColor}
-										onClick={() => setCollapseOpen(false)}
-									>
-										<p className='fontFamily'>{t('Contactar')}</p>
-									</NavLink>
+									<p className={navbarTextColor + ' fontFamily nav-link'}>{t('Contactar')}</p>
 								</Link>
 							</NavItem>
 
