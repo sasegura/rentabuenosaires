@@ -6,9 +6,6 @@ import { setCurrentNavBarColor } from 'redux/navBarColor/navBarColor.action';
 
 import { withTranslation } from 'react-i18next';
 
-//reactstrap
-import { Container } from 'reactstrap';
-
 //CSS
 import './Nosotros.style.scss';
 import Equipo from 'components/Equipo';

@@ -82,9 +82,6 @@ function LoginPage(props) {
 					respuesta.data[0].expiracion.replace(/ /g, 'T').split('+')[0]
 				);
 				const hoy = new Date();
-				console.log(respuesta.data[0].expiracion.replace(/ /g, 'T'));
-				console.log(fecha);
-				console.log(hoy);
 				if (fecha.getTime() > hoy.getTime()) {
 					setloginmensaje('');
 					props.setCurrentUsuario(respuesta.data[0]);
@@ -192,28 +189,7 @@ function LoginPage(props) {
 										>
 											{t('Entrar')}
 										</Button>
-										{/*<div className="pull-left">
-                      <h6>
-                        <a
-                          className="link"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          Create Account
-                        </a>
-                      </h6>
-                    </div>
-                    <div className="pull-right">
-                      <h6>
-                        <a
-                          className="link"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          Need Help?
-                        </a>
-                      </h6>
-                    </div>*/}
+										
 									</CardFooter>
 								</Form>
 							</Card>

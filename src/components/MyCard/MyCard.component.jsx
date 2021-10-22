@@ -39,7 +39,6 @@ function MyCard(props, { match, destino, link, history, cantHab, nombre }) {
 
 		try {
 			const imagen = await AxiosConexionConfig.get(url);
-			console.log(imagen);
 			if (imagen.data[0].imagen === null) {
 				setNoImagen(true);
 			} else {

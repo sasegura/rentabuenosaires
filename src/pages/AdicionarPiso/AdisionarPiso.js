@@ -1,10 +1,7 @@
-// import MyCard from "components/MyCard/MyCard.component";
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { setCurrentNavBarColor } from 'redux/navBarColor/navBarColor.action';
 import './css/pisoPreview.scss';
-// import { DataTable } from 'primereact/datatable';
-// import { Column } from 'primereact/column';
 import { InputSwitch } from 'primereact/inputswitch';
 import { Button } from 'primereact/button';
 

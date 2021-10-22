@@ -27,8 +27,6 @@ const AdicionarForm = (props) => {
 	const { piso } = props;
 	const [images, setImages] = useState([]);
 	const [cargandoImagenes, setCargandoImages] = useState(false);
-	const amenitiesGenerales = amenitiesGeneralesConst;
-	const amenitiesGeneralesText = amenitiesGeneralesTextConst;
 	const { t } = props;
 	const [serviciosAdicionales, setserviciosAdicionales] = useState([]);
 	const [selectedserviciosAdicionales, setSelectedserviciosAdicionales] = useState(null);
@@ -72,7 +70,6 @@ const AdicionarForm = (props) => {
 	const [selectedbanno, setSelectedbanno] = useState(null);
 	const [filteredbanno, setFilteredbanno] = useState(null);
 
-	const [currency, setCurrency] = useState('USD');
 	const currencies = [
 		{ label: 'Us Dolar', value: 'USD' },
 		{ label: 'Peso Argentino', value: 'PA' },
@@ -161,7 +158,6 @@ const AdicionarForm = (props) => {
 	}, []);
 
 	async function SavePiso(pisoData) {
-		console.log(pisoData);
 		pisoData.cocinaComedor = selectedCocinaComedor
 			? selectedCocinaComedor.map((v) => v.name).join(',')
 			: '';
@@ -181,7 +177,6 @@ const AdicionarForm = (props) => {
 		pisoData.seguridadHogar = selectedseguridadHogar
 			? selectedseguridadHogar.map((v) => v.name).join(',')
 			: '';
-		//pisoData.cocinaComedor = cocinaComedor.join();
 		pisoData.internetOficina = selectedinternetOficina
 			? selectedinternetOficina.map((v) => v.name).join(',')
 			: '';
@@ -280,24 +275,12 @@ const AdicionarForm = (props) => {
 
 		// Tab3
 		aireacondicionado: piso?.aireacondicionado || false,
-		// tendederoRopa: piso?.tendederoRopa || false,
-		// patioBalcon: piso?.patioBalcon || false,
 		gimnasio: piso?.gimnasio || false,
-		// productosLimpieza: piso?.productosLimpieza || false,
-		// sauna: piso?.sauna || false,
-		// plancha: piso?.plancha || false,
 		lavasecadora: piso?.lavasecadora || false,
 		lavadora: piso?.lavadora || false,
 		tv: piso?.tv || false,
-		// piscina: piso?.piscina || false,
-		// cocina: piso?.cocina || false,
 		jacuzzi: piso?.jacuzzi || false,
-		// secadorPelo: piso?.secadorPelo || false,
-		// utensiliosCocina: piso?.utensiliosCocina || false,
-		// zonaTrabajar: piso?.zonaTrabajar || false,
-		// platosCubiertos: piso?.platosCubiertos || false,
 		wifi: piso?.wifi || false,
-		// tvcable: piso?.tvcable || false,
 		calefaccion: piso?.calefaccion || false,
 
 		// Tab4
@@ -366,9 +349,6 @@ const AdicionarForm = (props) => {
 		if (!data.precio || data.precio === '') {
 			errors.precio = t('precio es requerido.');
 		}
-		/*else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
-            errors.email = 'Invalid email address. E.g. example@email.com';
-        }*/
 		return errors;
 	};
 
@@ -701,34 +681,6 @@ const AdicionarForm = (props) => {
 		</div>
 	);
 
-	const elementoBoolean = (text, elemento, valor) => {
-		return (
-			<div className='floatLeft p-field p-col-12 p-md-3'>
-				<label className='p-mb-3'>{text}</label>
-				<div className='p-formgrid p-grid'>
-					<div className='p-field-radiobutton p-col-6'>
-						<RadioButton
-							inputId={elemento + '1'}
-							name={elemento}
-							value={true}
-							checked={valor === true}
-						/>
-						<label htmlFor={elemento + '1'}>Si</label>
-					</div>
-					<div className='p-field-radiobutton p-col-6'>
-						<RadioButton
-							inputId={elemento + '2'}
-							name={elemento}
-							value={false}
-							checked={valor === false}
-						/>
-						<label htmlFor={elemento + '2'}>No</label>
-					</div>
-				</div>
-			</div>
-		);
-	};
-
 	const elementoCheck = (name, text) => {
 		return (
 			<div className='p-col-12 p-md-3 floatLeft'>
@@ -760,7 +712,6 @@ const AdicionarForm = (props) => {
 	};
 	return (
 		<>
-			{console.log(piso)}
 			{!savingPisos ? (
 				<Form
 					onSubmit={onSubmit}
@@ -888,24 +839,6 @@ const AdicionarForm = (props) => {
 								{elementoCheck('aireacondicionado', 'Aire Acondicionado')}
 							</div>
 
-							{/*<div className='p-col-12 p-d-flex p-flex-column p-flex-md-row '>
-								{elementoCheck('piscina', 'Piscina')}
-								{elementoCheck('cocina', 'Cocina')}
-								{elementoCheck('secadorPelo', 'Secador de Pelo')}
-							</div>
-							<div className='p-col-12 p-d-flex p-flex-column p-flex-md-row '>
-								{elementoCheck('utensiliosCocina', 'Utensilios de Cocina')}
-								{elementoCheck('zonaTrabajar', 'Zona para Trabajar')}
-								{elementoCheck('platosCubiertos', 'Platos y Cubiertos')}
-								{elementoCheck('plancha', 'Plancha')}
-							</div>
-							<div className='p-col-12 p-d-flex p-flex-column p-flex-md-row '>
-								{elementoCheck('productosLimpieza', 'Productos de Limpieza')}
-								{elementoCheck('sauna', 'sauna')}
-								{elementoCheck('tendederoRopa', 'Tendedero de Ropa')}
-								{elementoCheck('patioBalcon', 'Patio Balcon')}
-							</div>
-								*/}
 							<div className='p-d-flex p-flex-column p-flex-md-row'>
 								{autocompleteElement(
 									'Servicios Adicionales',

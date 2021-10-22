@@ -92,11 +92,7 @@ const Mensaje = (props) => {
 	}
 
 	const onSubmit = (data, form) => {
-		console.log(data);
 		sendMail(data);
-		/*setOpen(false)
-        setValor(data)
-        acept(true)*/
 		form.restart();
 	};
 

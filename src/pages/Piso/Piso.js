@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { withTranslation } from 'react-i18next';
-import classNames from 'classnames';
 import { Carousel } from 'primereact/carousel';
 import { Calendar } from 'primereact/calendar';
 import { addLocale } from 'primereact/api';
@@ -18,10 +17,7 @@ import imagencalefaccion from '../../assets/img/heating.svg';
 import imagenWifi from '../../assets/img/wifi.svg';
 import washingMachine from '../../assets/img/icon/washing-machine.svg';
 import jacuzzi from '../../assets/img/icon/jacuzzi.svg';
-// import elevator from '../../assets/img/icon/elevator.svg';
-// import frigorifico from '../../assets/img/icon/frigorifico.svg';
 import gym from '../../assets/img/icon/gym.svg';
-// reactstrap components
 import { CardImg, Row } from 'reactstrap';
 
 import './Piso.scss';
@@ -60,7 +56,6 @@ const Piso = (props) => {
 	const [disabledDatesSalida, setddisabledDatesSalida] = useState([]);
 	const [disabledEndDate, setdisabledEndDate] = useState(true);
 	const [errorfecha, seterrorfecha] = useState('');
-	const [minDate, setminDate] = useState(null);
 	const [amenities, setAmenities] = useState(null);
 	const [huesped, sethuesped] = useState(1);
 	const [totalCalculo, settotalCalculo] = useState(0);
@@ -116,8 +111,6 @@ const Piso = (props) => {
 
 	
 	React.useEffect(async () => {
-		//setdisabledDays([2])
-		//setddisabledDates([today])
 		if(props.currentUsuario!=='' && idPiso) setTips(await getTips(idPiso))
 		document.body.classList.add('landing-page');
 		document.body.classList.add('sidebar-collapse');
@@ -142,7 +135,6 @@ const Piso = (props) => {
 			setdisabledEndDate(false);
 			let date = new Date(dateBegin);
 			date.setDate(date.getDate() + 1);
-			setminDate(date);
 		}
 	}, [dateBegin]);
 
@@ -192,7 +184,6 @@ const Piso = (props) => {
 			console.log(e);
 		}
 
-		// const url = '/imagen?filter[where][idpiso]=' + idPiso;
 		if (imagenesTemp[0].imagen!==null){
 			try {
 			const imagen = await AxiosConexionConfig.get(url2 + encodeURIComponent(valores2));
@@ -260,7 +251,6 @@ const Piso = (props) => {
 		const url = '/pisos/' + idPiso;
 		try {
 			const piso = await AxiosConexionConfig.get(url);
-			// console.log(piso.data)
 			setData(piso.data);
 			setPiso(piso)
 			amenitiesList(piso.data);

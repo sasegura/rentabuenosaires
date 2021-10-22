@@ -48,9 +48,7 @@ const PisoPreview = (props) => {
 		}
 	}
 
-	//console.log(props.currentDestino)
 	React.useEffect(() => {
-		//console.log(props.currentDestino)
 		getPiso();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [props.currentDestino]);
@@ -76,7 +74,6 @@ const PisoPreview = (props) => {
 		return (
 			<div className='pisoPrev'>
 				<h1 className='h1 fontFamily'>{props.i18n.language === 'es'?props.currentDestino.nombre.toUpperCase():props.currentDestino.nombreI.toUpperCase()}</h1>
-				{/*<img src={"data:image/png;base64," + img} />*/}
 				<div className='p-col-12'>
 					<div className='collection-preview'>
 						{!loadding ? (

@@ -13,13 +13,11 @@ import { Toast } from 'primereact/toast';
 
 import { withTranslation } from 'react-i18next';
 import AxiosConexionConfig from 'conexion/AxiosConexionConfig';
-import moment from 'moment';
-import { apiPiso, apiReservaciones } from 'configuracion/constantes';
+import { apiPiso } from 'configuracion/constantes';
 import IndexNavbar from 'components/Navbars/IndexNavbar';
 import getTips from 'pages/Reservaciones/getTips';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
-import { SettingTwoTone } from '@ant-design/icons';
 
 const Tips = (props) => {
 	const toast = useRef(null);
@@ -73,7 +71,6 @@ const Tips = (props) => {
 		AxiosConexionConfig.delete(`/tips/${data.idtips}`)
 			.then(() => {
 				setreload(!reload);
-				//getReservaciones();
 			})
 			.catch((e) => {
 				console.log(e);

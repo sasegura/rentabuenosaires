@@ -21,7 +21,6 @@ import {
 	apisendMailCitaCancelada,
 } from 'configuracion/constantes';
 import IndexNavbar from 'components/Navbars/IndexNavbar';
-import { arrayExpression } from '@babel/types';
 
 const Reservaciones = (props) => {
 	const toast = useRef(null);
@@ -116,10 +115,6 @@ const Reservaciones = (props) => {
 			) {
 				reservedDays.push(day);
 			}
-			/*const te = dias.filter(
-				(fi) => moment(pi).getTime() >= moment(fi).getTime() && 
-			);
-			te.length === 0 ? diasReservados.push(day) : console.log(te);*/
 		});
 		const diasReservados = reservedDays.length > 0 ? reservedDays.toString() : '';
 		AxiosConexionConfig.patch(`${apiPiso}/${idpiso}`, JSON.stringify({ diasReservados })).then(

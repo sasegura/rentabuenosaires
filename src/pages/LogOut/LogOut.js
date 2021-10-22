@@ -10,8 +10,6 @@ const LogOut=(props)=>{
     let usuario = ""
     props.setCurrentUsuario(usuario)
 
-    //localStorage.setItem('', "");
-
     history.push("/")
     return (<div>Cerrando Sesión</div>)
 }

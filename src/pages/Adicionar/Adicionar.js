@@ -125,7 +125,6 @@ const Adicionar = (props) => {
 						<small className='p-error p-col-12'>{emptyNombreDestino}</small>
 						<div className='send-button'>
 							<Button
-								block
 								className='btn-round'
 								color='info'
 								href='#pablo'
@@ -347,9 +346,6 @@ const Adicionar = (props) => {
 	return (
 		<Fragment>
 			{getDestino()}
-			{
-				//pisosDestinoSeleccionado()
-			}
 		</Fragment>
 	);
 };
