@@ -56,6 +56,8 @@ const Piso = (props) => {
 	const [dateBegin, setDateBegin] = useState(null);
 	const [dateEnd, setDateEnd] = useState(null);
 	const [disabledDates, setddisabledDates] = useState([]);
+	const [disabledDatesEntrada, setddisabledDatesEntrada] = useState([]);
+	const [disabledDatesSalida, setddisabledDatesSalida] = useState([]);
 	const [disabledEndDate, setdisabledEndDate] = useState(true);
 	const [errorfecha, seterrorfecha] = useState('');
 	const [minDate, setminDate] = useState(null);
@@ -268,7 +270,19 @@ const Piso = (props) => {
 				temp = piso.data?.diasReservados?.split(',');
 				temp = temp.map((pos) => (pos = new Date(pos)));
 			}
+			let tempSalida = [];
+			if (piso.data?.diasReservadosSalida !== '' && piso.data?.diasReservadosSalida !== null) {
+				tempSalida = piso.data?.diasReservadosSalida?.split(',');
+				tempSalida = tempSalida.map((pos) => (pos = new Date(pos)));
+			}
+			let tempEntrada = [];
+			if (piso.data?.diasReservadosEntrada !== '' && piso.data?.diasReservadosEntrada !== null) {
+				tempEntrada = piso.data?.diasReservadosEntrada?.split(',');
+				tempEntrada = tempEntrada.map((pos) => (pos = new Date(pos)));
+			}
 			setddisabledDates(temp);
+			setddisabledDatesEntrada(tempEntrada);
+			setddisabledDatesSalida(tempSalida);
 			if (piso.data.wifi) {
 				datos.push({ icon: 'pi-wifi' });
 			}
@@ -343,7 +357,7 @@ const Piso = (props) => {
 		const fin = moment(dateEnd);
 		const dateB = new Date(dateBegin);
 		let contador = fin.diff(inicio, 'days') - 1;
-		if(contador<1) dias.push(sumarDias(dateB, 0));
+		// if(contador<1) dias.push(sumarDias(dateB, 0));
 		while (contador > 0) {
 			let a = new Date(dateBegin);
 			dias.push(sumarDias(a, contador));
@@ -366,7 +380,9 @@ const Piso = (props) => {
 		AxiosConexionConfig.post(apiReservaciones, JSON.stringify(reservacion))
 		.then(() => {
 			AxiosConexionConfig.patch(`${apiPiso}/${data.idpiso}`,
-				JSON.stringify({ diasReservados: diasReservados + ',' + data.diasReservados }))
+				JSON.stringify({ diasReservados: diasReservados + ',' + data.diasReservados, 
+					diasReservadosEntrada: new Date(dateBegin) + ',' + data.diasReservadosEntrada, 
+					diasReservadosSalida:  new Date(dateEnd)+ ',' + data.diasReservadosSalida }))
 				.then(() => {
 				getData();
 				sendMail();
@@ -382,7 +398,7 @@ const Piso = (props) => {
 		}
 		return pass;
 	}
-	
+
 	function sumarDias(fecha, dias) {
 		fecha.setDate(fecha.getDate() + dias);
 		return fecha;
@@ -538,7 +554,7 @@ const Piso = (props) => {
 								setDateBegin(e.value);
 								setDateEnd(e.value);
 							}}
-							disabledDates={disabledDates}
+							disabledDates={disabledDates.concat(disabledDatesEntrada)}
 							baseZIndex={1000}
 							readOnlyInput
 							monthNavigator
@@ -556,7 +572,7 @@ const Piso = (props) => {
 							placeholder='Check out'
 							disabled={disabledEndDate}
 							onChange={(e) => setDateEnd(e.value)}
-							disabledDates={disabledDates}
+							disabledDates={disabledDates.concat(disabledDatesSalida)}
 							baseZIndex={1000}
 							readOnlyInput
 							monthNavigator
