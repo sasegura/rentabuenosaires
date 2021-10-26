@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { setCurrentNavBarColor } from 'redux/navBarColor/navBarColor.action';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
-
+import parse from 'html-react-parser';
 //reactstrap
 
 import { withTranslation } from 'react-i18next';
@@ -18,6 +18,7 @@ import IndexNavbar from 'components/Navbars/IndexNavbar';
 import getTips from 'pages/Reservaciones/getTips';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
+import { Editor } from 'primereact/editor';
 
 const Tips = (props) => {
 	const toast = useRef(null);
@@ -167,12 +168,10 @@ const Tips = (props) => {
 				</div>
 				<div className='p-field'>
 					<label htmlFor='descripcion'>Descripción</label>
-					<InputText
+					<Editor
 						id='descripcion'
 						value={descripcion}
-						onChange={(e) => {
-							setDescripcion(e.target.value);
-						}}
+						onTextChange={(e) => setDescripcion(e.htmlValue)}
 						required
 						className={classNames({
 							'p-invalid': !descripcion,
@@ -182,12 +181,10 @@ const Tips = (props) => {
 				</div>
 				<div className='p-field'>
 					<label htmlFor='descripcionI'>Description</label>
-					<InputText
+					<Editor
 						id='descripcionI'
 						value={descripcionI}
-						onChange={(e) => {
-							setDescripcionI(e.target.value);
-						}}
+						onTextChange={(e) => setDescripcionI(e.htmlValue)}
 						required
 						className={classNames({
 							'p-invalid': !descripcionI,
@@ -244,6 +241,11 @@ const Tips = (props) => {
 			/>
 		</div>
 	);
+
+	const parseBodyTemplate = (row) => {
+		return parse(row);
+	};
+
 	return (
 		<>
 			<IndexNavbar />
@@ -271,8 +273,16 @@ const Tips = (props) => {
 					>
 						<Column field='nombre' header='Nombre'></Column>
 						<Column field='nombreI' header='Name'></Column>
-						<Column field='descripcion' header='Descripción'></Column>
-						<Column field='descripcionI' header='Description'></Column>
+						<Column
+							field='descripcion'
+							body={(row) => parseBodyTemplate(row.descripcion)}
+							header='Descripción'
+						></Column>
+						<Column
+							field='descripcionI'
+							body={(row) => parseBodyTemplate(row.descripcionI)}
+							header='Description'
+						></Column>
 
 						<Column header={headerColumnTemplate} body={actionBodyTemplate}></Column>
 					</DataTable>

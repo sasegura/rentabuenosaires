@@ -669,7 +669,7 @@ const Piso = (props) => {
 						{props.i18n.language === 'es'?tip.nombre :tip.nombreI}:
 					</div>
 					<div className='p-col-9'>
-						{props.i18n.language === 'es'?tip.descripcion :tip.descripcionI}
+						{props.i18n.language === 'es'?parse(tip.descripcion) :parse(tip.descripcionI)}
 					</div>
 				</div>
 			))

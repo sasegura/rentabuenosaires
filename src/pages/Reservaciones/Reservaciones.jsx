@@ -106,9 +106,9 @@ const Reservaciones = (props) => {
 	}
 
 	const eliminarDias = (fechaInicial, fechaFinal, idpiso) => {
-		const pis = pisos.filter((piso) => piso.idpiso === idpiso);
+		const pisoById = pisos.filter((piso) => piso.idpiso === idpiso);
 		const reservedDays = [];
-		pis[0]?.diasReservados?.split(',').forEach((day) => {
+		pisoById[0]?.diasReservados?.split(',').forEach((day) => {
 			if (
 				moment(day).valueOf() < moment(fechaInicial).valueOf() ||
 				moment(day).valueOf() > moment(fechaFinal).valueOf()
@@ -116,13 +116,31 @@ const Reservaciones = (props) => {
 				reservedDays.push(day);
 			}
 		});
+
+		let reservadosEntrada = [];
+		let reservadosSalida = [];
+
+		if (pisoById.diasReservadosEntrada) {
+			const entrada = pisoById.diasReservadosEntrada.split('');
+			const entradaIndex = entrada.findIndex((dia) => dia === fechaInicial);
+			reservadosEntrada = entrada.splice(1, entradaIndex);
+		}
+		if (pisoById.diasReservadosSalida) {
+			const salida = pisoById.diasReservadosSalida.split('');
+			const salidaIndex = salida.findIndex((dia) => dia === fechaFinal);
+			reservadosSalida = salida.splice(1, salidaIndex);
+		}
 		const diasReservados = reservedDays.length > 0 ? reservedDays.toString() : '';
-		AxiosConexionConfig.patch(`${apiPiso}/${idpiso}`, JSON.stringify({ diasReservados })).then(
-			(re) => {
-				console.log(re);
-				getData();
-			}
-		);
+
+		const diasReservadosEntrada = reservadosEntrada.toString();
+		const diasReservadosSalida = reservadosSalida.toString();
+		AxiosConexionConfig.patch(
+			`${apiPiso}/${idpiso}`,
+			JSON.stringify({ diasReservados, diasReservadosSalida, diasReservadosEntrada })
+		).then((re) => {
+			console.log(re);
+			getData();
+		});
 	};
 
 	const getPisoId = (id) => {
@@ -197,6 +215,7 @@ const Reservaciones = (props) => {
 			clienteNombre: usuario.nombre,
 			destino: getDestinoId(piso.iddestino).nombre,
 			telefono: usuario.telefono,
+			password: usuario.contrasenna,
 		};
 		const aceptada = {
 			aceptada: !datos.aceptada,
@@ -224,7 +243,9 @@ const Reservaciones = (props) => {
 	};
 
 	const actionBodyTemplate = (rowData) => {
-		const s = new Date(rowData.fechaInicio) < new Date();
+		var date = new Date();
+		date.setDate(date.getDate() - 1);
+		const s = new Date(rowData.fechaInicio) < date;
 		return (
 			<React.Fragment>
 				{!rowData.aceptada ? (
