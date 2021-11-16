@@ -21,6 +21,7 @@ import {
 	apisendMailCitaCancelada,
 } from 'configuracion/constantes';
 import IndexNavbar from 'components/Navbars/IndexNavbar';
+import './Reservaciones.scss';
 
 const Reservaciones = (props) => {
 	const toast = useRef(null);
@@ -200,7 +201,8 @@ const Reservaciones = (props) => {
 				console.log(e);
 			});
 	};
-	async function sendMailCitaConfirmada(datos) {
+	async function sendMailCitaConfirmada(datos, acepted) {
+		console.log(datos);
 		const piso = getPisoId(datos.idpiso);
 		const usuario = getUsuarioId(datos.idusuario);
 		const values = {
@@ -218,9 +220,12 @@ const Reservaciones = (props) => {
 			password: usuario.contrasenna,
 		};
 		const aceptada = {
-			aceptada: !datos.aceptada,
+			aceptada: true,
 		};
-		if (datos.aceptada) {
+		const cancelada = {
+			cancelada: true,
+		};
+		if (acepted) {
 			AxiosConexionConfig.patch(`${apiReservaciones}/${datos.id}`, JSON.stringify(aceptada));
 			confirmarCancelar(
 				apisendMailCitaCancelada,
@@ -228,7 +233,12 @@ const Reservaciones = (props) => {
 				`Correo de cancelacion enviado al cliente.`
 			);
 		} else {
-			AxiosConexionConfig.patch(`${apiReservaciones}/${datos.id}`, JSON.stringify(aceptada));
+			AxiosConexionConfig.patch(
+				`${apiReservaciones}/${datos.id}`,
+				JSON.stringify(cancelada)
+			).then((data) => {
+				eliminarDias(datos.fechaInicio, datos.fechaFin, datos.idpiso);
+			});
 			confirmarCancelar(
 				apiSendMailCitaConfirmada,
 				values,
@@ -248,21 +258,29 @@ const Reservaciones = (props) => {
 		const s = new Date(rowData.fechaInicio) < date;
 		return (
 			<React.Fragment>
-				{!rowData.aceptada ? (
-					<Button
-						disabled={s}
-						icon='pi pi-check'
-						className='p-button-rounded p-button-success p-mr-2'
-						onClick={() => sendMailCitaConfirmada(rowData)}
-					/>
-				) : (
+				{!rowData.aceptada && !rowData.cancelada ? (
+					<>
+						<Button
+							disabled={s}
+							icon='pi pi-check'
+							className='p-button-rounded p-button-success p-mr-2'
+							onClick={() => sendMailCitaConfirmada(rowData, true)}
+						/>
+						<Button
+							disabled={s}
+							icon='pi pi-times'
+							className='p-button-rounded p-button-danger p-mr-2'
+							onClick={() => sendMailCitaConfirmada(rowData, false)}
+						/>
+					</>
+				) : rowData.aceptada && !rowData.cancelada ? (
 					<Button
 						disabled={s}
 						icon='pi pi-times'
 						className='p-button-rounded p-button-danger p-mr-2'
-						onClick={() => sendMailCitaConfirmada(rowData)}
+						onClick={() => sendMailCitaConfirmada(rowData, false)}
 					/>
-				)}
+				) : null}
 				<Button
 					icon='pi pi-trash'
 					className='p-button-rounded p-button-warning'
@@ -282,6 +300,12 @@ const Reservaciones = (props) => {
 	const columnTemplate = (rowData) => {
 		return <span>{rowData}</span>;
 	};
+	const rowClass = (data) => {
+		return {
+			'row-accessories': data.cancelada === true,
+		};
+	};
+
 	return (
 		<>
 			<IndexNavbar />
@@ -295,6 +319,7 @@ const Reservaciones = (props) => {
 					paginatorTemplate='CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown'
 					currentPageReportTemplate='Showing {first} to {last} of {totalRecords}'
 					rows={10}
+					rowClassName={rowClass}
 					rowsPerPageOptions={[10, 20, 50]}
 				>
 					<Column

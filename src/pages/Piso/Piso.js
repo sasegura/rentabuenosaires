@@ -364,6 +364,7 @@ const Piso = (props) => {
 			fechaFin: dateEnd,
 			fechaInicio: dateBegin,
 			aceptada: false,
+			cancelada: false,
 			cantPersonas: huesped,
 			precio: totalCalculo,
 		};		
