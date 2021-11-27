@@ -16,7 +16,8 @@
 
 		{ "name": "Patio y balcon", "code": "AF" },
 		{ "name": "Sauna", "code": "AF" },
-		{ "name": "Piscina", "code": "AF" }
+		{ "name": "Piscina", "code": "AF" },
+		{ "name": "Parrilla/barbacoa", "code": "AF" }
 	],
 	"cocinaComedor": [
 		{ "name": "Utensilios de parrilla", "code": "AF" },

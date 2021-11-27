@@ -12,6 +12,9 @@ import { connect } from 'react-redux';
 import { setCurrentNavBarColor } from 'redux/navBarColor/navBarColor.action';
 import imagenLoading from '../../assets/img/loading.gif';
 import imagenTV from '../../assets/img/television.svg';
+import pool from '../../assets/img/icon/pool.png';
+import barbecue from '../../assets/img/icon/barbecue.jpg';
+
 import imagenAire from '../../assets/img/air-conditioner.svg';
 import imagencalefaccion from '../../assets/img/heating.svg';
 import imagenWifi from '../../assets/img/wifi.svg';
@@ -229,6 +232,12 @@ const Piso = (props) => {
 		}
 		if (data.aireacondicionado) {
 			a.push(amenitieForm(imagenAire, 'aireacondicionado'));
+		}
+		if (data.pool) {
+			a.push(amenitieForm(pool, 'Pool'));
+		}
+		if (data.barbecue) {
+			a.push(amenitieForm(barbecue, 'barbecue'));
 		}
 		if (data.tvcable) {
 			a.push(amenitieForm(imagenTV, 'TV'));

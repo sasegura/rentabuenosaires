@@ -282,7 +282,8 @@ const AdicionarForm = (props) => {
 		jacuzzi: piso?.jacuzzi || false,
 		wifi: piso?.wifi || false,
 		calefaccion: piso?.calefaccion || false,
-
+		pool:piso?.pool || false,
+		barbecue:piso?.barbecue || false,
 		// Tab4
 		serviciosAdicionales: piso?.serviciosAdicionales || '',
 		estacionamientoInstalaciones: piso?.estacionamientoInstalaciones || '',
@@ -303,6 +304,7 @@ const AdicionarForm = (props) => {
 	};
 
 	const onSubmit = (data, form) => {
+		console.log(data)
 		SavePiso(data);
 		form.restart();
 	};
@@ -710,6 +712,7 @@ const AdicionarForm = (props) => {
 			</div>
 		);
 	};
+	
 	return (
 		<>
 			{!savingPisos ? (
@@ -837,6 +840,11 @@ const AdicionarForm = (props) => {
 								{elementoCheck('lavadora', 'Lavadora')}
 								{elementoCheck('jacuzzi', 'Jacuzzi')}
 								{elementoCheck('aireacondicionado', 'Aire Acondicionado')}
+							</div>
+							<div className='p-col-12 p-d-flex p-flex-column p-flex-md-row '>
+								{elementoCheck('pool', 'Piscina')}
+								{elementoCheck('barbecue', 'Barbecue')}
+								
 							</div>
 
 							<div className='p-d-flex p-flex-column p-flex-md-row'>
