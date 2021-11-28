@@ -234,10 +234,10 @@ const Piso = (props) => {
 			a.push(amenitieForm(imagenAire, 'aireacondicionado'));
 		}
 		if (data.pool) {
-			a.push(amenitieForm(pool, 'Pool'));
+			a.push(amenitieForm(pool, 'Piscina'));
 		}
 		if (data.barbecue) {
-			a.push(amenitieForm(barbecue, 'barbecue'));
+			a.push(amenitieForm(barbecue, 'Parrilla/barbacoa'));
 		}
 		if (data.tvcable) {
 			a.push(amenitieForm(imagenTV, 'TV'));

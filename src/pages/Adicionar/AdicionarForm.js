@@ -204,9 +204,7 @@ const AdicionarForm = (props) => {
 			const url = '/pisos';
 			if (modificar) {
 				try {
-					console.log('modificar');
 					const pisoDatos = await AxiosConexionConfig.patch(url + '/' + id, pisoData);
-					console.log(pisoDatos.data);
 					props.getPiso();
 					props.setpisoDialog(false);
 				} catch (e) {
@@ -712,7 +710,7 @@ const AdicionarForm = (props) => {
 			</div>
 		);
 	};
-	
+
 	return (
 		<>
 			{!savingPisos ? (
