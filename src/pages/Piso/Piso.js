@@ -329,7 +329,7 @@ const Piso = (props) => {
 			expiracion: new Date().toString(),
 			rol: 2,
 		};
-		if(usuarioFromMail.length===0){			
+		if(usuarioFromMail.length===0 ){			
 			AxiosConexionConfig.post(linkUsuario, JSON.stringify(values))
 				.then((response) => {				
 					const diasReservados=cantDias()
@@ -344,7 +344,23 @@ const Piso = (props) => {
 					});
 					console.log(e);
 				});
-		}else{			
+		}else{
+			if(usuarioFromMail[0].nombre!==valorDialog.name)			{
+				AxiosConexionConfig.post(linkUsuario, JSON.stringify(values))
+				.then((response) => {				
+					const diasReservados=cantDias()
+					createReservation(response.data.idusuario,diasReservados)
+				})
+				.catch((e) => {
+					toast.current.show({
+						severity: 'error',
+						summary: 'Error Usuario',
+						detail: e,
+						life: 3000,
+					});
+					console.log(e);
+				});
+			}
 			const diasReservados=cantDias()
 			createReservation(usuarioFromMail[0].idusuario,diasReservados)
 		}		
