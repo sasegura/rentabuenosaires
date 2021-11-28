@@ -360,9 +360,10 @@ const Piso = (props) => {
 					});
 					console.log(e);
 				});
-			}
+			}else{
 			const diasReservados=cantDias()
 			createReservation(usuarioFromMail[0].idusuario,diasReservados)
+			}
 		}		
 	}
 
