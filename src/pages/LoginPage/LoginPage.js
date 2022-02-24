@@ -81,8 +81,10 @@ function LoginPage(props) {
 				const fecha = new Date(
 					respuesta.data[0].expiracion.replace(/ /g, 'T').split('+')[0]
 				);
+				const dateExpiration=new Date(respuesta.data[0].expiracion)
 				const hoy = new Date();
-				if (fecha.getTime() > hoy.getTime()) {
+				
+				if (dateExpiration.getTime() > hoy.getTime()) {
 					setloginmensaje('');
 					props.setCurrentUsuario(respuesta.data[0]);
 					history.push(index);

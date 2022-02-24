@@ -202,8 +202,8 @@ const Reservaciones = (props) => {
 				console.log(e);
 			});
 	};
+
 	async function sendMailCitaConfirmada(datos, acepted) {
-		console.log(datos);
 		const piso = getPisoId(datos.idpiso);
 		const usuario = getUsuarioId(datos.idusuario);
 		const values = {

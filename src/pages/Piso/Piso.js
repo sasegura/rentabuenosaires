@@ -320,13 +320,15 @@ const Piso = (props) => {
 
 	async function createUsuario() {
 		setCalculo(false);
+		const today=new Date()
+		today.setFullYear(today.getFullYear()+1)
 		const usuarioFromMail=await getUsuario(valorDialog.email);
 		const values = {
 			nombre: valorDialog.name,
 			apellidos: '',
 			correo: valorDialog.email,
 			contrasenna: generatePassword(10),
-			expiracion: new Date().toString(),
+			expiracion: today.toString(),
 			rol: 2,
 		};
 		if(usuarioFromMail.length===0 ){			
@@ -401,8 +403,8 @@ const Piso = (props) => {
 					diasReservadosEntrada: new Date(dateBegin) + ',' + data.diasReservadosEntrada, 
 					diasReservadosSalida:  new Date(dateEnd)+ ',' + data.diasReservadosSalida }))
 				.then(() => {
-				getData();
-				sendMail();
+					sendMail();
+					getData();				
 			});
 		});
 	}
