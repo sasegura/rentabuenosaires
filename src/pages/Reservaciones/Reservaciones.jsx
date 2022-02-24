@@ -171,6 +171,7 @@ const Reservaciones = (props) => {
 		});
 		return respuesta;
 	};
+
 	const confirmarCancelar = (url, values, text) => {
 		AxiosConexionConfig.post(url, JSON.stringify(values))
 			.then((response) => {
@@ -220,29 +221,32 @@ const Reservaciones = (props) => {
 			password: usuario.contrasenna,
 		};
 		const aceptada = {
-			aceptada: true,
+			aceptada: acepted ? true : false,
 		};
 		const cancelada = {
-			cancelada: true,
+			cancelada: acepted ? false : true,
 		};
 		if (acepted) {
-			AxiosConexionConfig.patch(`${apiReservaciones}/${datos.id}`, JSON.stringify(aceptada));
+			await AxiosConexionConfig.patch(
+				`${apiReservaciones}/${datos.id}`,
+				JSON.stringify(aceptada)
+			);
 			confirmarCancelar(
-				apisendMailCitaCancelada,
+				apiSendMailCitaConfirmada,
 				values,
-				`Correo de cancelacion enviado al cliente.`
+				`Correo de confirmacion enviado al cliente.`
 			);
 		} else {
-			AxiosConexionConfig.patch(
+			await AxiosConexionConfig.patch(
 				`${apiReservaciones}/${datos.id}`,
 				JSON.stringify(cancelada)
 			).then((data) => {
 				eliminarDias(datos.fechaInicio, datos.fechaFin, datos.idpiso);
 			});
 			confirmarCancelar(
-				apiSendMailCitaConfirmada,
+				apisendMailCitaCancelada,
 				values,
-				`Correo de confirmacion enviado al cliente.`
+				`Correo de cancelacion enviado al cliente.`
 			);
 		}
 	}
